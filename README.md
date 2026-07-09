@@ -1,41 +1,40 @@
 # FK Service Templates
 
-FK Service Templates; küçük işletmelere hızlı satılabilecek, tek seferlik kurulum modeliyle uyarlanabilecek hazır web sitesi + admin panel altyapısıdır.
-
-Bu repo aylık abonelikli SaaS olarak değil, **hazır sektör şablonlarını müşteriye özel uyarlayıp kurulum ücretiyle satmak** için hazırlanmıştır.
+FK Service Templates; küçük işletmelere tek seferlik kurulum ücretiyle satılabilecek, yönetilebilir admin panelli hazır web sitesi altyapısıdır.
 
 ## Güncel Durum
 
-MVP artık sadece statik site değildir. Müşteri admin panelden site içeriğinin önemli bölümlerini yönetebilir.
+MVP artık gerçek müşteri teslimine yaklaştırılmıştır. Public sitede demo dili temizlenmiş, teslim modu eklenmiş, spam/görsel/SEO güvenlikleri güçlendirilmiştir.
 
-Hazır olan ana parçalar:
+Hazır ana parçalar:
 
 - Next.js 14 web uygulaması
-- 3 sektör şablonu
-- Her sektör için 3 profesyonel arayüz varyantı
-- Template + layout seçicili ana demo
-- Sektöre özel route'lar
+- 3 sektör şablonu: Appointment, Salon, Real Estate
+- Her sektör için 3 profesyonel arayüz varyantı: `modern`, `split`, `showcase`
+- Müşteri teslim modu: `NEXT_PUBLIC_DEMO_MODE=false`
+- Public sitede demo yazılarını gizleme
+- Canlı modda örnek/dummy ilan göstermeme
 - Legal/trust sayfaları
 - Çerez banner
 - Formlarda KVKK/Gizlilik onayı
-- SEO meta, canonical, Open Graph, robots.txt ve sitemap.xml
+- Honeypot spam koruması
+- E-posta bildirim API route'u
+- API origin kontrolü ve basit rate limit
+- Admin panel canlı talep dinleme
+- Yeni talep rozeti, panel içi uyarı, sesli uyarı, tarayıcı bildirimi
 - Admin login + şifremi unuttum akışı
-- Admin panel
+- Admin/login/forgot-password noindex/robots koruması
+- SEO meta, canonical, Open Graph, favicon, manifest, robots.txt ve sitemap.xml
 - Site ayarları yönetimi
 - Kurumsal metin yönetimi
 - Hizmet/fiyat ekleme, düzenleme ve pasife alma
 - Kampanya yönetimi
 - Galeri/görsel yönetimi
+- Görsel upload tipi ve 5 MB boyut kontrolü
+- Storage rules tarafında görsel tipi/boyutu kontrolü
 - Emlak ilan ekleme, düzenleme, yayından kaldırma ve fotoğraf yükleme
-- Yeni talep e-posta bildirimi için API route
-- Admin panelde canlı talep dinleme, yeni talep rozeti, panel içi uyarı, sesli uyarı ve isteğe bağlı tarayıcı bildirimi
-- Firestore request, property, service ve settings helper'ları
-- Firebase Auth helper
-- Firebase Storage upload helper
-- Firestore rules
-- Storage rules
-- Netlify / Vercel deploy uyumu
-- GitHub Actions web build workflow
+- Profesyonel 404 sayfası
+- GitHub Actions: lint + typecheck + build
 
 ## Hedef Şablonlar
 
@@ -45,17 +44,7 @@ Hazır olan ana parçalar:
 | Salon | Kuaför, güzellik salonu, berber, nail art, spa | MVP hazır |
 | Real Estate | Emlak ofisi, gayrimenkul danışmanı, günlük kiralık işletme | MVP hazır |
 
-## Profesyonel Arayüz Varyantları
-
-İçerik aynı kalır; sadece site kabuğu değişir. Böylece müşteri aynı işletme bilgileriyle 3 farklı site görünümü arasından seçim yapabilir.
-
-| Varyant | Kullanım hissi | Amaç |
-|---|---|---|
-| `modern` | Modern kartlı premium yapı | Dengeli hero + kartlar + panel görünümü |
-| `split` | İki parçalı büyük görsel / içerik yapısı | Daha kurumsal, daha büyük vitrin hissi |
-| `showcase` | Tam genişlik sahne/vitrin yapısı | Daha çarpıcı, kampanya/portföy/galeri odaklı görünüm |
-
-Demo linkleri:
+## Demo Linkleri
 
 ```text
 /
@@ -70,13 +59,62 @@ Demo linkleri:
 /real-estate?layout=showcase
 ```
 
-Bu modelde 3 sektör x 3 layout = **9 farklı demo görünümü** elde edilir.
+## Public Sayfalar
+
+```text
+/
+/appointment
+/salon
+/real-estate
+/properties
+/properties/[id]
+/hakkimizda
+/iletisim
+/gizlilik-politikasi
+/kvkk-aydinlatma-metni
+/cerez-politikasi
+/kullanim-kosullari
+/sss
+/404
+/robots.txt
+/sitemap.xml
+```
+
+## Admin Sayfaları
+
+```text
+/login
+/forgot-password
+/admin
+/admin/settings
+/admin/content
+/admin/services
+/admin/campaigns
+/admin/gallery
+/admin/properties
+/admin/properties/new
+```
+
+Admin, login, forgot-password ve API route'ları robots tarafında engellenir. Login ve şifre sıfırlama sayfalarında `noindex` meta vardır.
+
+## Müşteri Admin Panelinde Ne Yönetir?
+
+| Panel | Route | İşlev |
+|---|---|---|
+| Talepler | `/admin` | Gelen formları canlı görür, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
+| Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, başlık ve seçili arayüz |
+| Kurumsal Metinler | `/admin/content` | Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS |
+| Hizmetler | `/admin/services` | Hizmet/fiyat ekler, düzenler, pasife alır veya aktif eder |
+| Kampanyalar | `/admin/campaigns` | Kampanya başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
+| Galeri | `/admin/gallery` | Görsel yükler, başlık/açıklama ekler |
+| İlanlar | `/admin/properties` | Emlak ilanlarını listeler, düzenler, vitrin/yayın durumunu değiştirir |
+| Yeni İlan | `/admin/properties/new` | Emlak ilanı ekler, fiyat/konum/açıklama/görsel girer |
 
 ## Bildirim Sistemi
 
 Telegram ve otomatik WhatsApp bildirimi yoktur.
 
-Kullanılan bildirim modeli:
+Kullanılan model:
 
 ```text
 1. Web formu Firestore'a talep kaydeder.
@@ -87,116 +125,54 @@ Kullanılan bildirim modeli:
 6. Kullanıcı izin verirse tarayıcı bildirimi gösterilir.
 ```
 
-E-posta bildirimi için env:
+## Env Ayarları
 
 ```env
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+
+NEXT_PUBLIC_DEFAULT_TEMPLATE=appointment
+NEXT_PUBLIC_BUSINESS_ID=demo-business
+NEXT_PUBLIC_SITE_URL=https://example.com
+
+# Demo linklerinde true/boş kalabilir.
+# Gerçek müşteri tesliminde false yapılır.
+NEXT_PUBLIC_DEMO_MODE=true
+
 RESEND_API_KEY=
 REQUEST_NOTIFICATION_TO=
-REQUEST_NOTIFICATION_FROM=FK Service Templates <onboarding@resend.dev>
-```
+REQUEST_NOTIFICATION_FROM=Site Bildirimi <onboarding@resend.dev>
 
-Bu değerler boşsa form kaydı çalışmaya devam eder; sadece e-posta bildirimi atlanır.
-
-## Legal / Trust Sayfaları
-
-Public siteye eklenen kurumsal/güven sayfaları:
-
-```text
-/hakkimizda
-/iletisim
-/gizlilik-politikasi
-/kvkk-aydinlatma-metni
-/cerez-politikasi
-/kullanim-kosullari
-/sss
-```
-
-Bu sayfalarda hazır şablon metinleri vardır. Müşteri isterse admin panelden bu metinleri kendi işletmesine göre düzenleyebilir.
-
-Not: KVKK/gizlilik metinleri MVP için hazır şablondur. Gerçek müşteri tesliminde hukuki kontrol önerilir.
-
-## Müşteri Admin Paneli
-
-Müşteri siteyi aldıktan sonra şu linklerden giriş yapar:
-
-```text
-/login
-/admin
-```
-
-Şifre unutulursa:
-
-```text
-/forgot-password
-```
-
-Teslimde Firebase Auth üzerinden müşteri için admin kullanıcı oluşturulur.
-
-Örnek:
-
-```text
-Admin panel: www.musterisitesi.com/login
-E-posta: info@musterisitesi.com
-Şifre: müşteri için oluşturulan şifre
-```
-
-Demo ortamında admin koruması kapalı tutulabilir:
-
-```env
+# Gerçek müşteri tesliminde true yapılır.
 NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=false
 ```
 
-Müşteri tesliminde admin koruması açılır:
+## Müşteri Teslim Ayarları
+
+Gerçek müşteri tesliminde önerilen env:
 
 ```env
+NEXT_PUBLIC_DEMO_MODE=false
 NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=true
+NEXT_PUBLIC_SITE_URL=https://www.musteridomaini.com
+NEXT_PUBLIC_BUSINESS_ID=musteri-kodu
+REQUEST_NOTIFICATION_TO=info@musteridomaini.com
+REQUEST_NOTIFICATION_FROM=Site Bildirimi <bildirim@musteridomaini.com>
 ```
 
-## Admin Panelde Müşteri Ne Değiştirebilir?
+Bu modda:
 
-| Panel | Route | Ne işe yarar? |
-|---|---|---|
-| Talepler | `/admin` | Gelen form/randevu/ilan taleplerini canlı görür, yeni talep bildirimi alır, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
-| Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, ana başlık, açıklama ve seçili arayüzü değiştirir |
-| Kurumsal Metinler | `/admin/content` | Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS metinlerini yönetir |
-| Hizmetler | `/admin/services` | Hizmet adı, açıklama ve fiyatları ekler, düzenler, pasife alır veya tekrar aktif eder |
-| Kampanyalar | `/admin/campaigns` | Kampanya başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
-| Galeri | `/admin/gallery` | Görsel yükler, başlık/açıklama ekler, site galerisini yönetir |
-| İlanlar | `/admin/properties` | Emlak ilanlarını listeler, düzenler, vitrin/yayın durumunu değiştirir |
-| Yeni İlan | `/admin/properties/new` | Emlak ilanı ekler, fiyat/konum/açıklama/görsel girer |
-
-Bu sayede müşteri sürekli FK Digital'e yazmadan siteyi uzun süre kullanabilir.
-
-## Çalışan Route'lar
-
-```text
-/                         -> 3 şablon + 3 arayüz seçicili ana demo
-/appointment               -> veteriner / klinik demo sitesi
-/salon                     -> kuaför / güzellik demo sitesi
-/real-estate               -> emlak landing demo sitesi
-/properties                -> emlak ilan listesi
-/properties/[id]           -> emlak ilan detay sayfası
-/hakkimizda                -> hakkımızda sayfası
-/iletisim                  -> iletişim sayfası
-/gizlilik-politikasi       -> gizlilik politikası
-/kvkk-aydinlatma-metni     -> KVKK aydınlatma metni
-/cerez-politikasi          -> çerez politikası
-/kullanim-kosullari        -> kullanım koşulları
-/sss                       -> sık sorulan sorular
-/robots.txt                -> arama motoru robots çıktısı
-/sitemap.xml               -> sitemap çıktısı
-/api/notify-request        -> e-posta bildirim API route'u
-/login                     -> admin login sayfası
-/forgot-password           -> admin şifre sıfırlama sayfası
-/admin                     -> admin ana panel / talepler
-/admin/settings            -> site ayarları
-/admin/content             -> kurumsal metin yönetimi
-/admin/services            -> hizmet/fiyat yönetimi
-/admin/campaigns           -> kampanya yönetimi
-/admin/gallery             -> galeri yönetimi
-/admin/properties          -> emlak ilan yönetimi
-/admin/properties/new      -> emlak ilan ekleme ekranı
-```
+- Demo panel linkleri public sitede görünmez.
+- Public sitede dummy/örnek ilanlar gösterilmez.
+- Teknik/demo ifadeler saklanır.
+- Admin panel login ister.
+- Formlar KVKK onaysız gönderilemez.
+- Honeypot ve API rate limit çalışır.
+- Admin/login sayfaları indexlenmez.
 
 ## Kurulum
 
@@ -211,137 +187,15 @@ Doğrudan web app:
 pnpm --filter @fk-templates/web dev
 ```
 
-Build:
+Kontroller:
 
 ```bash
+pnpm --filter @fk-templates/web lint
+pnpm --filter @fk-templates/web typecheck
 pnpm --filter @fk-templates/web build
 ```
 
-## Teknik Yapı
-
-- Next.js 14
-- React 18
-- TypeScript
-- pnpm workspace
-- Firebase Auth
-- Firestore
-- Firebase Storage
-- Resend uyumlu e-posta bildirim API route'u
-- Netlify / Vercel uyumlu deploy
-- CSS variables ile sektör bazlı tema sistemi
-- Layout varyantları: `modern`, `split`, `showcase`
-- Public site için managed config hook: `useManagedTemplateConfig`
-- Legal/trust içerikler için managed content sistemi
-- SEO component: `SeoHead`
-- Dynamic `robots.txt` ve `sitemap.xml`
-
-## Firestore Koleksiyonları
-
-### requests
-
-```text
-requests/{requestId}
-  template: appointment | salon | real-estate
-  businessId: string
-  customerName: string
-  customerPhone: string
-  subject: string
-  note?: string
-  adminNote?: string
-  status: new | contacted | confirmed | cancelled | completed
-  source?: website | qr | instagram | whatsapp
-  preferredDate?: string
-  preferredTime?: string
-  extra?: object
-  createdAt
-  updatedAt
-```
-
-### settings
-
-```text
-settings/{businessId}
-  businessId
-  template: appointment | salon | real-estate
-  layoutVariant: modern | split | showcase
-  brandName
-  eyebrow
-  heroTitle
-  heroDescription
-  primaryCta
-  secondaryCta
-  topBarText
-  phone
-  whatsapp
-  contactEmail
-  workingHours
-  address
-  mapsUrl
-  instagramUrl
-  campaignItems: ServiceItem[]
-  galleryItems: VisualItem[]
-  contentPages: Record<ContentPageKey, ManagedContentPage>
-  faqItems: FaqItem[]
-  createdAt
-  updatedAt
-```
-
-### services
-
-```text
-services/{serviceId}
-  template: appointment | salon
-  title
-  description
-  price
-  isActive
-  createdAt
-  updatedAt
-```
-
-### properties
-
-```text
-properties/{propertyId}
-  title
-  listingType: sale | rent
-  propertyType: apartment | villa | land | office | shop | dailyRental
-  price
-  location
-  squareMeters
-  roomCount
-  bathroomCount
-  description
-  imageUrls: string[]
-  isFeatured
-  consultantName
-  consultantPhone
-  isActive
-  createdAt
-  updatedAt
-```
-
-## Firebase / Env
-
-`.env.example` içinde gerekli alanlar vardır.
-
-```env
-NEXT_PUBLIC_FIREBASE_API_KEY=
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
-NEXT_PUBLIC_FIREBASE_APP_ID=
-NEXT_PUBLIC_DEFAULT_TEMPLATE=appointment
-NEXT_PUBLIC_BUSINESS_ID=demo-business
-NEXT_PUBLIC_SITE_URL=https://example.com
-RESEND_API_KEY=
-REQUEST_NOTIFICATION_TO=
-REQUEST_NOTIFICATION_FROM=FK Service Templates <onboarding@resend.dev>
-NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=false
-```
-
-Rules deploy:
+## Firebase Rules Deploy
 
 ```bash
 firebase deploy --only firestore:rules,storage
@@ -369,36 +223,26 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 
 > Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu, e-posta bildirimi, admin panel canlı uyarısı, KVKK/gizlilik sayfaları, SEO altyapısı ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
 
-## Teslimat Süreci
+## Teslimat Kontrol Listesi
 
 ```text
-1. Müşteri sektör şablonunu seçer.
-2. Müşteri 3 arayüz seçeneğinden birini seçer.
-3. Logo, renk, firma adı, telefon, adres ve sosyal medya bilgileri alınır.
-4. Domain/hosting/Firebase hesabı belirlenir.
-5. Config ve Firestore settings müşteri bilgilerine göre düzenlenir.
-6. Hakkımızda/KVKK/gizlilik/SSS metinleri müşteri bilgilerine göre düzenlenir.
-7. E-posta bildirimi için REQUEST_NOTIFICATION_TO müşterinin maili yapılır.
-8. Demo link paylaşılır.
-9. Küçük revizyonlar yapılır.
-10. Firebase/hosting canlıya alınır.
-11. Admin kullanıcı oluşturulur.
-12. Admin panel kullanımı ve tarayıcı bildirimi açma anlatılır.
-13. Teslim tamamlanır.
+1. Müşteri sektörü ve arayüz varyantı seçilir.
+2. Firma adı, logo, renk, telefon, adres, sosyal medya bilgileri alınır.
+3. Firebase projesi ve Auth admin kullanıcısı hazırlanır.
+4. Firestore ve Storage rules deploy edilir.
+5. Vercel/Netlify env değerleri girilir.
+6. NEXT_PUBLIC_DEMO_MODE=false yapılır.
+7. NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=true yapılır.
+8. NEXT_PUBLIC_SITE_URL gerçek domain yapılır.
+9. REQUEST_NOTIFICATION_TO müşteri e-postası yapılır.
+10. Hakkımızda/KVKK/gizlilik/SSS metinleri kontrol edilir.
+11. Form gönderme, e-posta bildirim, admin canlı uyarı test edilir.
+12. Görsel yükleme ve ilan/hizmet/kampanya yönetimi test edilir.
+13. robots.txt, sitemap.xml ve mobil görünüm kontrol edilir.
+14. Admin panel kullanımı müşteriye anlatılır.
+15. Teslim tamamlanır.
 ```
 
-## Sonraki Net Kontroller
+## Bilinen Sınır
 
-```text
-1. pnpm install
-2. pnpm --filter @fk-templates/web build
-3. GitHub Actions build sonucu kontrol
-4. Canlı Firebase Auth / Firestore / Storage test
-5. Admin panelden ayar, içerik, hizmet, kampanya, galeri ve ilan testi
-6. Formlarda KVKK onayı ve talep kayıt testi
-7. E-posta bildirim testi
-8. Admin panel canlı uyarı, sesli uyarı ve tarayıcı bildirim testi
-9. robots.txt / sitemap.xml / SEO meta kontrolü
-10. Mobil görsel kontrol
-11. İlk müşteri demosu için marka/logo/içerik uyarlama
-```
+Aynı Firebase projesinde çok müşterili kullanım için `ownerUid/businessId` bazlı gelişmiş rol sistemi gerekir. Mevcut güvenlik modeli müşteri başına ayrı Firebase projesi veya tek işletme kurulumu için uygundur.
