@@ -109,9 +109,15 @@ export default function PropertyDetailPage() {
     const customerPhone = String(formData.get("phone") || "").trim();
     const requestType = String(formData.get("requestType") || "İlan talebi");
     const note = String(formData.get("note") || "");
+    const acceptedLegal = formData.get("acceptedLegal") === "on";
 
     if (!customerName || !customerPhone) {
       setSubmitStatus("Ad soyad ve telefon zorunludur.");
+      return;
+    }
+
+    if (!acceptedLegal) {
+      setSubmitStatus("Devam etmek için KVKK/Gizlilik bilgilendirmesini onaylamalısınız.");
       return;
     }
 
@@ -129,7 +135,8 @@ export default function PropertyDetailPage() {
           propertyId: property.id,
           propertyTitle: property.title,
           price: property.price,
-          location: property.location
+          location: property.location,
+          acceptedLegal: "true"
         }
       });
       setSubmitStatus("Talep alındı. Danışman size dönüş yapacak.");
@@ -200,6 +207,7 @@ export default function PropertyDetailPage() {
             <label className="field"><span>Telefon</span><input name="phone" placeholder="+90 5xx xxx xx xx" /></label>
             <label className="field"><span>Talep tipi</span><select name="requestType" defaultValue=""><option value="" disabled>Seçiniz</option><option>İlanı görmek istiyorum</option><option>Fiyat bilgisi istiyorum</option><option>Benzer ilan istiyorum</option></select></label>
             <label className="field"><span>Not</span><textarea name="note" placeholder="Kısaca talebinizi yazın" /></label>
+            <label className="kvkkConsent"><input name="acceptedLegal" type="checkbox" required /><span><a href="/kvkk-aydinlatma-metni" target="_blank">KVKK Aydınlatma Metni</a> ve <a href="/gizlilik-politikasi" target="_blank">Gizlilik Politikası</a> kapsamında bilgilendirmeyi okudum.</span></label>
             <button className="pillButton" type="submit" disabled={isSubmitting}>{isSubmitting ? "Gönderiliyor..." : "Demo Talep Gönder"}</button>
             {submitStatus ? <p className="formStatus">{submitStatus}</p> : null}
           </form>
