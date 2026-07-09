@@ -3,6 +3,19 @@ import type { LayoutVariant, ServiceItem, TemplateKey, VisualItem } from "@fk-te
 import { COLLECTIONS } from "./collections";
 import { getFirestoreDb } from "./client";
 
+export type ContentPageKey = "about" | "contact" | "privacy" | "kvkk" | "cookies" | "terms";
+
+export type ManagedContentPage = {
+  title: string;
+  description: string;
+  body: string;
+};
+
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
 export type ManagedSiteSettings = {
   id?: string;
   businessId?: string;
@@ -20,8 +33,12 @@ export type ManagedSiteSettings = {
   address?: string;
   mapsUrl?: string;
   instagramUrl?: string;
+  workingHours?: string;
+  contactEmail?: string;
   campaignItems?: ServiceItem[];
   galleryItems?: VisualItem[];
+  contentPages?: Partial<Record<ContentPageKey, ManagedContentPage>>;
+  faqItems?: FaqItem[];
   updatedAt?: unknown;
   createdAt?: unknown;
 };
