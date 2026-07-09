@@ -175,8 +175,11 @@ export default function AdminDemoPage() {
         <a className="adminLogo" href="/"><span>FK</span><strong>Admin Demo</strong></a>
         <nav>
           <a className="active" href="#requests">Talepler</a>
-          <a href="#properties">İlanlar</a>
+          <a href="/admin/settings">Site Ayarları</a>
           <a href="/admin/services">Hizmetler</a>
+          <a href="/admin/campaigns">Kampanyalar</a>
+          <a href="/admin/gallery">Galeri</a>
+          <a href="#properties">İlanlar</a>
           <a href="#templates">Şablonlar</a>
         </nav>
       </aside>
@@ -186,7 +189,7 @@ export default function AdminDemoPage() {
           <div>
             <span className="eyebrow">FK Service Templates</span>
             <h1>Müşteri paneli demo görünümü</h1>
-            <p>Randevu, talep ve ilanlar tek panelde yönetilecek. Firebase env girilirse canlı kayıtlar, yoksa demo data gösterilir.</p>
+            <p>Randevu, talep, kampanya, galeri, hizmet ve ilanlar tek panelden yönetilecek. Firebase env girilirse canlı kayıtlar, yoksa demo data gösterilir.</p>
             <p className="adminMode">Veri modu: {dataMode}</p>
             <p className="adminMode">Panel modu: {guard.message}</p>
             {actionStatus ? <p className="adminMode">{actionStatus}</p> : null}
@@ -202,6 +205,21 @@ export default function AdminDemoPage() {
             </article>
           ))}
         </div>
+
+        <section className="adminCard">
+          <div className="adminSectionHead">
+            <div>
+              <h2>Site yönetimi</h2>
+              <p>Müşteri site içeriğini panelden yönetebilir; bize tekrar yazmadan değişiklik yapabilir.</p>
+            </div>
+          </div>
+          <div className="adminPropertyGrid">
+            <article className="adminProperty"><span>Yönetim</span><h3>Site Ayarları</h3><p>Firma adı, telefon, adres, başlıklar ve seçili arayüz.</p><a className="ghostButton navButtonLink" href="/admin/settings">Aç</a></article>
+            <article className="adminProperty"><span>Yönetim</span><h3>Hizmetler</h3><p>Hizmet adı, açıklama ve fiyat listesi.</p><a className="ghostButton navButtonLink" href="/admin/services">Aç</a></article>
+            <article className="adminProperty"><span>Yönetim</span><h3>Kampanyalar</h3><p>Dönemsel kampanya ve paket kartları.</p><a className="ghostButton navButtonLink" href="/admin/campaigns">Aç</a></article>
+            <article className="adminProperty"><span>Yönetim</span><h3>Galeri</h3><p>Site görselleri, başlık ve açıklamalar.</p><a className="ghostButton navButtonLink" href="/admin/gallery">Aç</a></article>
+          </div>
+        </section>
 
         <section className="adminCard" id="requests">
           <div className="adminSectionHead">
