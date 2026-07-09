@@ -6,14 +6,19 @@ service firebase.storage {
       return request.auth != null;
     }
 
+    function validImageUpload() {
+      return request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/(jpeg|png|webp)');
+    }
+
     match /business-images/{imagePath=**} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if signedIn() && validImageUpload();
     }
 
     match /property-images/{imagePath=**} {
       allow read: if true;
-      allow write: if signedIn();
+      allow write: if signedIn() && validImageUpload();
     }
 
     match /{allPaths=**} {
