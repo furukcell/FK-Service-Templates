@@ -1,4 +1,6 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, FormEvent } from "react";
+import { useState } from "react";
+import { createBusinessRequest } from "@fk-templates/firebase";
 import type { BusinessTemplateConfig, TemplateKey } from "@fk-templates/shared";
 import { templateConfigs, templateOrder } from "../templateConfigs";
 
@@ -19,7 +21,64 @@ function applyTheme(config: BusinessTemplateConfig): CSSProperties {
   } as CSSProperties;
 }
 
+function formDataToExtra(formData: FormData): Record<string, string> {
+  const extra: Record<string, string> = {};
+  formData.forEach((value, key) => {
+    extra[key] = String(value);
+  });
+  return extra;
+}
+
+function getSubject(formData: FormData, config: BusinessTemplateConfig): string {
+  return String(
+    formData.get("service") ||
+    formData.get("listingType") ||
+    formData.get("petType") ||
+    formData.get("location") ||
+    config.form.title
+  );
+}
+
 export function TemplateLanding({ config, activeTemplate, onTemplateChange, showTemplateSwitch = true }: TemplateLandingProps) {
+  const [submitStatus, setSubmitStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSubmitStatus("");
+
+    const formData = new FormData(event.currentTarget);
+    const customerName = String(formData.get("name") || "").trim();
+    const customerPhone = String(formData.get("phone") || "").trim();
+
+    if (!customerName || !customerPhone) {
+      setSubmitStatus("Ad soyad ve telefon zorunludur.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await createBusinessRequest({
+        template: config.template,
+        businessId: process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business",
+        customerName,
+        customerPhone,
+        subject: getSubject(formData, config),
+        note: String(formData.get("note") || ""),
+        source: "website",
+        preferredDate: String(formData.get("date") || ""),
+        preferredTime: String(formData.get("time") || ""),
+        extra: formDataToExtra(formData)
+      });
+      setSubmitStatus("Talep alındı. İşletme size WhatsApp veya telefonla dönüş yapacak.");
+      event.currentTarget.reset();
+    } catch (error) {
+      setSubmitStatus("Demo mod: Form hazır. Firebase bilgileri girilince bu talep panele düşecek.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <main className="pageShell" style={applyTheme(config)}>
       <div className="topBar">{config.topBarText}</div>
@@ -132,23 +191,24 @@ export function TemplateLanding({ config, activeTemplate, onTemplateChange, show
             <p>Firma adı, logo, renk, telefon, WhatsApp, adres, harita linki, hizmet listesi ve görseller config sistemine işlenecek.</p>
             <span className="priceTag">Tek seferlik kurulum modeli</span>
           </div>
-          <form className="formPanel formFields">
+          <form className="formPanel formFields" onSubmit={handleSubmit}>
             {config.form.fields.map((field) => (
               <label className="field" key={field.key}>
                 <span>{field.label}</span>
                 {field.type === "select" ? (
-                  <select defaultValue="">
+                  <select name={field.key} defaultValue="">
                     <option value="" disabled>Seçiniz</option>
                     {field.options?.map((option) => <option key={option}>{option}</option>)}
                   </select>
                 ) : field.type === "textarea" ? (
-                  <textarea placeholder={field.placeholder} />
+                  <textarea name={field.key} placeholder={field.placeholder} />
                 ) : (
-                  <input type={field.type} placeholder={field.placeholder} />
+                  <input name={field.key} type={field.type} placeholder={field.placeholder} />
                 )}
               </label>
             ))}
-            <button className="pillButton" type="button">Demo Talep Gönder</button>
+            <button className="pillButton" type="submit" disabled={isSubmitting}>{isSubmitting ? "Gönderiliyor..." : "Demo Talep Gönder"}</button>
+            {submitStatus ? <p className="formStatus">{submitStatus}</p> : null}
           </form>
         </div>
       </section>
