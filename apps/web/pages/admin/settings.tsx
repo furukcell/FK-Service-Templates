@@ -43,7 +43,22 @@ export default function AdminSettingsPage() {
         if (settings) {
           const selectedTemplate = settings.template || "appointment";
           const defaults = defaultsFor(selectedTemplate);
-          setForm({ ...defaults, ...settings, template: selectedTemplate, layoutVariant: settings.layoutVariant || defaults.layoutVariant });
+          setForm({
+            template: selectedTemplate,
+            layoutVariant: settings.layoutVariant || defaults.layoutVariant,
+            brandName: settings.brandName || defaults.brandName,
+            eyebrow: settings.eyebrow || defaults.eyebrow,
+            heroTitle: settings.heroTitle || defaults.heroTitle,
+            heroDescription: settings.heroDescription || defaults.heroDescription,
+            primaryCta: settings.primaryCta || defaults.primaryCta,
+            secondaryCta: settings.secondaryCta || defaults.secondaryCta,
+            topBarText: settings.topBarText || defaults.topBarText,
+            phone: settings.phone || defaults.phone,
+            whatsapp: settings.whatsapp || defaults.whatsapp,
+            address: settings.address || defaults.address,
+            mapsUrl: settings.mapsUrl || defaults.mapsUrl,
+            instagramUrl: settings.instagramUrl || defaults.instagramUrl
+          });
           setStatus("Canlı site ayarları yüklendi.");
         } else {
           setStatus("Ayar kaydı yok, demo varsayılanları gösteriliyor.");
