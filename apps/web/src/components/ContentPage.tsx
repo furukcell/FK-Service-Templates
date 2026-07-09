@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import type { ContentPageKey } from "@fk-templates/firebase";
 import type { BusinessTemplateConfig } from "@fk-templates/shared";
 import { SeoHead } from "./SeoHead";
+import { SiteSetupGuard } from "./SiteSetupGuard";
 import { templateConfigs } from "../templateConfigs";
 import { useSiteContent } from "../useSiteContent";
 import { contentPageLabels, contentPageRoutes, getManagedContentPage, getManagedFaqItems } from "../siteContent";
@@ -22,16 +23,23 @@ function themeStyle(config: BusinessTemplateConfig): CSSProperties {
   } as CSSProperties;
 }
 
+function logoText(name: string) {
+  return name.slice(0, 2).toUpperCase();
+}
+
 export function ContentPage({ pageKey }: { pageKey: ContentPageKey }) {
-  const { settings } = useSiteContent();
+  const { settings, requiresSetup } = useSiteContent();
   const config = settings?.template ? templateConfigs[settings.template] : baseConfig;
+  const brandName = settings?.brandName || config.brandName;
   const page = getManagedContentPage(config, settings, pageKey);
+
+  if (requiresSetup) return <SiteSetupGuard />;
 
   return (
     <main className="contentShell" style={themeStyle(config)}>
-      <SeoHead title={`${page.title} | ${settings?.brandName || config.brandName}`} description={page.description} canonicalPath={contentPageRoutes[pageKey]} />
+      <SeoHead title={`${page.title} | ${brandName}`} description={page.description} canonicalPath={contentPageRoutes[pageKey]} />
       <nav className="navbar contentNav">
-        <a className="logoLockup navButtonLink" href="/"><span className="logoMark">FK</span><span>{settings?.brandName || config.brandName}</span></a>
+        <a className="logoLockup navButtonLink" href="/"><span className="logoMark">{logoText(brandName)}</span><span>{brandName}</span></a>
         <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
       </nav>
 
@@ -69,15 +77,18 @@ export function ContentPage({ pageKey }: { pageKey: ContentPageKey }) {
 }
 
 export function FaqPage() {
-  const { settings } = useSiteContent();
+  const { settings, requiresSetup } = useSiteContent();
   const config = settings?.template ? templateConfigs[settings.template] : baseConfig;
+  const brandName = settings?.brandName || config.brandName;
   const faqItems = getManagedFaqItems(config, settings);
+
+  if (requiresSetup) return <SiteSetupGuard />;
 
   return (
     <main className="contentShell" style={themeStyle(config)}>
-      <SeoHead title={`Sık Sorulan Sorular | ${settings?.brandName || config.brandName}`} description="Randevu, talep, iletişim ve hizmet süreci hakkında sık sorulan sorular." canonicalPath="/sss" />
+      <SeoHead title={`Sık Sorulan Sorular | ${brandName}`} description="Randevu, talep, iletişim ve hizmet süreci hakkında sık sorulan sorular." canonicalPath="/sss" />
       <nav className="navbar contentNav">
-        <a className="logoLockup navButtonLink" href="/"><span className="logoMark">FK</span><span>{settings?.brandName || config.brandName}</span></a>
+        <a className="logoLockup navButtonLink" href="/"><span className="logoMark">{logoText(brandName)}</span><span>{brandName}</span></a>
         <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
       </nav>
       <section className="contentHero"><span className="eyebrow">Sık Sorulan Sorular</span><h1>Merak edilen sorular</h1><p>Randevu, talep, iletişim ve hizmet süreci hakkında sık sorulan sorular.</p></section>
