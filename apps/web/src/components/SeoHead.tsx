@@ -24,8 +24,11 @@ export function SeoHead({
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="theme-color" content="#12312a" />
       {noIndex ? <meta name="robots" content="noindex,nofollow" /> : null}
       <link rel="canonical" href={canonicalUrl} />
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      <link rel="manifest" href="/site.webmanifest" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
