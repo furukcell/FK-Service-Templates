@@ -51,7 +51,7 @@ export default function AdminCampaignsPage() {
   async function saveCampaigns() {
     setIsSaving(true);
     try {
-      await saveSiteSettings(businessId, { ...settings, template, campaignItems: items });
+      await saveSiteSettings(businessId, { ...(settings || {}), template, campaignItems: items });
       setStatus("Kampanyalar kaydedildi. Site bu kampanyaları canlı okuyacak.");
     } catch (error) {
       setStatus("Kampanyalar kaydedilemedi. Admin giriş, Firebase env veya Firestore rules kontrol edilmeli.");
