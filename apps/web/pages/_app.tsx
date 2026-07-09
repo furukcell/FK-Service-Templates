@@ -7,6 +7,7 @@ import "../src/styles/admin-forms.css";
 import "../src/styles/forms.css";
 import "../src/styles/properties.css";
 import "../src/styles/visual-sections.css";
+import "../src/styles/layout-variants.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
