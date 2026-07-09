@@ -1,17 +1,19 @@
+import type { CSSProperties } from "react";
 import { propertyDemoData } from "../../src/propertyDemoData";
 import { templateConfigs } from "../../src/templateConfigs";
 
 const config = templateConfigs["real-estate"];
+const themeStyle = {
+  "--primary": config.theme.primary,
+  "--secondary": config.theme.secondary,
+  "--accent": config.theme.accent,
+  "--soft": config.theme.soft,
+  "--dark": config.theme.dark
+} as CSSProperties;
 
 export default function PropertiesPage() {
   return (
-    <main className="pageShell" style={{
-      "--primary": config.theme.primary,
-      "--secondary": config.theme.secondary,
-      "--accent": config.theme.accent,
-      "--soft": config.theme.soft,
-      "--dark": config.theme.dark
-    } as React.CSSProperties}>
+    <main className="pageShell" style={themeStyle}>
       <div className="topBar">Emlak ilan portföyü • Vitrin ilanları • WhatsApp talep</div>
       <nav className="navbar">
         <a className="logoLockup navButtonLink" href="/real-estate"><span className="logoMark">FK</span><span>{config.brandName}</span></a>
