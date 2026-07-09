@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import type { ContentPageKey } from "@fk-templates/firebase";
+import type { BusinessTemplateConfig } from "@fk-templates/shared";
 import { templateConfigs } from "../templateConfigs";
 import { useSiteContent } from "../useSiteContent";
 import { contentPageLabels, contentPageRoutes, getManagedContentPage, getManagedFaqItems } from "../siteContent";
@@ -10,7 +11,7 @@ function paragraphs(body: string) {
   return body.split("\n").filter(Boolean);
 }
 
-function themeStyle(config: typeof baseConfig): CSSProperties {
+function themeStyle(config: BusinessTemplateConfig): CSSProperties {
   return {
     "--primary": config.theme.primary,
     "--secondary": config.theme.secondary,
