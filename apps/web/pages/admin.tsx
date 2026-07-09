@@ -1,13 +1,71 @@
-import { demoProperties, demoRequests, statusLabels } from "../src/adminDemoData";
+import { useEffect, useMemo, useState } from "react";
+import { listBusinessRequests, type BusinessRequest } from "@fk-templates/firebase";
+import { demoProperties, demoRequests, statusLabels, type DemoRequest } from "../src/adminDemoData";
 
-const summaryCards = [
-  { value: demoRequests.length.toString(), label: "toplam talep" },
-  { value: demoRequests.filter((item) => item.status === "new").length.toString(), label: "yeni talep" },
-  { value: demoProperties.length.toString(), label: "demo ilan" },
-  { value: "3", label: "aktif şablon" }
-];
+type DisplayRequest = {
+  id: string;
+  customerName: string;
+  customerPhone: string;
+  subject: string;
+  date: string;
+  status: DemoRequest["status"];
+  source: string;
+};
+
+function mapLiveRequest(request: BusinessRequest): DisplayRequest {
+  return {
+    id: request.id,
+    customerName: request.customerName,
+    customerPhone: request.customerPhone,
+    subject: request.subject,
+    date: request.preferredDate || "Canlı kayıt",
+    status: request.status,
+    source: request.source || "website"
+  };
+}
+
+function mapDemoRequest(request: DemoRequest): DisplayRequest {
+  return request;
+}
 
 export default function AdminDemoPage() {
+  const [liveRequests, setLiveRequests] = useState<DisplayRequest[]>([]);
+  const [dataMode, setDataMode] = useState("Demo data");
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadRequests() {
+      try {
+        const items = await listBusinessRequests();
+        if (!isMounted) return;
+        if (items.length) {
+          setLiveRequests(items.map(mapLiveRequest));
+          setDataMode("Firestore canlı kayıtlar");
+        } else {
+          setLiveRequests([]);
+          setDataMode("Firestore boş, demo data gösteriliyor");
+        }
+      } catch (error) {
+        if (isMounted) {
+          setLiveRequests([]);
+          setDataMode("Firebase bağlı değil, demo data gösteriliyor");
+        }
+      }
+    }
+
+    loadRequests();
+    return () => { isMounted = false; };
+  }, []);
+
+  const displayRequests = liveRequests.length ? liveRequests : demoRequests.map(mapDemoRequest);
+  const summaryCards = useMemo(() => [
+    { value: displayRequests.length.toString(), label: "toplam talep" },
+    { value: displayRequests.filter((item) => item.status === "new").length.toString(), label: "yeni talep" },
+    { value: demoProperties.length.toString(), label: "demo ilan" },
+    { value: "3", label: "aktif şablon" }
+  ], [displayRequests]);
+
   return (
     <main className="adminShell">
       <aside className="adminSidebar">
@@ -25,7 +83,8 @@ export default function AdminDemoPage() {
           <div>
             <span className="eyebrow">FK Service Templates</span>
             <h1>Müşteri paneli demo görünümü</h1>
-            <p>Randevu, talep ve ilanlar tek panelde yönetilecek. Bu ekran şu an demo veridir; Firebase bağlanınca canlı kayıtları gösterecek.</p>
+            <p>Randevu, talep ve ilanlar tek panelde yönetilecek. Firebase env girilirse canlı kayıtlar, yoksa demo data gösterilir.</p>
+            <p className="adminMode">Veri modu: {dataMode}</p>
           </div>
           <a className="pillButton navButtonLink" href="/">Siteye Dön</a>
         </header>
@@ -56,7 +115,7 @@ export default function AdminDemoPage() {
               <span>Durum</span>
               <span>Kaynak</span>
             </div>
-            {demoRequests.map((request) => (
+            {displayRequests.map((request) => (
               <div className="adminTableRow" key={request.id}>
                 <span>{request.id}</span>
                 <span><strong>{request.customerName}</strong><small>{request.customerPhone}</small></span>
@@ -75,7 +134,7 @@ export default function AdminDemoPage() {
               <h2>Emlak ilan demo listesi</h2>
               <p>Emlak şablonunda ilan ekleme/düzenleme bu panelden yönetilecek.</p>
             </div>
-            <button className="pillButton">Yeni ilan</button>
+            <a className="pillButton navButtonLink" href="/properties">İlanları Aç</a>
           </div>
           <div className="adminPropertyGrid">
             {demoProperties.map((property) => (
@@ -98,9 +157,9 @@ export default function AdminDemoPage() {
             </div>
           </div>
           <div className="adminPropertyGrid">
-            <article className="adminProperty"><span>Template</span><h3>Veteriner / Klinik</h3><p>Randevu formu, hizmetler, uzman kartları.</p><strong>Hazırlanıyor</strong></article>
-            <article className="adminProperty"><span>Template</span><h3>Kuaför / Güzellik</h3><p>Hizmet fiyatları, kampanya ve randevu.</p><strong>Hazırlanıyor</strong></article>
-            <article className="adminProperty"><span>Template</span><h3>Emlakçı</h3><p>İlan kartları, vitrin ve müşteri talebi.</p><strong>Hazırlanıyor</strong></article>
+            <article className="adminProperty"><span>Template</span><h3>Veteriner / Klinik</h3><p>Randevu formu, hizmetler, uzman kartları.</p><strong>İlk taslak hazır</strong></article>
+            <article className="adminProperty"><span>Template</span><h3>Kuaför / Güzellik</h3><p>Hizmet fiyatları, kampanya ve randevu.</p><strong>İlk taslak hazır</strong></article>
+            <article className="adminProperty"><span>Template</span><h3>Emlakçı</h3><p>İlan kartları, vitrin ve müşteri talebi.</p><strong>İlk taslak hazır</strong></article>
           </div>
         </section>
       </section>
