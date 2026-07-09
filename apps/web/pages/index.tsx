@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
+import { SeoHead } from "../src/components/SeoHead";
 import { TemplateLanding } from "../src/components/TemplateLanding";
 import { templateConfigs } from "../src/templateConfigs";
 import { useManagedTemplateConfig } from "../src/useManagedTemplateConfig";
@@ -11,14 +12,17 @@ export default function HomePage() {
   const { config } = useManagedTemplateConfig(baseConfig);
 
   return (
-    <TemplateLanding
-      config={config}
-      activeTemplate={activeTemplate}
-      activeLayout={activeLayout}
-      onTemplateChange={setActiveTemplate}
-      onLayoutChange={setActiveLayout}
-      showTemplateSwitch
-      showLayoutSwitch
-    />
+    <>
+      <SeoHead title={`${config.brandName} | ${config.sector}`} description={config.heroDescription} canonicalPath="/" />
+      <TemplateLanding
+        config={config}
+        activeTemplate={activeTemplate}
+        activeLayout={activeLayout}
+        onTemplateChange={setActiveTemplate}
+        onLayoutChange={setActiveLayout}
+        showTemplateSwitch
+        showLayoutSwitch
+      />
+    </>
   );
 }
