@@ -1,0 +1,9 @@
+.adminMode {
+  width: fit-content;
+  margin-top: 14px !important;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--primary) !important;
+  background: var(--soft);
+  font-weight: 950;
+}
