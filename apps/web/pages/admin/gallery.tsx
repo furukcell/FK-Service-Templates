@@ -68,7 +68,7 @@ export default function AdminGalleryPage() {
   async function saveGallery() {
     setIsSaving(true);
     try {
-      await saveSiteSettings(businessId, { ...settings, template, galleryItems: items });
+      await saveSiteSettings(businessId, { ...(settings || {}), template, galleryItems: items });
       setStatus("Galeri kaydedildi. Site bu görselleri canlı okuyacak.");
     } catch (error) {
       setStatus("Galeri kaydedilemedi. Admin giriş, Firebase env veya Firestore rules kontrol edilmeli.");
