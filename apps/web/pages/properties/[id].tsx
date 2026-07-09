@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { createBusinessRequest, getPropertyById, type Property } from "@fk-templates/firebase";
 import { notifyNewRequest } from "../../src/notifyRequest";
+import { isDemoMode } from "../../src/runtimeMode";
 import { findPropertyById, propertyDemoData, type PropertyDemo } from "../../src/propertyDemoData";
 import { templateConfigs } from "../../src/templateConfigs";
 
@@ -67,7 +68,8 @@ export default function PropertyDetailPage() {
   const router = useRouter();
   const demoProperty = useMemo(() => findPropertyById(router.query.id), [router.query.id]);
   const [liveProperty, setLiveProperty] = useState<DisplayProperty | null>(null);
-  const [dataMode, setDataMode] = useState("Demo portföy detayı");
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [dataMode, setDataMode] = useState(isDemoMode() ? "Demo portföy detayı" : "Canlı ilan detayı");
   const [submitStatus, setSubmitStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -83,16 +85,18 @@ export default function PropertyDetailPage() {
         if (!isMounted) return;
         if (item) {
           setLiveProperty(mapLiveProperty(item));
-          setDataMode("Firestore canlı ilan detayı");
+          setDataMode("Canlı ilan detayı");
         } else {
           setLiveProperty(null);
-          setDataMode("Firestore'da bulunamadı, demo portföy detayı");
+          setDataMode(isDemoMode() ? "Canlı ilanda bulunamadı, demo portföy detayı" : "İlan bulunamadı");
         }
       } catch (error) {
         if (isMounted) {
           setLiveProperty(null);
-          setDataMode("Firebase bağlı değil, demo portföy detayı");
+          setDataMode(isDemoMode() ? "Firebase bağlı değil, demo portföy detayı" : "İlan şu anda yüklenemedi");
         }
+      } finally {
+        if (isMounted) setHasLoaded(true);
       }
     }
 
@@ -100,17 +104,24 @@ export default function PropertyDetailPage() {
     return () => { isMounted = false; };
   }, [router.query.id]);
 
-  const property = liveProperty || mapDemoProperty(demoProperty);
-  const otherProperties = propertyDemoData.filter((item) => item.id !== property.id).slice(0, 2);
+  const property = liveProperty || (isDemoMode() ? mapDemoProperty(demoProperty) : null);
+  const otherProperties = property && isDemoMode() ? propertyDemoData.filter((item) => item.id !== property.id).slice(0, 2) : [];
 
   async function submitLead(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!property) return;
     const formData = new FormData(event.currentTarget);
     const customerName = String(formData.get("name") || "").trim();
     const customerPhone = String(formData.get("phone") || "").trim();
     const requestType = String(formData.get("requestType") || "İlan talebi");
     const note = String(formData.get("note") || "");
     const acceptedLegal = formData.get("acceptedLegal") === "on";
+    const honeypot = String(formData.get("website") || "");
+
+    if (honeypot) {
+      setSubmitStatus("Talebiniz alındı.");
+      return;
+    }
 
     if (!customerName || !customerPhone) {
       setSubmitStatus("Ad soyad ve telefon zorunludur.");
@@ -145,17 +156,34 @@ export default function PropertyDetailPage() {
       setSubmitStatus("Talep alındı. Danışman size dönüş yapacak.");
       event.currentTarget.reset();
     } catch (error) {
-      setSubmitStatus("Demo mod: Form hazır. Firebase bilgileri girilince bu ilan talebi panele düşecek.");
+      setSubmitStatus(isDemoMode() ? "Demo mod: Firebase bilgileri girilince bu ilan talebi panele düşecek." : "Talep şu anda gönderilemedi. Lütfen telefon veya WhatsApp üzerinden iletişime geçin.");
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  if (!property && hasLoaded) {
+    return (
+      <main className="pageShell" style={themeStyle}>
+        <div className="topBar">İlan bulunamadı</div>
+        <nav className="navbar">
+          <a className="logoLockup navButtonLink" href="/properties"><span className="logoMark">{config.brandName.slice(0, 2).toUpperCase()}</span><span>{config.brandName}</span></a>
+          <div className="navActions"><a className="pillButton navButtonLink" href="/properties">Tüm İlanlar</a></div>
+        </nav>
+        <section className="section"><div className="formPanel"><h1>İlan bulunamadı</h1><p>Bu ilan yayından kaldırılmış veya bağlantı hatalı olabilir.</p><a className="pillButton navButtonLink" href="/properties">Portföylere Dön</a></div></section>
+      </main>
+    );
+  }
+
+  if (!property) {
+    return <main className="pageShell" style={themeStyle}><section className="section"><div className="formPanel"><h1>İlan yükleniyor...</h1></div></section></main>;
   }
 
   return (
     <main className="pageShell" style={themeStyle}>
       <div className="topBar">{property.title} • {property.location} • {property.price}</div>
       <nav className="navbar">
-        <a className="logoLockup navButtonLink" href="/properties"><span className="logoMark">FK</span><span>{config.brandName}</span></a>
+        <a className="logoLockup navButtonLink" href="/properties"><span className="logoMark">{config.brandName.slice(0, 2).toUpperCase()}</span><span>{config.brandName}</span></a>
         <div className="navActions"><a className="ghostButton navButtonLink" href="/properties">Tüm İlanlar</a><a className="pillButton navButtonLink" href="#lead-form">İlanı Sor</a></div>
       </nav>
 
@@ -170,14 +198,14 @@ export default function PropertyDetailPage() {
           <p>{property.description}</p>
           <strong>{property.price}</strong>
           <div className="propertyMeta"><span>{property.location}</span><span>{property.squareMeters}</span><span>{property.roomCount}</span><span>{property.bathroomCount} banyo</span></div>
-          <p className="adminMode">Veri modu: {dataMode}</p>
+          {isDemoMode() ? <p className="adminMode">Veri modu: {dataMode}</p> : null}
           <div className="heroActions"><a className="pillButton navButtonLink" href="#lead-form">Bu İlanı Sor</a><a className="ghostButton navButtonLink" href="/properties">Diğer İlanlar</a></div>
         </div>
       </section>
 
       {property.imageUrls.length ? (
         <section className="section">
-          <div className="sectionHead"><h2>Fotoğraf galerisi</h2><p>Admin panelden yüklenen görseller burada portföy galerisi olarak görünür.</p></div>
+          <div className="sectionHead"><h2>Fotoğraf galerisi</h2><p>İlana ait görselleri inceleyebilirsiniz.</p></div>
           <div className="propertyImageGrid">
             {property.imageUrls.map((imageUrl) => <img src={imageUrl} alt={property.title} key={imageUrl} />)}
           </div>
@@ -187,10 +215,10 @@ export default function PropertyDetailPage() {
       <section className="section">
         <div className="sectionHead">
           <h2>Öne çıkan bilgiler</h2>
-          <p>İlan detay sayfası müşteri için güven veren, temiz ve hızlı bilgi veren yapıda hazırlanır.</p>
+          <p>İlanın temel özellikleri ve danışman bilgileri.</p>
         </div>
         <div className="cardGrid">
-          {property.highlights.map((highlight) => <article className="serviceCard" key={highlight}><h3>{highlight}</h3><p>Bu alan admin panelden düzenlenebilir portföy özelliği olarak planlandı.</p></article>)}
+          {property.highlights.map((highlight) => <article className="serviceCard" key={highlight}><h3>{highlight}</h3><p>Bu ilan hakkında detaylı bilgi almak için formu doldurabilirsiniz.</p></article>)}
         </div>
       </section>
 
@@ -206,12 +234,13 @@ export default function PropertyDetailPage() {
             <span className="priceTag">{property.consultantPhone}</span>
           </div>
           <form className="formPanel formFields" onSubmit={submitLead}>
+            <input aria-hidden="true" autoComplete="off" className="honeypotField" name="website" tabIndex={-1} />
             <label className="field"><span>Ad Soyad</span><input name="name" placeholder="Adınız soyadınız" /></label>
             <label className="field"><span>Telefon</span><input name="phone" placeholder="+90 5xx xxx xx xx" /></label>
             <label className="field"><span>Talep tipi</span><select name="requestType" defaultValue=""><option value="" disabled>Seçiniz</option><option>İlanı görmek istiyorum</option><option>Fiyat bilgisi istiyorum</option><option>Benzer ilan istiyorum</option></select></label>
             <label className="field"><span>Not</span><textarea name="note" placeholder="Kısaca talebinizi yazın" /></label>
             <label className="kvkkConsent"><input name="acceptedLegal" type="checkbox" required /><span><a href="/kvkk-aydinlatma-metni" target="_blank">KVKK Aydınlatma Metni</a> ve <a href="/gizlilik-politikasi" target="_blank">Gizlilik Politikası</a> kapsamında bilgilendirmeyi okudum.</span></label>
-            <button className="pillButton" type="submit" disabled={isSubmitting}>{isSubmitting ? "Gönderiliyor..." : "Demo Talep Gönder"}</button>
+            <button className="pillButton" type="submit" disabled={isSubmitting}>{isSubmitting ? "Gönderiliyor..." : "Talep Gönder"}</button>
             {submitStatus ? <p className="formStatus">{submitStatus}</p> : null}
           </form>
         </div>
@@ -219,7 +248,7 @@ export default function PropertyDetailPage() {
 
       {otherProperties.length ? (
         <section className="section">
-          <div className="sectionHead"><h2>Benzer portföyler</h2><p>İlan detayından diğer portföylere geçiş için satış odaklı öneri alanı.</p></div>
+          <div className="sectionHead"><h2>Benzer portföyler</h2><p>Diğer portföylere de göz atabilirsiniz.</p></div>
           <div className="cardGrid">
             {otherProperties.map((item) => <article className="serviceCard" key={item.id}><h3>{item.title}</h3><p>{item.location}</p><strong>{item.price}</strong><br /><a className="ghostButton navButtonLink" href={`/properties/${item.id}`}>İncele</a></article>)}
           </div>
