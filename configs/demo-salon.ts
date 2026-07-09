@@ -13,6 +13,8 @@ export const demoSalonConfig: BusinessTemplateConfig = {
   phone: "+90 5xx xxx xx xx",
   whatsapp: "+905xxxxxxxxx",
   address: "Bodrum / Muğla",
+  mapsUrl: "https://maps.google.com/?q=Bodrum%20Mu%C4%9Fla",
+  instagramUrl: "https://instagram.com/",
   theme: {
     primary: "#BE185D",
     secondary: "#EC4899",
@@ -31,6 +33,16 @@ export const demoSalonConfig: BusinessTemplateConfig = {
     { title: "Saç Kesim & Fön", description: "Kadın/erkek saç kesimi, fön ve bakım hizmetleri.", price: "₺450+" },
     { title: "Nail Art", description: "Protez tırnak, kalıcı oje ve tasarım uygulamaları.", price: "₺600+" },
     { title: "Cilt Bakımı", description: "Temizleme, yenileme ve bakım paketleri.", price: "₺900+" }
+  ],
+  campaignItems: [
+    { title: "Hafta içi bakım paketi", description: "Cilt bakımı + fön paket kampanyası.", price: "₺1.250" },
+    { title: "Nail art lansman", description: "Yeni müşteriye özel kalıcı oje paketi.", price: "₺500" },
+    { title: "Gelin hazırlık", description: "Saç, makyaj ve bakım için özel randevu paketi.", price: "Teklif al" }
+  ],
+  galleryItems: [
+    { title: "Instagram vitrini", description: "Salonun en iyi işleri için sosyal medya kartı." },
+    { title: "Öncesi / sonrası", description: "Saç, tırnak ve cilt bakımı sonuçları için görsel alan." },
+    { title: "Salon atmosferi", description: "Müşteriye güven veren modern işletme görselleri." }
   ],
   staff: [
     { name: "Elif", role: "Saç Tasarım", description: "Kesim, renklendirme ve özel gün hazırlığı." },
