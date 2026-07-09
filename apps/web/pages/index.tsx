@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { SeoHead } from "../src/components/SeoHead";
+import { SiteSetupGuard } from "../src/components/SiteSetupGuard";
 import { TemplateLanding } from "../src/components/TemplateLanding";
 import { templateConfigs } from "../src/templateConfigs";
 import { useManagedTemplateConfig } from "../src/useManagedTemplateConfig";
@@ -9,7 +10,9 @@ export default function HomePage() {
   const [activeTemplate, setActiveTemplate] = useState<TemplateKey>("appointment");
   const [activeLayout, setActiveLayout] = useState<LayoutVariant>("modern");
   const baseConfig = templateConfigs[activeTemplate];
-  const { config } = useManagedTemplateConfig(baseConfig);
+  const { config, requiresSetup } = useManagedTemplateConfig(baseConfig);
+
+  if (requiresSetup) return <SiteSetupGuard />;
 
   return (
     <>
