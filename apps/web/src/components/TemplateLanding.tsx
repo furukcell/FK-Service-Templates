@@ -39,6 +39,12 @@ function getSubject(formData: FormData, config: BusinessTemplateConfig): string 
   );
 }
 
+function galleryTitle(config: BusinessTemplateConfig) {
+  if (config.template === "salon") return "Kampanya ve Instagram vitrini";
+  if (config.template === "appointment") return "Klinik galeri ve konum alanı";
+  return "Vitrin portföy ve bölge güveni";
+}
+
 export function TemplateLanding({ config, activeTemplate, onTemplateChange, showTemplateSwitch = true }: TemplateLandingProps) {
   const [submitStatus, setSubmitStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -159,6 +165,25 @@ export function TemplateLanding({ config, activeTemplate, onTemplateChange, show
         </div>
       </section>
 
+      {config.campaignItems?.length ? (
+        <section className="section">
+          <div className="sectionHead">
+            <h2>Kampanya kartları</h2>
+            <p>Salon müşterileri için kampanya ve paketleri öne çıkaran satış odaklı alan.</p>
+          </div>
+          <div className="cardGrid">
+            {config.campaignItems.map((campaign) => (
+              <article className="serviceCard campaignCard" key={campaign.title}>
+                <span className="priceTag">Kampanya</span>
+                <h3>{campaign.title}</h3>
+                <p>{campaign.description}</p>
+                {campaign.price ? <strong>{campaign.price}</strong> : null}
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <section className="section">
         <div className="sectionHead">
           <h2>Güven veren ekip kartları</h2>
@@ -179,6 +204,37 @@ export function TemplateLanding({ config, activeTemplate, onTemplateChange, show
           </article>
         </div>
       </section>
+
+      {config.galleryItems?.length ? (
+        <section className="section">
+          <div className="sectionHead">
+            <h2>{galleryTitle(config)}</h2>
+            <p>Gerçek müşteri görselleri geldiğinde bu alanlar fotoğraf/galeri vitrini olarak kullanılacak.</p>
+          </div>
+          <div className="visualGrid">
+            {config.galleryItems.map((item, index) => (
+              <article className="visualCard" key={item.title}>
+                {item.imageUrl ? <img src={item.imageUrl} alt={item.title} /> : <div className="visualPlaceholder">{String(index + 1).padStart(2, "0")}</div>}
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </article>
+            ))}
+            <article className="visualCard locationCard">
+              <div className="visualPlaceholder">MAP</div>
+              <div>
+                <h3>Konum ve sosyal medya</h3>
+                <p>{config.address}</p>
+                <div className="heroActions">
+                  {config.mapsUrl ? <a className="ghostButton navButtonLink" href={config.mapsUrl} target="_blank" rel="noreferrer">Haritada Aç</a> : null}
+                  {config.instagramUrl ? <a className="pillButton navButtonLink" href={config.instagramUrl} target="_blank" rel="noreferrer">Instagram</a> : null}
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section" id="request-form">
         <div className="sectionHead">
