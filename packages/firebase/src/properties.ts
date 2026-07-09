@@ -49,6 +49,12 @@ export async function listProperties(): Promise<Property[]> {
   return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Omit<Property, "id">) }));
 }
 
+export async function listAdminProperties(): Promise<Property[]> {
+  const propertyQuery = query(collection(getFirestoreDb(), COLLECTIONS.properties), orderBy("createdAt", "desc"));
+  const snapshot = await getDocs(propertyQuery);
+  return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Omit<Property, "id">) }));
+}
+
 export async function getPropertyById(propertyId: string): Promise<Property | null> {
   const snapshot = await getDoc(doc(getFirestoreDb(), COLLECTIONS.properties, propertyId));
   if (!snapshot.exists()) return null;
@@ -57,9 +63,23 @@ export async function getPropertyById(propertyId: string): Promise<Property | nu
   return { id: snapshot.id, ...data };
 }
 
+export async function getAdminPropertyById(propertyId: string): Promise<Property | null> {
+  const snapshot = await getDoc(doc(getFirestoreDb(), COLLECTIONS.properties, propertyId));
+  if (!snapshot.exists()) return null;
+  return { id: snapshot.id, ...(snapshot.data() as Omit<Property, "id">) };
+}
+
 export async function updateProperty(propertyId: string, payload: Partial<CreatePropertyPayload>) {
   return updateDoc(doc(getFirestoreDb(), COLLECTIONS.properties, propertyId), {
     ...payload,
     updatedAt: serverTimestamp()
   });
+}
+
+export async function archiveProperty(propertyId: string) {
+  return updateProperty(propertyId, { isActive: false });
+}
+
+export async function restoreProperty(propertyId: string) {
+  return updateProperty(propertyId, { isActive: true });
 }
