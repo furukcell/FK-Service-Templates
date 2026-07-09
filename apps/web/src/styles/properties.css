@@ -1,0 +1,131 @@
+.propertyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.propertyCard {
+  overflow: hidden;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+.propertyVisual,
+.propertyDetailVisual {
+  min-height: 220px;
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.95), transparent 22%),
+    linear-gradient(135deg, var(--dark), var(--primary), var(--secondary));
+  color: #fff;
+  font-weight: 950;
+}
+
+.propertyVisual span,
+.propertyDetailVisual span,
+.propertyVisual mark,
+.propertyDetailVisual mark {
+  border-radius: 999px;
+  padding: 10px 13px;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.propertyBody {
+  padding: 22px;
+}
+
+.propertyBody h3 {
+  margin: 16px 0 8px;
+  font-size: 24px;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.propertyBody p {
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+.propertyBody strong,
+.propertyDetailInfo strong {
+  display: block;
+  font-size: 28px;
+  letter-spacing: -0.04em;
+  margin: 12px 0;
+}
+
+.propertyMeta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 14px 0 18px;
+}
+
+.propertyMeta span {
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: var(--soft);
+  color: var(--primary);
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.propertyDetailHero {
+  width: min(1280px, 92vw);
+  margin: 28px auto;
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.propertyDetailVisual {
+  min-height: 560px;
+  border-radius: 40px;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.14);
+}
+
+.propertyDetailInfo {
+  padding: 44px;
+  border-radius: 40px;
+  background:
+    radial-gradient(circle at 84% 10%, rgba(255, 255, 255, 0.95), transparent 24%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), var(--soft));
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.1);
+}
+
+.propertyDetailInfo h1 {
+  font-size: clamp(38px, 4vw, 68px);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+  margin: 22px 0;
+}
+
+.propertyDetailInfo p {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 18px;
+}
+
+@media (max-width: 980px) {
+  .propertyGrid,
+  .propertyDetailHero {
+    grid-template-columns: 1fr;
+  }
+
+  .propertyDetailInfo {
+    padding: 28px;
+  }
+
+  .propertyDetailVisual {
+    min-height: 320px;
+  }
+}
