@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "pnpm --filter @fk-templates/web dev",
     "build": "pnpm --filter @fk-templates/web build",
-    "lint": "pnpm --filter @fk-templates/web lint"
+    "lint": "pnpm --filter @fk-templates/web lint",
+    "typecheck": "pnpm --filter @fk-templates/web typecheck"
   },
   "keywords": [
     "business-templates",
