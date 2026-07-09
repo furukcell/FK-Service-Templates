@@ -21,6 +21,7 @@ export type CreateRequestPayload = {
 export type BusinessRequest = CreateRequestPayload & {
   id: string;
   status: RequestStatus;
+  adminNote?: string;
   createdAt?: unknown;
   updatedAt?: unknown;
 };
@@ -44,6 +45,13 @@ export async function listBusinessRequests(): Promise<BusinessRequest[]> {
 export async function updateBusinessRequestStatus(requestId: string, status: RequestStatus) {
   return updateDoc(doc(getFirestoreDb(), COLLECTIONS.requests, requestId), {
     status,
+    updatedAt: serverTimestamp()
+  });
+}
+
+export async function updateBusinessRequestAdminNote(requestId: string, adminNote: string) {
+  return updateDoc(doc(getFirestoreDb(), COLLECTIONS.requests, requestId), {
+    adminNote,
     updatedAt: serverTimestamp()
   });
 }
