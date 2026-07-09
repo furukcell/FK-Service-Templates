@@ -1,0 +1,11 @@
+{
+  "name": "@fk-templates/firebase",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@fk-templates/shared": "workspace:*",
+    "firebase": "^11.0.1"
+  }
+}
