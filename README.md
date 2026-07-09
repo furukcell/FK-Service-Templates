@@ -12,8 +12,10 @@ Hazır olan ana parçalar:
 
 - Modern Next.js web uygulaması
 - 3 sektör şablonu
+- Her sektör için 3 profesyonel arayüz varyantı
 - Premium landing arayüzü
 - Template switcher ana sayfa
+- Layout/tasarım seçici
 - Sektöre özel route'lar
 - Emlak ilan liste ve detay sayfaları
 - Admin demo panel
@@ -36,6 +38,40 @@ Hazır olan ana parçalar:
 | Appointment | Veteriner, klinik, psikolog, diyetisyen, fizyoterapi | MVP hazır |
 | Salon | Kuaför, güzellik salonu, berber, nail art, spa | MVP hazır |
 | Real Estate | Emlak ofisi, gayrimenkul danışmanı, günlük kiralık işletme | MVP hazır |
+
+## Profesyonel Arayüz Varyantları
+
+İçerik aynı kalır; sadece site kabuğu değişir. Böylece müşteri aynı işletme bilgileriyle 3 farklı site görünümü arasından seçim yapabilir.
+
+| Varyant | Kullanım hissi | Amaç |
+|---|---|---|
+| `modern` | Modern kartlı premium yapı | Arrivio mantığında dengeli hero + kartlar + panel görünümü |
+| `split` | İki parçalı büyük görsel / içerik yapısı | Daha kurumsal, daha büyük vitrin hissi |
+| `showcase` | Tam genişlik sahne/vitrin yapısı | Daha çarpıcı, kampanya/portföy/galeri odaklı görünüm |
+
+Ana demo sayfasında hem sektör hem de tasarım seçilebilir:
+
+```text
+/
+```
+
+Direkt sektör sayfalarında query ile layout seçilebilir:
+
+```text
+/appointment?layout=modern
+/appointment?layout=split
+/appointment?layout=showcase
+
+/salon?layout=modern
+/salon?layout=split
+/salon?layout=showcase
+
+/real-estate?layout=modern
+/real-estate?layout=split
+/real-estate?layout=showcase
+```
+
+Bu modelde 3 sektör x 3 layout = **9 farklı demo görünümü** elde edilir.
 
 ## İş Modeli
 
@@ -65,7 +101,7 @@ Ekstra işler ayrıca fiyatlandırılır:
 ## Çalışan Route'lar
 
 ```text
-/                         -> 3 şablon arasında geçişli ana demo
+/                         -> 3 şablon + 3 arayüz seçicili ana demo
 /appointment               -> veteriner / klinik demo sitesi
 /salon                     -> kuaför / güzellik demo sitesi
 /real-estate               -> emlak landing demo sitesi
@@ -107,10 +143,12 @@ FK-Service-Templates/
           forms.css
           properties.css
           visual-sections.css
+          layout-variants.css
         templateConfigs.ts
         propertyDemoData.ts
         adminDemoData.ts
         useOptionalAdminGuard.ts
+        useLayoutVariantFromQuery.ts
   packages/
     shared/
       src/index.ts
@@ -175,10 +213,13 @@ pnpm --filter @fk-templates/web build
 - Firebase Storage
 - Netlify / Vercel uyumlu deploy
 - CSS variables ile sektör bazlı tema sistemi
+- 3 layout varyantı: `modern`, `split`, `showcase`
 
 ## Template Mantığı
 
 Her sektör farklı config ile yönetilir. Tasarım altyapısı ortaktır ama renk, metin, hizmet listesi, ekip kartları, kampanyalar ve formlar config üzerinden değişir.
+
+Arayüz varyantı ise içeriği değiştirmez. Aynı içerik 3 farklı profesyonel site görünümüyle sunulur.
 
 Örnek config alanları:
 
@@ -450,18 +491,23 @@ push/main veya PR geldiğinde pnpm install yapıp web build almak.
 
 > Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Bu yüzden hızlı, uygun fiyatlı ve profesyonel bir web sistemi kurabiliyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu ve temel panel dahil tek seferlik kurulum ücretiyle yayına alıyoruz.
 
+## Tasarım Seçim Satış Cümlesi
+
+> Aynı işletme bilgilerinizi 3 farklı profesyonel tasarımla gösterebiliyoruz. Beğendiğiniz arayüzü seçiyoruz; logo, renk, içerik ve iletişim bilgilerinizi girip yayına alıyoruz.
+
 ## Teslimat Süreci
 
 ```text
 1. Müşteri sektör şablonunu seçer.
-2. Logo, renk, firma adı, telefon, adres ve sosyal medya bilgileri alınır.
-3. Domain/hosting/Firebase hesabı belirlenir.
-4. Config dosyası müşteri bilgilerine göre düzenlenir.
-5. Demo link paylaşılır.
-6. Küçük revizyonlar yapılır.
-7. Firebase/hosting canlıya alınır.
-8. Admin panel kullanımı anlatılır.
-9. Teslim tamamlanır.
+2. Müşteri 3 arayüz seçeneğinden birini seçer.
+3. Logo, renk, firma adı, telefon, adres ve sosyal medya bilgileri alınır.
+4. Domain/hosting/Firebase hesabı belirlenir.
+5. Config dosyası müşteri bilgilerine göre düzenlenir.
+6. Demo link paylaşılır.
+7. Küçük revizyonlar yapılır.
+8. Firebase/hosting canlıya alınır.
+9. Admin panel kullanımı anlatılır.
+10. Teslim tamamlanır.
 ```
 
 Hedef teslim süresi:
