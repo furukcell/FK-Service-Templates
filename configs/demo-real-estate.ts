@@ -13,6 +13,8 @@ export const demoRealEstateConfig: BusinessTemplateConfig = {
   phone: "+90 5xx xxx xx xx",
   whatsapp: "+905xxxxxxxxx",
   address: "Milas / Muğla",
+  mapsUrl: "https://maps.google.com/?q=Milas%20Mu%C4%9Fla",
+  instagramUrl: "https://instagram.com/",
   theme: {
     primary: "#1D4ED8",
     secondary: "#38BDF8",
@@ -31,6 +33,11 @@ export const demoRealEstateConfig: BusinessTemplateConfig = {
     { title: "Satılık Daire", description: "Merkezi lokasyonlarda güncel satılık daire portföyleri.", price: "₺2.850.000+" },
     { title: "Kiralık Villa", description: "Bodrum ve çevresinde sezonluk/günlük villa seçenekleri.", price: "₺35.000+" },
     { title: "Arsa & Zeytinlik", description: "Milas çevresinde yatırım ve tarımsal portföyler.", price: "₺1.500.000+" }
+  ],
+  galleryItems: [
+    { title: "Vitrin ilan", description: "En değerli portföyler için büyük görsel kart alanı." },
+    { title: "Bölge uzmanlığı", description: "Milas, Bodrum ve çevre mahalleleri için lokasyon kartları." },
+    { title: "Danışman güveni", description: "Emlak danışmanının iletişim ve uzmanlık vitrini." }
   ],
   staff: [
     { name: "Faruk Danışman", role: "Bölge Uzmanı", description: "Milas, Bodrum ve çevre portföy yönetimi." },
