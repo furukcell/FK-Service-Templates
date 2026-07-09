@@ -38,9 +38,24 @@ export async function listBusinessServices(template?: TemplateKey): Promise<Busi
   return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Omit<BusinessService, "id">) }));
 }
 
+export async function listAdminBusinessServices(template?: TemplateKey): Promise<BusinessService[]> {
+  const constraints = template ? [where("template", "==", template), orderBy("createdAt", "desc")] : [orderBy("createdAt", "desc")];
+  const serviceQuery = query(collection(getFirestoreDb(), COLLECTIONS.services), ...constraints);
+  const snapshot = await getDocs(serviceQuery);
+  return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Omit<BusinessService, "id">) }));
+}
+
 export async function updateBusinessService(serviceId: string, payload: Partial<CreateBusinessServicePayload>) {
   return updateDoc(doc(getFirestoreDb(), COLLECTIONS.services, serviceId), {
     ...payload,
     updatedAt: serverTimestamp()
   });
+}
+
+export async function archiveBusinessService(serviceId: string) {
+  return updateBusinessService(serviceId, { isActive: false });
+}
+
+export async function restoreBusinessService(serviceId: string) {
+  return updateBusinessService(serviceId, { isActive: true });
 }
