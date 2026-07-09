@@ -3,6 +3,7 @@ import "../src/styles/globals.css";
 import "../src/styles/admin.css";
 import "../src/styles/admin-extra.css";
 import "../src/styles/admin-actions.css";
+import "../src/styles/admin-forms.css";
 import "../src/styles/forms.css";
 import "../src/styles/properties.css";
 
