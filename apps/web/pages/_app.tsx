@@ -1,4 +1,5 @@
 import type { AppProps } from "next/app";
+import { CookieBanner } from "../src/components/CookieBanner";
 import "../src/styles/globals.css";
 import "../src/styles/admin.css";
 import "../src/styles/admin-extra.css";
@@ -8,7 +9,8 @@ import "../src/styles/forms.css";
 import "../src/styles/properties.css";
 import "../src/styles/visual-sections.css";
 import "../src/styles/layout-variants.css";
+import "../src/styles/content-pages.css";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return <><Component {...pageProps} /><CookieBanner /></>;
 }
