@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createProperty, type PropertyListingType, type PropertyType } from "@fk-templates/firebase";
+import { createProperty, uploadBusinessImage, type PropertyListingType, type PropertyType } from "@fk-templates/firebase";
 import { useOptionalAdminGuard } from "../../../src/useOptionalAdminGuard";
 
 const propertyTypes: Array<{ value: PropertyType; label: string }> = [
@@ -15,6 +15,7 @@ export default function NewPropertyPage() {
   const guard = useOptionalAdminGuard();
   const [status, setStatus] = useState("Yeni emlak ilanı Firestore'a kaydedilmeye hazır.");
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [form, setForm] = useState({
     title: "",
     listingType: "sale" as PropertyListingType,
@@ -33,6 +34,25 @@ export default function NewPropertyPage() {
 
   function updateField<K extends keyof typeof form>(key: K, value: typeof form[K]) {
     setForm((current) => ({ ...current, [key]: value }));
+  }
+
+  async function uploadSelectedImage(fileList: FileList | null) {
+    const file = fileList?.[0];
+    if (!file) return;
+    setIsUploading(true);
+    setStatus("Görsel yükleniyor...");
+    try {
+      const imageUrl = await uploadBusinessImage(file, "property-images");
+      setForm((current) => ({
+        ...current,
+        imageUrls: current.imageUrls ? `${current.imageUrls}\n${imageUrl}` : imageUrl
+      }));
+      setStatus("Görsel yüklendi ve URL listeye eklendi.");
+    } catch (error) {
+      setStatus("Görsel yüklenemedi. Firebase Storage, admin giriş veya storage rules kontrol edilmeli.");
+    } finally {
+      setIsUploading(false);
+    }
   }
 
   async function saveProperty() {
@@ -108,10 +128,11 @@ export default function NewPropertyPage() {
             <label className="field"><span>Banyo</span><input value={form.bathroomCount} onChange={(event) => updateField("bathroomCount", event.currentTarget.value)} placeholder="1" /></label>
             <label className="field"><span>Danışman adı</span><input value={form.consultantName} onChange={(event) => updateField("consultantName", event.currentTarget.value)} placeholder="Faruk Danışman" /></label>
             <label className="field"><span>Danışman telefon</span><input value={form.consultantPhone} onChange={(event) => updateField("consultantPhone", event.currentTarget.value)} placeholder="+90 5xx xxx xx xx" /></label>
+            <label className="field"><span>Görsel yükle</span><input type="file" accept="image/*" disabled={isUploading} onChange={(event) => uploadSelectedImage(event.currentTarget.files)} /></label>
             <label className="field"><span>Görsel URL'leri</span><textarea value={form.imageUrls} onChange={(event) => updateField("imageUrls", event.currentTarget.value)} placeholder="Her satıra bir görsel URL" /></label>
             <label className="field"><span>Açıklama</span><textarea value={form.description} onChange={(event) => updateField("description", event.currentTarget.value)} placeholder="İlan açıklaması" /></label>
             <label className="field checkboxField"><span>Vitrin ilan</span><input type="checkbox" checked={form.isFeatured} onChange={(event) => updateField("isFeatured", event.currentTarget.checked)} /></label>
-            <button className="pillButton" type="button" disabled={isSaving} onClick={saveProperty}>{isSaving ? "Kaydediliyor..." : "İlanı Kaydet"}</button>
+            <button className="pillButton" type="button" disabled={isSaving || isUploading} onClick={saveProperty}>{isSaving ? "Kaydediliyor..." : isUploading ? "Görsel yükleniyor..." : "İlanı Kaydet"}</button>
           </div>
         </section>
       </section>
