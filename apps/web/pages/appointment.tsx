@@ -1,3 +1,4 @@
+import { SeoHead } from "../src/components/SeoHead";
 import { TemplateLanding } from "../src/components/TemplateLanding";
 import { templateConfigs } from "../src/templateConfigs";
 import { useLayoutVariantFromQuery } from "../src/useLayoutVariantFromQuery";
@@ -8,12 +9,15 @@ export default function AppointmentTemplatePage() {
   const activeLayout = useLayoutVariantFromQuery(layoutVariant || "modern");
 
   return (
-    <TemplateLanding
-      config={config}
-      activeTemplate="appointment"
-      activeLayout={activeLayout}
-      showTemplateSwitch={false}
-      showLayoutSwitch={false}
-    />
+    <>
+      <SeoHead title={`${config.brandName} | ${config.sector}`} description={config.heroDescription} canonicalPath="/appointment" />
+      <TemplateLanding
+        config={config}
+        activeTemplate="appointment"
+        activeLayout={activeLayout}
+        showTemplateSwitch={false}
+        showLayoutSwitch={false}
+      />
+    </>
   );
 }
