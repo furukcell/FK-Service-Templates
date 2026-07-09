@@ -18,6 +18,7 @@ type DisplayRequest = {
   status: DemoRequest["status"];
   source: string;
   adminNote?: string;
+  extra?: Record<string, string | number | boolean | null>;
   isLive?: boolean;
 };
 
@@ -33,6 +34,16 @@ function whatsappUrl(phone: string, subject: string) {
   return normalized ? `https://wa.me/${normalized}?text=${message}` : `https://wa.me/?text=${message}`;
 }
 
+function csvEscape(value: string | number | boolean | null | undefined) {
+  const stringValue = String(value ?? "");
+  return `"${stringValue.replace(/"/g, '""')}"`;
+}
+
+function requestExtraSummary(extra?: Record<string, string | number | boolean | null>) {
+  if (!extra) return [];
+  return Object.entries(extra).filter(([, value]) => value !== "" && value !== null && value !== undefined);
+}
+
 function mapLiveRequest(request: BusinessRequest): DisplayRequest {
   return {
     id: request.id,
@@ -43,6 +54,7 @@ function mapLiveRequest(request: BusinessRequest): DisplayRequest {
     status: request.status,
     source: request.source || "website",
     adminNote: request.adminNote,
+    extra: request.extra,
     isLive: true
   };
 }
@@ -80,6 +92,28 @@ export default function AdminDemoPage() {
     if (!guard.isAllowed) return;
     loadRequests();
   }, [guard.isAllowed]);
+
+  function exportCsv() {
+    const header = ["Kod", "Müşteri", "Telefon", "Konu", "Tarih", "Durum", "Kaynak", "Admin Notu"];
+    const rows = displayRequests.map((request) => [
+      request.id,
+      request.customerName,
+      request.customerPhone,
+      request.subject,
+      request.date,
+      statusLabels[request.status],
+      request.source,
+      request.adminNote || noteDrafts[request.id] || ""
+    ]);
+    const csv = [header, ...rows].map((row) => row.map(csvEscape).join(",")).join("\n");
+    const blob = new Blob([`\ufeff${csv}`], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `fk-talepler-${new Date().toISOString().slice(0, 10)}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
 
   async function changeStatus(request: DisplayRequest, status: RequestStatus) {
     setActionStatus("");
@@ -142,8 +176,8 @@ export default function AdminDemoPage() {
         <nav>
           <a className="active" href="#requests">Talepler</a>
           <a href="#properties">İlanlar</a>
+          <a href="/admin/services">Hizmetler</a>
           <a href="#templates">Şablonlar</a>
-          <a href="#settings">Ayarlar</a>
         </nav>
       </aside>
 
@@ -175,28 +209,36 @@ export default function AdminDemoPage() {
               <h2>Gelen talepler</h2>
               <p>Veteriner, salon ve emlak formlarından gelen başvurular burada listelenecek.</p>
             </div>
-            <button className="ghostButton">CSV indir</button>
+            <button className="ghostButton" type="button" onClick={exportCsv}>CSV indir</button>
           </div>
           <div className="adminRequestList">
-            {displayRequests.map((request) => (
-              <article className="adminRequestCard" key={request.id}>
-                <div className="adminRequestTop">
-                  <span className="priceTag">{request.id}</span>
-                  <mark>{statusLabels[request.status]}</mark>
-                </div>
-                <h3>{request.subject}</h3>
-                <p><strong>{request.customerName}</strong> • {request.customerPhone}</p>
-                <p>{request.date} / Kaynak: {request.source}</p>
-                <div className="adminActionGrid">
-                  <label className="field"><span>Durum</span><select value={request.status} onChange={(event) => changeStatus(request, event.currentTarget.value as RequestStatus)}>{requestStatuses.map((status) => <option value={status} key={status}>{statusLabels[status]}</option>)}</select></label>
-                  <label className="field"><span>Admin notu</span><input value={noteDrafts[request.id] || ""} onChange={(event) => setNoteDrafts((current) => ({ ...current, [request.id]: event.currentTarget.value }))} placeholder="Görüşme notu" /></label>
-                </div>
-                <div className="heroActions">
-                  <a className="pillButton navButtonLink" href={whatsappUrl(request.customerPhone, request.subject)} target="_blank" rel="noreferrer">WhatsApp</a>
-                  <button className="ghostButton" type="button" onClick={() => saveNote(request)}>Notu Kaydet</button>
-                </div>
-              </article>
-            ))}
+            {displayRequests.map((request) => {
+              const extraEntries = requestExtraSummary(request.extra);
+              return (
+                <article className="adminRequestCard" key={request.id}>
+                  <div className="adminRequestTop">
+                    <span className="priceTag">{request.id}</span>
+                    <mark>{statusLabels[request.status]}</mark>
+                  </div>
+                  <h3>{request.subject}</h3>
+                  <p><strong>{request.customerName}</strong> • {request.customerPhone}</p>
+                  <p>{request.date} / Kaynak: {request.source}</p>
+                  {extraEntries.length ? (
+                    <div className="extraDetails">
+                      {extraEntries.map(([key, value]) => <span key={key}>{key}: {String(value)}</span>)}
+                    </div>
+                  ) : null}
+                  <div className="adminActionGrid">
+                    <label className="field"><span>Durum</span><select value={request.status} onChange={(event) => changeStatus(request, event.currentTarget.value as RequestStatus)}>{requestStatuses.map((status) => <option value={status} key={status}>{statusLabels[status]}</option>)}</select></label>
+                    <label className="field"><span>Admin notu</span><input value={noteDrafts[request.id] || ""} onChange={(event) => setNoteDrafts((current) => ({ ...current, [request.id]: event.currentTarget.value }))} placeholder="Görüşme notu" /></label>
+                  </div>
+                  <div className="heroActions">
+                    <a className="pillButton navButtonLink" href={whatsappUrl(request.customerPhone, request.subject)} target="_blank" rel="noreferrer">WhatsApp</a>
+                    <button className="ghostButton" type="button" onClick={() => saveNote(request)}>Notu Kaydet</button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
