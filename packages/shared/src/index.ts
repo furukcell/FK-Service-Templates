@@ -1,4 +1,5 @@
 export type TemplateKey = "appointment" | "salon" | "real-estate";
+export type LayoutVariant = "modern" | "split" | "showcase";
 
 export type ServiceItem = {
   title: string;
@@ -68,4 +69,10 @@ export const templateLabels: Record<TemplateKey, string> = {
   appointment: "Veteriner / Klinik",
   salon: "Kuaför / Güzellik",
   "real-estate": "Emlakçı"
+};
+
+export const layoutVariantLabels: Record<LayoutVariant, string> = {
+  modern: "Modern Kartlı",
+  split: "Split Premium",
+  showcase: "Showcase Vitrin"
 };
