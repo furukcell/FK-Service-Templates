@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { ContentPageKey } from "@fk-templates/firebase";
 import { templateConfigs } from "../templateConfigs";
 import { useSiteContent } from "../useSiteContent";
@@ -9,20 +10,23 @@ function paragraphs(body: string) {
   return body.split("\n").filter(Boolean);
 }
 
+function themeStyle(config: typeof baseConfig): CSSProperties {
+  return {
+    "--primary": config.theme.primary,
+    "--secondary": config.theme.secondary,
+    "--accent": config.theme.accent,
+    "--soft": config.theme.soft,
+    "--dark": config.theme.dark
+  } as CSSProperties;
+}
+
 export function ContentPage({ pageKey }: { pageKey: ContentPageKey }) {
   const { settings } = useSiteContent();
   const config = settings?.template ? templateConfigs[settings.template] : baseConfig;
   const page = getManagedContentPage(config, settings, pageKey);
-  const faqItems = getManagedFaqItems(config, settings);
 
   return (
-    <main className="contentShell" style={{
-      "--primary": config.theme.primary,
-      "--secondary": config.theme.secondary,
-      "--accent": config.theme.accent,
-      "--soft": config.theme.soft,
-      "--dark": config.theme.dark
-    } as React.CSSProperties}>
+    <main className="contentShell" style={themeStyle(config)}>
       <nav className="navbar contentNav">
         <a className="logoLockup navButtonLink" href="/"><span className="logoMark">FK</span><span>{settings?.brandName || config.brandName}</span></a>
         <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
@@ -67,13 +71,7 @@ export function FaqPage() {
   const faqItems = getManagedFaqItems(config, settings);
 
   return (
-    <main className="contentShell" style={{
-      "--primary": config.theme.primary,
-      "--secondary": config.theme.secondary,
-      "--accent": config.theme.accent,
-      "--soft": config.theme.soft,
-      "--dark": config.theme.dark
-    } as React.CSSProperties}>
+    <main className="contentShell" style={themeStyle(config)}>
       <nav className="navbar contentNav">
         <a className="logoLockup navButtonLink" href="/"><span className="logoMark">FK</span><span>{settings?.brandName || config.brandName}</span></a>
         <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
