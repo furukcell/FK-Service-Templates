@@ -18,14 +18,15 @@ Hazır olan ana parçalar:
 - Legal/trust sayfaları
 - Çerez banner
 - Formlarda KVKK/Gizlilik onayı
-- Admin login iskeleti
+- SEO meta, canonical, Open Graph, robots.txt ve sitemap.xml
+- Admin login + şifremi unuttum akışı
 - Admin panel
 - Site ayarları yönetimi
 - Kurumsal metin yönetimi
-- Hizmet/fiyat yönetimi
+- Hizmet/fiyat ekleme, düzenleme ve pasife alma
 - Kampanya yönetimi
 - Galeri/görsel yönetimi
-- Emlak ilan ekleme ve fotoğraf yükleme
+- Emlak ilan ekleme, düzenleme, yayından kaldırma ve fotoğraf yükleme
 - Firestore request, property, service ve settings helper'ları
 - Firebase Auth helper
 - Firebase Storage upload helper
@@ -96,6 +97,12 @@ Müşteri siteyi aldıktan sonra şu linklerden giriş yapar:
 /admin
 ```
 
+Şifre unutulursa:
+
+```text
+/forgot-password
+```
+
 Teslimde Firebase Auth üzerinden müşteri için admin kullanıcı oluşturulur.
 
 Örnek:
@@ -125,9 +132,10 @@ NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=true
 | Talepler | `/admin` | Gelen form/randevu/ilan taleplerini görür, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
 | Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, ana başlık, açıklama ve seçili arayüzü değiştirir |
 | Kurumsal Metinler | `/admin/content` | Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS metinlerini yönetir |
-| Hizmetler | `/admin/services` | Hizmet adı, açıklama ve fiyatları yönetir |
+| Hizmetler | `/admin/services` | Hizmet adı, açıklama ve fiyatları ekler, düzenler, pasife alır veya tekrar aktif eder |
 | Kampanyalar | `/admin/campaigns` | Kampanya başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
 | Galeri | `/admin/gallery` | Görsel yükler, başlık/açıklama ekler, site galerisini yönetir |
+| İlanlar | `/admin/properties` | Emlak ilanlarını listeler, düzenler, vitrin/yayın durumunu değiştirir |
 | Yeni İlan | `/admin/properties/new` | Emlak ilanı ekler, fiyat/konum/açıklama/görsel girer |
 
 Bu sayede müşteri sürekli FK Digital'e yazmadan siteyi uzun süre kullanabilir.
@@ -148,73 +156,18 @@ Bu sayede müşteri sürekli FK Digital'e yazmadan siteyi uzun süre kullanabili
 /cerez-politikasi          -> çerez politikası
 /kullanim-kosullari        -> kullanım koşulları
 /sss                       -> sık sorulan sorular
+/robots.txt                -> arama motoru robots çıktısı
+/sitemap.xml               -> sitemap çıktısı
 /login                     -> admin login sayfası
+/forgot-password           -> admin şifre sıfırlama sayfası
 /admin                     -> admin ana panel / talepler
 /admin/settings            -> site ayarları
 /admin/content             -> kurumsal metin yönetimi
 /admin/services            -> hizmet/fiyat yönetimi
 /admin/campaigns           -> kampanya yönetimi
 /admin/gallery             -> galeri yönetimi
+/admin/properties          -> emlak ilan yönetimi
 /admin/properties/new      -> emlak ilan ekleme ekranı
-```
-
-## Repo Yapısı
-
-```text
-FK-Service-Templates/
-  apps/web/
-    pages/
-      index.tsx
-      appointment.tsx
-      salon.tsx
-      real-estate.tsx
-      properties/index.tsx
-      properties/[id].tsx
-      hakkimizda.tsx
-      iletisim.tsx
-      gizlilik-politikasi.tsx
-      kvkk-aydinlatma-metni.tsx
-      cerez-politikasi.tsx
-      kullanim-kosullari.tsx
-      sss.tsx
-      login.tsx
-      admin.tsx
-      admin/settings.tsx
-      admin/content.tsx
-      admin/services.tsx
-      admin/campaigns.tsx
-      admin/gallery.tsx
-      admin/properties/new.tsx
-    src/
-      components/TemplateLanding.tsx
-      components/ContentPage.tsx
-      components/CookieBanner.tsx
-      styles/
-      siteContent.ts
-      templateConfigs.ts
-      useManagedTemplateConfig.ts
-      useSiteContent.ts
-      useLayoutVariantFromQuery.ts
-      useOptionalAdminGuard.ts
-  packages/shared/
-  packages/firebase/
-    src/client.ts
-    src/auth.ts
-    src/requests.ts
-    src/properties.ts
-    src/services.ts
-    src/settings.ts
-    src/storage.ts
-    src/collections.ts
-  configs/
-    demo-veterinary.ts
-    demo-salon.ts
-    demo-real-estate.ts
-  docs/
-  firestore.rules
-  storage.rules
-  firebase.json
-  netlify.toml
 ```
 
 ## Kurulum
@@ -250,6 +203,8 @@ pnpm --filter @fk-templates/web build
 - Layout varyantları: `modern`, `split`, `showcase`
 - Public site için managed config hook: `useManagedTemplateConfig`
 - Legal/trust içerikler için managed content sistemi
+- SEO component: `SeoHead`
+- Dynamic `robots.txt` ve `sitemap.xml`
 
 ## Firestore Koleksiyonları
 
@@ -350,6 +305,7 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 NEXT_PUBLIC_DEFAULT_TEMPLATE=appointment
 NEXT_PUBLIC_BUSINESS_ID=demo-business
+NEXT_PUBLIC_SITE_URL=https://example.com
 NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=false
 ```
 
@@ -379,7 +335,7 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 
 ## Satış Cümlesi
 
-> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu, KVKK/gizlilik sayfaları ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
+> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu, KVKK/gizlilik sayfaları, SEO altyapısı ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
 
 ## Teslimat Süreci
 
@@ -407,6 +363,7 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 4. Canlı Firebase Auth / Firestore / Storage test
 5. Admin panelden ayar, içerik, hizmet, kampanya, galeri ve ilan testi
 6. Formlarda KVKK onayı ve talep kayıt testi
-7. Mobil görsel kontrol
-8. İlk müşteri demosu için marka/logo/içerik uyarlama
+7. robots.txt / sitemap.xml / SEO meta kontrolü
+8. Mobil görsel kontrol
+9. İlk müşteri demosu için marka/logo/içerik uyarlama
 ```
