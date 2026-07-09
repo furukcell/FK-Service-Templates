@@ -30,6 +30,7 @@ export default function LoginPage() {
         <a className="adminLogo" href="/"><span>FK</span><strong>Admin Login</strong></a>
         <nav>
           <a className="active" href="/login">Giriş</a>
+          <a href="/forgot-password">Şifremi Unuttum</a>
           <a href="/admin">Demo Panel</a>
           <a href="/">Site</a>
         </nav>
@@ -49,6 +50,7 @@ export default function LoginPage() {
             <label className="field"><span>E-posta</span><input value={email} onChange={(event) => setEmail(event.currentTarget.value)} placeholder="admin@firma.com" /></label>
             <label className="field"><span>Şifre</span><input type="password" value={password} onChange={(event) => setPassword(event.currentTarget.value)} placeholder="••••••••" /></label>
             <button className="pillButton" type="button" disabled={isSubmitting} onClick={submitLogin}>{isSubmitting ? "Giriş yapılıyor..." : "Giriş Yap"}</button>
+            <a className="ghostButton navButtonLink" href="/forgot-password">Şifremi Unuttum</a>
           </div>
         </section>
       </section>
