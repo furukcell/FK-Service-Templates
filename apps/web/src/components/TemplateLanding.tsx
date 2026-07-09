@@ -4,6 +4,7 @@ import { createBusinessRequest } from "@fk-templates/firebase";
 import type { BusinessTemplateConfig, LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { layoutVariantLabels } from "@fk-templates/shared";
 import { notifyNewRequest } from "../notifyRequest";
+import { isDemoMode } from "../runtimeMode";
 import { contentPageLabels, contentPageRoutes } from "../siteContent";
 import { templateConfigs, templateOrder } from "../templateConfigs";
 
@@ -32,7 +33,7 @@ function applyTheme(config: BusinessTemplateConfig): CSSProperties {
 function formDataToExtra(formData: FormData): Record<string, string> {
   const extra: Record<string, string> = {};
   formData.forEach((value, key) => {
-    extra[key] = String(value);
+    if (key !== "acceptedLegal") extra[key] = String(value);
   });
   return extra;
 }
@@ -48,8 +49,8 @@ function getSubject(formData: FormData, config: BusinessTemplateConfig): string 
 }
 
 function galleryTitle(config: BusinessTemplateConfig) {
-  if (config.template === "salon") return "Kampanya ve Instagram vitrini";
-  if (config.template === "appointment") return "Klinik galeri ve konum alanı";
+  if (config.template === "salon") return "Kampanya ve sosyal medya vitrini";
+  if (config.template === "appointment") return "Galeri ve konum";
   return "Vitrin portföy ve bölge güveni";
 }
 
@@ -68,7 +69,7 @@ function Shell({ config, children }: { config: BusinessTemplateConfig; children:
       <div className="topBar">{config.topBarText}</div>
       {children}
       <footer className="footer">
-        <span>FK Service Templates • Hazır sektör web sitesi altyapısı</span>
+        <span>{config.brandName}</span>
         <span>{config.address}</span>
         <LegalFooterLinks />
       </footer>
@@ -79,12 +80,12 @@ function Shell({ config, children }: { config: BusinessTemplateConfig; children:
 function Nav({ config }: { config: BusinessTemplateConfig }) {
   return (
     <nav className="navbar">
-      <div className="logoLockup"><span className="logoMark">FK</span><span>{config.brandName}</span></div>
+      <div className="logoLockup"><span className="logoMark">{config.brandName.slice(0, 2).toUpperCase()}</span><span>{config.brandName}</span></div>
       <div className="navLinks">
         {config.navItems.map((item) => <a href="#services" key={item}>{item}</a>)}
       </div>
       <div className="navActions">
-        <a className="ghostButton navButtonLink" href="/admin">Demo Panel</a>
+        {isDemoMode() ? <a className="ghostButton navButtonLink" href="/admin">Demo Panel</a> : null}
         <a className="pillButton navButtonLink" href="#request-form">Talep Bırak</a>
       </div>
     </nav>
@@ -133,18 +134,18 @@ function Stats({ config }: { config: BusinessTemplateConfig }) {
 function PreviewPanel({ config }: { config: BusinessTemplateConfig }) {
   return (
     <div className="previewPanel">
-      <div className="previewHeader"><span className="previewBadge">{config.template}</span><span>FK Demo Desk</span></div>
+      <div className="previewHeader"><span className="previewBadge">{config.sector}</span><span>{config.brandName}</span></div>
       <div className="previewCard">
         <h3>{config.form.title}</h3>
         <p>{config.form.description}</p>
-        <span className="priceTag">WhatsApp destekli hızlı talep</span>
+        <span className="priceTag">Hızlı talep ve dönüş</span>
       </div>
       <div className="previewMiniGrid">
         {config.services.map((service) => <div key={service.title}>{service.title.split(" ")[0]}</div>)}
       </div>
       <div className="previewCard">
-        <h3>Admin Panel</h3>
-        <p>Gelen talep, randevu veya ilan başvuruları tek ekranda listelenir. Status ve WhatsApp geçişi hazır altyapı olarak planlandı.</p>
+        <h3>Güvenli başvuru</h3>
+        <p>Talep bilgileriniz işletmeye iletilir ve en kısa sürede sizinle iletişime geçilir.</p>
       </div>
     </div>
   );
@@ -154,8 +155,8 @@ function ServicesSection({ config }: { config: BusinessTemplateConfig }) {
   return (
     <section className="section" id="services">
       <div className="sectionHead">
-        <h2>{config.sector} için hazır vitrin</h2>
-        <p>Bu şablon müşteriye hızlı kurulum, profesyonel görünüm ve talep toplama altyapısı vermek için hazırlanıyor.</p>
+        <h2>{config.sector} hizmetleri</h2>
+        <p>İhtiyacınıza uygun hizmetleri inceleyebilir, form üzerinden hızlıca talep bırakabilirsiniz.</p>
       </div>
       <div className="cardGrid">
         {config.services.map((service) => (
@@ -175,8 +176,8 @@ function CampaignSection({ config }: { config: BusinessTemplateConfig }) {
   return (
     <section className="section">
       <div className="sectionHead">
-        <h2>Kampanya kartları</h2>
-        <p>Salon müşterileri için kampanya ve paketleri öne çıkaran satış odaklı alan.</p>
+        <h2>Kampanyalar</h2>
+        <p>Güncel paket ve kampanya seçeneklerini buradan inceleyebilirsiniz.</p>
       </div>
       <div className="cardGrid">
         {config.campaignItems.map((campaign) => (
@@ -196,8 +197,8 @@ function StaffSection({ config }: { config: BusinessTemplateConfig }) {
   return (
     <section className="section">
       <div className="sectionHead">
-        <h2>Güven veren ekip kartları</h2>
-        <p>Şablon, işletmenin uzmanlarını veya danışmanlarını öne çıkaracak kart sistemiyle gelir.</p>
+        <h2>Ekibimiz</h2>
+        <p>İşletmemizin uzman ekibi ve hizmet yaklaşımı hakkında bilgi alın.</p>
       </div>
       <div className="cardGrid">
         {config.staff.map((member) => (
@@ -208,9 +209,9 @@ function StaffSection({ config }: { config: BusinessTemplateConfig }) {
           </article>
         ))}
         <article className="staffCard">
-          <h3>WhatsApp Hızlı Dönüş</h3>
+          <h3>Hızlı İletişim</h3>
           <span className="priceTag">{config.phone}</span>
-          <p>Müşteri randevu veya talep bırakınca işletme WhatsApp üzerinden hızlı dönüş yapabilir.</p>
+          <p>Talebinizi bıraktıktan sonra işletme sizinle telefon veya WhatsApp üzerinden iletişime geçebilir.</p>
         </article>
       </div>
     </section>
@@ -223,7 +224,7 @@ function VisualSection({ config }: { config: BusinessTemplateConfig }) {
     <section className="section">
       <div className="sectionHead">
         <h2>{galleryTitle(config)}</h2>
-        <p>Gerçek müşteri görselleri geldiğinde bu alanlar fotoğraf/galeri vitrini olarak kullanılacak.</p>
+        <p>İşletmeye ait görseller, konum ve sosyal medya bağlantıları.</p>
       </div>
       <div className="visualGrid">
         {config.galleryItems.map((item, index) => (
@@ -260,11 +261,12 @@ function RequestFormSection({ config, handleSubmit, isSubmitting, submitStatus }
       </div>
       <div className="formLayout">
         <div className="formPanel">
-          <h3>Kurulumda müşteriden alınacak bilgiler</h3>
-          <p>Firma adı, logo, renk, telefon, WhatsApp, adres, harita linki, hizmet listesi ve görseller config sistemine işlenecek.</p>
-          <span className="priceTag">Tek seferlik kurulum modeli</span>
+          <h3>Talebinizi iletin</h3>
+          <p>Formu doldurun; işletme sizinle telefon veya WhatsApp üzerinden iletişime geçsin.</p>
+          <span className="priceTag">Hızlı dönüş</span>
         </div>
         <form className="formPanel formFields" onSubmit={handleSubmit}>
+          <input aria-hidden="true" autoComplete="off" className="honeypotField" name="website" tabIndex={-1} />
           {config.form.fields.map((field) => (
             <label className="field" key={field.key}>
               <span>{field.label}</span>
@@ -281,7 +283,7 @@ function RequestFormSection({ config, handleSubmit, isSubmitting, submitStatus }
             </label>
           ))}
           <label className="kvkkConsent"><input name="acceptedLegal" type="checkbox" required /><span><a href="/kvkk-aydinlatma-metni" target="_blank">KVKK Aydınlatma Metni</a> ve <a href="/gizlilik-politikasi" target="_blank">Gizlilik Politikası</a> kapsamında bilgilendirmeyi okudum.</span></label>
-          <button className="pillButton" type="submit" disabled={isSubmitting}>{isSubmitting ? "Gönderiliyor..." : "Demo Talep Gönder"}</button>
+          <button className="pillButton" type="submit" disabled={isSubmitting}>{isSubmitting ? "Gönderiliyor..." : "Talep Gönder"}</button>
           {submitStatus ? <p className="formStatus">{submitStatus}</p> : null}
         </form>
       </div>
@@ -347,7 +349,7 @@ function ShowcaseLayout({ config, switchers, form }: { config: BusinessTemplateC
         <div className="heroActions showcaseActions"><a className="pillButton navButtonLink" href="#request-form">{config.primaryCta}</a><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
         {switchers}
         <div className="showcaseServiceStrip">
-          {config.services.map((service) => <article key={service.title}><span>{service.price || "Hazır"}</span><strong>{service.title}</strong></article>)}
+          {config.services.map((service) => <article key={service.title}><span>{service.price || "Bilgi al"}</span><strong>{service.title}</strong></article>)}
         </div>
       </section>
       <section className="showcasePanelGrid"><PreviewPanel config={config} /><VisualSection config={config} /></section>
@@ -371,6 +373,12 @@ export function TemplateLanding({ config, activeTemplate, activeLayout = "modern
     const customerName = String(formData.get("name") || "").trim();
     const customerPhone = String(formData.get("phone") || "").trim();
     const acceptedLegal = formData.get("acceptedLegal") === "on";
+    const honeypot = String(formData.get("website") || "");
+
+    if (honeypot) {
+      setSubmitStatus("Talebiniz alındı.");
+      return;
+    }
 
     if (!customerName || !customerPhone) {
       setSubmitStatus("Ad soyad ve telefon zorunludur.");
@@ -398,10 +406,10 @@ export function TemplateLanding({ config, activeTemplate, activeLayout = "modern
       };
       await createBusinessRequest(requestPayload);
       await notifyNewRequest(requestPayload);
-      setSubmitStatus("Talep alındı. İşletme size WhatsApp veya telefonla dönüş yapacak.");
+      setSubmitStatus("Talep alındı. İşletme size telefon veya WhatsApp ile dönüş yapacak.");
       event.currentTarget.reset();
     } catch (error) {
-      setSubmitStatus("Demo mod: Form hazır. Firebase bilgileri girilince bu talep panele düşecek.");
+      setSubmitStatus(isDemoMode() ? "Demo mod: Firebase bilgileri girilince bu talep panele düşecek." : "Talep şu anda gönderilemedi. Lütfen telefon veya WhatsApp üzerinden iletişime geçin.");
     } finally {
       setIsSubmitting(false);
     }
