@@ -2,6 +2,7 @@ import type { CSSProperties, FormEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { createBusinessRequest, getPropertyById, type Property } from "@fk-templates/firebase";
+import { notifyNewRequest } from "../../src/notifyRequest";
 import { findPropertyById, propertyDemoData, type PropertyDemo } from "../../src/propertyDemoData";
 import { templateConfigs } from "../../src/templateConfigs";
 
@@ -123,14 +124,14 @@ export default function PropertyDetailPage() {
 
     setIsSubmitting(true);
     try {
-      await createBusinessRequest({
-        template: "real-estate",
+      const requestPayload = {
+        template: "real-estate" as const,
         businessId: process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business",
         customerName,
         customerPhone,
         subject: `${requestType}: ${property.title}`,
         note,
-        source: "website",
+        source: "website" as const,
         extra: {
           propertyId: property.id,
           propertyTitle: property.title,
@@ -138,7 +139,9 @@ export default function PropertyDetailPage() {
           location: property.location,
           acceptedLegal: "true"
         }
-      });
+      };
+      await createBusinessRequest(requestPayload);
+      await notifyNewRequest(requestPayload);
       setSubmitStatus("Talep alındı. Danışman size dönüş yapacak.");
       event.currentTarget.reset();
     } catch (error) {
