@@ -14,18 +14,16 @@ Toplam plan: **8 faz**
 |---|---|---|---|
 | Faz 1 | Monorepo ve temel mimari | Done / MVP | Next.js web, shared config ve template klasörlerini kurmak |
 | Faz 2 | Ortak tema ve premium UI sistemi | Done / MVP | Arrivio benzeri modern, kartlı, ferah ve mobil uyumlu tasarım dili kurmak |
-| Faz 3 | Appointment template | Done / Firebase-ready Draft | Veteriner/klinik/randevu şablonunu çıkarmak |
-| Faz 4 | Salon template | Done / Firebase-ready Draft | Kuaför/güzellik salonu şablonunu çıkarmak |
-| Faz 5 | Real Estate template | Done / Firestore-ready MVP | Emlakçı ilan ve portföy şablonunu çıkarmak |
-| Faz 6 | Admin panel MVP | Done / Firestore-ready MVP | Randevu, talep ve ilan yönetimini tek admin panelde toplamak |
+| Faz 3 | Appointment template | Done / MVP | Veteriner/klinik/randevu şablonunu çıkarmak |
+| Faz 4 | Salon template | Done / MVP | Kuaför/güzellik salonu şablonunu çıkarmak |
+| Faz 5 | Real Estate template | Done / MVP | Emlakçı ilan ve portföy şablonunu çıkarmak |
+| Faz 6 | Admin panel MVP | Done / MVP | Randevu, talep ve ilan yönetimini tek admin panelde toplamak |
 | Faz 7 | Firebase entegrasyonu | Done / MVP | Firestore kayıt, Auth ve müşteri config kurulumunu bağlamak |
 | Faz 8 | Satış ve teslimat dokümantasyonu | Done / First Draft | Kurulum rehberi, satış metni ve müşteri teslim süreci hazırlamak |
 
 ---
 
 ## Faz 1 — Monorepo ve Temel Mimari
-
-Amaç: Repo içinde çalışabilir temel yapıyı oluşturmak.
 
 Yapılanlar:
 
@@ -41,7 +39,7 @@ Yapılanlar:
 - [x] `configs` demo müşteri configleri oluşturuldu.
 - [x] GitHub Actions web build workflow eklendi.
 
-Kalan:
+Manuel kontrol bekleyenler:
 
 - [ ] Local build/dev test yapılacak.
 - [ ] GitHub Actions build sonucu kontrol edilecek.
@@ -59,10 +57,11 @@ Yapılanlar:
 - [x] Hero, mockup panel, hizmet kartları, ekip kartları ve form preview eklendi.
 - [x] `/`, `/appointment`, `/salon`, `/real-estate` route'ları açıldı.
 - [x] `/properties` ve `/properties/[id]` emlak ilan sayfaları eklendi.
+- [x] Gerçek müşteri görselleri için galeri/görsel alanları güçlendirildi.
+- [x] Kampanya, Instagram, harita ve lokasyon CTA alanları eklendi.
 
-Kalan:
+Manuel kontrol bekleyenler:
 
-- [ ] Gerçek müşteri görselleri için görsel alanları güçlendirilecek.
 - [ ] Mobilde son görsel kontrol yapılacak.
 
 ---
@@ -80,11 +79,8 @@ Yapılanlar:
 - [x] Firebase yoksa demo mode mesajı gösteriyor.
 - [x] WhatsApp CTA mantığı hazır.
 - [x] `/appointment` route'u açıldı.
-
-Kalan:
-
-- [ ] Klinik/veteriner için galeri ve harita alanı güçlendirilecek.
-- [ ] Pet özel alanları admin listede detaylı gösterilecek.
+- [x] Klinik/veteriner için galeri ve harita alanı güçlendirildi.
+- [x] Pet özel alanları admin listede detaylı gösterilecek şekilde extra details alanı eklendi.
 
 ---
 
@@ -100,11 +96,8 @@ Yapılanlar:
 - [x] Form `createBusinessRequest()` servisine bağlandı.
 - [x] Firebase yoksa demo mode mesajı gösteriyor.
 - [x] `/salon` route'u açıldı.
-
-Kalan:
-
-- [ ] Kampanya kartları güçlendirilecek.
-- [ ] Instagram/galeri alanı eklenecek.
+- [x] Kampanya kartları güçlendirildi.
+- [x] Instagram/galeri alanı eklendi.
 
 ---
 
@@ -122,15 +115,12 @@ Yapılanlar:
 - [x] `/properties` ilan grid sayfası eklendi.
 - [x] `/properties` canlı Firestore property listesini okumaya hazırlandı.
 - [x] `/properties/[id]` ilan detay sayfası eklendi.
+- [x] Firestore canlı property için detay sayfası dinamik fetch yapacak hale getirildi.
 - [x] İlan detay lead formu `createBusinessRequest()` servisine bağlandı.
 - [x] `/admin/properties/new` ilan ekleme formu eklendi.
 - [x] İlan ekleme formu `createProperty()` servisine bağlandı.
 - [x] Görsel yükleme helper'ı forma bağlandı.
-
-Kalan:
-
-- [ ] Firestore canlı property için detay sayfası dinamik fetch yapılacak.
-- [ ] Fotoğraf galerisi görsel URL'leriyle gerçek görsel render edecek.
+- [x] Fotoğraf galerisi görsel URL'leriyle gerçek görsel render edecek hale getirildi.
 
 ---
 
@@ -151,11 +141,8 @@ Yapılanlar:
 - [x] Premium admin panel CSS eklendi.
 - [x] `/login` admin giriş sayfası eklendi.
 - [x] `/admin/properties/new` yeni ilan formu eklendi.
-
-Kalan:
-
-- [ ] Salon/klinik için hizmet listesi yönetimi yapılacak.
-- [ ] Admin CSV export gerçek işlem yapılacak.
+- [x] Salon/klinik için hizmet listesi yönetimi yapıldı.
+- [x] Admin CSV export gerçek işlem olarak eklendi.
 
 ---
 
@@ -170,6 +157,8 @@ Yapılanlar:
 - [x] Request servisleri eklendi.
 - [x] Admin note request servisi eklendi.
 - [x] Property servisleri eklendi.
+- [x] Property detail fetch helper eklendi.
+- [x] Service management helper eklendi.
 - [x] Storage upload helper eklendi.
 - [x] Web landing formları request servisine bağlandı.
 - [x] Emlak ilan detay formu request servisine bağlandı.
@@ -183,7 +172,7 @@ Yapılanlar:
 - [x] `firebase.json` eklendi.
 - [x] Firebase kurulum dokümanı güncellendi.
 
-Kalan:
+Manuel kontrol bekleyenler:
 
 - [ ] Firestore/Storage canlı test yapılacak.
 - [ ] Admin Auth gerçek müşteri hesabıyla test edilecek.
@@ -215,6 +204,6 @@ Kalan:
 1. Build/dev hataları kontrol edilecek.
 2. GitHub Actions workflow sonucu kontrol edilecek.
 3. Canlı Firebase test yapılacak.
-4. Fotoğraf URL'leri gerçek görsel galeri olarak render edilecek.
-5. Salon/klinik hizmet yönetim ekranı yapılacak.
+4. Mobil görsel kontrol yapılacak.
+5. Demo video/sunum metni genişletilecek.
 ```
