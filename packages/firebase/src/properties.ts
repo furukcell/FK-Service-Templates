@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, orderBy, query, serverTimestamp, updateDoc, doc, where } from "firebase/firestore";
+import { addDoc, collection, getDoc, getDocs, orderBy, query, serverTimestamp, updateDoc, doc, where } from "firebase/firestore";
 import { COLLECTIONS } from "./collections";
 import { getFirestoreDb } from "./client";
 
@@ -47,6 +47,14 @@ export async function listProperties(): Promise<Property[]> {
   );
   const snapshot = await getDocs(propertyQuery);
   return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Omit<Property, "id">) }));
+}
+
+export async function getPropertyById(propertyId: string): Promise<Property | null> {
+  const snapshot = await getDoc(doc(getFirestoreDb(), COLLECTIONS.properties, propertyId));
+  if (!snapshot.exists()) return null;
+  const data = snapshot.data() as Omit<Property, "id">;
+  if (data.isActive === false) return null;
+  return { id: snapshot.id, ...data };
 }
 
 export async function updateProperty(propertyId: string, payload: Partial<CreatePropertyPayload>) {
