@@ -1,5 +1,7 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, FormEvent } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
+import { createBusinessRequest } from "@fk-templates/firebase";
 import { findPropertyById, propertyDemoData } from "../../src/propertyDemoData";
 import { templateConfigs } from "../../src/templateConfigs";
 
@@ -16,6 +18,47 @@ export default function PropertyDetailPage() {
   const router = useRouter();
   const property = findPropertyById(router.query.id);
   const otherProperties = propertyDemoData.filter((item) => item.id !== property.id).slice(0, 2);
+  const [submitStatus, setSubmitStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function submitLead(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const customerName = String(formData.get("name") || "").trim();
+    const customerPhone = String(formData.get("phone") || "").trim();
+    const requestType = String(formData.get("requestType") || "İlan talebi");
+    const note = String(formData.get("note") || "");
+
+    if (!customerName || !customerPhone) {
+      setSubmitStatus("Ad soyad ve telefon zorunludur.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await createBusinessRequest({
+        template: "real-estate",
+        businessId: process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business",
+        customerName,
+        customerPhone,
+        subject: `${requestType}: ${property.title}`,
+        note,
+        source: "website",
+        extra: {
+          propertyId: property.id,
+          propertyTitle: property.title,
+          price: property.price,
+          location: property.location
+        }
+      });
+      setSubmitStatus("Talep alındı. Danışman size dönüş yapacak.");
+      event.currentTarget.reset();
+    } catch (error) {
+      setSubmitStatus("Demo mod: Form hazır. Firebase bilgileri girilince bu ilan talebi panele düşecek.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <main className="pageShell" style={themeStyle}>
@@ -58,12 +101,13 @@ export default function PropertyDetailPage() {
             <p>{property.consultantName}</p>
             <span className="priceTag">{property.consultantPhone}</span>
           </div>
-          <form className="formPanel formFields">
-            <label className="field"><span>Ad Soyad</span><input placeholder="Adınız soyadınız" /></label>
-            <label className="field"><span>Telefon</span><input placeholder="+90 5xx xxx xx xx" /></label>
-            <label className="field"><span>Talep tipi</span><select defaultValue=""><option value="" disabled>Seçiniz</option><option>İlanı görmek istiyorum</option><option>Fiyat bilgisi istiyorum</option><option>Benzer ilan istiyorum</option></select></label>
-            <label className="field"><span>Not</span><textarea placeholder="Kısaca talebinizi yazın" /></label>
-            <button className="pillButton" type="button">Demo Talep Gönder</button>
+          <form className="formPanel formFields" onSubmit={submitLead}>
+            <label className="field"><span>Ad Soyad</span><input name="name" placeholder="Adınız soyadınız" /></label>
+            <label className="field"><span>Telefon</span><input name="phone" placeholder="+90 5xx xxx xx xx" /></label>
+            <label className="field"><span>Talep tipi</span><select name="requestType" defaultValue=""><option value="" disabled>Seçiniz</option><option>İlanı görmek istiyorum</option><option>Fiyat bilgisi istiyorum</option><option>Benzer ilan istiyorum</option></select></label>
+            <label className="field"><span>Not</span><textarea name="note" placeholder="Kısaca talebinizi yazın" /></label>
+            <button className="pillButton" type="submit" disabled={isSubmitting}>{isSubmitting ? "Gönderiliyor..." : "Demo Talep Gönder"}</button>
+            {submitStatus ? <p className="formStatus">{submitStatus}</p> : null}
           </form>
         </div>
       </section>
