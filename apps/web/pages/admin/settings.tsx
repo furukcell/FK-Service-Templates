@@ -24,7 +24,9 @@ function defaultsFor(template: TemplateKey) {
     whatsapp: config.whatsapp,
     address: config.address,
     mapsUrl: config.mapsUrl || "",
-    instagramUrl: config.instagramUrl || ""
+    instagramUrl: config.instagramUrl || "",
+    contactEmail: "info@ornekfirma.com",
+    workingHours: "Pazartesi - Cumartesi 09:00 - 18:00"
   };
 }
 
@@ -57,7 +59,9 @@ export default function AdminSettingsPage() {
             whatsapp: settings.whatsapp || defaults.whatsapp,
             address: settings.address || defaults.address,
             mapsUrl: settings.mapsUrl || defaults.mapsUrl,
-            instagramUrl: settings.instagramUrl || defaults.instagramUrl
+            instagramUrl: settings.instagramUrl || defaults.instagramUrl,
+            contactEmail: settings.contactEmail || defaults.contactEmail,
+            workingHours: settings.workingHours || defaults.workingHours
           });
           setStatus("Canlı site ayarları yüklendi.");
         } else {
@@ -107,6 +111,7 @@ export default function AdminSettingsPage() {
         <nav>
           <a href="/admin">Talepler</a>
           <a className="active" href="/admin/settings">Site Ayarları</a>
+          <a href="/admin/content">Kurumsal Metinler</a>
           <a href="/admin/services">Hizmetler</a>
           <a href="/admin/campaigns">Kampanyalar</a>
           <a href="/admin/gallery">Galeri</a>
@@ -137,6 +142,8 @@ export default function AdminSettingsPage() {
             <label className="field"><span>İkinci buton</span><input value={form.secondaryCta} onChange={(event) => updateField("secondaryCta", event.currentTarget.value)} /></label>
             <label className="field"><span>Telefon</span><input value={form.phone} onChange={(event) => updateField("phone", event.currentTarget.value)} /></label>
             <label className="field"><span>WhatsApp</span><input value={form.whatsapp} onChange={(event) => updateField("whatsapp", event.currentTarget.value)} /></label>
+            <label className="field"><span>E-posta</span><input value={form.contactEmail} onChange={(event) => updateField("contactEmail", event.currentTarget.value)} /></label>
+            <label className="field"><span>Çalışma saatleri</span><input value={form.workingHours} onChange={(event) => updateField("workingHours", event.currentTarget.value)} /></label>
             <label className="field"><span>Adres</span><input value={form.address} onChange={(event) => updateField("address", event.currentTarget.value)} /></label>
             <label className="field"><span>Google Maps linki</span><input value={form.mapsUrl} onChange={(event) => updateField("mapsUrl", event.currentTarget.value)} /></label>
             <label className="field"><span>Instagram linki</span><input value={form.instagramUrl} onChange={(event) => updateField("instagramUrl", event.currentTarget.value)} /></label>
