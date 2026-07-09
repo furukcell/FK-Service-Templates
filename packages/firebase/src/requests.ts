@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, orderBy, query, serverTimestamp, updateDoc, doc } from "firebase/firestore";
+import { addDoc, collection, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc, doc } from "firebase/firestore";
 import type { TemplateKey } from "@fk-templates/shared";
 import { COLLECTIONS } from "./collections";
 import { getFirestoreDb } from "./client";
@@ -26,6 +26,10 @@ export type BusinessRequest = CreateRequestPayload & {
   updatedAt?: unknown;
 };
 
+function mapRequestDoc(item: { id: string; data: () => unknown }): BusinessRequest {
+  return { id: item.id, ...(item.data() as Omit<BusinessRequest, "id">) };
+}
+
 export async function createBusinessRequest(payload: CreateRequestPayload) {
   return addDoc(collection(getFirestoreDb(), COLLECTIONS.requests), {
     ...payload,
@@ -39,7 +43,16 @@ export async function createBusinessRequest(payload: CreateRequestPayload) {
 export async function listBusinessRequests(): Promise<BusinessRequest[]> {
   const requestQuery = query(collection(getFirestoreDb(), COLLECTIONS.requests), orderBy("createdAt", "desc"));
   const snapshot = await getDocs(requestQuery);
-  return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Omit<BusinessRequest, "id">) }));
+  return snapshot.docs.map(mapRequestDoc);
+}
+
+export function listenBusinessRequests(callback: (requests: BusinessRequest[]) => void, onError?: (error: unknown) => void) {
+  const requestQuery = query(collection(getFirestoreDb(), COLLECTIONS.requests), orderBy("createdAt", "desc"));
+  return onSnapshot(
+    requestQuery,
+    (snapshot) => callback(snapshot.docs.map(mapRequestDoc)),
+    (error) => onError?.(error)
+  );
 }
 
 export async function updateBusinessRequestStatus(requestId: string, status: RequestStatus) {
