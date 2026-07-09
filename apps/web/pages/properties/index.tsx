@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
 import { listProperties, type Property } from "@fk-templates/firebase";
+import { isDemoMode } from "../../src/runtimeMode";
 import { propertyDemoData } from "../../src/propertyDemoData";
 import { templateConfigs } from "../../src/templateConfigs";
 
@@ -49,7 +50,7 @@ function mapDemoProperty(property: typeof propertyDemoData[number]): DisplayProp
 
 export default function PropertiesPage() {
   const [liveProperties, setLiveProperties] = useState<DisplayProperty[]>([]);
-  const [dataMode, setDataMode] = useState("Demo portföyler");
+  const [dataMode, setDataMode] = useState(isDemoMode() ? "Demo portföyler" : "Canlı portföyler");
 
   useEffect(() => {
     let isMounted = true;
@@ -60,15 +61,15 @@ export default function PropertiesPage() {
         const activeItems = items.filter((item) => item.isActive !== false);
         if (activeItems.length) {
           setLiveProperties(activeItems.map(mapLiveProperty));
-          setDataMode("Firestore canlı portföyler");
+          setDataMode("Canlı portföyler");
         } else {
           setLiveProperties([]);
-          setDataMode("Firestore boş, demo portföyler gösteriliyor");
+          setDataMode(isDemoMode() ? "Canlı ilan yok, demo portföyler gösteriliyor" : "Henüz ilan eklenmedi");
         }
       } catch (error) {
         if (isMounted) {
           setLiveProperties([]);
-          setDataMode("Firebase bağlı değil, demo portföyler gösteriliyor");
+          setDataMode(isDemoMode() ? "Firebase bağlı değil, demo portföyler gösteriliyor" : "İlanlar şu anda yüklenemedi");
         }
       }
     }
@@ -76,14 +77,14 @@ export default function PropertiesPage() {
     return () => { isMounted = false; };
   }, []);
 
-  const displayProperties = liveProperties.length ? liveProperties : propertyDemoData.map(mapDemoProperty);
+  const displayProperties = liveProperties.length ? liveProperties : isDemoMode() ? propertyDemoData.map(mapDemoProperty) : [];
 
   return (
     <main className="pageShell" style={themeStyle}>
-      <div className="topBar">Emlak ilan portföyü • Vitrin ilanları • WhatsApp talep</div>
+      <div className="topBar">Emlak ilan portföyü • Vitrin ilanları • Hızlı talep</div>
       <nav className="navbar">
-        <a className="logoLockup navButtonLink" href="/real-estate"><span className="logoMark">FK</span><span>{config.brandName}</span></a>
-        <div className="navActions"><a className="ghostButton navButtonLink" href="/admin">Demo Panel</a><a className="pillButton navButtonLink" href="/real-estate">Siteye Dön</a></div>
+        <a className="logoLockup navButtonLink" href="/real-estate"><span className="logoMark">{config.brandName.slice(0, 2).toUpperCase()}</span><span>{config.brandName}</span></a>
+        <div className="navActions">{isDemoMode() ? <a className="ghostButton navButtonLink" href="/admin">Demo Panel</a> : null}<a className="pillButton navButtonLink" href="/real-estate">Siteye Dön</a></div>
       </nav>
 
       <section className="section">
@@ -92,23 +93,27 @@ export default function PropertiesPage() {
             <span className="eyebrow">Vitrin portföyleri</span>
             <h2>Satılık ve kiralık ilanlar</h2>
           </div>
-          <p>Bu sayfa emlak şablonu için ilan listeleme demosudur. Veri modu: {dataMode}.</p>
+          <p>Güncel portföyleri inceleyebilir, ilan detayından hızlı bilgi talebi bırakabilirsiniz. {isDemoMode() ? `Veri modu: ${dataMode}.` : null}</p>
         </div>
-        <div className="propertyGrid">
-          {displayProperties.map((property) => (
-            <article className="propertyCard" key={property.id}>
-              <div className="propertyVisual"><span>{property.propertyType}</span>{property.isFeatured ? <mark>Vitrin</mark> : null}</div>
-              <div className="propertyBody">
-                <span className="priceTag">{property.listingType}</span>
-                <h3>{property.title}</h3>
-                <p>{property.location}</p>
-                <strong>{property.price}</strong>
-                <div className="propertyMeta"><span>{property.squareMeters}</span><span>{property.roomCount}</span><span>{property.bathroomCount} banyo</span></div>
-                <a className="pillButton navButtonLink" href={`/properties/${property.id}`}>İlanı İncele</a>
-              </div>
-            </article>
-          ))}
-        </div>
+        {displayProperties.length ? (
+          <div className="propertyGrid">
+            {displayProperties.map((property) => (
+              <article className="propertyCard" key={property.id}>
+                <div className="propertyVisual"><span>{property.propertyType}</span>{property.isFeatured ? <mark>Vitrin</mark> : null}</div>
+                <div className="propertyBody">
+                  <span className="priceTag">{property.listingType}</span>
+                  <h3>{property.title}</h3>
+                  <p>{property.location}</p>
+                  <strong>{property.price}</strong>
+                  <div className="propertyMeta"><span>{property.squareMeters}</span><span>{property.roomCount}</span><span>{property.bathroomCount} banyo</span></div>
+                  <a className="pillButton navButtonLink" href={`/properties/${property.id}`}>İlanı İncele</a>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="formPanel"><h3>Henüz ilan eklenmedi</h3><p>Portföyler eklendiğinde bu sayfada yayınlanacaktır.</p><a className="pillButton navButtonLink" href="/iletisim">İletişime Geç</a></div>
+        )}
       </section>
     </main>
   );
