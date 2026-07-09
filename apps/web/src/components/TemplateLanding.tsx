@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createBusinessRequest } from "@fk-templates/firebase";
 import type { BusinessTemplateConfig, LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { layoutVariantLabels } from "@fk-templates/shared";
+import { contentPageLabels, contentPageRoutes } from "../siteContent";
 import { templateConfigs, templateOrder } from "../templateConfigs";
 
 type TemplateLandingProps = {
@@ -51,6 +52,15 @@ function galleryTitle(config: BusinessTemplateConfig) {
   return "Vitrin portföy ve bölge güveni";
 }
 
+function LegalFooterLinks() {
+  return (
+    <div className="legalFooterLinks">
+      {Object.entries(contentPageRoutes).map(([key, href]) => <a href={href} key={key}>{contentPageLabels[key as keyof typeof contentPageLabels]}</a>)}
+      <a href="/sss">SSS</a>
+    </div>
+  );
+}
+
 function Shell({ config, children }: { config: BusinessTemplateConfig; children: ReactNode }) {
   return (
     <main className="pageShell" style={applyTheme(config)}>
@@ -59,6 +69,7 @@ function Shell({ config, children }: { config: BusinessTemplateConfig; children:
       <footer className="footer">
         <span>FK Service Templates • Hazır sektör web sitesi altyapısı</span>
         <span>{config.address}</span>
+        <LegalFooterLinks />
       </footer>
     </main>
   );
@@ -268,6 +279,7 @@ function RequestFormSection({ config, handleSubmit, isSubmitting, submitStatus }
               )}
             </label>
           ))}
+          <label className="kvkkConsent"><input name="acceptedLegal" type="checkbox" required /><span><a href="/kvkk-aydinlatma-metni" target="_blank">KVKK Aydınlatma Metni</a> ve <a href="/gizlilik-politikasi" target="_blank">Gizlilik Politikası</a> kapsamında bilgilendirmeyi okudum.</span></label>
           <button className="pillButton" type="submit" disabled={isSubmitting}>{isSubmitting ? "Gönderiliyor..." : "Demo Talep Gönder"}</button>
           {submitStatus ? <p className="formStatus">{submitStatus}</p> : null}
         </form>
@@ -357,9 +369,15 @@ export function TemplateLanding({ config, activeTemplate, activeLayout = "modern
     const formData = new FormData(event.currentTarget);
     const customerName = String(formData.get("name") || "").trim();
     const customerPhone = String(formData.get("phone") || "").trim();
+    const acceptedLegal = formData.get("acceptedLegal") === "on";
 
     if (!customerName || !customerPhone) {
       setSubmitStatus("Ad soyad ve telefon zorunludur.");
+      return;
+    }
+
+    if (!acceptedLegal) {
+      setSubmitStatus("Devam etmek için KVKK/Gizlilik bilgilendirmesini onaylamalısınız.");
       return;
     }
 
