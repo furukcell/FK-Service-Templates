@@ -1,5 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { listBusinessRequests, type BusinessRequest } from "@fk-templates/firebase";
+import {
+  listBusinessRequests,
+  updateBusinessRequestAdminNote,
+  updateBusinessRequestStatus,
+  type BusinessRequest,
+  type RequestStatus
+} from "@fk-templates/firebase";
 import { demoProperties, demoRequests, statusLabels, type DemoRequest } from "../src/adminDemoData";
 
 type DisplayRequest = {
@@ -10,7 +16,21 @@ type DisplayRequest = {
   date: string;
   status: DemoRequest["status"];
   source: string;
+  adminNote?: string;
+  isLive?: boolean;
 };
+
+const requestStatuses: RequestStatus[] = ["new", "contacted", "confirmed", "cancelled", "completed"];
+
+function normalizePhone(phone: string) {
+  return phone.replace(/[^0-9]/g, "");
+}
+
+function whatsappUrl(phone: string, subject: string) {
+  const normalized = normalizePhone(phone);
+  const message = encodeURIComponent(`Merhaba, ${subject} talebiniz için dönüş yapıyorum.`);
+  return normalized ? `https://wa.me/${normalized}?text=${message}` : `https://wa.me/?text=${message}`;
+}
 
 function mapLiveRequest(request: BusinessRequest): DisplayRequest {
   return {
@@ -20,43 +40,73 @@ function mapLiveRequest(request: BusinessRequest): DisplayRequest {
     subject: request.subject,
     date: request.preferredDate || "Canlı kayıt",
     status: request.status,
-    source: request.source || "website"
+    source: request.source || "website",
+    adminNote: request.adminNote,
+    isLive: true
   };
 }
 
 function mapDemoRequest(request: DemoRequest): DisplayRequest {
-  return request;
+  return { ...request, isLive: false };
 }
 
 export default function AdminDemoPage() {
   const [liveRequests, setLiveRequests] = useState<DisplayRequest[]>([]);
   const [dataMode, setDataMode] = useState("Demo data");
+  const [actionStatus, setActionStatus] = useState("");
+  const [noteDrafts, setNoteDrafts] = useState<Record<string, string>>({});
+
+  async function loadRequests() {
+    try {
+      const items = await listBusinessRequests();
+      if (items.length) {
+        const mappedItems = items.map(mapLiveRequest);
+        setLiveRequests(mappedItems);
+        setNoteDrafts(Object.fromEntries(mappedItems.map((item) => [item.id, item.adminNote || ""])));
+        setDataMode("Firestore canlı kayıtlar");
+      } else {
+        setLiveRequests([]);
+        setDataMode("Firestore boş, demo data gösteriliyor");
+      }
+    } catch (error) {
+      setLiveRequests([]);
+      setDataMode("Firebase bağlı değil, demo data gösteriliyor");
+    }
+  }
 
   useEffect(() => {
-    let isMounted = true;
-
-    async function loadRequests() {
-      try {
-        const items = await listBusinessRequests();
-        if (!isMounted) return;
-        if (items.length) {
-          setLiveRequests(items.map(mapLiveRequest));
-          setDataMode("Firestore canlı kayıtlar");
-        } else {
-          setLiveRequests([]);
-          setDataMode("Firestore boş, demo data gösteriliyor");
-        }
-      } catch (error) {
-        if (isMounted) {
-          setLiveRequests([]);
-          setDataMode("Firebase bağlı değil, demo data gösteriliyor");
-        }
-      }
-    }
-
     loadRequests();
-    return () => { isMounted = false; };
   }, []);
+
+  async function changeStatus(request: DisplayRequest, status: RequestStatus) {
+    setActionStatus("");
+    if (!request.isLive) {
+      setActionStatus("Demo kayıt üzerinde status değişikliği simüle edildi. Firebase bağlanınca gerçek kayıt güncellenecek.");
+      return;
+    }
+    try {
+      await updateBusinessRequestStatus(request.id, status);
+      setActionStatus("Status güncellendi.");
+      await loadRequests();
+    } catch (error) {
+      setActionStatus("Status güncellenemedi. Admin girişi veya Firestore rules kontrol edilmeli.");
+    }
+  }
+
+  async function saveNote(request: DisplayRequest) {
+    setActionStatus("");
+    if (!request.isLive) {
+      setActionStatus("Demo kayıt üzerinde not kaydı simüle edildi. Firebase bağlanınca gerçek kayıt güncellenecek.");
+      return;
+    }
+    try {
+      await updateBusinessRequestAdminNote(request.id, noteDrafts[request.id] || "");
+      setActionStatus("Admin notu kaydedildi.");
+      await loadRequests();
+    } catch (error) {
+      setActionStatus("Admin notu kaydedilemedi. Admin girişi veya Firestore rules kontrol edilmeli.");
+    }
+  }
 
   const displayRequests = liveRequests.length ? liveRequests : demoRequests.map(mapDemoRequest);
   const summaryCards = useMemo(() => [
@@ -85,8 +135,9 @@ export default function AdminDemoPage() {
             <h1>Müşteri paneli demo görünümü</h1>
             <p>Randevu, talep ve ilanlar tek panelde yönetilecek. Firebase env girilirse canlı kayıtlar, yoksa demo data gösterilir.</p>
             <p className="adminMode">Veri modu: {dataMode}</p>
+            {actionStatus ? <p className="adminMode">{actionStatus}</p> : null}
           </div>
-          <a className="pillButton navButtonLink" href="/">Siteye Dön</a>
+          <div className="navActions"><a className="ghostButton navButtonLink" href="/login">Admin Giriş</a><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
         </header>
 
         <div className="adminStats">
@@ -106,24 +157,25 @@ export default function AdminDemoPage() {
             </div>
             <button className="ghostButton">CSV indir</button>
           </div>
-          <div className="adminTable">
-            <div className="adminTableRow adminTableHead">
-              <span>Kod</span>
-              <span>Müşteri</span>
-              <span>Konu</span>
-              <span>Tarih</span>
-              <span>Durum</span>
-              <span>Kaynak</span>
-            </div>
+          <div className="adminRequestList">
             {displayRequests.map((request) => (
-              <div className="adminTableRow" key={request.id}>
-                <span>{request.id}</span>
-                <span><strong>{request.customerName}</strong><small>{request.customerPhone}</small></span>
-                <span>{request.subject}</span>
-                <span>{request.date}</span>
-                <span><mark>{statusLabels[request.status]}</mark></span>
-                <span>{request.source}</span>
-              </div>
+              <article className="adminRequestCard" key={request.id}>
+                <div className="adminRequestTop">
+                  <span className="priceTag">{request.id}</span>
+                  <mark>{statusLabels[request.status]}</mark>
+                </div>
+                <h3>{request.subject}</h3>
+                <p><strong>{request.customerName}</strong> • {request.customerPhone}</p>
+                <p>{request.date} / Kaynak: {request.source}</p>
+                <div className="adminActionGrid">
+                  <label className="field"><span>Durum</span><select value={request.status} onChange={(event) => changeStatus(request, event.currentTarget.value as RequestStatus)}>{requestStatuses.map((status) => <option value={status} key={status}>{statusLabels[status]}</option>)}</select></label>
+                  <label className="field"><span>Admin notu</span><input value={noteDrafts[request.id] || ""} onChange={(event) => setNoteDrafts((current) => ({ ...current, [request.id]: event.currentTarget.value }))} placeholder="Görüşme notu" /></label>
+                </div>
+                <div className="heroActions">
+                  <a className="pillButton navButtonLink" href={whatsappUrl(request.customerPhone, request.subject)} target="_blank" rel="noreferrer">WhatsApp</a>
+                  <button className="ghostButton" type="button" onClick={() => saveNote(request)}>Notu Kaydet</button>
+                </div>
+              </article>
             ))}
           </div>
         </section>
