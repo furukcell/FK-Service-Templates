@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, orderBy, query, serverTimestamp, updateDoc, doc } from "firebase/firestore";
+import { addDoc, collection, getDocs, orderBy, query, serverTimestamp, updateDoc, doc, where } from "firebase/firestore";
 import { COLLECTIONS } from "./collections";
 import { getFirestoreDb } from "./client";
 
@@ -40,7 +40,11 @@ export async function createProperty(payload: CreatePropertyPayload) {
 }
 
 export async function listProperties(): Promise<Property[]> {
-  const propertyQuery = query(collection(getFirestoreDb(), COLLECTIONS.properties), orderBy("createdAt", "desc"));
+  const propertyQuery = query(
+    collection(getFirestoreDb(), COLLECTIONS.properties),
+    where("isActive", "==", true),
+    orderBy("createdAt", "desc")
+  );
   const snapshot = await getDocs(propertyQuery);
   return snapshot.docs.map((item) => ({ id: item.id, ...(item.data() as Omit<Property, "id">) }));
 }
