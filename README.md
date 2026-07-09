@@ -1,35 +1,34 @@
 # FK Service Templates
 
-FK Service Templates; küçük işletmelere hızlı satılabilecek, tek seferlik kurulum modeliyle uyarlanabilecek hazır web sitesi + talep/randevu/ilan paneli altyapısıdır.
+FK Service Templates; küçük işletmelere hızlı satılabilecek, tek seferlik kurulum modeliyle uyarlanabilecek hazır web sitesi + admin panel altyapısıdır.
 
-Bu repo bir aylık abonelikli SaaS ürünü olarak değil, **hazır sektör şablonlarını müşteriye özel uyarlayıp kurulum ücretiyle satmak** için hazırlanmıştır.
+Bu repo aylık abonelikli SaaS olarak değil, **hazır sektör şablonlarını müşteriye özel uyarlayıp kurulum ücretiyle satmak** için hazırlanmıştır.
 
-## Güncel MVP Durumu
+## Güncel Durum
 
-İlk MVP iskeleti tamamlandı.
+MVP artık sadece statik site değildir. Müşteri admin panelden site içeriğinin önemli bölümlerini yönetebilir.
 
 Hazır olan ana parçalar:
 
-- Modern Next.js web uygulaması
+- Next.js 14 web uygulaması
 - 3 sektör şablonu
 - Her sektör için 3 profesyonel arayüz varyantı
-- Premium landing arayüzü
-- Template switcher ana sayfa
-- Layout/tasarım seçici
+- Template + layout seçicili ana demo
 - Sektöre özel route'lar
-- Emlak ilan liste ve detay sayfaları
-- Admin demo panel
 - Admin login iskeleti
+- Admin panel
+- Site ayarları yönetimi
+- Hizmet/fiyat yönetimi
+- Kampanya yönetimi
+- Galeri/görsel yönetimi
+- Emlak ilan ekleme ve fotoğraf yükleme
+- Firestore request, property, service ve settings helper'ları
 - Firebase Auth helper
-- Firestore request helper
-- Firestore property helper
-- Firestore service management helper
-- Firebase Storage görsel yükleme helper
-- Firestore rules taslağı
-- Storage rules taslağı
-- Netlify deploy config
+- Firebase Storage upload helper
+- Firestore rules
+- Storage rules
+- Netlify / Vercel deploy uyumu
 - GitHub Actions web build workflow
-- Satış, kurulum, Firebase ve onboarding dokümanları
 
 ## Hedef Şablonlar
 
@@ -45,27 +44,20 @@ Hazır olan ana parçalar:
 
 | Varyant | Kullanım hissi | Amaç |
 |---|---|---|
-| `modern` | Modern kartlı premium yapı | Arrivio mantığında dengeli hero + kartlar + panel görünümü |
+| `modern` | Modern kartlı premium yapı | Dengeli hero + kartlar + panel görünümü |
 | `split` | İki parçalı büyük görsel / içerik yapısı | Daha kurumsal, daha büyük vitrin hissi |
 | `showcase` | Tam genişlik sahne/vitrin yapısı | Daha çarpıcı, kampanya/portföy/galeri odaklı görünüm |
 
-Ana demo sayfasında hem sektör hem de tasarım seçilebilir:
+Demo linkleri:
 
 ```text
 /
-```
-
-Direkt sektör sayfalarında query ile layout seçilebilir:
-
-```text
 /appointment?layout=modern
 /appointment?layout=split
 /appointment?layout=showcase
-
 /salon?layout=modern
 /salon?layout=split
 /salon?layout=showcase
-
 /real-estate?layout=modern
 /real-estate?layout=split
 /real-estate?layout=showcase
@@ -73,30 +65,49 @@ Direkt sektör sayfalarında query ile layout seçilebilir:
 
 Bu modelde 3 sektör x 3 layout = **9 farklı demo görünümü** elde edilir.
 
-## İş Modeli
+## Müşteri Admin Paneli
 
-Müşteri hazır sektör şablonunu seçer. Logo, renk, firma adı, telefon, adres, hizmetler, ilanlar ve sosyal medya bilgileri config sistemine girilir.
+Müşteri siteyi aldıktan sonra şu linklerden giriş yapar:
 
-Domain, Firebase ve hosting mümkünse müşterinin kendi hesabında olur. FK Digital kurulumdan, uyarlamadan ve ekstra geliştirmelerden gelir elde eder.
+```text
+/login
+/admin
+```
 
-Önerilen başlangıç fiyatları:
+Teslimde Firebase Auth üzerinden müşteri için admin kullanıcı oluşturulur.
 
-| Şablon | Kurulum |
-|---|---:|
-| Veteriner / Klinik | 5.000 TL |
-| Kuaför / Güzellik | 5.000 TL |
-| Emlakçı | 7.500 TL |
+Örnek:
 
-Ekstra işler ayrıca fiyatlandırılır:
+```text
+Admin panel: www.musterisitesi.com/login
+E-posta: info@musterisitesi.com
+Şifre: müşteri için oluşturulan şifre
+```
 
-| Ek iş | Önerilen fiyat |
-|---|---:|
-| Ek sayfa | 1.000 TL |
-| Ek form | 1.500 TL |
-| Tasarım revizyonu | 1.000 TL |
-| Çok dil | 2.000 TL |
-| Admin panel ek alan | 2.000 TL |
-| Özel filtre/özel akış | 2.500 TL+ |
+Demo ortamında admin koruması kapalı tutulabilir:
+
+```env
+NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=false
+```
+
+Müşteri tesliminde admin koruması açılır:
+
+```env
+NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=true
+```
+
+## Admin Panelde Müşteri Ne Değiştirebilir?
+
+| Panel | Route | Ne işe yarar? |
+|---|---|---|
+| Talepler | `/admin` | Gelen form/randevu/ilan taleplerini görür, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
+| Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, adres, harita, Instagram, ana başlık, açıklama ve seçili arayüzü değiştirir |
+| Hizmetler | `/admin/services` | Hizmet adı, açıklama ve fiyatları yönetir |
+| Kampanyalar | `/admin/campaigns` | Kampanya başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
+| Galeri | `/admin/gallery` | Görsel yükler, başlık/açıklama ekler, site galerisini yönetir |
+| Yeni İlan | `/admin/properties/new` | Emlak ilanı ekler, fiyat/konum/açıklama/görsel girer |
+
+Bu sayede müşteri sürekli FK Digital'e yazmadan siteyi uzun süre kullanabilir.
 
 ## Çalışan Route'lar
 
@@ -107,76 +118,56 @@ Ekstra işler ayrıca fiyatlandırılır:
 /real-estate               -> emlak landing demo sitesi
 /properties                -> emlak ilan listesi
 /properties/[id]           -> emlak ilan detay sayfası
-/admin                     -> admin demo panel
 /login                     -> admin login sayfası
+/admin                     -> admin ana panel / talepler
+/admin/settings            -> site ayarları
+/admin/services            -> hizmet/fiyat yönetimi
+/admin/campaigns           -> kampanya yönetimi
+/admin/gallery             -> galeri yönetimi
 /admin/properties/new      -> emlak ilan ekleme ekranı
-/admin/services            -> klinik/salon hizmet listesi yönetimi
 ```
 
 ## Repo Yapısı
 
 ```text
 FK-Service-Templates/
-  apps/
-    web/
-      pages/
-        index.tsx
-        appointment.tsx
-        salon.tsx
-        real-estate.tsx
-        properties/
-          index.tsx
-          [id].tsx
-        admin.tsx
-        login.tsx
-        admin/
-          properties/new.tsx
-          services.tsx
-      src/
-        components/
-          TemplateLanding.tsx
-        styles/
-          globals.css
-          admin.css
-          admin-actions.css
-          admin-forms.css
-          forms.css
-          properties.css
-          visual-sections.css
-          layout-variants.css
-        templateConfigs.ts
-        propertyDemoData.ts
-        adminDemoData.ts
-        useOptionalAdminGuard.ts
-        useLayoutVariantFromQuery.ts
-  packages/
-    shared/
-      src/index.ts
-    firebase/
-      src/
-        client.ts
-        auth.ts
-        requests.ts
-        properties.ts
-        services.ts
-        storage.ts
-        collections.ts
-  templates/
-    appointment/
-    salon/
-    real-estate/
+  apps/web/
+    pages/
+      index.tsx
+      appointment.tsx
+      salon.tsx
+      real-estate.tsx
+      properties/index.tsx
+      properties/[id].tsx
+      login.tsx
+      admin.tsx
+      admin/settings.tsx
+      admin/services.tsx
+      admin/campaigns.tsx
+      admin/gallery.tsx
+      admin/properties/new.tsx
+    src/
+      components/TemplateLanding.tsx
+      styles/
+      templateConfigs.ts
+      useManagedTemplateConfig.ts
+      useLayoutVariantFromQuery.ts
+      useOptionalAdminGuard.ts
+  packages/shared/
+  packages/firebase/
+    src/client.ts
+    src/auth.ts
+    src/requests.ts
+    src/properties.ts
+    src/services.ts
+    src/settings.ts
+    src/storage.ts
+    src/collections.ts
   configs/
     demo-veterinary.ts
     demo-salon.ts
     demo-real-estate.ts
   docs/
-    sales-guide.md
-    setup-guide.md
-    firebase-setup.md
-    deployment-guide.md
-    customer-checklist.md
-    demo-pitch.md
-    first-customer-onboarding.md
   firestore.rules
   storage.rules
   firebase.json
@@ -190,7 +181,7 @@ pnpm install
 pnpm dev
 ```
 
-veya doğrudan web app:
+Doğrudan web app:
 
 ```bash
 pnpm --filter @fk-templates/web dev
@@ -213,158 +204,10 @@ pnpm --filter @fk-templates/web build
 - Firebase Storage
 - Netlify / Vercel uyumlu deploy
 - CSS variables ile sektör bazlı tema sistemi
-- 3 layout varyantı: `modern`, `split`, `showcase`
+- Layout varyantları: `modern`, `split`, `showcase`
+- Public site için managed config hook: `useManagedTemplateConfig`
 
-## Template Mantığı
-
-Her sektör farklı config ile yönetilir. Tasarım altyapısı ortaktır ama renk, metin, hizmet listesi, ekip kartları, kampanyalar ve formlar config üzerinden değişir.
-
-Arayüz varyantı ise içeriği değiştirmez. Aynı içerik 3 farklı profesyonel site görünümüyle sunulur.
-
-Örnek config alanları:
-
-```ts
-export const demoVeterinaryConfig = {
-  template: "appointment",
-  sector: "Veteriner Kliniği",
-  brandName: "Mavi Pati Veteriner",
-  phone: "+90 5xx xxx xx xx",
-  whatsapp: "+905xxxxxxxxx",
-  address: "Milas / Muğla",
-  mapsUrl: "https://maps.google.com/?q=Milas%20Mu%C4%9Fla",
-  instagramUrl: "https://instagram.com/",
-  theme: {
-    primary: "#0F766E",
-    secondary: "#14B8A6",
-    accent: "#F59E0B",
-    soft: "#ECFDF5",
-    dark: "#042F2E"
-  },
-  services: [],
-  staff: [],
-  galleryItems: [],
-  campaignItems: [],
-  form: {
-    title: "Randevu talebi bırak",
-    fields: []
-  }
-};
-```
-
-## Ortak Özellikler
-
-Tüm şablonlarda ortak hedef özellikler:
-
-- Mobil uyumlu modern tasarım
-- Büyük hero alanı
-- Kartlı hizmet sunumu
-- WhatsApp hızlı iletişim
-- Google Maps / lokasyon CTA
-- Instagram / galeri alanı
-- Talep veya randevu formu
-- Firestore'a request kaydı
-- Admin panelde request listesi
-- Status değiştirme
-- Admin notu kaydetme
-- CSV export
-- Firebase yoksa demo mod fallback
-
-## Appointment Template
-
-Hedef sektörler:
-
-- Veteriner kliniği
-- Diş kliniği
-- Psikolog
-- Diyetisyen
-- Fizyoterapi merkezi
-- Küçük sağlık kliniği
-
-Hazır alanlar:
-
-- Hero
-- Hizmetler
-- Uzman/veteriner/doktor kartları
-- Randevu formu
-- Pet adı / hayvan türü / not alanları
-- Galeri kartları
-- Google Maps CTA
-- WhatsApp hızlı dönüş
-- Admin panelde detaylı request extra bilgileri
-
-## Salon Template
-
-Hedef sektörler:
-
-- Kadın kuaförü
-- Erkek berberi
-- Güzellik salonu
-- Lazer epilasyon merkezi
-- Nail art / protez tırnak salonu
-- Masaj / spa merkezi
-
-Hazır alanlar:
-
-- Hero
-- Hizmet/fiyat listesi
-- Kampanya kartları
-- Personel kartları
-- Randevu formu
-- Instagram/galeri alanı
-- WhatsApp hızlı dönüş
-- `/admin/services` hizmet yönetimi
-
-## Real Estate Template
-
-Hedef sektörler:
-
-- Emlak ofisleri
-- Gayrimenkul danışmanları
-- Günlük kiralık ev/apart işletmeleri
-- Arsa/ofis/işyeri portföyü olan danışmanlar
-
-Hazır alanlar:
-
-- Hero
-- Vitrin portföy kartları
-- `/properties` ilan listesi
-- `/properties/[id]` ilan detay sayfası
-- Firestore property listesi okuma
-- Firestore property detay fetch
-- Görsel URL galerisi render
-- `/admin/properties/new` ilan ekleme
-- Storage'a görsel yükleme helper
-- İlan lead formu
-
-## Admin Panel
-
-Admin panel şu an `/admin` route'u altında çalışır.
-
-Özellikler:
-
-- Demo data fallback
-- Firestore canlı request okuma
-- Status değiştirme
-- Admin notu kaydetme
-- WhatsApp'a geçiş
-- CSV export
-- Emlak ilan linkleri
-- Hizmet yönetimi linki
-- Opsiyonel admin guard
-
-Admin guard ayarı:
-
-```env
-NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=false
-```
-
-Demo için `false` kalabilir. Müşteri tesliminde admin panel giriş zorunlu olsun istenirse:
-
-```env
-NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=true
-```
-
-## Firebase Koleksiyonları
+## Firestore Koleksiyonları
 
 ### requests
 
@@ -382,6 +225,44 @@ requests/{requestId}
   preferredDate?: string
   preferredTime?: string
   extra?: object
+  createdAt
+  updatedAt
+```
+
+### settings
+
+```text
+settings/{businessId}
+  businessId
+  template: appointment | salon | real-estate
+  layoutVariant: modern | split | showcase
+  brandName
+  eyebrow
+  heroTitle
+  heroDescription
+  primaryCta
+  secondaryCta
+  topBarText
+  phone
+  whatsapp
+  address
+  mapsUrl
+  instagramUrl
+  campaignItems: ServiceItem[]
+  galleryItems: VisualItem[]
+  createdAt
+  updatedAt
+```
+
+### services
+
+```text
+services/{serviceId}
+  template: appointment | salon
+  title
+  description
+  price
+  isActive
   createdAt
   updatedAt
 ```
@@ -408,19 +289,6 @@ properties/{propertyId}
   updatedAt
 ```
 
-### services
-
-```text
-services/{serviceId}
-  template: appointment | salon
-  title
-  description
-  price
-  isActive
-  createdAt
-  updatedAt
-```
-
 ## Firebase / Env
 
 `.env.example` içinde gerekli alanlar vardır.
@@ -437,63 +305,33 @@ NEXT_PUBLIC_BUSINESS_ID=demo-business
 NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=false
 ```
 
-Firebase rules dosyaları:
-
-```text
-firestore.rules
-storage.rules
-firebase.json
-```
-
 Rules deploy:
 
 ```bash
 firebase deploy --only firestore:rules,storage
 ```
 
-## Deploy
+## Satış Modeli
 
-Netlify config hazırdır:
+Başlangıç fiyatları:
 
-```text
-netlify.toml
-```
+| Şablon | Kurulum |
+|---|---:|
+| Veteriner / Klinik | 5.000 TL |
+| Kuaför / Güzellik | 5.000 TL |
+| Emlakçı | 7.500 TL |
 
-Build command:
+Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 
-```bash
-pnpm --filter @fk-templates/web build
-```
-
-Publish directory:
-
-```text
-apps/web/.next
-```
-
-Next.js Netlify plugin kullanılmalıdır.
-
-## GitHub Actions
-
-Workflow dosyası:
-
-```text
-.github/workflows/web-build.yml
-```
-
-Amaç:
-
-```text
-push/main veya PR geldiğinde pnpm install yapıp web build almak.
-```
+| Paket | Önerilen fiyat |
+|---|---:|
+| Basit site + talep paneli | 5.000 TL |
+| Yönetilebilir site paneli | 7.500 - 10.000 TL |
+| Emlak ilan yönetimli panel | 10.000 - 15.000 TL |
 
 ## Satış Cümlesi
 
-> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Bu yüzden hızlı, uygun fiyatlı ve profesyonel bir web sistemi kurabiliyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu ve temel panel dahil tek seferlik kurulum ücretiyle yayına alıyoruz.
-
-## Tasarım Seçim Satış Cümlesi
-
-> Aynı işletme bilgilerinizi 3 farklı profesyonel tasarımla gösterebiliyoruz. Beğendiğiniz arayüzü seçiyoruz; logo, renk, içerik ve iletişim bilgilerinizi girip yayına alıyoruz.
+> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
 
 ## Teslimat Süreci
 
@@ -502,56 +340,23 @@ push/main veya PR geldiğinde pnpm install yapıp web build almak.
 2. Müşteri 3 arayüz seçeneğinden birini seçer.
 3. Logo, renk, firma adı, telefon, adres ve sosyal medya bilgileri alınır.
 4. Domain/hosting/Firebase hesabı belirlenir.
-5. Config dosyası müşteri bilgilerine göre düzenlenir.
+5. Config ve Firestore settings müşteri bilgilerine göre düzenlenir.
 6. Demo link paylaşılır.
 7. Küçük revizyonlar yapılır.
 8. Firebase/hosting canlıya alınır.
-9. Admin panel kullanımı anlatılır.
-10. Teslim tamamlanır.
+9. Admin kullanıcı oluşturulur.
+10. Admin panel kullanımı anlatılır.
+11. Teslim tamamlanır.
 ```
-
-Hedef teslim süresi:
-
-```text
-Basit şablon: 1-2 gün
-Admin panelli şablon: 2-4 gün
-Emlak ilan paneli: 3-5 gün
-```
-
-## Dokümanlar
-
-- `docs/sales-guide.md`
-- `docs/setup-guide.md`
-- `docs/firebase-setup.md`
-- `docs/deployment-guide.md`
-- `docs/customer-checklist.md`
-- `docs/demo-pitch.md`
-- `docs/first-customer-onboarding.md`
-
-## Lisans ve Açık Kaynak Notu
-
-Bu repo mümkün olduğunca FK Digital'e ait temiz kod tabanı olarak geliştirilecektir.
-
-Açık kaynak kod kullanılacaksa lisans kontrolü yapılmalıdır.
-
-| Lisans | Ticari kullanım yaklaşımı |
-|---|---|
-| MIT | Uygun, lisans bildirimi korunmalı |
-| Apache 2.0 | Uygun, lisans bildirimi korunmalı |
-| BSD | Uygun, lisans bildirimi korunmalı |
-| GPL | Dikkatli olunmalı |
-| AGPL | Uzak durulmalı |
-| Lisans yok | Kod kopyalanmamalı, sadece fikir alınmalı |
 
 ## Sonraki Net Kontroller
-
-Kod tarafındaki MVP parçaları hazırlandı. Sıradaki net kontroller:
 
 ```text
 1. pnpm install
 2. pnpm --filter @fk-templates/web build
 3. GitHub Actions build sonucu kontrol
-4. Canlı Firebase/Storage test
-5. Mobil görsel kontrol
-6. İlk müşteri demosu için marka/logo/içerik uyarlama
+4. Canlı Firebase Auth / Firestore / Storage test
+5. Admin panelden ayar, hizmet, kampanya, galeri ve ilan testi
+6. Mobil görsel kontrol
+7. İlk müşteri demosu için marka/logo/içerik uyarlama
 ```
