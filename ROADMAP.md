@@ -14,12 +14,12 @@ Toplam plan: **8 faz**
 |---|---|---|---|
 | Faz 1 | Monorepo ve temel mimari | Done / MVP | Next.js web, shared config ve template klasörlerini kurmak |
 | Faz 2 | Ortak tema ve premium UI sistemi | Done / MVP | Arrivio benzeri modern, kartlı, ferah ve mobil uyumlu tasarım dili kurmak |
-| Faz 3 | Appointment template | Done / First Draft | Veteriner/klinik/randevu şablonunu çıkarmak |
-| Faz 4 | Salon template | Done / First Draft | Kuaför/güzellik salonu şablonunu çıkarmak |
-| Faz 5 | Real Estate template | Done / First Draft | Emlakçı ilan ve portföy şablonunu çıkarmak |
-| Faz 6 | Admin panel MVP | Done / Demo | Randevu, talep ve ilan yönetimini tek admin panelde toplamak |
-| Faz 7 | Firebase entegrasyonu | Partial | Firestore kayıt, Auth ve müşteri config kurulumunu bağlamak |
-| Faz 8 | Satış ve teslimat dokümantasyonu | Partial | Kurulum rehberi, satış metni ve müşteri teslim süreci hazırlamak |
+| Faz 3 | Appointment template | Done / Firebase-ready Draft | Veteriner/klinik/randevu şablonunu çıkarmak |
+| Faz 4 | Salon template | Done / Firebase-ready Draft | Kuaför/güzellik salonu şablonunu çıkarmak |
+| Faz 5 | Real Estate template | Done / Firebase-ready Draft | Emlakçı ilan ve portföy şablonunu çıkarmak |
+| Faz 6 | Admin panel MVP | Partial / Firestore-ready Demo | Randevu, talep ve ilan yönetimini tek admin panelde toplamak |
+| Faz 7 | Firebase entegrasyonu | Partial / Connected Forms | Firestore kayıt, Auth ve müşteri config kurulumunu bağlamak |
+| Faz 8 | Satış ve teslimat dokümantasyonu | Done / First Draft | Kurulum rehberi, satış metni ve müşteri teslim süreci hazırlamak |
 
 ---
 
@@ -27,7 +27,7 @@ Toplam plan: **8 faz**
 
 Amaç: Repo içinde çalışabilir temel yapıyı oluşturmak.
 
-Yapılacaklar:
+Yapılanlar:
 
 - [x] README yazıldı.
 - [x] ROADMAP yazıldı.
@@ -39,10 +39,12 @@ Yapılacaklar:
 - [x] `packages/firebase` Firebase helper paketi için başlangıç oluşturuldu.
 - [x] `templates/appointment`, `templates/salon`, `templates/real-estate` klasörleri oluşturuldu.
 - [x] `configs` demo müşteri configleri oluşturuldu.
+- [x] GitHub Actions web build workflow eklendi.
 
 Kalan:
 
 - [ ] Local build/dev test yapılacak.
+- [ ] GitHub Actions build sonucu kontrol edilecek.
 
 Başarı kriteri:
 
@@ -59,18 +61,6 @@ komutlarıyla demo web arayüzü çalışmalı.
 
 Amaç: Arayüzler basit, hazır tema gibi değil; modern, güven veren ve satılabilir görünmelidir.
 
-Tasarım prensibi:
-
-```text
-Büyük hero alanı
-Yumuşak gradient arka plan
-Kartlı servis sunumu
-Mobil öncelikli layout
-Net CTA butonları
-WhatsApp odaklı hızlı iletişim
-Admin/panel algısı veren mockup kartları
-```
-
 Yapılanlar:
 
 - [x] Global CSS tema sistemi oluşturuldu.
@@ -79,6 +69,7 @@ Yapılanlar:
 - [x] Template seçimine göre tema rengi değişiyor.
 - [x] Hero, mockup panel, hizmet kartları, ekip kartları ve form preview eklendi.
 - [x] `/`, `/appointment`, `/salon`, `/real-estate` route'ları açıldı.
+- [x] `/properties` ve `/properties/[id]` emlak ilan sayfaları eklendi.
 
 Kalan:
 
@@ -97,15 +88,16 @@ Yapılanlar:
 - [x] Landing ana sayfa ilk taslak hazır.
 - [x] Hizmetler bölümü hazır.
 - [x] Uzman/veteriner/doktor kartları hazır.
-- [x] Randevu talep formu preview hazır.
+- [x] Randevu talep formu hazır.
+- [x] Form `createBusinessRequest()` servisine bağlandı.
+- [x] Firebase yoksa demo mode mesajı gösteriyor.
 - [x] WhatsApp CTA mantığı hazır.
 - [x] `/appointment` route'u açıldı.
 
 Kalan:
 
-- [ ] Form Firestore'a bağlanacak.
 - [ ] Klinik/veteriner için galeri ve harita alanı güçlendirilecek.
-- [ ] Pet özel alanları admin listede gösterilecek.
+- [ ] Pet özel alanları admin listede detaylı gösterilecek.
 
 Başarı kriteri:
 
@@ -113,7 +105,7 @@ Başarı kriteri:
 /appointment
 ```
 
-sayfası demo veteriner/klinik sitesi gibi görünecek.
+sayfası demo veteriner/klinik sitesi gibi görünecek ve form Firebase env varsa request kaydı oluşturacak.
 
 ---
 
@@ -127,14 +119,15 @@ Yapılanlar:
 - [x] Landing ana sayfa ilk taslak hazır.
 - [x] Hizmet/fiyat listesi hazır.
 - [x] Personel kartları hazır.
-- [x] Randevu formu preview hazır.
+- [x] Randevu formu hazır.
+- [x] Form `createBusinessRequest()` servisine bağlandı.
+- [x] Firebase yoksa demo mode mesajı gösteriyor.
 - [x] `/salon` route'u açıldı.
 
 Kalan:
 
 - [ ] Kampanya kartları güçlendirilecek.
 - [ ] Instagram/galeri alanı eklenecek.
-- [ ] Salon formu Firestore'a bağlanacak.
 
 Başarı kriteri:
 
@@ -142,7 +135,7 @@ Başarı kriteri:
 /salon
 ```
 
-sayfası modern güzellik/kuaför sitesi gibi görünecek.
+sayfası modern güzellik/kuaför sitesi gibi görünecek ve form Firebase env varsa request kaydı oluşturacak.
 
 ---
 
@@ -156,22 +149,28 @@ Yapılanlar:
 - [x] Landing ana sayfa ilk taslak hazır.
 - [x] Vitrin portföy/hizmet kartları ilk taslak hazır.
 - [x] Danışman kartları hazır.
-- [x] İlan talep formu preview hazır.
+- [x] İlan talep formu hazır.
+- [x] Form `createBusinessRequest()` servisine bağlandı.
 - [x] `/real-estate` route'u açıldı.
+- [x] `/properties` ilan grid sayfası eklendi.
+- [x] `/properties/[id]` ilan detay sayfası eklendi.
+- [x] İlan detay lead formu `createBusinessRequest()` servisine bağlandı.
 
 Kalan:
 
-- [ ] Gerçek ilan grid'i yapılacak.
-- [ ] İlan detay sayfası yapılacak.
 - [ ] Admin ilan ekleme formu yapılacak.
+- [ ] Firestore property listesi public grid'e bağlanacak.
+- [ ] Fotoğraf yükleme / Storage eklenecek.
 
 Başarı kriteri:
 
 ```text
 /real-estate
+/properties
+/properties/[id]
 ```
 
-sayfası portföy/ilan odaklı emlak sitesi gibi görünecek.
+sayfaları portföy/ilan odaklı emlak sitesi gibi görünecek.
 
 ---
 
@@ -183,13 +182,16 @@ Yapılanlar:
 
 - [x] `/admin` demo panel route'u açıldı.
 - [x] Talep/randevu listesi demo data ile gösteriliyor.
+- [x] Admin panel `listBusinessRequests()` ile Firestore canlı kayıtlarını okumaya çalışıyor.
+- [x] Firebase bağlı değilse demo data'ya düşüyor.
 - [x] Emlak ilan demo listesi gösteriliyor.
 - [x] Şablon durumu kartları gösteriliyor.
 - [x] Premium admin panel CSS eklendi.
+- [x] `/login` admin giriş sayfası eklendi.
 
 Kalan:
 
-- [ ] Admin login sayfası yapılacak.
+- [ ] Admin panel route guard yapılacak.
 - [ ] Status güncelleme gerçek işlem olacak.
 - [ ] WhatsApp'a geçiş butonu eklenecek.
 - [ ] Not ekleme yapılacak.
@@ -200,9 +202,10 @@ Başarı kriteri:
 
 ```text
 /admin
+/login
 ```
 
-sayfası müşteri işletmenin taleplerini yönetebileceği kadar yeterli olmalı.
+sayfaları müşteri işletmenin taleplerini yönetebileceği kadar yeterli olmalı.
 
 ---
 
@@ -214,19 +217,23 @@ Yapılanlar:
 
 - [x] Firebase package scaffold eklendi.
 - [x] Firebase client helper eklendi.
+- [x] Firebase Auth helper eklendi.
 - [x] Firestore collection constants eklendi.
 - [x] Request servisleri eklendi.
 - [x] Property servisleri eklendi.
+- [x] Web landing formları request servisine bağlandı.
+- [x] Emlak ilan detay formu request servisine bağlandı.
+- [x] Admin panel request servisinden canlı kayıt okumaya hazırlandı.
 - [x] `.env.example` hazırlandı.
 - [x] Firestore rules taslağı yazıldı.
 - [x] Firebase kurulum dokümanı yazıldı.
 
 Kalan:
 
-- [ ] Web formları Firebase request servislerine bağlanacak.
-- [ ] Admin panel Firestore listelerine bağlanacak.
-- [ ] Admin Auth eklenecek.
+- [ ] Admin status update işlemi Firestore'a bağlanacak.
+- [ ] Admin Auth guard eklenecek.
 - [ ] Storage opsiyonel görsel yükleme için hazırlanacak.
+- [ ] Emlak property listesi Firestore'dan okutulacak.
 
 Başarı kriteri:
 
@@ -246,13 +253,14 @@ Yapılanlar:
 - [x] `docs/setup-guide.md`
 - [x] `docs/firebase-setup.md`
 - [x] `docs/deployment-guide.md`
+- [x] `docs/customer-checklist.md`
+- [x] `docs/demo-pitch.md`
 - [x] Fiyat listesi ve ekstra iş tablosu README/sales-guide içinde var.
 
 Kalan:
 
-- [ ] Müşteriden alınacak bilgiler checklisti ayrı dosya yapılacak.
-- [ ] Demo sunum metni yazılacak.
 - [ ] İlk müşteri onboarding checklist'i hazırlanacak.
+- [ ] Demo video/sunum metni genişletilecek.
 
 Başarı kriteri:
 
@@ -267,9 +275,9 @@ Bir müşteri geldiğinde şu akış net olmalı:
 ## Sıradaki Net İş
 
 ```text
-1. Local build/dev hataları kontrol edilecek.
-2. Form submit state'i eklenecek.
-3. Web formları createBusinessRequest() ile Firestore'a bağlanacak.
-4. Admin panel listBusinessRequests() ile gerçek veriyi gösterecek.
-5. Emlak ilan grid'i ve ilan detay sayfası yapılacak.
+1. Build/dev hataları kontrol edilecek.
+2. Admin status update gerçek işlem olacak.
+3. Admin Auth guard eklenecek.
+4. Emlak property listesi Firestore'dan okutulacak.
+5. Storage görsel yükleme altyapısı hazırlanacak.
 ```
