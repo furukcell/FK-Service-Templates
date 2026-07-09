@@ -1,8 +1,16 @@
+import type { CSSProperties } from "react";
 import { useRouter } from "next/router";
 import { findPropertyById, propertyDemoData } from "../../src/propertyDemoData";
 import { templateConfigs } from "../../src/templateConfigs";
 
 const config = templateConfigs["real-estate"];
+const themeStyle = {
+  "--primary": config.theme.primary,
+  "--secondary": config.theme.secondary,
+  "--accent": config.theme.accent,
+  "--soft": config.theme.soft,
+  "--dark": config.theme.dark
+} as CSSProperties;
 
 export default function PropertyDetailPage() {
   const router = useRouter();
@@ -10,13 +18,7 @@ export default function PropertyDetailPage() {
   const otherProperties = propertyDemoData.filter((item) => item.id !== property.id).slice(0, 2);
 
   return (
-    <main className="pageShell" style={{
-      "--primary": config.theme.primary,
-      "--secondary": config.theme.secondary,
-      "--accent": config.theme.accent,
-      "--soft": config.theme.soft,
-      "--dark": config.theme.dark
-    } as React.CSSProperties}>
+    <main className="pageShell" style={themeStyle}>
       <div className="topBar">{property.title} • {property.location} • {property.price}</div>
       <nav className="navbar">
         <a className="logoLockup navButtonLink" href="/properties"><span className="logoMark">FK</span><span>{config.brandName}</span></a>
