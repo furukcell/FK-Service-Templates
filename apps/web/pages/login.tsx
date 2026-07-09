@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { loginWithEmail } from "@fk-templates/firebase";
+import { SeoHead } from "../src/components/SeoHead";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState("Admin girişi için Firebase Email/Password aktif olmalı.");
+  const [status, setStatus] = useState("Yönetim paneline giriş yapın.");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function submitLogin() {
@@ -15,10 +16,10 @@ export default function LoginPage() {
     setIsSubmitting(true);
     try {
       await loginWithEmail(email, password);
-      setStatus("Giriş başarılı. Admin panel açılıyor...");
+      setStatus("Giriş başarılı. Yönetim paneli açılıyor...");
       window.location.href = "/admin";
     } catch (error) {
-      setStatus("Giriş yapılamadı. Firebase env veya kullanıcı bilgilerini kontrol edin.");
+      setStatus("Giriş yapılamadı. Lütfen e-posta ve şifreyi kontrol edin.");
     } finally {
       setIsSubmitting(false);
     }
@@ -26,21 +27,21 @@ export default function LoginPage() {
 
   return (
     <main className="adminShell">
+      <SeoHead title="Admin Giriş" description="Yönetim paneli giriş sayfası." canonicalPath="/login" noIndex />
       <aside className="adminSidebar">
-        <a className="adminLogo" href="/"><span>FK</span><strong>Admin Login</strong></a>
+        <a className="adminLogo" href="/"><span>YP</span><strong>Yönetim Paneli</strong></a>
         <nav>
           <a className="active" href="/login">Giriş</a>
           <a href="/forgot-password">Şifremi Unuttum</a>
-          <a href="/admin">Demo Panel</a>
           <a href="/">Site</a>
         </nav>
       </aside>
       <section className="adminMain">
         <header className="adminHeader">
           <div>
-            <span className="eyebrow">FK Service Templates</span>
-            <h1>Müşteri paneline giriş</h1>
-            <p>Her müşteri için Firebase Authentication üzerinden ayrı admin kullanıcısı oluşturulacak.</p>
+            <span className="eyebrow">Yönetim Paneli</span>
+            <h1>Panele giriş</h1>
+            <p>Site taleplerini ve içeriklerini yönetmek için giriş yapın.</p>
             <p className="adminMode">{status}</p>
           </div>
         </header>
