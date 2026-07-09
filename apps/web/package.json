@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fk-templates/firebase": "workspace:*",
     "@fk-templates/shared": "workspace:*",
     "next": "14.2.16",
     "react": "18.3.1",
