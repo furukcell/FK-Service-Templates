@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { ContentPageKey } from "@fk-templates/firebase";
 import type { BusinessTemplateConfig } from "@fk-templates/shared";
+import { SeoHead } from "./SeoHead";
 import { templateConfigs } from "../templateConfigs";
 import { useSiteContent } from "../useSiteContent";
 import { contentPageLabels, contentPageRoutes, getManagedContentPage, getManagedFaqItems } from "../siteContent";
@@ -28,6 +29,7 @@ export function ContentPage({ pageKey }: { pageKey: ContentPageKey }) {
 
   return (
     <main className="contentShell" style={themeStyle(config)}>
+      <SeoHead title={`${page.title} | ${settings?.brandName || config.brandName}`} description={page.description} canonicalPath={contentPageRoutes[pageKey]} />
       <nav className="navbar contentNav">
         <a className="logoLockup navButtonLink" href="/"><span className="logoMark">FK</span><span>{settings?.brandName || config.brandName}</span></a>
         <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
@@ -73,6 +75,7 @@ export function FaqPage() {
 
   return (
     <main className="contentShell" style={themeStyle(config)}>
+      <SeoHead title={`Sık Sorulan Sorular | ${settings?.brandName || config.brandName}`} description="Randevu, talep, iletişim ve hizmet süreci hakkında sık sorulan sorular." canonicalPath="/sss" />
       <nav className="navbar contentNav">
         <a className="logoLockup navButtonLink" href="/"><span className="logoMark">FK</span><span>{settings?.brandName || config.brandName}</span></a>
         <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
