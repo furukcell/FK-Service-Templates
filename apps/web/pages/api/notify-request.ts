@@ -13,6 +13,40 @@ type NotifyBody = {
   extra?: Record<string, string | number | boolean | null>;
 };
 
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX = 8;
+
+function getClientIp(req: NextApiRequest) {
+  const forwardedFor = req.headers["x-forwarded-for"];
+  if (Array.isArray(forwardedFor)) return forwardedFor[0] || "unknown";
+  return forwardedFor?.split(",")[0]?.trim() || req.socket.remoteAddress || "unknown";
+}
+
+function isRateLimited(ip: string) {
+  const now = Date.now();
+  const record = rateLimitStore.get(ip);
+  if (!record || record.resetAt < now) {
+    rateLimitStore.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+  record.count += 1;
+  rateLimitStore.set(ip, record);
+  return record.count > RATE_LIMIT_MAX;
+}
+
+function isAllowedOrigin(req: NextApiRequest) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  if (!siteUrl) return true;
+  const origin = req.headers.origin;
+  if (!origin) return true;
+  try {
+    return new URL(origin).host === new URL(siteUrl).host;
+  } catch (error) {
+    return false;
+  }
+}
+
 function escapeHtml(value: string) {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/'/g, "&#039;");
 }
@@ -20,7 +54,7 @@ function escapeHtml(value: string) {
 function extraRows(extra?: Record<string, string | number | boolean | null>) {
   if (!extra) return "";
   return Object.entries(extra)
-    .filter(([, value]) => value !== "" && value !== null && value !== undefined)
+    .filter(([key, value]) => key !== "website" && value !== "" && value !== null && value !== undefined)
     .map(([key, value]) => `<tr><td><strong>${escapeHtml(key)}</strong></td><td>${escapeHtml(String(value))}</td></tr>`)
     .join("");
 }
@@ -37,7 +71,6 @@ function buildEmailHtml(body: NotifyBody) {
           <tr><td><strong>Konu</strong></td><td>${escapeHtml(body.subject || "-")}</td></tr>
           <tr><td><strong>Not</strong></td><td>${escapeHtml(body.note || "-")}</td></tr>
           <tr><td><strong>Tarih/Saat</strong></td><td>${escapeHtml([body.preferredDate, body.preferredTime].filter(Boolean).join(" ") || "-")}</td></tr>
-          <tr><td><strong>Şablon</strong></td><td>${escapeHtml(body.template || "-")}</td></tr>
           <tr><td><strong>Kaynak</strong></td><td>${escapeHtml(body.source || "website")}</td></tr>
           ${extraRows(body.extra)}
         </table>
@@ -53,15 +86,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).json({ ok: false, error: "Method not allowed" });
   }
 
+  if (!isAllowedOrigin(req)) {
+    return res.status(403).json({ ok: false, error: "Forbidden origin" });
+  }
+
+  const ip = getClientIp(req);
+  if (isRateLimited(ip)) {
+    return res.status(429).json({ ok: false, error: "Too many requests" });
+  }
+
+  const body = req.body as NotifyBody;
+  if (body.extra?.website) {
+    return res.status(200).json({ ok: true, skipped: true, reason: "Honeypot filled." });
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.REQUEST_NOTIFICATION_TO;
-  const from = process.env.REQUEST_NOTIFICATION_FROM || "FK Service Templates <onboarding@resend.dev>";
+  const from = process.env.REQUEST_NOTIFICATION_FROM || "Site Bildirimi <onboarding@resend.dev>";
 
   if (!apiKey || !to) {
     return res.status(200).json({ ok: true, skipped: true, reason: "Email notification env is not configured." });
   }
 
-  const body = req.body as NotifyBody;
   if (!body.customerName || !body.customerPhone || !body.subject) {
     return res.status(400).json({ ok: false, error: "Missing required fields" });
   }
