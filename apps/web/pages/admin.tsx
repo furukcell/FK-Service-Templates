@@ -7,6 +7,7 @@ import {
   type RequestStatus
 } from "@fk-templates/firebase";
 import { demoProperties, demoRequests, statusLabels, type DemoRequest } from "../src/adminDemoData";
+import { useOptionalAdminGuard } from "../src/useOptionalAdminGuard";
 
 type DisplayRequest = {
   id: string;
@@ -51,6 +52,7 @@ function mapDemoRequest(request: DemoRequest): DisplayRequest {
 }
 
 export default function AdminDemoPage() {
+  const guard = useOptionalAdminGuard();
   const [liveRequests, setLiveRequests] = useState<DisplayRequest[]>([]);
   const [dataMode, setDataMode] = useState("Demo data");
   const [actionStatus, setActionStatus] = useState("");
@@ -75,8 +77,9 @@ export default function AdminDemoPage() {
   }
 
   useEffect(() => {
+    if (!guard.isAllowed) return;
     loadRequests();
-  }, []);
+  }, [guard.isAllowed]);
 
   async function changeStatus(request: DisplayRequest, status: RequestStatus) {
     setActionStatus("");
@@ -116,6 +119,22 @@ export default function AdminDemoPage() {
     { value: "3", label: "aktif şablon" }
   ], [displayRequests]);
 
+  if (guard.isChecking) {
+    return (
+      <main className="adminShell">
+        <section className="adminMain"><header className="adminHeader"><div><span className="eyebrow">FK Service Templates</span><h1>Admin kontrol ediliyor</h1><p>{guard.message}</p></div></header></section>
+      </main>
+    );
+  }
+
+  if (!guard.isAllowed) {
+    return (
+      <main className="adminShell">
+        <section className="adminMain"><header className="adminHeader"><div><span className="eyebrow">FK Service Templates</span><h1>Giriş gerekli</h1><p>{guard.message}</p><p className="adminMode">Müşteri tesliminde paneli kapatmak için `NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=true` kullanılır.</p></div><a className="pillButton navButtonLink" href="/login">Admin Giriş</a></header></section>
+      </main>
+    );
+  }
+
   return (
     <main className="adminShell">
       <aside className="adminSidebar">
@@ -135,6 +154,7 @@ export default function AdminDemoPage() {
             <h1>Müşteri paneli demo görünümü</h1>
             <p>Randevu, talep ve ilanlar tek panelde yönetilecek. Firebase env girilirse canlı kayıtlar, yoksa demo data gösterilir.</p>
             <p className="adminMode">Veri modu: {dataMode}</p>
+            <p className="adminMode">Panel modu: {guard.message}</p>
             {actionStatus ? <p className="adminMode">{actionStatus}</p> : null}
           </div>
           <div className="navActions"><a className="ghostButton navButtonLink" href="/login">Admin Giriş</a><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
