@@ -71,8 +71,9 @@ export default function PropertyDetailPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const propertyId = Array.isArray(router.query.id) ? router.query.id[0] : router.query.id;
-    if (!propertyId) return;
+    const routePropertyId = Array.isArray(router.query.id) ? router.query.id[0] : router.query.id;
+    if (!routePropertyId) return;
+    const propertyId: string = routePropertyId;
 
     let isMounted = true;
     async function loadProperty() {
