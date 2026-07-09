@@ -12,6 +12,7 @@ type TemplateLandingProps = {
   onTemplateChange?: (template: TemplateKey) => void;
   onLayoutChange?: (layout: LayoutVariant) => void;
   showTemplateSwitch?: boolean;
+  showLayoutSwitch?: boolean;
 };
 
 const layoutOrder: LayoutVariant[] = ["modern", "split", "showcase"];
@@ -78,7 +79,8 @@ function Nav({ config }: { config: BusinessTemplateConfig }) {
   );
 }
 
-function Switchers({ activeTemplate, activeLayout, onTemplateChange, onLayoutChange, showTemplateSwitch }: Pick<TemplateLandingProps, "activeTemplate" | "activeLayout" | "onTemplateChange" | "onLayoutChange" | "showTemplateSwitch">) {
+function Switchers({ activeTemplate, activeLayout, onTemplateChange, onLayoutChange, showTemplateSwitch, showLayoutSwitch }: Pick<TemplateLandingProps, "activeTemplate" | "activeLayout" | "onTemplateChange" | "onLayoutChange" | "showTemplateSwitch" | "showLayoutSwitch">) {
+  if (!showTemplateSwitch && !showLayoutSwitch) return null;
   return (
     <div className="variantControlDeck">
       {showTemplateSwitch ? (
@@ -90,13 +92,15 @@ function Switchers({ activeTemplate, activeLayout, onTemplateChange, onLayoutCha
           ))}
         </div>
       ) : null}
-      <div className="templateSwitch layoutSwitch" aria-label="Tasarım seçici">
-        {layoutOrder.map((layout) => (
-          <button className={`templateButton ${activeLayout === layout ? "active" : ""}`} key={layout} onClick={() => onLayoutChange?.(layout)} type="button">
-            {layoutVariantLabels[layout]}
-          </button>
-        ))}
-      </div>
+      {showLayoutSwitch ? (
+        <div className="templateSwitch layoutSwitch" aria-label="Tasarım seçici">
+          {layoutOrder.map((layout) => (
+            <button className={`templateButton ${activeLayout === layout ? "active" : ""}`} key={layout} onClick={() => onLayoutChange?.(layout)} type="button">
+              {layoutVariantLabels[layout]}
+            </button>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -342,7 +346,7 @@ function ShowcaseLayout({ config, switchers, form }: { config: BusinessTemplateC
   );
 }
 
-export function TemplateLanding({ config, activeTemplate, activeLayout = "modern", onTemplateChange, onLayoutChange, showTemplateSwitch = true }: TemplateLandingProps) {
+export function TemplateLanding({ config, activeTemplate, activeLayout = "modern", onTemplateChange, onLayoutChange, showTemplateSwitch = true, showLayoutSwitch = true }: TemplateLandingProps) {
   const [submitStatus, setSubmitStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -382,7 +386,7 @@ export function TemplateLanding({ config, activeTemplate, activeLayout = "modern
     }
   }
 
-  const switchers = <Switchers activeTemplate={activeTemplate} activeLayout={activeLayout} onTemplateChange={onTemplateChange} onLayoutChange={onLayoutChange} showTemplateSwitch={showTemplateSwitch} />;
+  const switchers = <Switchers activeTemplate={activeTemplate} activeLayout={activeLayout} onTemplateChange={onTemplateChange} onLayoutChange={onLayoutChange} showTemplateSwitch={showTemplateSwitch} showLayoutSwitch={showLayoutSwitch} />;
   const form = <RequestFormSection config={config} handleSubmit={handleSubmit} isSubmitting={isSubmitting} submitStatus={submitStatus} />;
 
   return (
