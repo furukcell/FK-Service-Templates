@@ -1,0 +1,16 @@
+.formStatus {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--soft);
+  color: var(--primary);
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+button:disabled,
+.pillButton:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
