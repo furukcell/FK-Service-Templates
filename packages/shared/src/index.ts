@@ -17,6 +17,12 @@ export type StatItem = {
   label: string;
 };
 
+export type VisualItem = {
+  title: string;
+  description: string;
+  imageUrl?: string;
+};
+
 export type BusinessTemplateConfig = {
   template: TemplateKey;
   sector: string;
@@ -43,6 +49,8 @@ export type BusinessTemplateConfig = {
   stats: StatItem[];
   services: ServiceItem[];
   staff: StaffMember[];
+  galleryItems?: VisualItem[];
+  campaignItems?: ServiceItem[];
   form: {
     title: string;
     description: string;
