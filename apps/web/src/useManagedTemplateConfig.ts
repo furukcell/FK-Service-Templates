@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { BusinessTemplateConfig, LayoutVariant, ServiceItem } from "@fk-templates/shared";
 import { getSiteSettings, listBusinessServices, type ManagedSiteSettings } from "@fk-templates/firebase";
+import { isDemoMode } from "./runtimeMode";
 
 function cleanText(value?: string) {
   return typeof value === "string" && value.trim() ? value.trim() : undefined;
@@ -17,12 +18,16 @@ function mapLiveServices(services: ServiceItem[]) {
 export function useManagedTemplateConfig(baseConfig: BusinessTemplateConfig) {
   const [settings, setSettings] = useState<ManagedSiteSettings | null>(null);
   const [liveServices, setLiveServices] = useState<ServiceItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasLoadError, setHasLoadError] = useState(false);
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business";
 
   useEffect(() => {
     let isMounted = true;
 
     async function loadManagedContent() {
+      setIsLoading(true);
+      setHasLoadError(false);
       try {
         const [siteSettings, services] = await Promise.all([
           getSiteSettings(businessId),
@@ -35,6 +40,9 @@ export function useManagedTemplateConfig(baseConfig: BusinessTemplateConfig) {
         if (!isMounted) return;
         setSettings(null);
         setLiveServices([]);
+        setHasLoadError(true);
+      } finally {
+        if (isMounted) setIsLoading(false);
       }
     }
 
@@ -43,6 +51,7 @@ export function useManagedTemplateConfig(baseConfig: BusinessTemplateConfig) {
   }, [baseConfig.template, businessId]);
 
   const activeSettings = !settings?.template || settings.template === baseConfig.template ? settings : null;
+  const requiresSetup = !isDemoMode() && !isLoading && (!activeSettings || hasLoadError);
 
   const managedConfig = useMemo<BusinessTemplateConfig>(() => ({
     ...baseConfig,
@@ -66,6 +75,8 @@ export function useManagedTemplateConfig(baseConfig: BusinessTemplateConfig) {
   return {
     config: managedConfig,
     layoutVariant: activeSettings?.layoutVariant as LayoutVariant | undefined,
-    settings: activeSettings
+    settings: activeSettings,
+    isLoading,
+    requiresSetup
   };
 }
