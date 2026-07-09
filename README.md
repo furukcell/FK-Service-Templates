@@ -27,6 +27,8 @@ Hazır olan ana parçalar:
 - Kampanya yönetimi
 - Galeri/görsel yönetimi
 - Emlak ilan ekleme, düzenleme, yayından kaldırma ve fotoğraf yükleme
+- Yeni talep e-posta bildirimi için API route
+- Admin panelde canlı talep dinleme, yeni talep rozeti, panel içi uyarı, sesli uyarı ve isteğe bağlı tarayıcı bildirimi
 - Firestore request, property, service ve settings helper'ları
 - Firebase Auth helper
 - Firebase Storage upload helper
@@ -69,6 +71,31 @@ Demo linkleri:
 ```
 
 Bu modelde 3 sektör x 3 layout = **9 farklı demo görünümü** elde edilir.
+
+## Bildirim Sistemi
+
+Telegram ve otomatik WhatsApp bildirimi yoktur.
+
+Kullanılan bildirim modeli:
+
+```text
+1. Web formu Firestore'a talep kaydeder.
+2. Resend ayarı varsa işletmeye e-posta bildirimi gider.
+3. Admin panel canlı Firestore dinler.
+4. Yeni talep gelince panelde uyarı çıkar.
+5. Panel açıksa kısa sesli uyarı çalar.
+6. Kullanıcı izin verirse tarayıcı bildirimi gösterilir.
+```
+
+E-posta bildirimi için env:
+
+```env
+RESEND_API_KEY=
+REQUEST_NOTIFICATION_TO=
+REQUEST_NOTIFICATION_FROM=FK Service Templates <onboarding@resend.dev>
+```
+
+Bu değerler boşsa form kaydı çalışmaya devam eder; sadece e-posta bildirimi atlanır.
 
 ## Legal / Trust Sayfaları
 
@@ -129,7 +156,7 @@ NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=true
 
 | Panel | Route | Ne işe yarar? |
 |---|---|---|
-| Talepler | `/admin` | Gelen form/randevu/ilan taleplerini görür, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
+| Talepler | `/admin` | Gelen form/randevu/ilan taleplerini canlı görür, yeni talep bildirimi alır, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
 | Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, ana başlık, açıklama ve seçili arayüzü değiştirir |
 | Kurumsal Metinler | `/admin/content` | Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS metinlerini yönetir |
 | Hizmetler | `/admin/services` | Hizmet adı, açıklama ve fiyatları ekler, düzenler, pasife alır veya tekrar aktif eder |
@@ -158,6 +185,7 @@ Bu sayede müşteri sürekli FK Digital'e yazmadan siteyi uzun süre kullanabili
 /sss                       -> sık sorulan sorular
 /robots.txt                -> arama motoru robots çıktısı
 /sitemap.xml               -> sitemap çıktısı
+/api/notify-request        -> e-posta bildirim API route'u
 /login                     -> admin login sayfası
 /forgot-password           -> admin şifre sıfırlama sayfası
 /admin                     -> admin ana panel / talepler
@@ -198,6 +226,7 @@ pnpm --filter @fk-templates/web build
 - Firebase Auth
 - Firestore
 - Firebase Storage
+- Resend uyumlu e-posta bildirim API route'u
 - Netlify / Vercel uyumlu deploy
 - CSS variables ile sektör bazlı tema sistemi
 - Layout varyantları: `modern`, `split`, `showcase`
@@ -306,6 +335,9 @@ NEXT_PUBLIC_FIREBASE_APP_ID=
 NEXT_PUBLIC_DEFAULT_TEMPLATE=appointment
 NEXT_PUBLIC_BUSINESS_ID=demo-business
 NEXT_PUBLIC_SITE_URL=https://example.com
+RESEND_API_KEY=
+REQUEST_NOTIFICATION_TO=
+REQUEST_NOTIFICATION_FROM=FK Service Templates <onboarding@resend.dev>
 NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=false
 ```
 
@@ -335,7 +367,7 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 
 ## Satış Cümlesi
 
-> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu, KVKK/gizlilik sayfaları, SEO altyapısı ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
+> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu, e-posta bildirimi, admin panel canlı uyarısı, KVKK/gizlilik sayfaları, SEO altyapısı ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
 
 ## Teslimat Süreci
 
@@ -346,12 +378,13 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 4. Domain/hosting/Firebase hesabı belirlenir.
 5. Config ve Firestore settings müşteri bilgilerine göre düzenlenir.
 6. Hakkımızda/KVKK/gizlilik/SSS metinleri müşteri bilgilerine göre düzenlenir.
-7. Demo link paylaşılır.
-8. Küçük revizyonlar yapılır.
-9. Firebase/hosting canlıya alınır.
-10. Admin kullanıcı oluşturulur.
-11. Admin panel kullanımı anlatılır.
-12. Teslim tamamlanır.
+7. E-posta bildirimi için REQUEST_NOTIFICATION_TO müşterinin maili yapılır.
+8. Demo link paylaşılır.
+9. Küçük revizyonlar yapılır.
+10. Firebase/hosting canlıya alınır.
+11. Admin kullanıcı oluşturulur.
+12. Admin panel kullanımı ve tarayıcı bildirimi açma anlatılır.
+13. Teslim tamamlanır.
 ```
 
 ## Sonraki Net Kontroller
@@ -363,7 +396,9 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 4. Canlı Firebase Auth / Firestore / Storage test
 5. Admin panelden ayar, içerik, hizmet, kampanya, galeri ve ilan testi
 6. Formlarda KVKK onayı ve talep kayıt testi
-7. robots.txt / sitemap.xml / SEO meta kontrolü
-8. Mobil görsel kontrol
-9. İlk müşteri demosu için marka/logo/içerik uyarlama
+7. E-posta bildirim testi
+8. Admin panel canlı uyarı, sesli uyarı ve tarayıcı bildirim testi
+9. robots.txt / sitemap.xml / SEO meta kontrolü
+10. Mobil görsel kontrol
+11. İlk müşteri demosu için marka/logo/içerik uyarlama
 ```
