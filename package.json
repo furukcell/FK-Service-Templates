@@ -1,0 +1,25 @@
+{
+  "name": "fk-service-templates",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Ready-to-customize business website templates with request forms, admin panels and Firebase-ready architecture.",
+  "scripts": {
+    "dev": "pnpm --filter @fk-templates/web dev",
+    "build": "pnpm --filter @fk-templates/web build",
+    "lint": "pnpm --filter @fk-templates/web lint"
+  },
+  "keywords": [
+    "business-templates",
+    "nextjs",
+    "firebase",
+    "appointment",
+    "salon",
+    "real-estate"
+  ],
+  "author": "FK Digital",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@9.12.3",
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
