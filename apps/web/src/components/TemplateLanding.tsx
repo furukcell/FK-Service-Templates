@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createBusinessRequest } from "@fk-templates/firebase";
 import type { BusinessTemplateConfig, LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { layoutVariantLabels } from "@fk-templates/shared";
+import { notifyNewRequest } from "../notifyRequest";
 import { contentPageLabels, contentPageRoutes } from "../siteContent";
 import { templateConfigs, templateOrder } from "../templateConfigs";
 
@@ -383,18 +384,20 @@ export function TemplateLanding({ config, activeTemplate, activeLayout = "modern
 
     setIsSubmitting(true);
     try {
-      await createBusinessRequest({
+      const requestPayload = {
         template: config.template,
         businessId: process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business",
         customerName,
         customerPhone,
         subject: getSubject(formData, config),
         note: String(formData.get("note") || ""),
-        source: "website",
+        source: "website" as const,
         preferredDate: String(formData.get("date") || ""),
         preferredTime: String(formData.get("time") || ""),
         extra: formDataToExtra(formData)
-      });
+      };
+      await createBusinessRequest(requestPayload);
+      await notifyNewRequest(requestPayload);
       setSubmitStatus("Talep alındı. İşletme size WhatsApp veya telefonla dönüş yapacak.");
       event.currentTarget.reset();
     } catch (error) {
