@@ -15,9 +15,13 @@ Hazır olan ana parçalar:
 - Her sektör için 3 profesyonel arayüz varyantı
 - Template + layout seçicili ana demo
 - Sektöre özel route'lar
+- Legal/trust sayfaları
+- Çerez banner
+- Formlarda KVKK/Gizlilik onayı
 - Admin login iskeleti
 - Admin panel
 - Site ayarları yönetimi
+- Kurumsal metin yönetimi
 - Hizmet/fiyat yönetimi
 - Kampanya yönetimi
 - Galeri/görsel yönetimi
@@ -65,6 +69,24 @@ Demo linkleri:
 
 Bu modelde 3 sektör x 3 layout = **9 farklı demo görünümü** elde edilir.
 
+## Legal / Trust Sayfaları
+
+Public siteye eklenen kurumsal/güven sayfaları:
+
+```text
+/hakkimizda
+/iletisim
+/gizlilik-politikasi
+/kvkk-aydinlatma-metni
+/cerez-politikasi
+/kullanim-kosullari
+/sss
+```
+
+Bu sayfalarda hazır şablon metinleri vardır. Müşteri isterse admin panelden bu metinleri kendi işletmesine göre düzenleyebilir.
+
+Not: KVKK/gizlilik metinleri MVP için hazır şablondur. Gerçek müşteri tesliminde hukuki kontrol önerilir.
+
 ## Müşteri Admin Paneli
 
 Müşteri siteyi aldıktan sonra şu linklerden giriş yapar:
@@ -101,7 +123,8 @@ NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=true
 | Panel | Route | Ne işe yarar? |
 |---|---|---|
 | Talepler | `/admin` | Gelen form/randevu/ilan taleplerini görür, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
-| Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, adres, harita, Instagram, ana başlık, açıklama ve seçili arayüzü değiştirir |
+| Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, ana başlık, açıklama ve seçili arayüzü değiştirir |
+| Kurumsal Metinler | `/admin/content` | Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS metinlerini yönetir |
 | Hizmetler | `/admin/services` | Hizmet adı, açıklama ve fiyatları yönetir |
 | Kampanyalar | `/admin/campaigns` | Kampanya başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
 | Galeri | `/admin/gallery` | Görsel yükler, başlık/açıklama ekler, site galerisini yönetir |
@@ -118,9 +141,17 @@ Bu sayede müşteri sürekli FK Digital'e yazmadan siteyi uzun süre kullanabili
 /real-estate               -> emlak landing demo sitesi
 /properties                -> emlak ilan listesi
 /properties/[id]           -> emlak ilan detay sayfası
+/hakkimizda                -> hakkımızda sayfası
+/iletisim                  -> iletişim sayfası
+/gizlilik-politikasi       -> gizlilik politikası
+/kvkk-aydinlatma-metni     -> KVKK aydınlatma metni
+/cerez-politikasi          -> çerez politikası
+/kullanim-kosullari        -> kullanım koşulları
+/sss                       -> sık sorulan sorular
 /login                     -> admin login sayfası
 /admin                     -> admin ana panel / talepler
 /admin/settings            -> site ayarları
+/admin/content             -> kurumsal metin yönetimi
 /admin/services            -> hizmet/fiyat yönetimi
 /admin/campaigns           -> kampanya yönetimi
 /admin/gallery             -> galeri yönetimi
@@ -139,18 +170,30 @@ FK-Service-Templates/
       real-estate.tsx
       properties/index.tsx
       properties/[id].tsx
+      hakkimizda.tsx
+      iletisim.tsx
+      gizlilik-politikasi.tsx
+      kvkk-aydinlatma-metni.tsx
+      cerez-politikasi.tsx
+      kullanim-kosullari.tsx
+      sss.tsx
       login.tsx
       admin.tsx
       admin/settings.tsx
+      admin/content.tsx
       admin/services.tsx
       admin/campaigns.tsx
       admin/gallery.tsx
       admin/properties/new.tsx
     src/
       components/TemplateLanding.tsx
+      components/ContentPage.tsx
+      components/CookieBanner.tsx
       styles/
+      siteContent.ts
       templateConfigs.ts
       useManagedTemplateConfig.ts
+      useSiteContent.ts
       useLayoutVariantFromQuery.ts
       useOptionalAdminGuard.ts
   packages/shared/
@@ -206,6 +249,7 @@ pnpm --filter @fk-templates/web build
 - CSS variables ile sektör bazlı tema sistemi
 - Layout varyantları: `modern`, `split`, `showcase`
 - Public site için managed config hook: `useManagedTemplateConfig`
+- Legal/trust içerikler için managed content sistemi
 
 ## Firestore Koleksiyonları
 
@@ -245,11 +289,15 @@ settings/{businessId}
   topBarText
   phone
   whatsapp
+  contactEmail
+  workingHours
   address
   mapsUrl
   instagramUrl
   campaignItems: ServiceItem[]
   galleryItems: VisualItem[]
+  contentPages: Record<ContentPageKey, ManagedContentPage>
+  faqItems: FaqItem[]
   createdAt
   updatedAt
 ```
@@ -331,7 +379,7 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 
 ## Satış Cümlesi
 
-> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
+> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu, KVKK/gizlilik sayfaları ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
 
 ## Teslimat Süreci
 
@@ -341,12 +389,13 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 3. Logo, renk, firma adı, telefon, adres ve sosyal medya bilgileri alınır.
 4. Domain/hosting/Firebase hesabı belirlenir.
 5. Config ve Firestore settings müşteri bilgilerine göre düzenlenir.
-6. Demo link paylaşılır.
-7. Küçük revizyonlar yapılır.
-8. Firebase/hosting canlıya alınır.
-9. Admin kullanıcı oluşturulur.
-10. Admin panel kullanımı anlatılır.
-11. Teslim tamamlanır.
+6. Hakkımızda/KVKK/gizlilik/SSS metinleri müşteri bilgilerine göre düzenlenir.
+7. Demo link paylaşılır.
+8. Küçük revizyonlar yapılır.
+9. Firebase/hosting canlıya alınır.
+10. Admin kullanıcı oluşturulur.
+11. Admin panel kullanımı anlatılır.
+12. Teslim tamamlanır.
 ```
 
 ## Sonraki Net Kontroller
@@ -356,7 +405,8 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 2. pnpm --filter @fk-templates/web build
 3. GitHub Actions build sonucu kontrol
 4. Canlı Firebase Auth / Firestore / Storage test
-5. Admin panelden ayar, hizmet, kampanya, galeri ve ilan testi
-6. Mobil görsel kontrol
-7. İlk müşteri demosu için marka/logo/içerik uyarlama
+5. Admin panelden ayar, içerik, hizmet, kampanya, galeri ve ilan testi
+6. Formlarda KVKK onayı ve talep kayıt testi
+7. Mobil görsel kontrol
+8. İlk müşteri demosu için marka/logo/içerik uyarlama
 ```
