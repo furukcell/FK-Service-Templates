@@ -13,6 +13,8 @@ export const demoVeterinaryConfig: BusinessTemplateConfig = {
   phone: "+90 5xx xxx xx xx",
   whatsapp: "+905xxxxxxxxx",
   address: "Milas / Muğla",
+  mapsUrl: "https://maps.google.com/?q=Milas%20Mu%C4%9Fla",
+  instagramUrl: "https://instagram.com/",
   theme: {
     primary: "#0F766E",
     secondary: "#14B8A6",
@@ -35,6 +37,11 @@ export const demoVeterinaryConfig: BusinessTemplateConfig = {
   staff: [
     { name: "Vet. Hekim Ayşe", role: "Kedi & Köpek", description: "Rutin kontrol, aşı ve acil ilk değerlendirme." },
     { name: "Vet. Hekim Deniz", role: "Cerrahi Danışmanlık", description: "Operasyon öncesi bilgilendirme ve takip." }
+  ],
+  galleryItems: [
+    { title: "Muayene Alanı", description: "Temiz ve güven veren klinik alanı için görsel kart." },
+    { title: "Aşı ve Takip", description: "Kedi/köpek aşı takibi ve rutin bakım görsel alanı." },
+    { title: "Acil İletişim", description: "Acil durumlarda WhatsApp yönlendirmesiyle hızlı dönüş." }
   ],
   form: {
     title: "Randevu talebi bırak",
