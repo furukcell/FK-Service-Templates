@@ -42,28 +42,30 @@ export function useManagedTemplateConfig(baseConfig: BusinessTemplateConfig) {
     return () => { isMounted = false; };
   }, [baseConfig.template, businessId]);
 
+  const activeSettings = !settings?.template || settings.template === baseConfig.template ? settings : null;
+
   const managedConfig = useMemo<BusinessTemplateConfig>(() => ({
     ...baseConfig,
-    brandName: cleanText(settings?.brandName) || baseConfig.brandName,
-    eyebrow: cleanText(settings?.eyebrow) || baseConfig.eyebrow,
-    heroTitle: cleanText(settings?.heroTitle) || baseConfig.heroTitle,
-    heroDescription: cleanText(settings?.heroDescription) || baseConfig.heroDescription,
-    primaryCta: cleanText(settings?.primaryCta) || baseConfig.primaryCta,
-    secondaryCta: cleanText(settings?.secondaryCta) || baseConfig.secondaryCta,
-    topBarText: cleanText(settings?.topBarText) || baseConfig.topBarText,
-    phone: cleanText(settings?.phone) || baseConfig.phone,
-    whatsapp: cleanText(settings?.whatsapp) || baseConfig.whatsapp,
-    address: cleanText(settings?.address) || baseConfig.address,
-    mapsUrl: cleanText(settings?.mapsUrl) || baseConfig.mapsUrl,
-    instagramUrl: cleanText(settings?.instagramUrl) || baseConfig.instagramUrl,
+    brandName: cleanText(activeSettings?.brandName) || baseConfig.brandName,
+    eyebrow: cleanText(activeSettings?.eyebrow) || baseConfig.eyebrow,
+    heroTitle: cleanText(activeSettings?.heroTitle) || baseConfig.heroTitle,
+    heroDescription: cleanText(activeSettings?.heroDescription) || baseConfig.heroDescription,
+    primaryCta: cleanText(activeSettings?.primaryCta) || baseConfig.primaryCta,
+    secondaryCta: cleanText(activeSettings?.secondaryCta) || baseConfig.secondaryCta,
+    topBarText: cleanText(activeSettings?.topBarText) || baseConfig.topBarText,
+    phone: cleanText(activeSettings?.phone) || baseConfig.phone,
+    whatsapp: cleanText(activeSettings?.whatsapp) || baseConfig.whatsapp,
+    address: cleanText(activeSettings?.address) || baseConfig.address,
+    mapsUrl: cleanText(activeSettings?.mapsUrl) || baseConfig.mapsUrl,
+    instagramUrl: cleanText(activeSettings?.instagramUrl) || baseConfig.instagramUrl,
     services: liveServices.length ? mapLiveServices(liveServices) : baseConfig.services,
-    campaignItems: settings?.campaignItems?.length ? settings.campaignItems : baseConfig.campaignItems,
-    galleryItems: settings?.galleryItems?.length ? settings.galleryItems : baseConfig.galleryItems
-  }), [baseConfig, liveServices, settings]);
+    campaignItems: activeSettings?.campaignItems?.length ? activeSettings.campaignItems : baseConfig.campaignItems,
+    galleryItems: activeSettings?.galleryItems?.length ? activeSettings.galleryItems : baseConfig.galleryItems
+  }), [activeSettings, baseConfig, liveServices]);
 
   return {
     config: managedConfig,
-    layoutVariant: settings?.layoutVariant as LayoutVariant | undefined,
-    settings
+    layoutVariant: activeSettings?.layoutVariant as LayoutVariant | undefined,
+    settings: activeSettings
   };
 }
