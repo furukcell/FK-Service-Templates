@@ -25,7 +25,11 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
+NEXT_PUBLIC_BUSINESS_ID=demo-business
+NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=false
 ```
+
+`NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=false` demo için kullanılır. Müşteri tesliminde admin panelin giriş istemesi için `true` yapılır.
 
 ## 3. Firestore aç
 
@@ -48,16 +52,44 @@ Authentication → Sign-in method → Email/Password aktif edilir.
 
 Admin kullanıcı müşterinin e-postasıyla oluşturulur.
 
-## 5. Rules deploy
+Müşteri tesliminde:
 
-Bu repodaki `firestore.rules` dosyası ilk MVP rules taslağıdır.
+```text
+NEXT_PUBLIC_REQUIRE_ADMIN_AUTH=true
+```
+
+olarak ayarlanır. Bu durumda `/admin` ve `/admin/properties/new` ekranları login kontrolü yapar.
+
+## 5. Storage aç
+
+Firebase Storage etkinleştirilir.
+
+İlk klasörler:
+
+```text
+business-images
+property-images
+```
+
+Storage rules taslağı `storage.rules` dosyasındadır. Görseller public okunabilir, yazma işlemi admin girişine bağlıdır.
+
+## 6. Rules deploy
+
+Bu repodaki `firestore.rules` ve `storage.rules` dosyaları ilk MVP rules taslağıdır.
+
+```bash
+firebase deploy --only firestore:rules,storage
+```
 
 Geliştirme sürecinde müşteri ihtiyacına göre sıkılaştırılmalıdır.
 
-## 6. Teslim öncesi kontrol
+## 7. Teslim öncesi kontrol
 
 - Form kaydı Firestore'a düşüyor mu?
 - Admin kullanıcı login olabiliyor mu?
+- Admin panel canlı kayıtları okuyabiliyor mu?
+- Admin status ve not güncelleyebiliyor mu?
+- Emlak ilanı eklenebiliyor mu?
 - İlanlar public okunuyor mu?
-- Sadece admin yazabiliyor mu?
+- Storage görsel yazma sadece admin girişinde mi?
 - WhatsApp linkleri doğru mu?
