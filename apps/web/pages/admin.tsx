@@ -206,7 +206,7 @@ export default function AdminDemoPage() {
               <h2>Emlak ilan demo listesi</h2>
               <p>Emlak şablonunda ilan ekleme/düzenleme bu panelden yönetilecek.</p>
             </div>
-            <a className="pillButton navButtonLink" href="/properties">İlanları Aç</a>
+            <div className="navActions"><a className="ghostButton navButtonLink" href="/properties">İlanları Aç</a><a className="pillButton navButtonLink" href="/admin/properties/new">Yeni İlan</a></div>
           </div>
           <div className="adminPropertyGrid">
             {demoProperties.map((property) => (
