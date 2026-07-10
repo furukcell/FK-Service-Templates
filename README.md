@@ -17,6 +17,7 @@ Hazır ana parçalar:
 - Legal/trust sayfaları
 - Çerez banner
 - Formlarda KVKK/Gizlilik onayı
+- Talep/randevu/sipariş formu başlığı, açıklaması ve seçeneklerini admin panelden yönetme
 - Honeypot spam koruması
 - E-posta bildirim API route'u
 - API origin kontrolü ve basit rate limit
@@ -107,13 +108,29 @@ Admin, login, forgot-password ve API route'ları robots tarafında engellenir. L
 | Panel | Route | İşlev |
 |---|---|---|
 | Talepler | `/admin` | Gelen formları canlı görür, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
-| Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, başlık ve seçili arayüz |
+| Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, başlık, form seçenekleri ve seçili arayüz |
 | Kurumsal Metinler | `/admin/content` | Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS |
 | Hizmetler | `/admin/services` | Hizmet/fiyat/menü ürünü ekler, düzenler, pasife alır veya aktif eder |
 | Kampanyalar | `/admin/campaigns` | Kampanya başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
 | Galeri | `/admin/gallery` | Görsel yükler, başlık/açıklama ekler |
 | İlanlar | `/admin/properties` | Emlak ilanlarını listeler, düzenler, vitrin/yayın durumunu değiştirir |
 | Yeni İlan | `/admin/properties/new` | Emlak ilanı ekler, fiyat/konum/açıklama/görsel girer |
+
+## Talep Formu Uyarlama
+
+Cafe şablonu tek kalır; pastane, cafe, börekçi veya fırın için form seçenekleri admin panelden değişir.
+
+Örneğin börekçi tesliminde `/admin/settings` içindeki **Talep seçenekleri** alanı şöyle yapılabilir:
+
+```text
+Tepsi börek siparişi
+Kilo ile börek
+Toplu sipariş
+Gel-al sipariş
+Menü ve fiyat bilgisi
+```
+
+Bu şekilde “masa talebi” veya “pasta siparişi” gibi o işletmeye uymayan seçenekler canlı sitede görünmez.
 
 ## Bildirim Sistemi
 
@@ -242,11 +259,12 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 8. NEXT_PUBLIC_SITE_URL gerçek domain yapılır.
 9. REQUEST_NOTIFICATION_TO müşteri e-postası yapılır.
 10. Hakkımızda/KVKK/gizlilik/SSS metinleri kontrol edilir.
-11. Form gönderme, e-posta bildirim, admin canlı uyarı test edilir.
-12. Görsel yükleme ve ilan/hizmet/kampanya yönetimi test edilir.
-13. robots.txt, sitemap.xml ve mobil görünüm kontrol edilir.
-14. Admin panel kullanımı müşteriye anlatılır.
-15. Teslim tamamlanır.
+11. Form başlığı, açıklaması ve talep seçenekleri müşteriye göre düzenlenir.
+12. Form gönderme, e-posta bildirim, admin canlı uyarı test edilir.
+13. Görsel yükleme ve ilan/hizmet/kampanya yönetimi test edilir.
+14. robots.txt, sitemap.xml ve mobil görünüm kontrol edilir.
+15. Admin panel kullanımı müşteriye anlatılır.
+16. Teslim tamamlanır.
 ```
 
 ## Bilinen Sınır
