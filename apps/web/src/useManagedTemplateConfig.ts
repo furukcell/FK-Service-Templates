@@ -11,6 +11,10 @@ function cleanOptions(options?: string[]) {
   return options?.map((option) => option.trim()).filter(Boolean) || [];
 }
 
+function cleanColor(value?: string) {
+  return typeof value === "string" && /^#[0-9A-Fa-f]{6}$/.test(value.trim()) ? value.trim() : undefined;
+}
+
 function mapLiveServices(services: ServiceItem[]) {
   return services.map((service) => ({
     title: service.title,
@@ -38,6 +42,16 @@ function applyManagedForm(config: BusinessTemplateConfig, settings: ManagedSiteS
       }
       return field;
     })
+  };
+}
+
+function applyManagedTheme(config: BusinessTemplateConfig, settings: ManagedSiteSettings | null): BusinessTemplateConfig["theme"] {
+  return {
+    primary: cleanColor(settings?.theme?.primary) || config.theme.primary,
+    secondary: cleanColor(settings?.theme?.secondary) || config.theme.secondary,
+    accent: cleanColor(settings?.theme?.accent) || config.theme.accent,
+    soft: cleanColor(settings?.theme?.soft) || config.theme.soft,
+    dark: cleanColor(settings?.theme?.dark) || config.theme.dark
   };
 }
 
@@ -93,6 +107,7 @@ export function useManagedTemplateConfig(baseConfig: BusinessTemplateConfig) {
     address: cleanText(activeSettings?.address) || baseConfig.address,
     mapsUrl: cleanText(activeSettings?.mapsUrl) || baseConfig.mapsUrl,
     instagramUrl: cleanText(activeSettings?.instagramUrl) || baseConfig.instagramUrl,
+    theme: applyManagedTheme(baseConfig, activeSettings),
     services: liveServices.length ? mapLiveServices(liveServices) : baseConfig.services,
     campaignItems: activeSettings?.campaignItems?.length ? activeSettings.campaignItems : baseConfig.campaignItems,
     galleryItems: activeSettings?.galleryItems?.length ? activeSettings.galleryItems : baseConfig.galleryItems,
