@@ -35,6 +35,9 @@ export type ManagedSiteSettings = {
   instagramUrl?: string;
   workingHours?: string;
   contactEmail?: string;
+  requestFormTitle?: string;
+  requestFormDescription?: string;
+  requestTypeOptions?: string[];
   campaignItems?: ServiceItem[];
   galleryItems?: VisualItem[];
   contentPages?: Partial<Record<ContentPageKey, ManagedContentPage>>;
