@@ -3,12 +3,14 @@ import { demoVeterinaryConfig } from "../../../configs/demo-veterinary";
 import { demoSalonConfig } from "../../../configs/demo-salon";
 import { demoRealEstateConfig } from "../../../configs/demo-real-estate";
 import { demoCafeConfig } from "../../../configs/demo-cafe";
+import { demoKindergartenConfig } from "../../../configs/demo-kindergarten";
 
 export const templateConfigs: Record<TemplateKey, BusinessTemplateConfig> = {
   appointment: demoVeterinaryConfig,
   salon: demoSalonConfig,
   "real-estate": demoRealEstateConfig,
-  cafe: demoCafeConfig
+  cafe: demoCafeConfig,
+  kindergarten: demoKindergartenConfig
 };
 
-export const templateOrder: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe"];
+export const templateOrder: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe", "kindergarten"];
