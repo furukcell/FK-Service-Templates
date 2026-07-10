@@ -9,7 +9,7 @@ MVP artık gerçek müşteri teslimine yaklaştırılmıştır. Public sitede de
 Hazır ana parçalar:
 
 - Next.js 14 web uygulaması
-- 5 sektör şablonu: Appointment, Salon, Real Estate, Cafe, Kindergarten
+- 6 sektör şablonu: Appointment, Salon, Real Estate, Cafe, Kindergarten, Event Venue
 - Her sektör için 3 profesyonel arayüz varyantı: `modern`, `split`, `showcase`
 - Müşteri teslim modu: `NEXT_PUBLIC_DEMO_MODE=false`
 - Public sitede demo yazılarını gizleme
@@ -17,7 +17,7 @@ Hazır ana parçalar:
 - Legal/trust sayfaları
 - Çerez banner
 - Formlarda KVKK/Gizlilik onayı
-- Talep/randevu/sipariş/ön görüşme formu başlığı, açıklaması ve seçeneklerini admin panelden yönetme
+- Talep/randevu/sipariş/ön görüşme/tarih sorma formu başlığı, açıklaması ve seçeneklerini admin panelden yönetme
 - Kuruma göre renkleri admin panelden değiştirme
 - Honeypot spam koruması
 - E-posta bildirim API route'u
@@ -29,8 +29,8 @@ Hazır ana parçalar:
 - SEO meta, canonical, Open Graph, favicon, manifest, robots.txt ve sitemap.xml
 - Site ayarları yönetimi
 - Kurumsal metin yönetimi
-- Hizmet/fiyat/sınıf/program kartı ekleme, düzenleme ve pasife alma
-- Kampanya/duyuru/etkinlik yönetimi
+- Hizmet/fiyat/sınıf/program/salon paketi kartı ekleme, düzenleme ve pasife alma
+- Kampanya/duyuru/etkinlik/sezon fırsatı yönetimi
 - Galeri/görsel yönetimi
 - Görsel upload tipi ve 5 MB boyut kontrolü
 - Storage rules tarafında görsel tipi/boyutu kontrolü
@@ -47,6 +47,7 @@ Hazır ana parçalar:
 | Real Estate | Emlak ofisi, gayrimenkul danışmanı, günlük kiralık işletme | MVP hazır |
 | Cafe | Pastane, cafe, börekçi, fırın, tatlıcı | MVP hazır |
 | Kindergarten | Kreş, anaokulu, gündüz bakım evi, oyun grubu | MVP hazır |
+| Event Venue | Düğün salonu, kır düğünü alanı, kına/nişan/sünnet organizasyonu | MVP hazır |
 
 ## Demo Linkleri
 
@@ -67,6 +68,9 @@ Hazır ana parçalar:
 /kindergarten?layout=modern
 /kindergarten?layout=split
 /kindergarten?layout=showcase
+/event-venue?layout=modern
+/event-venue?layout=split
+/event-venue?layout=showcase
 ```
 
 ## Public Sayfalar
@@ -78,6 +82,7 @@ Hazır ana parçalar:
 /real-estate
 /cafe
 /kindergarten
+/event-venue
 /properties
 /properties/[id]
 /hakkimizda
@@ -116,8 +121,8 @@ Admin, login, forgot-password ve API route'ları robots tarafında engellenir. L
 | Talepler | `/admin` | Gelen formları canlı görür, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
 | Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, başlık, renkler, form seçenekleri ve seçili arayüz |
 | Kurumsal Metinler | `/admin/content` | Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS |
-| Hizmetler | `/admin/services` | Hizmet/fiyat/menü ürünü/sınıf/program kartı ekler, düzenler, pasife alır veya aktif eder |
-| Kampanyalar | `/admin/campaigns` | Kampanya, duyuru veya etkinlik başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
+| Hizmetler | `/admin/services` | Hizmet/fiyat/menü ürünü/sınıf/program/salon paketi kartı ekler, düzenler, pasife alır veya aktif eder |
+| Kampanyalar | `/admin/campaigns` | Kampanya, duyuru, etkinlik veya sezon fırsatı başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
 | Galeri | `/admin/gallery` | Görsel yükler, başlık/açıklama ekler |
 | İlanlar | `/admin/properties` | Emlak ilanlarını listeler, düzenler, vitrin/yayın durumunu değiştirir |
 | Yeni İlan | `/admin/properties/new` | Emlak ilanı ekler, fiyat/konum/açıklama/görsel girer |
@@ -148,16 +153,28 @@ Fiyat bilgisi almak istiyorum
 Yemek ve günlük program hakkında bilgi almak istiyorum
 ```
 
-## Renk Uyarlama
-
-`/admin/settings` üzerinden ana renk, ikinci renk, vurgu rengi, açık arka plan ve koyu renk değiştirilebilir. Kreş müşterilerinde pastel mavi, pembe, lila, yeşil veya krem tonlarına göre uyarlanabilir.
+Düğün salonu / organizasyon şablonunda form seçenekleri örneği:
 
 ```text
-Ana renk: #4F46E5
-İkinci renk: #38BDF8
-Vurgu rengi: #FBBF24
-Açık arka plan: #EEF2FF
-Koyu renk: #312E81
+Düğün
+Kına Gecesi
+Nişan / Söz
+Sünnet Düğünü
+Yemekli Davet
+Salon Kiralama
+Diğer
+```
+
+## Renk Uyarlama
+
+`/admin/settings` üzerinden ana renk, ikinci renk, vurgu rengi, açık arka plan ve koyu renk değiştirilebilir. Kreş müşterilerinde pastel mavi, pembe, lila, yeşil veya krem tonlarına; düğün salonlarında lacivert, altın, şampanya, bordo veya mürdüm tonlarına göre uyarlanabilir.
+
+```text
+Ana renk: #1E1B4B
+İkinci renk: #C9A227
+Vurgu rengi: #F4D35E
+Açık arka plan: #FFFBEB
+Koyu renk: #111827
 ```
 
 ## Bildirim Sistemi
@@ -261,6 +278,7 @@ Başlangıç fiyatları:
 | Kuaför / Güzellik | 5.000 TL |
 | Pastane / Cafe / Börekçi | 5.000 TL |
 | Kreş / Anaokulu | 5.000 - 7.500 TL |
+| Düğün Salonu / Organizasyon | 7.500 - 12.500 TL |
 | Emlakçı | 7.500 TL |
 
 Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
@@ -269,11 +287,12 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 |---|---:|
 | Basit site + talep paneli | 5.000 TL |
 | Yönetilebilir site paneli | 7.500 - 10.000 TL |
+| Düğün salonu / etkinlik mekanı paneli | 7.500 - 12.500 TL |
 | Emlak ilan yönetimli panel | 10.000 - 15.000 TL |
 
 ## Satış Cümlesi
 
-> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu/sipariş/ön görüşme formu, e-posta bildirimi, admin panel canlı uyarısı, KVKK/gizlilik sayfaları, SEO altyapısı ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
+> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu/sipariş/ön görüşme/tarih sorma formu, e-posta bildirimi, admin panel canlı uyarısı, KVKK/gizlilik sayfaları, SEO altyapısı ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
 
 ## Teslimat Kontrol Listesi
 
