@@ -4,7 +4,7 @@ import type { ServiceItem, TemplateKey } from "@fk-templates/shared";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
-const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate"];
+const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe", "kindergarten"];
 
 export default function AdminCampaignsPage() {
   const guard = useOptionalAdminGuard();
@@ -13,7 +13,7 @@ export default function AdminCampaignsPage() {
   const [template, setTemplate] = useState<TemplateKey>("salon");
   const [items, setItems] = useState<ServiceItem[]>([]);
   const [form, setForm] = useState<ServiceItem>({ title: "", description: "", price: "" });
-  const [status, setStatus] = useState("Kampanyalar panelden yönetilebilir.");
+  const [status, setStatus] = useState("Kampanya, duyuru ve etkinlikler panelden yönetilebilir.");
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
@@ -25,9 +25,9 @@ export default function AdminCampaignsPage() {
         const selectedTemplate = siteSettings?.template || "salon";
         setTemplate(selectedTemplate);
         setItems(siteSettings?.campaignItems?.length ? siteSettings.campaignItems : templateConfigs[selectedTemplate].campaignItems || []);
-        setStatus(siteSettings?.campaignItems?.length ? "Canlı kampanyalar yüklendi." : "Kampanya kaydı yok, demo kampanyalar gösteriliyor.");
+        setStatus(siteSettings?.campaignItems?.length ? "Canlı kampanya/duyurular yüklendi." : "Kayıt yok, demo kampanya/duyurular gösteriliyor.");
       } catch (error) {
-        setStatus("Firebase bağlı değil, demo kampanyalar gösteriliyor.");
+        setStatus("Firebase bağlı değil, demo kampanya/duyurular gösteriliyor.");
         setItems(templateConfigs.salon.campaignItems || []);
       }
     }
@@ -36,12 +36,12 @@ export default function AdminCampaignsPage() {
 
   function addCampaign() {
     if (!form.title || !form.description) {
-      setStatus("Kampanya başlığı ve açıklaması zorunludur.");
+      setStatus("Başlık ve açıklama zorunludur.");
       return;
     }
     setItems((current) => [...current, form]);
     setForm({ title: "", description: "", price: "" });
-    setStatus("Kampanya listeye eklendi. Canlıya yansıtmak için kaydet.");
+    setStatus("Listeye eklendi. Canlıya yansıtmak için kaydet.");
   }
 
   function removeCampaign(index: number) {
@@ -52,9 +52,9 @@ export default function AdminCampaignsPage() {
     setIsSaving(true);
     try {
       await saveSiteSettings(businessId, { ...(settings || {}), template, campaignItems: items });
-      setStatus("Kampanyalar kaydedildi. Site bu kampanyaları canlı okuyacak.");
+      setStatus("Kampanya/duyurular kaydedildi. Site bu alanı canlı okuyacak.");
     } catch (error) {
-      setStatus("Kampanyalar kaydedilemedi. Admin giriş, Firebase env veya Firestore rules kontrol edilmeli.");
+      setStatus("Kayıt yapılamadı. Admin giriş, Firebase env veya Firestore rules kontrol edilmeli.");
     } finally {
       setIsSaving(false);
     }
@@ -85,29 +85,29 @@ export default function AdminCampaignsPage() {
         <header className="adminHeader">
           <div>
             <span className="eyebrow">Müşteri Site Yönetimi</span>
-            <h1>Kampanya yönetimi</h1>
-            <p>Müşteri indirim, paket ve dönemsel kampanyalarını panelden ekleyebilir.</p>
+            <h1>Kampanya / duyuru yönetimi</h1>
+            <p>Müşteri indirim, paket, dönemsel kampanya, kayıt duyurusu veya etkinlik bilgisini panelden ekleyebilir.</p>
             <p className="adminMode">{status}</p>
           </div>
-          <button className="pillButton" type="button" disabled={isSaving} onClick={saveCampaigns}>{isSaving ? "Kaydediliyor..." : "Kampanyaları Kaydet"}</button>
+          <button className="pillButton" type="button" disabled={isSaving} onClick={saveCampaigns}>{isSaving ? "Kaydediliyor..." : "Listeyi Kaydet"}</button>
         </header>
 
         <section className="adminCard">
           <div className="adminPropertyForm formFields">
             <label className="field"><span>Aktif sektör</span><select value={template} onChange={(event) => setTemplate(event.currentTarget.value as TemplateKey)}>{templateKeys.map((item) => <option value={item} key={item}>{templateConfigs[item].sector}</option>)}</select></label>
-            <label className="field"><span>Kampanya başlığı</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="Hafta içi bakım paketi" /></label>
-            <label className="field"><span>Fiyat / etiket</span><input value={form.price || ""} onChange={(event) => setForm((current) => ({ ...current, price: event.currentTarget.value }))} placeholder="₺1.250 / Teklif al" /></label>
-            <label className="field"><span>Açıklama</span><textarea value={form.description} onChange={(event) => setForm((current) => ({ ...current, description: event.currentTarget.value }))} placeholder="Kampanya açıklaması" /></label>
+            <label className="field"><span>Başlık</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="Yeni dönem kayıtları / Hafta içi bakım paketi" /></label>
+            <label className="field"><span>Fiyat / etiket</span><input value={form.price || ""} onChange={(event) => setForm((current) => ({ ...current, price: event.currentTarget.value }))} placeholder="Bilgi al / Kontenjan sor / ₺1.250" /></label>
+            <label className="field"><span>Açıklama</span><textarea value={form.description} onChange={(event) => setForm((current) => ({ ...current, description: event.currentTarget.value }))} placeholder="Kısa açıklama" /></label>
             <button className="ghostButton" type="button" onClick={addCampaign}>Listeye Ekle</button>
           </div>
         </section>
 
         <section className="adminCard">
-          <div className="adminSectionHead"><div><h2>Mevcut kampanyalar</h2><p>Bu liste kaydedilince sitedeki kampanya alanında görünür.</p></div></div>
+          <div className="adminSectionHead"><div><h2>Mevcut liste</h2><p>Bu liste kaydedilince sitedeki kampanya/duyuru alanında görünür.</p></div></div>
           <div className="adminPropertyGrid">
             {items.map((item, index) => (
               <article className="adminProperty" key={`${item.title}-${index}`}>
-                <span>Kampanya</span>
+                <span>Öne çıkan</span>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
                 {item.price ? <strong>{item.price}</strong> : null}
