@@ -5,7 +5,7 @@ import { layoutVariantLabels } from "@fk-templates/shared";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
-const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate"];
+const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe"];
 const layoutKeys: LayoutVariant[] = ["modern", "split", "showcase"];
 
 function defaultsFor(template: TemplateKey) {
