@@ -4,7 +4,7 @@ import type { ServiceItem, TemplateKey } from "@fk-templates/shared";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
-const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe", "kindergarten"];
+const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe", "kindergarten", "event-venue"];
 
 export default function AdminCampaignsPage() {
   const guard = useOptionalAdminGuard();
@@ -86,7 +86,7 @@ export default function AdminCampaignsPage() {
           <div>
             <span className="eyebrow">Müşteri Site Yönetimi</span>
             <h1>Kampanya / duyuru yönetimi</h1>
-            <p>Müşteri indirim, paket, dönemsel kampanya, kayıt duyurusu veya etkinlik bilgisini panelden ekleyebilir.</p>
+            <p>Müşteri indirim, paket, dönemsel kampanya, kayıt duyurusu, sezon fırsatı veya etkinlik bilgisini panelden ekleyebilir.</p>
             <p className="adminMode">{status}</p>
           </div>
           <button className="pillButton" type="button" disabled={isSaving} onClick={saveCampaigns}>{isSaving ? "Kaydediliyor..." : "Listeyi Kaydet"}</button>
@@ -95,8 +95,8 @@ export default function AdminCampaignsPage() {
         <section className="adminCard">
           <div className="adminPropertyForm formFields">
             <label className="field"><span>Aktif sektör</span><select value={template} onChange={(event) => setTemplate(event.currentTarget.value as TemplateKey)}>{templateKeys.map((item) => <option value={item} key={item}>{templateConfigs[item].sector}</option>)}</select></label>
-            <label className="field"><span>Başlık</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="Yeni dönem kayıtları / Hafta içi bakım paketi" /></label>
-            <label className="field"><span>Fiyat / etiket</span><input value={form.price || ""} onChange={(event) => setForm((current) => ({ ...current, price: event.currentTarget.value }))} placeholder="Bilgi al / Kontenjan sor / ₺1.250" /></label>
+            <label className="field"><span>Başlık</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="Erken rezervasyon / Hafta içi davet avantajı" /></label>
+            <label className="field"><span>Fiyat / etiket</span><input value={form.price || ""} onChange={(event) => setForm((current) => ({ ...current, price: event.currentTarget.value }))} placeholder="Tarih sor / Teklif al / Bilgi al" /></label>
             <label className="field"><span>Açıklama</span><textarea value={form.description} onChange={(event) => setForm((current) => ({ ...current, description: event.currentTarget.value }))} placeholder="Kısa açıklama" /></label>
             <button className="ghostButton" type="button" onClick={addCampaign}>Listeye Ekle</button>
           </div>
