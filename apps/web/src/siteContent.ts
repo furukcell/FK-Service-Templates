@@ -83,6 +83,14 @@ export function defaultFaqItems(config: BusinessTemplateConfig): FaqItem[] {
     ];
   }
 
+  if (config.template === "cafe") {
+    return [
+      { question: "Formdan verilen sipariş kesinleşir mi?", answer: "Hayır. İşletme size telefon veya WhatsApp üzerinden dönüş yaptıktan sonra sipariş ya da masa talebi kesinleşir." },
+      { question: "Toplu sipariş verebilir miyim?", answer: "Evet. Formda adet, tarih ve ürün notunuzu yazabilirsiniz; işletme size uygunluk ve fiyat bilgisiyle dönüş yapar." },
+      { question: "Günlük ürünler değişiyor mu?", answer: "Günlük üretim ve stok durumuna göre ürünler değişebilir. En güncel bilgi için işletmeden dönüş bekleyiniz." }
+    ];
+  }
+
   return [
     { question: "Randevu talebi kesin randevu mudur?", answer: "Hayır. Talebiniz alındıktan sonra işletme size telefon veya WhatsApp üzerinden dönüş yapar." },
     { question: "Acil durumda ne yapmalıyım?", answer: "Acil durumlarda doğrudan telefon veya WhatsApp üzerinden işletmeye ulaşmanız önerilir." },
