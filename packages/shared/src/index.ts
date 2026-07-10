@@ -1,4 +1,4 @@
-export type TemplateKey = "appointment" | "salon" | "real-estate" | "cafe";
+export type TemplateKey = "appointment" | "salon" | "real-estate" | "cafe" | "kindergarten";
 export type LayoutVariant = "modern" | "split" | "showcase";
 
 export type ServiceItem = {
@@ -24,6 +24,14 @@ export type VisualItem = {
   imageUrl?: string;
 };
 
+export type BusinessTheme = {
+  primary: string;
+  secondary: string;
+  accent: string;
+  soft: string;
+  dark: string;
+};
+
 export type BusinessTemplateConfig = {
   template: TemplateKey;
   sector: string;
@@ -39,13 +47,7 @@ export type BusinessTemplateConfig = {
   address: string;
   mapsUrl?: string;
   instagramUrl?: string;
-  theme: {
-    primary: string;
-    secondary: string;
-    accent: string;
-    soft: string;
-    dark: string;
-  };
+  theme: BusinessTheme;
   navItems: string[];
   stats: StatItem[];
   services: ServiceItem[];
@@ -69,7 +71,8 @@ export const templateLabels: Record<TemplateKey, string> = {
   appointment: "Veteriner / Klinik",
   salon: "Kuaför / Güzellik",
   "real-estate": "Emlakçı",
-  cafe: "Pastane / Cafe / Börekçi"
+  cafe: "Pastane / Cafe / Börekçi",
+  kindergarten: "Kreş / Anaokulu"
 };
 
 export const layoutVariantLabels: Record<LayoutVariant, string> = {
