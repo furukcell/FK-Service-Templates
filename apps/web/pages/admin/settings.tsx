@@ -5,7 +5,7 @@ import { layoutVariantLabels } from "@fk-templates/shared";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
-const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe"];
+const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe", "kindergarten"];
 const layoutKeys: LayoutVariant[] = ["modern", "split", "showcase"];
 
 function formOptionsText(template: TemplateKey) {
@@ -35,10 +35,15 @@ function defaultsFor(template: TemplateKey) {
     mapsUrl: config.mapsUrl || "",
     instagramUrl: config.instagramUrl || "",
     contactEmail: "info@ornekfirma.com",
-    workingHours: "Pazartesi - Cumartesi 09:00 - 18:00",
+    workingHours: "Pazartesi - Cuma 08:30 - 17:30",
     requestFormTitle: config.form.title,
     requestFormDescription: config.form.description,
-    requestTypeOptionsText: formOptionsText(template)
+    requestTypeOptionsText: formOptionsText(template),
+    themePrimary: config.theme.primary,
+    themeSecondary: config.theme.secondary,
+    themeAccent: config.theme.accent,
+    themeSoft: config.theme.soft,
+    themeDark: config.theme.dark
   };
 }
 
@@ -76,7 +81,12 @@ export default function AdminSettingsPage() {
             workingHours: settings.workingHours || defaults.workingHours,
             requestFormTitle: settings.requestFormTitle || defaults.requestFormTitle,
             requestFormDescription: settings.requestFormDescription || defaults.requestFormDescription,
-            requestTypeOptionsText: settings.requestTypeOptions?.length ? settings.requestTypeOptions.join("\n") : defaults.requestTypeOptionsText
+            requestTypeOptionsText: settings.requestTypeOptions?.length ? settings.requestTypeOptions.join("\n") : defaults.requestTypeOptionsText,
+            themePrimary: settings.theme?.primary || defaults.themePrimary,
+            themeSecondary: settings.theme?.secondary || defaults.themeSecondary,
+            themeAccent: settings.theme?.accent || defaults.themeAccent,
+            themeSoft: settings.theme?.soft || defaults.themeSoft,
+            themeDark: settings.theme?.dark || defaults.themeDark
           });
           setStatus("Canlı site ayarları yüklendi.");
         } else {
@@ -102,10 +112,17 @@ export default function AdminSettingsPage() {
     setIsSaving(true);
     setStatus("");
     try {
-      const { requestTypeOptionsText, ...sitePayload } = form;
+      const { requestTypeOptionsText, themePrimary, themeSecondary, themeAccent, themeSoft, themeDark, ...sitePayload } = form;
       await saveSiteSettings(businessId, {
         ...sitePayload,
-        requestTypeOptions: splitOptions(requestTypeOptionsText)
+        requestTypeOptions: splitOptions(requestTypeOptionsText),
+        theme: {
+          primary: themePrimary,
+          secondary: themeSecondary,
+          accent: themeAccent,
+          soft: themeSoft,
+          dark: themeDark
+        }
       });
       setStatus("Site ayarları kaydedildi. Site bu bilgileri canlı okuyacak.");
     } catch (error) {
@@ -142,7 +159,7 @@ export default function AdminSettingsPage() {
           <div>
             <span className="eyebrow">Müşteri Site Yönetimi</span>
             <h1>Site ayarları</h1>
-            <p>Firma bilgisi, ana sayfa metinleri, iletişim linkleri, form seçenekleri ve seçili arayüz buradan düzenlenir.</p>
+            <p>Firma bilgisi, ana sayfa metinleri, renkler, iletişim linkleri, form seçenekleri ve seçili arayüz buradan düzenlenir.</p>
             <p className="adminMode">{status}</p>
           </div>
           <a className="pillButton navButtonLink" href={`/${form.template === "real-estate" ? "real-estate" : form.template}`}>Siteyi Aç</a>
@@ -159,6 +176,11 @@ export default function AdminSettingsPage() {
             <label className="field"><span>Açıklama</span><textarea value={form.heroDescription} onChange={(event) => updateField("heroDescription", event.currentTarget.value)} /></label>
             <label className="field"><span>Birinci buton</span><input value={form.primaryCta} onChange={(event) => updateField("primaryCta", event.currentTarget.value)} /></label>
             <label className="field"><span>İkinci buton</span><input value={form.secondaryCta} onChange={(event) => updateField("secondaryCta", event.currentTarget.value)} /></label>
+            <label className="field"><span>Ana renk</span><input value={form.themePrimary} onChange={(event) => updateField("themePrimary", event.currentTarget.value)} placeholder="#4F46E5" /></label>
+            <label className="field"><span>İkinci renk</span><input value={form.themeSecondary} onChange={(event) => updateField("themeSecondary", event.currentTarget.value)} placeholder="#38BDF8" /></label>
+            <label className="field"><span>Vurgu rengi</span><input value={form.themeAccent} onChange={(event) => updateField("themeAccent", event.currentTarget.value)} placeholder="#FBBF24" /></label>
+            <label className="field"><span>Açık arka plan</span><input value={form.themeSoft} onChange={(event) => updateField("themeSoft", event.currentTarget.value)} placeholder="#EEF2FF" /></label>
+            <label className="field"><span>Koyu renk</span><input value={form.themeDark} onChange={(event) => updateField("themeDark", event.currentTarget.value)} placeholder="#312E81" /></label>
             <label className="field"><span>Form başlığı</span><input value={form.requestFormTitle} onChange={(event) => updateField("requestFormTitle", event.currentTarget.value)} /></label>
             <label className="field"><span>Form açıklaması</span><textarea value={form.requestFormDescription} onChange={(event) => updateField("requestFormDescription", event.currentTarget.value)} /></label>
             <label className="field"><span>Talep seçenekleri</span><textarea value={form.requestTypeOptionsText} onChange={(event) => updateField("requestTypeOptionsText", event.currentTarget.value)} placeholder="Her satıra bir seçenek yazın" /></label>
