@@ -99,6 +99,14 @@ export function defaultFaqItems(config: BusinessTemplateConfig): FaqItem[] {
     ];
   }
 
+  if (config.template === "event-venue") {
+    return [
+      { question: "Formdan tarih sormak kesin rezervasyon mudur?", answer: "Hayır. Form üzerinden iletilen talep ön bilgi ve uygunluk kontrolü içindir. Kesin rezervasyon salon ekibinin dönüşü ve ödeme/kapora süreciyle netleşir." },
+      { question: "Yemekli organizasyon yapılabiliyor mu?", answer: "Salonun güncel hizmet kapsamına göre yemekli veya yemeksiz paket seçenekleri sunulabilir. Detay için formdan davetli sayısı ve tarih bilgisi bırakabilirsiniz." },
+      { question: "Kına, nişan ve sünnet organizasyonu da yapılıyor mu?", answer: "Evet. Düğün dışında kına, nişan, söz, sünnet ve özel davetler için de uygun paket ve tarih bilgisi alınabilir." }
+    ];
+  }
+
   return [
     { question: "Randevu talebi kesin randevu mudur?", answer: "Hayır. Talebiniz alındıktan sonra işletme size telefon veya WhatsApp üzerinden dönüş yapar." },
     { question: "Acil durumda ne yapmalıyım?", answer: "Acil durumlarda doğrudan telefon veya WhatsApp üzerinden işletmeye ulaşmanız önerilir." },
