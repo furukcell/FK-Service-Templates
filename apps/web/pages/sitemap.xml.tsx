@@ -7,6 +7,7 @@ const routes = [
   "/real-estate",
   "/cafe",
   "/kindergarten",
+  "/event-venue",
   "/properties",
   "/hakkimizda",
   "/iletisim",
