@@ -9,7 +9,7 @@ MVP artık gerçek müşteri teslimine yaklaştırılmıştır. Public sitede de
 Hazır ana parçalar:
 
 - Next.js 14 web uygulaması
-- 4 sektör şablonu: Appointment, Salon, Real Estate, Cafe
+- 5 sektör şablonu: Appointment, Salon, Real Estate, Cafe, Kindergarten
 - Her sektör için 3 profesyonel arayüz varyantı: `modern`, `split`, `showcase`
 - Müşteri teslim modu: `NEXT_PUBLIC_DEMO_MODE=false`
 - Public sitede demo yazılarını gizleme
@@ -17,7 +17,8 @@ Hazır ana parçalar:
 - Legal/trust sayfaları
 - Çerez banner
 - Formlarda KVKK/Gizlilik onayı
-- Talep/randevu/sipariş formu başlığı, açıklaması ve seçeneklerini admin panelden yönetme
+- Talep/randevu/sipariş/ön görüşme formu başlığı, açıklaması ve seçeneklerini admin panelden yönetme
+- Kuruma göre renkleri admin panelden değiştirme
 - Honeypot spam koruması
 - E-posta bildirim API route'u
 - API origin kontrolü ve basit rate limit
@@ -28,8 +29,8 @@ Hazır ana parçalar:
 - SEO meta, canonical, Open Graph, favicon, manifest, robots.txt ve sitemap.xml
 - Site ayarları yönetimi
 - Kurumsal metin yönetimi
-- Hizmet/fiyat ekleme, düzenleme ve pasife alma
-- Kampanya yönetimi
+- Hizmet/fiyat/sınıf/program kartı ekleme, düzenleme ve pasife alma
+- Kampanya/duyuru/etkinlik yönetimi
 - Galeri/görsel yönetimi
 - Görsel upload tipi ve 5 MB boyut kontrolü
 - Storage rules tarafında görsel tipi/boyutu kontrolü
@@ -45,6 +46,7 @@ Hazır ana parçalar:
 | Salon | Kuaför, güzellik salonu, berber, nail art, spa | MVP hazır |
 | Real Estate | Emlak ofisi, gayrimenkul danışmanı, günlük kiralık işletme | MVP hazır |
 | Cafe | Pastane, cafe, börekçi, fırın, tatlıcı | MVP hazır |
+| Kindergarten | Kreş, anaokulu, gündüz bakım evi, oyun grubu | MVP hazır |
 
 ## Demo Linkleri
 
@@ -62,6 +64,9 @@ Hazır ana parçalar:
 /cafe?layout=modern
 /cafe?layout=split
 /cafe?layout=showcase
+/kindergarten?layout=modern
+/kindergarten?layout=split
+/kindergarten?layout=showcase
 ```
 
 ## Public Sayfalar
@@ -72,6 +77,7 @@ Hazır ana parçalar:
 /salon
 /real-estate
 /cafe
+/kindergarten
 /properties
 /properties/[id]
 /hakkimizda
@@ -108,10 +114,10 @@ Admin, login, forgot-password ve API route'ları robots tarafında engellenir. L
 | Panel | Route | İşlev |
 |---|---|---|
 | Talepler | `/admin` | Gelen formları canlı görür, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
-| Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, başlık, form seçenekleri ve seçili arayüz |
+| Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, başlık, renkler, form seçenekleri ve seçili arayüz |
 | Kurumsal Metinler | `/admin/content` | Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS |
-| Hizmetler | `/admin/services` | Hizmet/fiyat/menü ürünü ekler, düzenler, pasife alır veya aktif eder |
-| Kampanyalar | `/admin/campaigns` | Kampanya başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
+| Hizmetler | `/admin/services` | Hizmet/fiyat/menü ürünü/sınıf/program kartı ekler, düzenler, pasife alır veya aktif eder |
+| Kampanyalar | `/admin/campaigns` | Kampanya, duyuru veya etkinlik başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
 | Galeri | `/admin/gallery` | Görsel yükler, başlık/açıklama ekler |
 | İlanlar | `/admin/properties` | Emlak ilanlarını listeler, düzenler, vitrin/yayın durumunu değiştirir |
 | Yeni İlan | `/admin/properties/new` | Emlak ilanı ekler, fiyat/konum/açıklama/görsel girer |
@@ -131,6 +137,28 @@ Menü ve fiyat bilgisi
 ```
 
 Bu şekilde “masa talebi” veya “pasta siparişi” gibi o işletmeye uymayan seçenekler canlı sitede görünmez.
+
+Kreş / Anaokulu şablonunda form seçenekleri örneği:
+
+```text
+Kayıt bilgisi almak istiyorum
+Ön görüşme talep ediyorum
+Kontenjan sormak istiyorum
+Fiyat bilgisi almak istiyorum
+Yemek ve günlük program hakkında bilgi almak istiyorum
+```
+
+## Renk Uyarlama
+
+`/admin/settings` üzerinden ana renk, ikinci renk, vurgu rengi, açık arka plan ve koyu renk değiştirilebilir. Kreş müşterilerinde pastel mavi, pembe, lila, yeşil veya krem tonlarına göre uyarlanabilir.
+
+```text
+Ana renk: #4F46E5
+İkinci renk: #38BDF8
+Vurgu rengi: #FBBF24
+Açık arka plan: #EEF2FF
+Koyu renk: #312E81
+```
 
 ## Bildirim Sistemi
 
@@ -232,6 +260,7 @@ Başlangıç fiyatları:
 | Veteriner / Klinik | 5.000 TL |
 | Kuaför / Güzellik | 5.000 TL |
 | Pastane / Cafe / Börekçi | 5.000 TL |
+| Kreş / Anaokulu | 5.000 - 7.500 TL |
 | Emlakçı | 7.500 TL |
 
 Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
@@ -244,7 +273,7 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 
 ## Satış Cümlesi
 
-> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu/sipariş formu, e-posta bildirimi, admin panel canlı uyarısı, KVKK/gizlilik sayfaları, SEO altyapısı ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
+> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu/sipariş/ön görüşme formu, e-posta bildirimi, admin panel canlı uyarısı, KVKK/gizlilik sayfaları, SEO altyapısı ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
 
 ## Teslimat Kontrol Listesi
 
@@ -259,12 +288,11 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 8. NEXT_PUBLIC_SITE_URL gerçek domain yapılır.
 9. REQUEST_NOTIFICATION_TO müşteri e-postası yapılır.
 10. Hakkımızda/KVKK/gizlilik/SSS metinleri kontrol edilir.
-11. Form başlığı, açıklaması ve talep seçenekleri müşteriye göre düzenlenir.
-12. Form gönderme, e-posta bildirim, admin canlı uyarı test edilir.
-13. Görsel yükleme ve ilan/hizmet/kampanya yönetimi test edilir.
-14. robots.txt, sitemap.xml ve mobil görünüm kontrol edilir.
-15. Admin panel kullanımı müşteriye anlatılır.
-16. Teslim tamamlanır.
+11. Form gönderme, e-posta bildirim, admin canlı uyarı test edilir.
+12. Görsel yükleme ve ilan/hizmet/kampanya yönetimi test edilir.
+13. robots.txt, sitemap.xml ve mobil görünüm kontrol edilir.
+14. Admin panel kullanımı müşteriye anlatılır.
+15. Teslim tamamlanır.
 ```
 
 ## Bilinen Sınır
