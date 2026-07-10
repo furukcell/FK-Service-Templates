@@ -1,5 +1,5 @@
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
-import type { LayoutVariant, ServiceItem, TemplateKey, VisualItem } from "@fk-templates/shared";
+import type { BusinessTheme, LayoutVariant, ServiceItem, TemplateKey, VisualItem } from "@fk-templates/shared";
 import { COLLECTIONS } from "./collections";
 import { getFirestoreDb } from "./client";
 
@@ -38,6 +38,7 @@ export type ManagedSiteSettings = {
   requestFormTitle?: string;
   requestFormDescription?: string;
   requestTypeOptions?: string[];
+  theme?: Partial<BusinessTheme>;
   campaignItems?: ServiceItem[];
   galleryItems?: VisualItem[];
   contentPages?: Partial<Record<ContentPageKey, ManagedContentPage>>;
