@@ -9,7 +9,7 @@ MVP artık gerçek müşteri teslimine yaklaştırılmıştır. Public sitede de
 Hazır ana parçalar:
 
 - Next.js 14 web uygulaması
-- 3 sektör şablonu: Appointment, Salon, Real Estate
+- 4 sektör şablonu: Appointment, Salon, Real Estate, Cafe
 - Her sektör için 3 profesyonel arayüz varyantı: `modern`, `split`, `showcase`
 - Müşteri teslim modu: `NEXT_PUBLIC_DEMO_MODE=false`
 - Public sitede demo yazılarını gizleme
@@ -43,6 +43,7 @@ Hazır ana parçalar:
 | Appointment | Veteriner, klinik, psikolog, diyetisyen, fizyoterapi | MVP hazır |
 | Salon | Kuaför, güzellik salonu, berber, nail art, spa | MVP hazır |
 | Real Estate | Emlak ofisi, gayrimenkul danışmanı, günlük kiralık işletme | MVP hazır |
+| Cafe | Pastane, cafe, börekçi, fırın, tatlıcı | MVP hazır |
 
 ## Demo Linkleri
 
@@ -57,6 +58,9 @@ Hazır ana parçalar:
 /real-estate?layout=modern
 /real-estate?layout=split
 /real-estate?layout=showcase
+/cafe?layout=modern
+/cafe?layout=split
+/cafe?layout=showcase
 ```
 
 ## Public Sayfalar
@@ -66,6 +70,7 @@ Hazır ana parçalar:
 /appointment
 /salon
 /real-estate
+/cafe
 /properties
 /properties/[id]
 /hakkimizda
@@ -104,7 +109,7 @@ Admin, login, forgot-password ve API route'ları robots tarafında engellenir. L
 | Talepler | `/admin` | Gelen formları canlı görür, durum değiştirir, not yazar, WhatsApp'a geçer, CSV indirir |
 | Site Ayarları | `/admin/settings` | Firma adı, telefon, WhatsApp, e-posta, çalışma saati, adres, harita, Instagram, başlık ve seçili arayüz |
 | Kurumsal Metinler | `/admin/content` | Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS |
-| Hizmetler | `/admin/services` | Hizmet/fiyat ekler, düzenler, pasife alır veya aktif eder |
+| Hizmetler | `/admin/services` | Hizmet/fiyat/menü ürünü ekler, düzenler, pasife alır veya aktif eder |
 | Kampanyalar | `/admin/campaigns` | Kampanya başlığı, açıklaması ve fiyat/etiket bilgisini yönetir |
 | Galeri | `/admin/gallery` | Görsel yükler, başlık/açıklama ekler |
 | İlanlar | `/admin/properties` | Emlak ilanlarını listeler, düzenler, vitrin/yayın durumunu değiştirir |
@@ -209,6 +214,7 @@ Başlangıç fiyatları:
 |---|---:|
 | Veteriner / Klinik | 5.000 TL |
 | Kuaför / Güzellik | 5.000 TL |
+| Pastane / Cafe / Börekçi | 5.000 TL |
 | Emlakçı | 7.500 TL |
 
 Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
@@ -221,7 +227,7 @@ Yönetilebilir panel sayesinde üst paket fiyatı artırılabilir:
 
 ## Satış Cümlesi
 
-> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu formu, e-posta bildirimi, admin panel canlı uyarısı, KVKK/gizlilik sayfaları, SEO altyapısı ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
+> Size sıfırdan özel yazılım yapmıyoruz. Hazır sektör şablonumuzu işletmenize uyarlıyoruz. Mobil uyumlu site, WhatsApp bağlantısı, talep/randevu/sipariş formu, e-posta bildirimi, admin panel canlı uyarısı, KVKK/gizlilik sayfaları, SEO altyapısı ve kendi kendinize güncelleyebileceğiniz admin paneliyle tek seferlik kurulum ücretiyle yayına alıyoruz.
 
 ## Teslimat Kontrol Listesi
 
