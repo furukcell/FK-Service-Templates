@@ -10,7 +10,7 @@ import type { TemplateKey } from "@fk-templates/shared";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
-const manageableTemplates: TemplateKey[] = ["appointment", "salon", "cafe", "kindergarten"];
+const manageableTemplates: TemplateKey[] = ["appointment", "salon", "cafe", "kindergarten", "event-venue"];
 
 export default function AdminServicesPage() {
   const guard = useOptionalAdminGuard();
@@ -139,7 +139,7 @@ export default function AdminServicesPage() {
           <div>
             <span className="eyebrow">Hizmet / Program Yönetimi</span>
             <h1>Hizmet listesi yönetimi</h1>
-            <p>Hizmet, fiyat, menü ürünü, sınıf veya yaş grubu kartları eklenir, düzenlenir, pasife alınır ve tekrar aktif edilir.</p>
+            <p>Hizmet, fiyat, menü ürünü, sınıf, yaş grubu, salon özelliği veya organizasyon paketi kartları eklenir, düzenlenir, pasife alınır ve tekrar aktif edilir.</p>
             <p className="adminMode">{status}</p>
           </div>
           <a className="pillButton navButtonLink" href="/admin">Panele Dön</a>
@@ -152,8 +152,8 @@ export default function AdminServicesPage() {
             ))}
           </div>
           <div className="formFields adminPropertyForm">
-            <label className="field"><span>Başlık</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="3 Yaş Sınıfı / Yaz Okulu / Günlük Akış" /></label>
-            <label className="field"><span>Etiket / fiyat</span><input value={form.price} onChange={(event) => setForm((current) => ({ ...current, price: event.currentTarget.value }))} placeholder="Kontenjan sor / Bilgi al / ₺500+" /></label>
+            <label className="field"><span>Başlık</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="Düğün Paketi / Kına Organizasyonu / 3 Yaş Sınıfı" /></label>
+            <label className="field"><span>Etiket / fiyat</span><input value={form.price} onChange={(event) => setForm((current) => ({ ...current, price: event.currentTarget.value }))} placeholder="Tarih sor / Teklif al / Kontenjan sor / ₺500+" /></label>
             <label className="field"><span>Açıklama</span><textarea value={form.description} onChange={(event) => setForm((current) => ({ ...current, description: event.currentTarget.value }))} placeholder="Kısa açıklama" /></label>
             <div className="heroActions">
               <button className="pillButton" type="button" disabled={isSaving} onClick={saveService}>{isSaving ? "Kaydediliyor..." : editingId ? "Güncelle" : "Kaydet"}</button>
