@@ -49,9 +49,53 @@ function getSubject(formData: FormData, config: BusinessTemplateConfig): string 
 }
 
 function galleryTitle(config: BusinessTemplateConfig) {
+  if (config.template === "kindergarten") return "Kreş ortamı ve güven veren alanlar";
+  if (config.template === "cafe") return "Lezzet vitrini ve konum";
   if (config.template === "salon") return "Kampanya ve sosyal medya vitrini";
   if (config.template === "appointment") return "Galeri ve konum";
   return "Vitrin portföy ve bölge güveni";
+}
+
+function servicesTitle(config: BusinessTemplateConfig) {
+  if (config.template === "kindergarten") return "Sınıflar ve programlar";
+  if (config.template === "cafe") return "Menü ve ürünler";
+  if (config.template === "real-estate") return "Portföy ve danışmanlık";
+  return `${config.sector} hizmetleri`;
+}
+
+function servicesDescription(config: BusinessTemplateConfig) {
+  if (config.template === "kindergarten") return "Yaş grupları, günlük program ve kurum hizmetlerini inceleyebilir, ön görüşme talebi bırakabilirsiniz.";
+  if (config.template === "cafe") return "Menü, ürün ve sipariş seçeneklerini inceleyebilir, form üzerinden hızlıca talep bırakabilirsiniz.";
+  if (config.template === "real-estate") return "İlan, portföy ve danışmanlık seçeneklerini inceleyebilir, hızlıca bilgi talebi bırakabilirsiniz.";
+  return "İhtiyacınıza uygun hizmetleri inceleyebilir, form üzerinden hızlıca talep bırakabilirsiniz.";
+}
+
+function campaignTitle(config: BusinessTemplateConfig) {
+  if (config.template === "kindergarten") return "Duyurular ve günlük akış";
+  if (config.template === "real-estate") return "Öne çıkan portföyler";
+  return "Kampanyalar";
+}
+
+function campaignDescription(config: BusinessTemplateConfig) {
+  if (config.template === "kindergarten") return "Kayıt dönemi, günlük akış, yemek ve etkinlik bilgileri için öne çıkan duyurular.";
+  if (config.template === "real-estate") return "Öne çıkan ilan ve portföy bilgilerini buradan inceleyebilirsiniz.";
+  return "Güncel paket ve kampanya seçeneklerini buradan inceleyebilirsiniz.";
+}
+
+function campaignBadge(config: BusinessTemplateConfig) {
+  if (config.template === "kindergarten") return "Duyuru";
+  if (config.template === "real-estate") return "Portföy";
+  return "Kampanya";
+}
+
+function staffTitle(config: BusinessTemplateConfig) {
+  if (config.template === "kindergarten") return "Kurum ekibi";
+  return "Ekibimiz";
+}
+
+function staffDescription(config: BusinessTemplateConfig) {
+  if (config.template === "kindergarten") return "Kurumun eğitim, bakım ve veli iletişimi yaklaşımı hakkında bilgi alın.";
+  return "İşletmemizin uzman ekibi ve hizmet yaklaşımı hakkında bilgi alın.";
 }
 
 function LegalFooterLinks() {
@@ -155,8 +199,8 @@ function ServicesSection({ config }: { config: BusinessTemplateConfig }) {
   return (
     <section className="section" id="services">
       <div className="sectionHead">
-        <h2>{config.sector} hizmetleri</h2>
-        <p>İhtiyacınıza uygun hizmetleri inceleyebilir, form üzerinden hızlıca talep bırakabilirsiniz.</p>
+        <h2>{servicesTitle(config)}</h2>
+        <p>{servicesDescription(config)}</p>
       </div>
       <div className="cardGrid">
         {config.services.map((service) => (
@@ -176,13 +220,13 @@ function CampaignSection({ config }: { config: BusinessTemplateConfig }) {
   return (
     <section className="section">
       <div className="sectionHead">
-        <h2>Kampanyalar</h2>
-        <p>Güncel paket ve kampanya seçeneklerini buradan inceleyebilirsiniz.</p>
+        <h2>{campaignTitle(config)}</h2>
+        <p>{campaignDescription(config)}</p>
       </div>
       <div className="cardGrid">
         {config.campaignItems.map((campaign) => (
           <article className="serviceCard campaignCard" key={campaign.title}>
-            <span className="priceTag">Kampanya</span>
+            <span className="priceTag">{campaignBadge(config)}</span>
             <h3>{campaign.title}</h3>
             <p>{campaign.description}</p>
             {campaign.price ? <strong>{campaign.price}</strong> : null}
@@ -197,8 +241,8 @@ function StaffSection({ config }: { config: BusinessTemplateConfig }) {
   return (
     <section className="section">
       <div className="sectionHead">
-        <h2>Ekibimiz</h2>
-        <p>İşletmemizin uzman ekibi ve hizmet yaklaşımı hakkında bilgi alın.</p>
+        <h2>{staffTitle(config)}</h2>
+        <p>{staffDescription(config)}</p>
       </div>
       <div className="cardGrid">
         {config.staff.map((member) => (
