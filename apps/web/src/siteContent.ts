@@ -91,6 +91,14 @@ export function defaultFaqItems(config: BusinessTemplateConfig): FaqItem[] {
     ];
   }
 
+  if (config.template === "kindergarten") {
+    return [
+      { question: "Ön görüşme talebi kesin kayıt anlamına gelir mi?", answer: "Hayır. Form üzerinden iletilen talep kurumun size dönüş yapması içindir. Kayıt süreci kurum görüşmesi ve kontenjan durumuna göre netleşir." },
+      { question: "Kontenjan ve fiyat bilgisini nasıl öğrenebilirim?", answer: "Formu doldurarak ya da WhatsApp üzerinden kuruma ulaşarak yaş grubu, kontenjan ve fiyat bilgisi alabilirsiniz." },
+      { question: "Çocuk fotoğrafları sitede paylaşılır mı?", answer: "Kurum tercihine ve veli izinlerine göre hareket edilmelidir. Çocuk yüzü göstermeden sınıf, etkinlik ve oyun alanı görselleriyle de güven veren bir site hazırlanabilir." }
+    ];
+  }
+
   return [
     { question: "Randevu talebi kesin randevu mudur?", answer: "Hayır. Talebiniz alındıktan sonra işletme size telefon veya WhatsApp üzerinden dönüş yapar." },
     { question: "Acil durumda ne yapmalıyım?", answer: "Acil durumlarda doğrudan telefon veya WhatsApp üzerinden işletmeye ulaşmanız önerilir." },
