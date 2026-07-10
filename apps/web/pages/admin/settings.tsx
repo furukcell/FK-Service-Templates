@@ -8,6 +8,15 @@ import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe"];
 const layoutKeys: LayoutVariant[] = ["modern", "split", "showcase"];
 
+function formOptionsText(template: TemplateKey) {
+  const field = templateConfigs[template].form.fields.find((item) => item.type === "select" && ["service", "requestType", "listingType"].includes(item.key));
+  return field?.options?.join("\n") || "";
+}
+
+function splitOptions(value: string) {
+  return value.split("\n").map((item) => item.trim()).filter(Boolean);
+}
+
 function defaultsFor(template: TemplateKey) {
   const config = templateConfigs[template];
   return {
@@ -26,7 +35,10 @@ function defaultsFor(template: TemplateKey) {
     mapsUrl: config.mapsUrl || "",
     instagramUrl: config.instagramUrl || "",
     contactEmail: "info@ornekfirma.com",
-    workingHours: "Pazartesi - Cumartesi 09:00 - 18:00"
+    workingHours: "Pazartesi - Cumartesi 09:00 - 18:00",
+    requestFormTitle: config.form.title,
+    requestFormDescription: config.form.description,
+    requestTypeOptionsText: formOptionsText(template)
   };
 }
 
@@ -61,7 +73,10 @@ export default function AdminSettingsPage() {
             mapsUrl: settings.mapsUrl || defaults.mapsUrl,
             instagramUrl: settings.instagramUrl || defaults.instagramUrl,
             contactEmail: settings.contactEmail || defaults.contactEmail,
-            workingHours: settings.workingHours || defaults.workingHours
+            workingHours: settings.workingHours || defaults.workingHours,
+            requestFormTitle: settings.requestFormTitle || defaults.requestFormTitle,
+            requestFormDescription: settings.requestFormDescription || defaults.requestFormDescription,
+            requestTypeOptionsText: settings.requestTypeOptions?.length ? settings.requestTypeOptions.join("\n") : defaults.requestTypeOptionsText
           });
           setStatus("Canlı site ayarları yüklendi.");
         } else {
@@ -87,7 +102,11 @@ export default function AdminSettingsPage() {
     setIsSaving(true);
     setStatus("");
     try {
-      await saveSiteSettings(businessId, form);
+      const { requestTypeOptionsText, ...sitePayload } = form;
+      await saveSiteSettings(businessId, {
+        ...sitePayload,
+        requestTypeOptions: splitOptions(requestTypeOptionsText)
+      });
       setStatus("Site ayarları kaydedildi. Site bu bilgileri canlı okuyacak.");
     } catch (error) {
       setStatus("Ayarlar kaydedilemedi. Admin giriş, Firebase env veya Firestore rules kontrol edilmeli.");
@@ -123,7 +142,7 @@ export default function AdminSettingsPage() {
           <div>
             <span className="eyebrow">Müşteri Site Yönetimi</span>
             <h1>Site ayarları</h1>
-            <p>Firma bilgisi, ana sayfa metinleri, iletişim linkleri ve seçili arayüz buradan düzenlenir.</p>
+            <p>Firma bilgisi, ana sayfa metinleri, iletişim linkleri, form seçenekleri ve seçili arayüz buradan düzenlenir.</p>
             <p className="adminMode">{status}</p>
           </div>
           <a className="pillButton navButtonLink" href={`/${form.template === "real-estate" ? "real-estate" : form.template}`}>Siteyi Aç</a>
@@ -140,6 +159,9 @@ export default function AdminSettingsPage() {
             <label className="field"><span>Açıklama</span><textarea value={form.heroDescription} onChange={(event) => updateField("heroDescription", event.currentTarget.value)} /></label>
             <label className="field"><span>Birinci buton</span><input value={form.primaryCta} onChange={(event) => updateField("primaryCta", event.currentTarget.value)} /></label>
             <label className="field"><span>İkinci buton</span><input value={form.secondaryCta} onChange={(event) => updateField("secondaryCta", event.currentTarget.value)} /></label>
+            <label className="field"><span>Form başlığı</span><input value={form.requestFormTitle} onChange={(event) => updateField("requestFormTitle", event.currentTarget.value)} /></label>
+            <label className="field"><span>Form açıklaması</span><textarea value={form.requestFormDescription} onChange={(event) => updateField("requestFormDescription", event.currentTarget.value)} /></label>
+            <label className="field"><span>Talep seçenekleri</span><textarea value={form.requestTypeOptionsText} onChange={(event) => updateField("requestTypeOptionsText", event.currentTarget.value)} placeholder="Her satıra bir seçenek yazın" /></label>
             <label className="field"><span>Telefon</span><input value={form.phone} onChange={(event) => updateField("phone", event.currentTarget.value)} /></label>
             <label className="field"><span>WhatsApp</span><input value={form.whatsapp} onChange={(event) => updateField("whatsapp", event.currentTarget.value)} /></label>
             <label className="field"><span>E-posta</span><input value={form.contactEmail} onChange={(event) => updateField("contactEmail", event.currentTarget.value)} /></label>
