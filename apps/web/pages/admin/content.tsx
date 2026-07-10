@@ -5,7 +5,7 @@ import { contentPageLabels, contentPageOrder, defaultContentPages, defaultFaqIte
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
-const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe", "kindergarten"];
+const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe", "kindergarten", "event-venue"];
 
 export default function AdminContentPage() {
   const guard = useOptionalAdminGuard();
