@@ -10,7 +10,7 @@ import type { TemplateKey } from "@fk-templates/shared";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
-const manageableTemplates: TemplateKey[] = ["appointment", "salon", "cafe"];
+const manageableTemplates: TemplateKey[] = ["appointment", "salon", "cafe", "kindergarten"];
 
 export default function AdminServicesPage() {
   const guard = useOptionalAdminGuard();
@@ -137,9 +137,9 @@ export default function AdminServicesPage() {
       <section className="adminMain">
         <header className="adminHeader">
           <div>
-            <span className="eyebrow">Hizmet / Menü Yönetimi</span>
+            <span className="eyebrow">Hizmet / Program Yönetimi</span>
             <h1>Hizmet listesi yönetimi</h1>
-            <p>Hizmet, ürün, menü veya fiyat listesi eklenir, düzenlenir, pasife alınır ve tekrar aktif edilir.</p>
+            <p>Hizmet, fiyat, menü ürünü, sınıf veya yaş grubu kartları eklenir, düzenlenir, pasife alınır ve tekrar aktif edilir.</p>
             <p className="adminMode">{status}</p>
           </div>
           <a className="pillButton navButtonLink" href="/admin">Panele Dön</a>
@@ -152,18 +152,18 @@ export default function AdminServicesPage() {
             ))}
           </div>
           <div className="formFields adminPropertyForm">
-            <label className="field"><span>Hizmet / ürün adı</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="Aşı takibi / Saç kesim / Börek paketi" /></label>
-            <label className="field"><span>Fiyat</span><input value={form.price} onChange={(event) => setForm((current) => ({ ...current, price: event.currentTarget.value }))} placeholder="₺500+" /></label>
-            <label className="field"><span>Açıklama</span><textarea value={form.description} onChange={(event) => setForm((current) => ({ ...current, description: event.currentTarget.value }))} placeholder="Kısa hizmet veya ürün açıklaması" /></label>
+            <label className="field"><span>Başlık</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="3 Yaş Sınıfı / Yaz Okulu / Günlük Akış" /></label>
+            <label className="field"><span>Etiket / fiyat</span><input value={form.price} onChange={(event) => setForm((current) => ({ ...current, price: event.currentTarget.value }))} placeholder="Kontenjan sor / Bilgi al / ₺500+" /></label>
+            <label className="field"><span>Açıklama</span><textarea value={form.description} onChange={(event) => setForm((current) => ({ ...current, description: event.currentTarget.value }))} placeholder="Kısa açıklama" /></label>
             <div className="heroActions">
-              <button className="pillButton" type="button" disabled={isSaving} onClick={saveService}>{isSaving ? "Kaydediliyor..." : editingId ? "Hizmeti Güncelle" : "Hizmeti Kaydet"}</button>
+              <button className="pillButton" type="button" disabled={isSaving} onClick={saveService}>{isSaving ? "Kaydediliyor..." : editingId ? "Güncelle" : "Kaydet"}</button>
               {editingId ? <button className="ghostButton" type="button" onClick={cancelEdit}>Vazgeç</button> : null}
             </div>
           </div>
         </section>
 
         <section className="adminCard">
-          <div className="adminSectionHead"><div><h2>Mevcut hizmetler</h2><p>Aktif hizmetler sitede görünür, pasif hizmetler panelde kalır ama sitede görünmez.</p></div></div>
+          <div className="adminSectionHead"><div><h2>Mevcut kartlar</h2><p>Aktif kartlar sitede görünür, pasif kartlar panelde kalır ama sitede görünmez.</p></div></div>
           <div className="adminPropertyGrid">
             {displayServices.map((service) => (
               <article className="adminProperty" key={service.id}>
