@@ -50,7 +50,7 @@ export default function LotusBorekDemoPage() {
           background:
             radial-gradient(circle at 78% 12%, rgba(255, 255, 255, 0.18), transparent 27%),
             linear-gradient(90deg, rgba(67, 20, 7, 0.92) 0%, rgba(124, 45, 18, 0.76) 46%, rgba(249, 115, 22, 0.72) 100%),
-            url("/images/logos/hero-vitrin.png");
+            url("/images/logos/hero-vitrin-real.png");
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
