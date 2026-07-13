@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getSiteSettings, saveSiteSettings, type ManagedSiteSettings } from "@fk-templates/firebase";
 import type { ServiceItem, TemplateKey } from "@fk-templates/shared";
+import { getDefaultTemplate } from "../../src/defaultTemplate";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
@@ -9,9 +10,10 @@ const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "caf
 export default function AdminCampaignsPage() {
   const guard = useOptionalAdminGuard();
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business";
+  const defaultTemplate = getDefaultTemplate();
   const [settings, setSettings] = useState<ManagedSiteSettings | null>(null);
-  const [template, setTemplate] = useState<TemplateKey>("salon");
-  const [items, setItems] = useState<ServiceItem[]>([]);
+  const [template, setTemplate] = useState<TemplateKey>(defaultTemplate);
+  const [items, setItems] = useState<ServiceItem[]>(templateConfigs[defaultTemplate].campaignItems || []);
   const [form, setForm] = useState<ServiceItem>({ title: "", description: "", price: "" });
   const [status, setStatus] = useState("Kampanya, duyuru ve etkinlikler panelden yönetilebilir.");
   const [isSaving, setIsSaving] = useState(false);
@@ -22,17 +24,23 @@ export default function AdminCampaignsPage() {
       try {
         const siteSettings = await getSiteSettings(businessId);
         setSettings(siteSettings);
-        const selectedTemplate = siteSettings?.template || "salon";
+        const selectedTemplate = siteSettings?.template || defaultTemplate;
         setTemplate(selectedTemplate);
         setItems(siteSettings?.campaignItems?.length ? siteSettings.campaignItems : templateConfigs[selectedTemplate].campaignItems || []);
         setStatus(siteSettings?.campaignItems?.length ? "Canlı kampanya/duyurular yüklendi." : "Kayıt yok, demo kampanya/duyurular gösteriliyor.");
       } catch (error) {
+        setTemplate(defaultTemplate);
+        setItems(templateConfigs[defaultTemplate].campaignItems || []);
         setStatus("Firebase bağlı değil, demo kampanya/duyurular gösteriliyor.");
-        setItems(templateConfigs.salon.campaignItems || []);
       }
     }
     loadCampaigns();
-  }, [businessId, guard.isAllowed]);
+  }, [businessId, defaultTemplate, guard.isAllowed]);
+
+  function changeTemplate(selectedTemplate: TemplateKey) {
+    setTemplate(selectedTemplate);
+    setItems(templateConfigs[selectedTemplate].campaignItems || []);
+  }
 
   function addCampaign() {
     if (!form.title || !form.description) {
@@ -94,7 +102,7 @@ export default function AdminCampaignsPage() {
 
         <section className="adminCard">
           <div className="adminPropertyForm formFields">
-            <label className="field"><span>Aktif sektör</span><select value={template} onChange={(event) => setTemplate(event.currentTarget.value as TemplateKey)}>{templateKeys.map((item) => <option value={item} key={item}>{templateConfigs[item].sector}</option>)}</select></label>
+            <label className="field"><span>Aktif sektör</span><select value={template} onChange={(event) => changeTemplate(event.currentTarget.value as TemplateKey)}>{templateKeys.map((item) => <option value={item} key={item}>{templateConfigs[item].sector}</option>)}</select></label>
             <label className="field"><span>Başlık</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="Erken rezervasyon / Hafta içi davet avantajı" /></label>
             <label className="field"><span>Fiyat / etiket</span><input value={form.price || ""} onChange={(event) => setForm((current) => ({ ...current, price: event.currentTarget.value }))} placeholder="Tarih sor / Teklif al / Bilgi al" /></label>
             <label className="field"><span>Açıklama</span><textarea value={form.description} onChange={(event) => setForm((current) => ({ ...current, description: event.currentTarget.value }))} placeholder="Kısa açıklama" /></label>
