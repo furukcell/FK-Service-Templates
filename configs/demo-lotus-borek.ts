@@ -12,8 +12,8 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
   topBarText: "Günlük taze börek • Hamur işleri • Kahvaltılıklar • Tatlı & baklava • WhatsApp sipariş",
   phone: "+90 537 058 44 20",
   whatsapp: "+905370584420",
-  address: "Milas / Muğla",
-  mapsUrl: "https://maps.google.com/?q=Milas%20Mu%C4%9Fla",
+  address: "Cumhuriyet Mahallesi, Halil Bey Bulvarı No: 75/A, Milas / Muğla",
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Cumhuriyet%20Mahallesi%20Halil%20Bey%20Bulvar%C4%B1%20No%3A%2075%2FA%20Milas%2FMu%C4%9Fla",
   instagramUrl: "https://instagram.com/",
   theme: {
     primary: "#7C2D12",
