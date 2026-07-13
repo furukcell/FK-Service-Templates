@@ -3,7 +3,7 @@ import type { BusinessTemplateConfig } from "@fk-templates/shared";
 export const demoLotusBorekConfig: BusinessTemplateConfig = {
   template: "cafe",
   sector: "Börek • Hamur İşi • Tatlı",
-  brandName: "Lotus Börek Evi",
+  brandName: "LOTUS BÖREK EVİ",
   eyebrow: "Milas’ta günlük taze lezzetler",
   heroTitle: "Günlük taze börek, hamur işi ve tatlı çeşitleri",
   heroDescription: "Kol böreği, Arnavut böreği, su böreği, kahvaltılıklar, kurabiye ve cevizli baklava için hızlı sipariş ve menü bilgisi.",
@@ -89,7 +89,7 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
   ],
   form: {
     title: "Sipariş ve menü bilgi talebi",
-    description: "Börek, hamur işi, kahvaltılık, baklava, kurabiye, tatlı veya toplu sipariş için formu doldurun. Lotus Börek Evi size telefon veya WhatsApp üzerinden dönüş yapsın.",
+    description: "Börek, hamur işi, kahvaltılık, baklava, kurabiye, tatlı veya toplu sipariş için formu doldurun. LOTUS BÖREK EVİ size telefon veya WhatsApp üzerinden dönüş yapsın.",
     fields: [
       { key: "name", label: "Ad Soyad", type: "text", placeholder: "Adınız soyadınız" },
       { key: "phone", label: "Telefon", type: "tel", placeholder: "+90 5xx xxx xx xx" },
