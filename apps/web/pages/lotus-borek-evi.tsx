@@ -11,6 +11,61 @@ export default function LotusBorekDemoPage() {
         canonicalPath="/lotus-borek-evi"
         noIndex
       />
+      <style jsx global>{`
+        .lotusDemoPage .navbar {
+          height: 98px;
+        }
+
+        .lotusDemoPage .logoLockup {
+          gap: 0;
+          min-width: 330px;
+        }
+
+        .lotusDemoPage .logoLockup .logoMark {
+          display: none;
+        }
+
+        .lotusDemoPage .logoLockup > span:not(.logoMark) {
+          width: 330px;
+          height: 76px;
+          display: block;
+          overflow: hidden;
+          color: transparent;
+          font-size: 0;
+          line-height: 0;
+          background-image: url("/images/logos/lotus-borek-logo.png");
+          background-repeat: no-repeat;
+          background-position: left center;
+          background-size: contain;
+        }
+
+        @media (max-width: 1180px) {
+          .lotusDemoPage .logoLockup {
+            min-width: 250px;
+          }
+
+          .lotusDemoPage .logoLockup > span:not(.logoMark) {
+            width: 250px;
+            height: 58px;
+          }
+        }
+
+        @media (max-width: 760px) {
+          .lotusDemoPage .navbar {
+            height: auto;
+            gap: 14px;
+          }
+
+          .lotusDemoPage .logoLockup {
+            min-width: 220px;
+          }
+
+          .lotusDemoPage .logoLockup > span:not(.logoMark) {
+            width: 220px;
+            height: 52px;
+          }
+        }
+      `}</style>
       <TemplateLanding
         config={demoLotusBorekConfig}
         activeTemplate="cafe"
