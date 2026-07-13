@@ -16,6 +16,7 @@ type TemplateLandingProps = {
   onLayoutChange?: (layout: LayoutVariant) => void;
   showTemplateSwitch?: boolean;
   showLayoutSwitch?: boolean;
+  contentBasePath?: string;
 };
 
 const layoutOrder: LayoutVariant[] = ["modern", "split", "showcase"];
@@ -28,6 +29,11 @@ function applyTheme(config: BusinessTemplateConfig): CSSProperties {
     "--soft": config.theme.soft,
     "--dark": config.theme.dark
   } as CSSProperties;
+}
+
+function contentHref(path: string, contentBasePath = "") {
+  if (!contentBasePath) return path;
+  return `${contentBasePath}${path}`;
 }
 
 function formDataToExtra(formData: FormData): Record<string, string> {
@@ -106,16 +112,16 @@ function staffDescription(config: BusinessTemplateConfig) {
   return "İşletmemizin uzman ekibi ve hizmet yaklaşımı hakkında bilgi alın.";
 }
 
-function LegalFooterLinks() {
+function LegalFooterLinks({ contentBasePath = "" }: { contentBasePath?: string }) {
   return (
     <div className="legalFooterLinks">
-      {Object.entries(contentPageRoutes).map(([key, href]) => <a href={href} key={key}>{contentPageLabels[key as keyof typeof contentPageLabels]}</a>)}
-      <a href="/sss">SSS</a>
+      {Object.entries(contentPageRoutes).map(([key, href]) => <a href={contentHref(href, contentBasePath)} key={key}>{contentPageLabels[key as keyof typeof contentPageLabels]}</a>)}
+      <a href={contentHref("/sss", contentBasePath)}>SSS</a>
     </div>
   );
 }
 
-function Shell({ config, children }: { config: BusinessTemplateConfig; children: ReactNode }) {
+function Shell({ config, children, contentBasePath }: { config: BusinessTemplateConfig; children: ReactNode; contentBasePath?: string }) {
   return (
     <main className="pageShell" style={applyTheme(config)}>
       <div className="topBar">{config.topBarText}</div>
@@ -123,7 +129,7 @@ function Shell({ config, children }: { config: BusinessTemplateConfig; children:
       <footer className="footer">
         <span>{config.brandName}</span>
         <span>{config.address}</span>
-        <LegalFooterLinks />
+        <LegalFooterLinks contentBasePath={contentBasePath} />
       </footer>
     </main>
   );
@@ -304,7 +310,7 @@ function VisualSection({ config }: { config: BusinessTemplateConfig }) {
   );
 }
 
-function RequestFormSection({ config, handleSubmit, isSubmitting, submitStatus }: { config: BusinessTemplateConfig; handleSubmit: (event: FormEvent<HTMLFormElement>) => void; isSubmitting: boolean; submitStatus: string }) {
+function RequestFormSection({ config, handleSubmit, isSubmitting, submitStatus, contentBasePath }: { config: BusinessTemplateConfig; handleSubmit: (event: FormEvent<HTMLFormElement>) => void; isSubmitting: boolean; submitStatus: string; contentBasePath?: string }) {
   return (
     <section className="section" id="request-form">
       <div className="sectionHead">
@@ -334,7 +340,7 @@ function RequestFormSection({ config, handleSubmit, isSubmitting, submitStatus }
               )}
             </label>
           ))}
-          <label className="kvkkConsent"><input name="acceptedLegal" type="checkbox" required /><span><a href="/kvkk-aydinlatma-metni" target="_blank">KVKK Aydınlatma Metni</a> ve <a href="/gizlilik-politikasi" target="_blank">Gizlilik Politikası</a> kapsamında bilgilendirmeyi okudum.</span></label>
+          <label className="kvkkConsent"><input name="acceptedLegal" type="checkbox" required /><span><a href={contentHref("/kvkk-aydinlatma-metni", contentBasePath)} target="_blank">KVKK Aydınlatma Metni</a> ve <a href={contentHref("/gizlilik-politikasi", contentBasePath)} target="_blank">Gizlilik Politikası</a> kapsamında bilgilendirmeyi okudum.</span></label>
           <button className="pillButton" type="submit" disabled={isSubmitting}>{isSubmitting ? "Gönderiliyor..." : "Talep Gönder"}</button>
           {submitStatus ? <p className="formStatus">{submitStatus}</p> : null}
         </form>
@@ -413,7 +419,7 @@ function ShowcaseLayout({ config, switchers, form }: { config: BusinessTemplateC
   );
 }
 
-export function TemplateLanding({ config, activeTemplate, activeLayout = "modern", onTemplateChange, onLayoutChange, showTemplateSwitch = true, showLayoutSwitch = true }: TemplateLandingProps) {
+export function TemplateLanding({ config, activeTemplate, activeLayout = "modern", onTemplateChange, onLayoutChange, showTemplateSwitch = true, showLayoutSwitch = true, contentBasePath }: TemplateLandingProps) {
   const [submitStatus, setSubmitStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -468,10 +474,10 @@ export function TemplateLanding({ config, activeTemplate, activeLayout = "modern
   }
 
   const switchers = <Switchers activeTemplate={activeTemplate} activeLayout={activeLayout} onTemplateChange={onTemplateChange} onLayoutChange={onLayoutChange} showTemplateSwitch={showTemplateSwitch} showLayoutSwitch={showLayoutSwitch} />;
-  const form = <RequestFormSection config={config} handleSubmit={handleSubmit} isSubmitting={isSubmitting} submitStatus={submitStatus} />;
+  const form = <RequestFormSection config={config} handleSubmit={handleSubmit} isSubmitting={isSubmitting} submitStatus={submitStatus} contentBasePath={contentBasePath} />;
 
   return (
-    <Shell config={config}>
+    <Shell config={config} contentBasePath={contentBasePath}>
       {activeLayout === "split" ? <SplitLayout config={config} switchers={switchers} form={form} /> : null}
       {activeLayout === "showcase" ? <ShowcaseLayout config={config} switchers={switchers} form={form} /> : null}
       {activeLayout === "modern" ? <ModernLayout config={config} switchers={switchers} form={form} /> : null}
