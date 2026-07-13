@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getSiteSettings, saveSiteSettings } from "@fk-templates/firebase";
 import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { layoutVariantLabels } from "@fk-templates/shared";
+import { getDefaultTemplate } from "../../src/defaultTemplate";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
@@ -50,7 +51,8 @@ function defaultsFor(template: TemplateKey) {
 export default function AdminSettingsPage() {
   const guard = useOptionalAdminGuard();
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business";
-  const [form, setForm] = useState(defaultsFor("appointment"));
+  const defaultTemplate = getDefaultTemplate();
+  const [form, setForm] = useState(defaultsFor(defaultTemplate));
   const [status, setStatus] = useState("Site ayarları panelden yönetilebilir.");
   const [isSaving, setIsSaving] = useState(false);
 
@@ -60,7 +62,7 @@ export default function AdminSettingsPage() {
       try {
         const settings = await getSiteSettings(businessId);
         if (settings) {
-          const selectedTemplate = settings.template || "appointment";
+          const selectedTemplate = settings.template || defaultTemplate;
           const defaults = defaultsFor(selectedTemplate);
           setForm({
             template: selectedTemplate,
@@ -90,14 +92,16 @@ export default function AdminSettingsPage() {
           });
           setStatus("Canlı site ayarları yüklendi.");
         } else {
+          setForm(defaultsFor(defaultTemplate));
           setStatus("Ayar kaydı yok, demo varsayılanları gösteriliyor.");
         }
       } catch (error) {
+        setForm(defaultsFor(defaultTemplate));
         setStatus("Firebase bağlı değil, demo varsayılanları gösteriliyor.");
       }
     }
     loadSettings();
-  }, [businessId, guard.isAllowed]);
+  }, [businessId, defaultTemplate, guard.isAllowed]);
 
   function updateField(key: keyof typeof form, value: string) {
     setForm((current) => ({ ...current, [key]: value }));
