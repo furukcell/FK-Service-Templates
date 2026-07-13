@@ -5,7 +5,11 @@ import { demoLotusBorekConfig } from "../../../configs/demo-lotus-borek";
 export const lotusAdminTemplateKeys: TemplateKey[] = ["cafe"];
 
 export function isLotusAdminDemo() {
-  return process.env.NEXT_PUBLIC_BUSINESS_ID === "lotus-borek-demo" || process.env.NEXT_PUBLIC_SITE_HOME_PATH === "/lotus-borek-evi";
+  return (
+    process.env.NEXT_PUBLIC_BUSINESS_ID === "lotus-borek-demo" ||
+    process.env.NEXT_PUBLIC_SITE_HOME_PATH === "/lotus-borek-evi" ||
+    (process.env.NEXT_PUBLIC_DEMO_MODE === "true" && process.env.NEXT_PUBLIC_DEFAULT_TEMPLATE === "cafe")
+  );
 }
 
 export function getLotusAdminConfig(template: TemplateKey, templateConfigs: Record<TemplateKey, BusinessTemplateConfig>) {
