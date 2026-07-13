@@ -21,6 +21,10 @@
   color: var(--primary);
 }
 
+.lotusDemoPage .showcasePanelGrid .sectionHead p {
+  display: none;
+}
+
 .visualGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
