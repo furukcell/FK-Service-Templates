@@ -46,7 +46,7 @@ function normalizePhone(phone: string) {
 function whatsappUrl(config: BusinessTemplateConfig) {
   const normalized = normalizePhone(config.whatsapp || config.phone);
   const message = encodeURIComponent(`Merhaba ${config.brandName}, sipariş vermek ve menü/fiyat bilgisi almak istiyorum.`);
-  return normalized ? `https://wa.me/${normalized}?text=${message}` : "#request-form";
+  return normalized.length >= 10 ? `https://wa.me/${normalized}?text=${message}` : "#request-form";
 }
 
 function isWhatsappCta(label: string) {
@@ -63,6 +63,18 @@ function PrimaryCtaButton({ config }: { config: BusinessTemplateConfig }) {
       rel={isWhatsapp ? "noreferrer" : undefined}
     >
       {config.primaryCta}
+    </a>
+  );
+}
+
+function FloatingWhatsappButton({ config }: { config: BusinessTemplateConfig }) {
+  const href = whatsappUrl(config);
+  if (href === "#request-form") return null;
+
+  return (
+    <a className="floatingWhatsappButton" href={href} target="_blank" rel="noreferrer" aria-label={`${config.brandName} WhatsApp iletişim`}>
+      <span className="floatingWhatsappMark" aria-hidden="true">WA</span>
+      <span className="floatingWhatsappText"><strong>WhatsApp</strong><small>Hızlı sipariş</small></span>
     </a>
   );
 }
@@ -162,6 +174,7 @@ function Shell({ config, children, contentBasePath }: { config: BusinessTemplate
         <span>{config.address}</span>
         <LegalFooterLinks contentBasePath={contentBasePath} />
       </footer>
+      <FloatingWhatsappButton config={config} />
     </main>
   );
 }
