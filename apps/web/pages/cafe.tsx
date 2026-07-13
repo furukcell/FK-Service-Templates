@@ -7,7 +7,7 @@ import { useManagedTemplateConfig } from "../src/useManagedTemplateConfig";
 
 export default function CafeTemplatePage() {
   const { config, layoutVariant, requiresSetup } = useManagedTemplateConfig(templateConfigs.cafe);
-  const activeLayout = useLayoutVariantFromQuery(layoutVariant || "modern");
+  const activeLayout = useLayoutVariantFromQuery(layoutVariant || "showcase");
 
   if (requiresSetup) return <SiteSetupGuard />;
 
@@ -20,6 +20,9 @@ export default function CafeTemplatePage() {
         activeLayout={activeLayout}
         showTemplateSwitch={false}
         showLayoutSwitch={false}
+        hideShowcaseServiceStrip
+        hidePreviewMiniGrid
+        prominentLocationCard
       />
     </>
   );
