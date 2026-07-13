@@ -16,6 +16,7 @@
   "dependencies": {
     "@fk-templates/firebase": "file:../../packages/firebase",
     "@fk-templates/shared": "file:../../packages/shared",
+    "firebase": "^11.0.1",
     "next": "14.2.16",
     "react": "18.3.1",
     "react-dom": "18.3.1"
