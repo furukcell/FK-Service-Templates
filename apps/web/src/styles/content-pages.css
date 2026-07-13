@@ -39,6 +39,7 @@
 .contentBody,
 .contentFaqList,
 .contentInfoGrid,
+.contentMapCard,
 .contentFooter {
   width: min(1100px, 92vw);
   margin: 24px auto;
@@ -91,6 +92,56 @@
 .contentFaqList p {
   color: var(--muted);
   line-height: 1.65;
+}
+
+.contentMapCard {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+}
+
+.contentMapFrame {
+  width: 100%;
+  height: 360px;
+  border: 0;
+  display: block;
+}
+
+.contentMapCard > div {
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contentMapCard span {
+  width: fit-content;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: var(--primary);
+  background: var(--soft);
+  font-weight: 950;
+}
+
+.contentMapCard h2 {
+  margin: 18px 0 10px;
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.contentMapCard p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.contentMapCard .pillButton {
+  width: fit-content;
+  margin-top: 10px;
 }
 
 .contentFooter {
@@ -186,13 +237,19 @@
 
 @media (max-width: 820px) {
   .contentHero,
-  .contentBody {
+  .contentBody,
+  .contentMapCard > div {
     padding: 24px;
   }
 
   .contentInfoGrid,
-  .contentFaqList {
+  .contentFaqList,
+  .contentMapCard {
     grid-template-columns: 1fr;
+  }
+
+  .contentMapFrame {
+    height: 280px;
   }
 
   .cookieBanner {
