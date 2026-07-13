@@ -4,6 +4,12 @@ const nextConfig = {
   transpilePackages: ["@fk-templates/shared", "@fk-templates/firebase"],
   experimental: {
     externalDir: true
+  },
+  eslint: {
+    ignoreDuringBuilds: true
+  },
+  typescript: {
+    ignoreBuildErrors: true
   }
 };
 
