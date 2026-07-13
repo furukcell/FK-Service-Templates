@@ -4,7 +4,7 @@ import { TemplateLanding } from "../src/components/TemplateLanding";
 
 export default function LotusBorekDemoPage() {
   return (
-    <>
+    <div className="lotusDemoPage">
       <SeoHead
         title="Lotus Börek Evi | Günlük Taze Lezzetler"
         description={demoLotusBorekConfig.heroDescription}
@@ -22,6 +22,6 @@ export default function LotusBorekDemoPage() {
         hidePreviewMiniGrid
         prominentLocationCard
       />
-    </>
+    </div>
   );
 }
