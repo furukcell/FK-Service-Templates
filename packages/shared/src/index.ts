@@ -71,7 +71,7 @@ export const templateLabels: Record<TemplateKey, string> = {
   appointment: "Veteriner / Klinik",
   salon: "Kuaför / Güzellik",
   "real-estate": "Emlakçı",
-  cafe: "Pastane / Cafe / Börekçi",
+  cafe: "Cafe / Pastane / Fırın / Restoran",
   kindergarten: "Kreş / Anaokulu",
   "event-venue": "Düğün Salonu / Organizasyon"
 };
