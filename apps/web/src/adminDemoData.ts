@@ -2,7 +2,7 @@ export type DemoRequestStatus = "new" | "contacted" | "confirmed" | "cancelled" 
 
 export type DemoRequest = {
   id: string;
-  template: "appointment" | "salon" | "real-estate";
+  template: "appointment" | "salon" | "real-estate" | "cafe" | "kindergarten" | "event-venue";
   customerName: string;
   customerPhone: string;
   subject: string;
@@ -22,34 +22,34 @@ export type DemoProperty = {
 
 export const demoRequests: DemoRequest[] = [
   {
-    id: "REQ-1001",
-    template: "appointment",
+    id: "LOTUS-1001",
+    template: "cafe",
     customerName: "Ayşe Yılmaz",
     customerPhone: "+90 532 *** ** 18",
-    subject: "Kedi aşı randevusu",
-    date: "Bugün 14:30",
+    subject: "Börek çeşitleri ve fiyat bilgisi",
+    date: "Bugün 10:20",
     status: "new",
+    source: "whatsapp"
+  },
+  {
+    id: "LOTUS-1002",
+    template: "cafe",
+    customerName: "Mehmet Çakır",
+    customerPhone: "+90 544 *** ** 90",
+    subject: "Toplu sipariş talebi",
+    date: "Bugün 12:45",
+    status: "contacted",
     source: "website"
   },
   {
-    id: "REQ-1002",
-    template: "salon",
+    id: "LOTUS-1003",
+    template: "cafe",
     customerName: "Meltem Kurtuluş",
     customerPhone: "+90 555 *** ** 42",
-    subject: "Saç kesim ve fön",
-    date: "Yarın 11:00",
+    subject: "Cevizli baklava ve kurabiye bilgisi",
+    date: "Yarın 09:00",
     status: "confirmed",
     source: "instagram"
-  },
-  {
-    id: "REQ-1003",
-    template: "real-estate",
-    customerName: "Mehmet Çakır",
-    customerPhone: "+90 544 *** ** 90",
-    subject: "Milas satılık arsa talebi",
-    date: "2 saat önce",
-    status: "contacted",
-    source: "qr"
   }
 ];
 
