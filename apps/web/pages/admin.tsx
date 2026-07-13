@@ -8,6 +8,7 @@ import {
   type RequestStatus
 } from "@fk-templates/firebase";
 import { demoProperties, demoRequests, statusLabels } from "../src/adminDemoData";
+import { getDefaultTemplateRoute } from "../src/defaultTemplate";
 import { isDemoMode } from "../src/runtimeMode";
 import { useOptionalAdminGuard } from "../src/useOptionalAdminGuard";
 
@@ -94,6 +95,7 @@ export default function AdminPage() {
   const [browserNotificationStatus, setBrowserNotificationStatus] = useState("Tarayıcı bildirimi kapalı.");
   const knownRequestIdsRef = useRef<Set<string>>(new Set());
   const initialSnapshotLoadedRef = useRef(false);
+  const siteReturnPath = getDefaultTemplateRoute();
 
   async function loadRequests() {
     try {
@@ -249,7 +251,7 @@ export default function AdminPage() {
             <p className="adminMode">Bildirim: {browserNotificationStatus}</p>
             {actionStatus ? <p className="adminMode">{actionStatus}</p> : null}
           </div>
-          <div className="navActions"><button className="ghostButton" type="button" onClick={enableBrowserNotifications}>Tarayıcı Bildirimi Aç</button><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
+          <div className="navActions"><button className="ghostButton" type="button" onClick={enableBrowserNotifications}>Tarayıcı Bildirimi Aç</button><a className="pillButton navButtonLink" href={siteReturnPath}>Siteye Dön</a></div>
         </header>
 
         {notificationMessage ? <section className="adminToast"><div><strong>Yeni talep bildirimi</strong><p>{notificationMessage}</p></div><button className="ghostButton" type="button" onClick={clearNotification}>Kapat</button></section> : null}
