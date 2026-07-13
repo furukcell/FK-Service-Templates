@@ -8,6 +8,68 @@
   color: var(--text);
 }
 
+.lotusAdminShell {
+  background:
+    radial-gradient(circle at top right, rgba(249, 115, 22, 0.2), transparent 34%),
+    radial-gradient(circle at 12% 18%, rgba(250, 204, 21, 0.14), transparent 26%),
+    linear-gradient(135deg, #fff7ed, #fffaf3);
+}
+
+.lotusAdminShell .adminHeader {
+  background:
+    radial-gradient(circle at 82% 8%, rgba(255, 255, 255, 0.96), transparent 28%),
+    linear-gradient(135deg, rgba(255, 247, 237, 0.96), rgba(255, 237, 213, 0.78));
+}
+
+.lotusAdminShell .adminSidebar nav a.active,
+.lotusAdminShell .adminSidebar nav a:hover,
+.lotusAdminShell .adminMode,
+.lotusAdminShell .priceTag,
+.lotusAdminShell .adminProperty mark {
+  background: #ffedd5;
+  color: var(--primary);
+}
+
+.lotusAdminShell .pillButton {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+.lotusAdminShell .ghostButton:hover {
+  color: var(--primary);
+  border-color: color-mix(in srgb, var(--primary) 28%, var(--line));
+}
+
+.lotusAdminBadge {
+  width: fit-content;
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--primary);
+  background: #ffedd5;
+  font-weight: 950;
+}
+
+.lotusColorPresetPanel {
+  grid-column: 1 / -1;
+  padding: 18px;
+  border-radius: 24px;
+  background: #fff7ed;
+  border: 1px solid color-mix(in srgb, var(--primary) 14%, var(--line));
+}
+
+.lotusColorPresetPanel > span {
+  display: block;
+  color: var(--primary);
+  font-weight: 950;
+  margin-bottom: 12px;
+}
+
+.lotusColorPresetPanel > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .adminSidebar {
   min-height: 100vh;
   padding: 28px;
