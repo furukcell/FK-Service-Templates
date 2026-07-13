@@ -1,0 +1,77 @@
+.floatingWhatsappButton {
+  position: fixed;
+  right: clamp(18px, 4vw, 34px);
+  bottom: clamp(18px, 4vw, 34px);
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 184px;
+  padding: 12px 16px 12px 12px;
+  border-radius: 999px;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  box-shadow: 0 22px 46px rgba(22, 163, 74, 0.34), 0 8px 18px rgba(15, 23, 42, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.floatingWhatsappButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 26px 58px rgba(22, 163, 74, 0.42), 0 10px 24px rgba(15, 23, 42, 0.16);
+}
+
+.floatingWhatsappMark {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: #16a34a;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 1000;
+  letter-spacing: -0.05em;
+}
+
+.floatingWhatsappText {
+  display: grid;
+  gap: 1px;
+  line-height: 1.1;
+}
+
+.floatingWhatsappText strong {
+  font-size: 16px;
+  letter-spacing: -0.03em;
+}
+
+.floatingWhatsappText small {
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+@media (max-width: 640px) {
+  .floatingWhatsappButton {
+    right: 14px;
+    bottom: 14px;
+    min-width: 0;
+    padding: 10px 12px 10px 10px;
+  }
+
+  .floatingWhatsappMark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .floatingWhatsappText strong {
+    font-size: 14px;
+  }
+
+  .floatingWhatsappText small {
+    display: none;
+  }
+}
