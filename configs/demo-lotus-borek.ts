@@ -48,19 +48,24 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
   ],
   galleryItems: [
     {
-      title: "Taze fırın ürünleri",
-      description: "Demo görsel: günlük çıkan börek, simit, poğaça ve fırın lezzetleri için vitrin alanı.",
-      imageUrl: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80"
+      title: "Taze börek vitrini",
+      description: "Demo görsel: kol böreği, su böreği, gül böreği ve günlük çıkan börek çeşitleri.",
+      imageUrl: "/demo/lotus-borek/borek-vitrini.svg"
     },
     {
-      title: "Börek ve hamur işi vitrini",
-      description: "Demo görsel: kol böreği, su böreği, gül böreği ve kalem böreği sunum alanı.",
-      imageUrl: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&w=1200&q=80"
+      title: "Hamur işleri",
+      description: "Demo görsel: simit, poğaça ve günlük sıcak hamur işi çeşitleri.",
+      imageUrl: "/demo/lotus-borek/hamur-isleri.svg"
     },
     {
-      title: "Kurabiye ve tatlılar",
-      description: "Demo görsel: kurabiye, tatlı ve cevizli baklava çeşitleri için galeri alanı.",
-      imageUrl: "https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?auto=format&fit=crop&w=1200&q=80"
+      title: "Tatlı ve baklava",
+      description: "Demo görsel: cevizli baklava, kurabiye ve günlük tatlı çeşitleri.",
+      imageUrl: "/demo/lotus-borek/tatlilar-baklava.svg"
+    },
+    {
+      title: "Kahvaltılıklar",
+      description: "Demo görsel: sabah kahvaltılıkları, sıcak ürünler ve gel-al sipariş vitrini.",
+      imageUrl: "/demo/lotus-borek/kahvaltiliklar.svg"
     }
   ],
   staff: [
