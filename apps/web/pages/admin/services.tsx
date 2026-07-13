@@ -7,14 +7,20 @@ import {
   type BusinessService
 } from "@fk-templates/firebase";
 import type { TemplateKey } from "@fk-templates/shared";
+import { getDefaultTemplate, getDefaultTemplateRoute } from "../../src/defaultTemplate";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
 const manageableTemplates: TemplateKey[] = ["appointment", "salon", "cafe", "kindergarten", "event-venue"];
 
+function getDefaultManageableTemplate() {
+  const defaultTemplate = getDefaultTemplate();
+  return manageableTemplates.includes(defaultTemplate) ? defaultTemplate : "appointment";
+}
+
 export default function AdminServicesPage() {
   const guard = useOptionalAdminGuard();
-  const [activeTemplate, setActiveTemplate] = useState<TemplateKey>("appointment");
+  const [activeTemplate, setActiveTemplate] = useState<TemplateKey>(getDefaultManageableTemplate());
   const [services, setServices] = useState<BusinessService[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [status, setStatus] = useState("Hizmet yönetimi Firebase'e hazırdır.");
@@ -131,7 +137,7 @@ export default function AdminServicesPage() {
           <a href="/admin/campaigns">Kampanyalar</a>
           <a href="/admin/gallery">Galeri</a>
           <a href="/admin/properties">İlanlar</a>
-          <a href="/">Site</a>
+          <a href={getDefaultTemplateRoute()}>Site</a>
         </nav>
       </aside>
       <section className="adminMain">
