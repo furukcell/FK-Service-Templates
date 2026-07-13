@@ -43,6 +43,49 @@ export default function LotusBorekDemoPage() {
           background-size: contain;
         }
 
+        .lotusDemoPage .showcaseHero {
+          position: relative;
+          overflow: hidden;
+          color: #fff;
+          background:
+            radial-gradient(circle at 78% 12%, rgba(255, 255, 255, 0.18), transparent 27%),
+            linear-gradient(90deg, rgba(67, 20, 7, 0.92) 0%, rgba(124, 45, 18, 0.76) 46%, rgba(249, 115, 22, 0.72) 100%),
+            url("/images/logos/hero-vitrin.png");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          box-shadow: 0 34px 90px rgba(67, 20, 7, 0.18);
+        }
+
+        .lotusDemoPage .showcaseHero::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.08));
+          pointer-events: none;
+        }
+
+        .lotusDemoPage .showcaseHero > * {
+          position: relative;
+          z-index: 1;
+        }
+
+        .lotusDemoPage .showcaseHero .eyebrow,
+        .lotusDemoPage .showcaseHero p {
+          color: rgba(255, 255, 255, 0.92);
+        }
+
+        .lotusDemoPage .showcaseHero h1 {
+          color: #fff;
+          text-shadow: 0 12px 38px rgba(0, 0, 0, 0.26);
+        }
+
+        .lotusDemoPage .showcaseHero .ghostButton {
+          color: #fff;
+          background: rgba(255, 255, 255, 0.14);
+          border-color: rgba(255, 255, 255, 0.34);
+        }
+
         @media (max-width: 1180px) {
           .lotusDemoPage .logoLockup {
             min-width: 250px;
@@ -67,6 +110,10 @@ export default function LotusBorekDemoPage() {
           .lotusDemoPage .logoLockup > span:not(.logoMark) {
             width: 220px;
             height: 52px;
+          }
+
+          .lotusDemoPage .showcaseHero {
+            background-position: center;
           }
         }
       `}</style>
