@@ -2,12 +2,12 @@ import type { BusinessTemplateConfig } from "@fk-templates/shared";
 
 export const demoCafeConfig: BusinessTemplateConfig = {
   template: "cafe",
-  sector: "Pastane / Cafe / Börekçi",
+  sector: "Cafe / Pastane / Fırın / Restoran",
   brandName: "Fırın & Cafe",
-  eyebrow: "Günlük ürün, paket sipariş ve masa talebi alan modern işletme sitesi",
-  heroTitle: "Sıcak lezzetleri dijital vitrinde siparişe ve rezervasyona dönüştür.",
-  heroDescription: "Pastane, cafe ve börekçi işletmeleri için menü, kampanya, galeri, toplu sipariş ve masa/ürün talebi alan hazır web sitesi.",
-  primaryCta: "Sipariş / Talep Bırak",
+  eyebrow: "Günlük taze ürün, paket sipariş ve lezzet vitrini",
+  heroTitle: "Günlük taze lezzetleri dijital vitrinde siparişe dönüştür.",
+  heroDescription: "Cafe, pastane, fırın ve restoran işletmeleri için menü, görsel vitrin, WhatsApp sipariş, konum ve hızlı talep alan modern web sitesi.",
+  primaryCta: "WhatsApp’tan Sipariş Ver",
   secondaryCta: "Menüyü İncele",
   topBarText: "Günlük taze ürünler • Paket sipariş • Toplu sipariş • WhatsApp destek",
   phone: "+90 5xx xxx xx xx",
@@ -22,39 +22,41 @@ export const demoCafeConfig: BusinessTemplateConfig = {
     soft: "#FFF7ED",
     dark: "#431407"
   },
-  navItems: ["Menü", "Kampanyalar", "Galeri", "Sipariş"],
+  navItems: ["Menü", "Vitrin", "Konum", "Sipariş"],
   stats: [
-    { value: "Günlük", label: "taze üretim" },
-    { value: "10+", label: "ürün grubu" },
-    { value: "1 dk", label: "talep formu" },
-    { value: "IG", label: "lezzet vitrini" }
+    { value: "Günlük", label: "taze ürün" },
+    { value: "Menü", label: "kategori düzeni" },
+    { value: "WA", label: "hızlı sipariş" },
+    { value: "Konum", label: "yol tarifi" }
   ],
   services: [
-    { title: "Kahvaltı & Cafe Ürünleri", description: "Kahve, tatlı, kahvaltı tabakları ve günlük atıştırmalıklar.", price: "Menüden seç" },
-    { title: "Börek & Poğaça Çeşitleri", description: "Günlük taze börek, poğaça, açma ve tuzlu ürün çeşitleri.", price: "₺25+" },
-    { title: "Pasta & Tatlı Siparişi", description: "Doğum günü, özel gün ve toplu tatlı/pasta siparişleri.", price: "Teklif al" }
+    { title: "Ana Lezzetler", description: "İşletmenin öne çıkan ürünleri, günlük çıkan ana menü seçenekleri ve vitrin ürünleri.", price: "Fiyat Sor" },
+    { title: "Kahvaltı & Atıştırmalık", description: "Sabah ürünleri, hızlı servis seçenekleri, kahvaltılık ve gün içi atıştırmalıklar.", price: "Fiyat Sor" },
+    { title: "Tatlı & İçecek", description: "Tatlı, pasta, kurabiye, kahve, sıcak-soğuk içecek ve günlük ikram seçenekleri.", price: "Fiyat Sor" },
+    { title: "Paket & Gel-Al", description: "Telefon veya WhatsApp üzerinden hızlı sipariş, gel-al ve paket servis yönlendirmesi.", price: "Fiyat Sor" },
+    { title: "Toplu Sipariş", description: "İş yeri, okul, toplantı, özel gün ve etkinlikler için toplu sipariş desteği.", price: "Fiyat Sor" }
   ],
   campaignItems: [
-    { title: "Sabah kahvaltı paketi", description: "Börek + içecek + tatlı mini paket seçeneği.", price: "₺150+" },
-    { title: "Toplu ofis siparişi", description: "Şirket, okul ve etkinlikler için toplu börek/poğaça siparişi.", price: "Teklif al" },
-    { title: "Özel gün pastası", description: "Kişiye özel pasta ve tatlı siparişi için hızlı talep.", price: "Teklif al" }
+    { title: "Günlük Taze Vitrin", description: "Günün öne çıkan ürünleri, sıcak çıkan lezzetler ve vitrin duyuruları.", price: "Günlük" },
+    { title: "Paket ve Gel-Al Kolaylığı", description: "Müşteri WhatsApp üzerinden sipariş bırakır, işletme uygunluk ve fiyat bilgisiyle dönüş yapar.", price: "Hızlı dönüş" },
+    { title: "Toplu Sipariş Desteği", description: "Şirket, okul, toplantı ve özel günler için ürün ve adet bilgisi alınır.", price: "Fiyat Sor" }
   ],
   galleryItems: [
-    { title: "Günlük vitrin", description: "Taze çıkan ürünler ve vitrin görselleri için galeri alanı." },
-    { title: "Cafe atmosferi", description: "Mekan içi masa, sunum ve müşteri deneyimi görselleri." },
-    { title: "Özel siparişler", description: "Pasta, tatlı ve toplu sipariş örnekleri için portföy alanı." }
+    { title: "Ürün vitrini", description: "Taze çıkan ürünler ve vitrin görselleri için galeri alanı." },
+    { title: "Mekan atmosferi", description: "Mekan içi, masa düzeni, sunum ve müşteri deneyimi görselleri." },
+    { title: "Paket ve özel sipariş", description: "Paket servis, özel gün ve toplu sipariş örnekleri." }
   ],
   staff: [
-    { name: "Usta Şef", role: "Üretim", description: "Günlük taze börek, pasta ve fırın ürünleri üretimi." },
-    { name: "Cafe Ekibi", role: "Servis", description: "Masa, paket ve hızlı müşteri taleplerinin takibi." }
+    { name: "Üretim Ekibi", role: "Günlük hazırlık", description: "Günlük ürün, menü ve vitrin hazırlıklarının takibi." },
+    { name: "Sipariş Ekibi", role: "Müşteri dönüşü", description: "WhatsApp, telefon ve form taleplerine hızlı dönüş." }
   ],
   form: {
-    title: "Sipariş / masa talebi bırak",
-    description: "Ürün, tarih ve notunuzu yazın; işletme size telefon veya WhatsApp üzerinden dönüş yapsın.",
+    title: "Sipariş ve menü bilgi talebi",
+    description: "Menü, paket sipariş, toplu sipariş veya güncel fiyat bilgisi için formu doldurun. İşletme size telefon veya WhatsApp üzerinden dönüş yapsın.",
     fields: [
       { key: "name", label: "Ad Soyad", type: "text", placeholder: "Adınız soyadınız" },
       { key: "phone", label: "Telefon", type: "tel", placeholder: "+90 5xx xxx xx xx" },
-      { key: "service", label: "Talep tipi", type: "select", options: ["Paket sipariş", "Masa talebi", "Toplu sipariş", "Pasta siparişi", "Menü bilgisi"] },
+      { key: "service", label: "Talep tipi", type: "select", options: ["Menü ve fiyat bilgisi", "Paket sipariş", "Gel-al sipariş", "Toplu sipariş", "Rezervasyon / masa bilgisi"] },
       { key: "date", label: "Tercih edilen tarih", type: "date" },
       { key: "time", label: "Tercih edilen saat", type: "time" },
       { key: "note", label: "Not", type: "textarea", placeholder: "Ürün, adet, teslim/masa notu yazın" }
