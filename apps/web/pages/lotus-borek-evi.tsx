@@ -17,6 +17,7 @@ export default function LotusBorekDemoPage() {
         activeLayout="showcase"
         showTemplateSwitch={false}
         showLayoutSwitch={false}
+        contentBasePath="/lotus-borek-evi"
       />
     </>
   );
