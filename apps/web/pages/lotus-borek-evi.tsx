@@ -86,6 +86,59 @@ export default function LotusBorekDemoPage() {
           border-color: rgba(255, 255, 255, 0.34);
         }
 
+        .lotusDemoPage .previewHeader {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+          padding: 18px;
+          border-radius: 24px;
+          background: rgba(255, 247, 237, 0.96);
+          border: 1px solid rgba(249, 115, 22, 0.16);
+          box-shadow: 0 18px 36px rgba(67, 20, 7, 0.16);
+        }
+
+        .lotusDemoPage .previewHeader > span:not(.previewBadge) {
+          order: 1;
+          width: 100%;
+          color: #431407;
+          text-align: center;
+          font-size: 16px;
+          line-height: 1.12;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          font-weight: 950;
+        }
+
+        .lotusDemoPage .previewHeader > span:not(.previewBadge)::after {
+          content: "";
+          display: block;
+          width: 64px;
+          height: 2px;
+          margin: 8px auto 0;
+          border-radius: 999px;
+          background: linear-gradient(90deg, transparent, #f97316, transparent);
+        }
+
+        .lotusDemoPage .previewHeader .previewBadge {
+          order: 2;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 40px;
+          padding: 10px 12px;
+          border: 0;
+          border-radius: 999px;
+          color: #fff;
+          text-align: center;
+          white-space: nowrap;
+          font-size: 13px;
+          line-height: 1;
+          letter-spacing: -0.01em;
+          background: linear-gradient(135deg, #7c2d12 0%, #ea580c 58%, #f97316 100%);
+          box-shadow: 0 14px 28px rgba(124, 45, 18, 0.22);
+        }
+
         @media (max-width: 1180px) {
           .lotusDemoPage .logoLockup {
             min-width: 250px;
