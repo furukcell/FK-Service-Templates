@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getSiteSettings, saveSiteSettings, type ContentPageKey, type FaqItem, type ManagedContentPage, type ManagedSiteSettings } from "@fk-templates/firebase";
 import type { TemplateKey } from "@fk-templates/shared";
+import { getDefaultTemplate } from "../../src/defaultTemplate";
 import { contentPageLabels, contentPageOrder, defaultContentPages, defaultFaqItems } from "../../src/siteContent";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
@@ -10,11 +11,12 @@ const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "caf
 export default function AdminContentPage() {
   const guard = useOptionalAdminGuard();
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business";
+  const defaultTemplate = getDefaultTemplate();
   const [settings, setSettings] = useState<ManagedSiteSettings | null>(null);
-  const [template, setTemplate] = useState<TemplateKey>("appointment");
+  const [template, setTemplate] = useState<TemplateKey>(defaultTemplate);
   const [activePage, setActivePage] = useState<ContentPageKey>("about");
-  const [pageForm, setPageForm] = useState<ManagedContentPage>(defaultContentPages(templateConfigs.appointment).about);
-  const [faqItems, setFaqItems] = useState<FaqItem[]>(defaultFaqItems(templateConfigs.appointment));
+  const [pageForm, setPageForm] = useState<ManagedContentPage>(defaultContentPages(templateConfigs[defaultTemplate]).about);
+  const [faqItems, setFaqItems] = useState<FaqItem[]>(defaultFaqItems(templateConfigs[defaultTemplate]));
   const [faqForm, setFaqForm] = useState<FaqItem>({ question: "", answer: "" });
   const [status, setStatus] = useState("Kurumsal metinler panelden yönetilebilir.");
   const [isSaving, setIsSaving] = useState(false);
@@ -28,18 +30,21 @@ export default function AdminContentPage() {
     async function loadContent() {
       try {
         const siteSettings = await getSiteSettings(businessId);
-        const selectedTemplate = siteSettings?.template || "appointment";
+        const selectedTemplate = siteSettings?.template || defaultTemplate;
         setSettings(siteSettings);
         setTemplate(selectedTemplate);
         setPageForm(siteSettings?.contentPages?.[activePage] || pageDefaults(selectedTemplate, activePage, siteSettings));
         setFaqItems(siteSettings?.faqItems?.length ? siteSettings.faqItems : defaultFaqItems(templateConfigs[selectedTemplate]));
         setStatus(siteSettings?.contentPages ? "Canlı kurumsal metinler yüklendi." : "Metin kaydı yok, hazır şablon metinleri gösteriliyor.");
       } catch (error) {
+        setTemplate(defaultTemplate);
+        setPageForm(pageDefaults(defaultTemplate, activePage));
+        setFaqItems(defaultFaqItems(templateConfigs[defaultTemplate]));
         setStatus("Firebase bağlı değil, hazır şablon metinleri gösteriliyor.");
       }
     }
     loadContent();
-  }, [activePage, businessId, guard.isAllowed]);
+  }, [activePage, businessId, defaultTemplate, guard.isAllowed]);
 
   function changeTemplate(selectedTemplate: TemplateKey) {
     setTemplate(selectedTemplate);
