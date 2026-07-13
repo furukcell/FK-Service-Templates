@@ -21,7 +21,8 @@ export function getDefaultTemplateRoute() {
   if (homePath) return homePath;
 
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID;
-  if (businessId === "lotus-borek-demo") return "/lotus-borek-evi";
+  const isCafeDemo = process.env.NEXT_PUBLIC_DEMO_MODE === "true" && process.env.NEXT_PUBLIC_DEFAULT_TEMPLATE === "cafe";
+  if (businessId === "lotus-borek-demo" || isCafeDemo) return "/lotus-borek-evi";
 
   return templateRouteByKey[getDefaultTemplate()];
 }
