@@ -9,6 +9,12 @@ import { useSiteContent } from "../useSiteContent";
 import { contentPageLabels, contentPageRoutes, getManagedContentPage, getManagedFaqItems } from "../siteContent";
 import { getDefaultTemplate } from "../defaultTemplate";
 
+type StaticContentProps = {
+  staticConfig?: BusinessTemplateConfig;
+  homePath?: string;
+  contentBasePath?: string;
+};
+
 function isLotusDemo() {
   return process.env.NEXT_PUBLIC_BUSINESS_ID === "lotus-borek-demo" || process.env.NEXT_PUBLIC_DEFAULT_TEMPLATE === "cafe";
 }
@@ -21,6 +27,11 @@ function getFallbackConfig(): BusinessTemplateConfig {
 function getHomePath() {
   if (isLotusDemo()) return "/lotus-borek-evi";
   return "/";
+}
+
+function contentHref(path: string, contentBasePath = "") {
+  if (!contentBasePath) return path;
+  return `${contentBasePath}${path}`;
 }
 
 function paragraphs(body: string) {
@@ -41,22 +52,24 @@ function logoText(name: string) {
   return name.slice(0, 2).toUpperCase();
 }
 
-export function ContentPage({ pageKey }: { pageKey: ContentPageKey }) {
+export function ContentPage({ pageKey, staticConfig, homePath, contentBasePath = "" }: { pageKey: ContentPageKey } & StaticContentProps) {
   const { settings, requiresSetup } = useSiteContent();
-  const fallbackConfig = getFallbackConfig();
-  const config = settings?.template ? templateConfigs[settings.template] : fallbackConfig;
-  const brandName = settings?.brandName || config.brandName;
-  const page = getManagedContentPage(config, settings, pageKey);
-  const homePath = getHomePath();
+  const fallbackConfig = staticConfig || getFallbackConfig();
+  const config = staticConfig || (settings?.template ? templateConfigs[settings.template] : fallbackConfig);
+  const activeSettings = staticConfig ? null : settings;
+  const brandName = activeSettings?.brandName || config.brandName;
+  const page = getManagedContentPage(config, activeSettings, pageKey);
+  const activeHomePath = homePath || getHomePath();
+  const contactHref = contentHref(contentPageRoutes.contact, contentBasePath);
 
-  if (requiresSetup) return <SiteSetupGuard />;
+  if (!staticConfig && requiresSetup) return <SiteSetupGuard />;
 
   return (
     <main className="contentShell" style={themeStyle(config)}>
-      <SeoHead title={`${page.title} | ${brandName}`} description={page.description} canonicalPath={contentPageRoutes[pageKey]} />
+      <SeoHead title={`${page.title} | ${brandName}`} description={page.description} canonicalPath={contentHref(contentPageRoutes[pageKey], contentBasePath)} />
       <nav className="navbar contentNav">
-        <a className="logoLockup navButtonLink" href={homePath}><span className="logoMark">{logoText(brandName)}</span><span>{brandName}</span></a>
-        <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href={homePath}>Siteye Dön</a></div>
+        <a className="logoLockup navButtonLink" href={activeHomePath}><span className="logoMark">{logoText(brandName)}</span><span>{brandName}</span></a>
+        <div className="navActions"><a className="ghostButton navButtonLink" href={contactHref}>İletişim</a><a className="pillButton navButtonLink" href={activeHomePath}>Siteye Dön</a></div>
       </nav>
 
       <section className="contentHero">
@@ -71,10 +84,10 @@ export function ContentPage({ pageKey }: { pageKey: ContentPageKey }) {
 
       {pageKey === "contact" ? (
         <section className="contentInfoGrid">
-          <article><span>Telefon</span><strong>{settings?.phone || config.phone}</strong></article>
-          <article><span>Adres</span><strong>{settings?.address || config.address}</strong></article>
-          <article><span>Çalışma saatleri</span><strong>{settings?.workingHours || "Pazartesi - Cumartesi 09:00 - 18:00"}</strong></article>
-          <article><span>E-posta</span><strong>{settings?.contactEmail || "info@ornekfirma.com"}</strong></article>
+          <article><span>Telefon</span><strong>{activeSettings?.phone || config.phone}</strong></article>
+          <article><span>Adres</span><strong>{activeSettings?.address || config.address}</strong></article>
+          <article><span>Çalışma saatleri</span><strong>{activeSettings?.workingHours || "Her gün 07:00 - 20:00"}</strong></article>
+          <article><span>E-posta</span><strong>{activeSettings?.contactEmail || "info@ornekfirma.com"}</strong></article>
         </section>
       ) : null}
 
@@ -85,36 +98,38 @@ export function ContentPage({ pageKey }: { pageKey: ContentPageKey }) {
       ) : null}
 
       <footer className="contentFooter">
-        {Object.entries(contentPageRoutes).map(([key, href]) => <a href={href} key={key}>{contentPageLabels[key as ContentPageKey]}</a>)}
-        <a href="/sss">SSS</a>
+        {Object.entries(contentPageRoutes).map(([key, href]) => <a href={contentHref(href, contentBasePath)} key={key}>{contentPageLabels[key as ContentPageKey]}</a>)}
+        <a href={contentHref("/sss", contentBasePath)}>SSS</a>
       </footer>
     </main>
   );
 }
 
-export function FaqPage() {
+export function FaqPage({ staticConfig, homePath, contentBasePath = "" }: StaticContentProps = {}) {
   const { settings, requiresSetup } = useSiteContent();
-  const fallbackConfig = getFallbackConfig();
-  const config = settings?.template ? templateConfigs[settings.template] : fallbackConfig;
-  const brandName = settings?.brandName || config.brandName;
-  const faqItems = getManagedFaqItems(config, settings);
-  const homePath = getHomePath();
+  const fallbackConfig = staticConfig || getFallbackConfig();
+  const config = staticConfig || (settings?.template ? templateConfigs[settings.template] : fallbackConfig);
+  const activeSettings = staticConfig ? null : settings;
+  const brandName = activeSettings?.brandName || config.brandName;
+  const faqItems = getManagedFaqItems(config, activeSettings);
+  const activeHomePath = homePath || getHomePath();
+  const contactHref = contentHref(contentPageRoutes.contact, contentBasePath);
 
-  if (requiresSetup) return <SiteSetupGuard />;
+  if (!staticConfig && requiresSetup) return <SiteSetupGuard />;
 
   return (
     <main className="contentShell" style={themeStyle(config)}>
-      <SeoHead title={`Sık Sorulan Sorular | ${brandName}`} description="Randevu, talep, iletişim ve hizmet süreci hakkında sık sorulan sorular." canonicalPath="/sss" />
+      <SeoHead title={`Sık Sorulan Sorular | ${brandName}`} description="Randevu, talep, iletişim ve hizmet süreci hakkında sık sorulan sorular." canonicalPath={contentHref("/sss", contentBasePath)} />
       <nav className="navbar contentNav">
-        <a className="logoLockup navButtonLink" href={homePath}><span className="logoMark">{logoText(brandName)}</span><span>{brandName}</span></a>
-        <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href={homePath}>Siteye Dön</a></div>
+        <a className="logoLockup navButtonLink" href={activeHomePath}><span className="logoMark">{logoText(brandName)}</span><span>{brandName}</span></a>
+        <div className="navActions"><a className="ghostButton navButtonLink" href={contactHref}>İletişim</a><a className="pillButton navButtonLink" href={activeHomePath}>Siteye Dön</a></div>
       </nav>
       <section className="contentHero"><span className="eyebrow">Sık Sorulan Sorular</span><h1>Merak edilen sorular</h1><p>Randevu, talep, iletişim ve hizmet süreci hakkında sık sorulan sorular.</p></section>
       <section className="contentFaqList">
         {faqItems.map((item, index) => <article key={`${item.question}-${index}`}><h3>{item.question}</h3><p>{item.answer}</p></article>)}
       </section>
       <footer className="contentFooter">
-        {Object.entries(contentPageRoutes).map(([key, href]) => <a href={href} key={key}>{contentPageLabels[key as ContentPageKey]}</a>)}
+        {Object.entries(contentPageRoutes).map(([key, href]) => <a href={contentHref(href, contentBasePath)} key={key}>{contentPageLabels[key as ContentPageKey]}</a>)}
       </footer>
     </main>
   );
