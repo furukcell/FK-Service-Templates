@@ -14,7 +14,7 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
   whatsapp: "+905370584420",
   address: "Cumhuriyet Mahallesi, Halil Bey Bulvarı No: 75/A, Milas / Muğla",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Cumhuriyet%20Mahallesi%20Halil%20Bey%20Bulvar%C4%B1%20No%3A%2075%2FA%20Milas%2FMu%C4%9Fla",
-  instagramUrl: "https://instagram.com/",
+  instagramUrl: "https://www.instagram.com/lotus_borek_evi_48/",
   theme: {
     primary: "#7C2D12",
     secondary: "#F97316",
