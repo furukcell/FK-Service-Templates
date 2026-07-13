@@ -1,13 +1,23 @@
 import type { CSSProperties } from "react";
 import type { ContentPageKey } from "@fk-templates/firebase";
 import type { BusinessTemplateConfig } from "@fk-templates/shared";
+import { demoLotusBorekConfig } from "../../../../configs/demo-lotus-borek";
 import { SeoHead } from "./SeoHead";
 import { SiteSetupGuard } from "./SiteSetupGuard";
 import { templateConfigs } from "../templateConfigs";
 import { useSiteContent } from "../useSiteContent";
 import { contentPageLabels, contentPageRoutes, getManagedContentPage, getManagedFaqItems } from "../siteContent";
+import { getDefaultTemplate } from "../defaultTemplate";
 
-const baseConfig = templateConfigs.appointment;
+function getFallbackConfig(): BusinessTemplateConfig {
+  if (process.env.NEXT_PUBLIC_BUSINESS_ID === "lotus-borek-demo") return demoLotusBorekConfig;
+  return templateConfigs[getDefaultTemplate()];
+}
+
+function getHomePath() {
+  if (process.env.NEXT_PUBLIC_BUSINESS_ID === "lotus-borek-demo") return "/lotus-borek-evi";
+  return "/";
+}
 
 function paragraphs(body: string) {
   return body.split("\n").filter(Boolean);
@@ -29,9 +39,11 @@ function logoText(name: string) {
 
 export function ContentPage({ pageKey }: { pageKey: ContentPageKey }) {
   const { settings, requiresSetup } = useSiteContent();
-  const config = settings?.template ? templateConfigs[settings.template] : baseConfig;
+  const fallbackConfig = getFallbackConfig();
+  const config = settings?.template ? templateConfigs[settings.template] : fallbackConfig;
   const brandName = settings?.brandName || config.brandName;
   const page = getManagedContentPage(config, settings, pageKey);
+  const homePath = getHomePath();
 
   if (requiresSetup) return <SiteSetupGuard />;
 
@@ -39,8 +51,8 @@ export function ContentPage({ pageKey }: { pageKey: ContentPageKey }) {
     <main className="contentShell" style={themeStyle(config)}>
       <SeoHead title={`${page.title} | ${brandName}`} description={page.description} canonicalPath={contentPageRoutes[pageKey]} />
       <nav className="navbar contentNav">
-        <a className="logoLockup navButtonLink" href="/"><span className="logoMark">{logoText(brandName)}</span><span>{brandName}</span></a>
-        <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
+        <a className="logoLockup navButtonLink" href={homePath}><span className="logoMark">{logoText(brandName)}</span><span>{brandName}</span></a>
+        <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href={homePath}>Siteye Dön</a></div>
       </nav>
 
       <section className="contentHero">
@@ -78,9 +90,11 @@ export function ContentPage({ pageKey }: { pageKey: ContentPageKey }) {
 
 export function FaqPage() {
   const { settings, requiresSetup } = useSiteContent();
-  const config = settings?.template ? templateConfigs[settings.template] : baseConfig;
+  const fallbackConfig = getFallbackConfig();
+  const config = settings?.template ? templateConfigs[settings.template] : fallbackConfig;
   const brandName = settings?.brandName || config.brandName;
   const faqItems = getManagedFaqItems(config, settings);
+  const homePath = getHomePath();
 
   if (requiresSetup) return <SiteSetupGuard />;
 
@@ -88,8 +102,8 @@ export function FaqPage() {
     <main className="contentShell" style={themeStyle(config)}>
       <SeoHead title={`Sık Sorulan Sorular | ${brandName}`} description="Randevu, talep, iletişim ve hizmet süreci hakkında sık sorulan sorular." canonicalPath="/sss" />
       <nav className="navbar contentNav">
-        <a className="logoLockup navButtonLink" href="/"><span className="logoMark">{logoText(brandName)}</span><span>{brandName}</span></a>
-        <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href="/">Siteye Dön</a></div>
+        <a className="logoLockup navButtonLink" href={homePath}><span className="logoMark">{logoText(brandName)}</span><span>{brandName}</span></a>
+        <div className="navActions"><a className="ghostButton navButtonLink" href="/iletisim">İletişim</a><a className="pillButton navButtonLink" href={homePath}>Siteye Dön</a></div>
       </nav>
       <section className="contentHero"><span className="eyebrow">Sık Sorulan Sorular</span><h1>Merak edilen sorular</h1><p>Randevu, talep, iletişim ve hizmet süreci hakkında sık sorulan sorular.</p></section>
       <section className="contentFaqList">
