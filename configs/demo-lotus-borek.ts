@@ -65,22 +65,22 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
     {
       title: "Taze börek vitrini",
       description: "Günlük çıkan börekler ve sıcak ürün vitrini.",
-      imageUrl: "/demo/lotus-borek/real-taze-borek-vitrini.svg"
+      imageUrl: "/demo/lotus-borek/taze-borek.jpg"
     },
     {
       title: "Sıcak simit",
       description: "Sabah saatlerinde taze ve sıcak simit.",
-      imageUrl: "/demo/lotus-borek/real-sicak-simit.svg"
+      imageUrl: "/demo/lotus-borek/sicak-simit.jpg"
     },
     {
       title: "Kahvaltılıklar",
       description: "Simit, poğaça ve sabah ürünleri.",
-      imageUrl: "/demo/lotus-borek/real-kahvaltiliklar.svg"
+      imageUrl: "/demo/lotus-borek/sicak-simit.jpg"
     },
     {
       title: "Tatlı ve baklava",
       description: "Baklava, kurabiye ve günlük tatlı seçenekleri.",
-      imageUrl: "/demo/lotus-borek/real-tatli-baklava.svg"
+      imageUrl: "/demo/lotus-borek/baklava.jpg"
     }
   ],
   staff: [
