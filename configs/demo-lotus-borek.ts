@@ -4,9 +4,9 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
   template: "cafe",
   sector: "Pastane / Cafe / Börekçi",
   brandName: "Lotus Börek Evi",
-  eyebrow: "Milas’ta günlük taze börek, hamur işi ve tatlı çeşitleri",
-  heroTitle: "Lotus Börek Evi: börekten baklavaya günlük taze lezzetler.",
-  heroDescription: "Kol böreği, Arnavut böreği, su böreği, gül böreği, kalem böreği, kahvaltılıklar, kurabiye, tatlı ve cevizli baklava çeşitleri için hızlı WhatsApp siparişi ve menü bilgisi.",
+  eyebrow: "Milas’ta günlük taze lezzetler",
+  heroTitle: "Günlük taze börek, hamur işi ve tatlı çeşitleri",
+  heroDescription: "Kol böreği, Arnavut böreği, su böreği, kahvaltılıklar, kurabiye ve cevizli baklava için hızlı sipariş ve menü bilgisi.",
   primaryCta: "WhatsApp’tan Sipariş Ver",
   secondaryCta: "Menüyü İncele",
   topBarText: "Günlük taze börek • Hamur işleri • Kahvaltılıklar • Tatlı & baklava • WhatsApp sipariş",
@@ -49,22 +49,22 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
   galleryItems: [
     {
       title: "Taze börek vitrini",
-      description: "Demo görsel: kol böreği, su böreği, gül böreği ve günlük çıkan börek çeşitleri.",
+      description: "Günlük çıkan börekler ve sıcak ürün vitrini.",
       imageUrl: "/demo/lotus-borek/borek-vitrini.svg"
     },
     {
       title: "Hamur işleri",
-      description: "Demo görsel: simit, poğaça ve günlük sıcak hamur işi çeşitleri.",
+      description: "Simit, poğaça ve günlük sıcak hamur işi ürünleri.",
       imageUrl: "/demo/lotus-borek/hamur-isleri.svg"
     },
     {
       title: "Tatlı ve baklava",
-      description: "Demo görsel: cevizli baklava, kurabiye ve günlük tatlı çeşitleri.",
+      description: "Baklava, kurabiye ve günlük tatlı seçenekleri.",
       imageUrl: "/demo/lotus-borek/tatlilar-baklava.svg"
     },
     {
       title: "Kahvaltılıklar",
-      description: "Demo görsel: sabah kahvaltılıkları, sıcak ürünler ve gel-al sipariş vitrini.",
+      description: "Simit, poğaça ve sabah ürünleri.",
       imageUrl: "/demo/lotus-borek/kahvaltiliklar.svg"
     }
   ],
