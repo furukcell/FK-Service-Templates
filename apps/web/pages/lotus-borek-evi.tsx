@@ -98,22 +98,224 @@ export default function LotusBorekDemoPage() {
         }
 
         @media (max-width: 760px) {
+          .lotusDemoPage .topBar {
+            padding: 8px 12px;
+            font-size: 12px;
+            line-height: 1.35;
+          }
+
           .lotusDemoPage .navbar {
             height: auto;
-            gap: 14px;
+            min-height: 0;
+            padding: 12px 18px;
+            gap: 12px;
+            align-items: center;
           }
 
           .lotusDemoPage .logoLockup {
-            min-width: 220px;
+            min-width: 0;
+            flex: 1 1 auto;
           }
 
           .lotusDemoPage .logoLockup > span:not(.logoMark) {
-            width: 220px;
+            width: min(230px, 56vw);
             height: 52px;
           }
 
+          .lotusDemoPage .navLinks {
+            display: none;
+          }
+
+          .lotusDemoPage .navActions {
+            flex: 0 0 auto;
+          }
+
+          .lotusDemoPage .navActions .pillButton {
+            padding: 11px 14px;
+            font-size: 13px;
+            white-space: nowrap;
+          }
+
           .lotusDemoPage .showcaseHero {
-            background-position: center;
+            width: calc(100vw - 24px);
+            min-height: auto;
+            margin: 14px auto 0;
+            padding: 44px 18px 38px;
+            border-radius: 28px;
+            background-position: 63% center;
+          }
+
+          .lotusDemoPage .showcaseHero .eyebrow {
+            padding: 8px 12px;
+            font-size: 12px;
+            max-width: 92%;
+          }
+
+          .lotusDemoPage .showcaseHero h1 {
+            font-size: clamp(33px, 11vw, 46px);
+            line-height: 0.98;
+            letter-spacing: -0.065em;
+            max-width: 100%;
+            margin: 18px auto 14px;
+          }
+
+          .lotusDemoPage .showcaseHero p {
+            font-size: 15px;
+            line-height: 1.55;
+            max-width: 94%;
+            margin-left: auto;
+            margin-right: auto;
+          }
+
+          .lotusDemoPage .showcaseActions {
+            justify-content: center;
+            gap: 10px;
+          }
+
+          .lotusDemoPage .showcaseActions .pillButton,
+          .lotusDemoPage .showcaseActions .ghostButton {
+            padding: 12px 15px;
+            font-size: 13px;
+          }
+
+          .lotusDemoPage .showcasePanelGrid {
+            width: calc(100vw - 24px);
+            margin: 18px auto 0;
+            display: block;
+          }
+
+          .lotusDemoPage .showcasePanelGrid > .previewPanel {
+            display: none;
+          }
+
+          .lotusDemoPage .showcasePanelGrid .section {
+            width: 100%;
+            margin: 0;
+            padding: 24px 16px;
+            border-radius: 26px;
+          }
+
+          .lotusDemoPage .sectionHead {
+            gap: 10px;
+            margin-bottom: 16px;
+          }
+
+          .lotusDemoPage .sectionHead h2 {
+            font-size: clamp(26px, 9vw, 36px);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+          }
+
+          .lotusDemoPage .visualGrid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+          }
+
+          .lotusDemoPage .visualCard {
+            min-width: 0;
+            border-radius: 18px;
+            overflow: hidden;
+          }
+
+          .lotusDemoPage .visualCard img {
+            height: 112px;
+            width: 100%;
+            object-fit: cover;
+          }
+
+          .lotusDemoPage .visualCard > div:not(.visualPlaceholder) {
+            padding: 12px;
+          }
+
+          .lotusDemoPage .visualCard h3 {
+            font-size: 15px;
+            line-height: 1.15;
+          }
+
+          .lotusDemoPage .visualCard p {
+            font-size: 13px;
+            line-height: 1.45;
+          }
+
+          .lotusDemoPage .locationCard,
+          .lotusDemoPage .locationCardWide {
+            grid-column: 1 / -1;
+          }
+
+          .lotusDemoPage .locationCard .mapEmbedFrame,
+          .lotusDemoPage .locationCardWide .mapEmbedFrame {
+            min-height: 220px;
+          }
+
+          .lotusDemoPage #services,
+          .lotusDemoPage .section:not(.showcasePanelGrid .section) {
+            width: calc(100vw - 24px);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 18px;
+            padding-right: 18px;
+            border-radius: 26px;
+          }
+
+          .lotusDemoPage .cardGrid,
+          .lotusDemoPage .formLayout {
+            grid-template-columns: 1fr;
+          }
+
+          .lotusDemoPage .floatingWhatsappButton {
+            right: 14px;
+            bottom: 14px;
+            padding: 10px 12px;
+            gap: 8px;
+          }
+
+          .lotusDemoPage .floatingWhatsappText strong {
+            font-size: 13px;
+          }
+
+          .lotusDemoPage .floatingWhatsappText small {
+            font-size: 10px;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .lotusDemoPage .logoLockup > span:not(.logoMark) {
+            width: 188px;
+            height: 44px;
+          }
+
+          .lotusDemoPage .navActions .pillButton {
+            padding: 10px 12px;
+            font-size: 12px;
+          }
+
+          .lotusDemoPage .showcaseHero {
+            padding: 36px 15px 32px;
+            border-radius: 24px;
+          }
+
+          .lotusDemoPage .showcaseActions {
+            flex-direction: column;
+          }
+
+          .lotusDemoPage .showcaseActions .pillButton,
+          .lotusDemoPage .showcaseActions .ghostButton {
+            width: 100%;
+            max-width: 260px;
+          }
+
+          .lotusDemoPage .visualGrid {
+            grid-template-columns: 1fr;
+          }
+
+          .lotusDemoPage .visualCard img {
+            height: 170px;
+          }
+
+          .lotusDemoPage .floatingWhatsappButton {
+            right: 12px;
+            bottom: 12px;
           }
         }
       `}</style>
