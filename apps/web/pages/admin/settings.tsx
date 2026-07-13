@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { getSiteSettings, saveSiteSettings } from "@fk-templates/firebase";
 import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { layoutVariantLabels } from "@fk-templates/shared";
-import { getDefaultTemplate } from "../../src/defaultTemplate";
+import { getDefaultTemplate, getDefaultTemplateRoute } from "../../src/defaultTemplate";
+import { getAdminShellClassName, getAdminShellStyle, getLotusAdminConfig, getLotusAwareTemplate, isLotusAdminDemo, lotusColorPresets, lotusAdminTemplateKeys } from "../../src/lotusAdmin";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
@@ -10,7 +11,8 @@ const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "caf
 const layoutKeys: LayoutVariant[] = ["modern", "split", "showcase"];
 
 function formOptionsText(template: TemplateKey) {
-  const field = templateConfigs[template].form.fields.find((item) => item.type === "select" && ["service", "requestType", "listingType"].includes(item.key));
+  const config = getLotusAdminConfig(template, templateConfigs);
+  const field = config.form.fields.find((item) => item.type === "select" && ["service", "requestType", "listingType"].includes(item.key));
   return field?.options?.join("\n") || "";
 }
 
@@ -19,10 +21,11 @@ function splitOptions(value: string) {
 }
 
 function defaultsFor(template: TemplateKey) {
-  const config = templateConfigs[template];
+  const config = getLotusAdminConfig(template, templateConfigs);
+  const isLotus = isLotusAdminDemo();
   return {
     template,
-    layoutVariant: "modern" as LayoutVariant,
+    layoutVariant: (isLotus ? "showcase" : "modern") as LayoutVariant,
     brandName: config.brandName,
     eyebrow: config.eyebrow,
     heroTitle: config.heroTitle,
@@ -35,8 +38,8 @@ function defaultsFor(template: TemplateKey) {
     address: config.address,
     mapsUrl: config.mapsUrl || "",
     instagramUrl: config.instagramUrl || "",
-    contactEmail: "info@ornekfirma.com",
-    workingHours: "Pazartesi - Cuma 08:30 - 17:30",
+    contactEmail: isLotus ? "" : "info@ornekfirma.com",
+    workingHours: isLotus ? "Her gün 07:00 - 20:00" : "Pazartesi - Cuma 08:30 - 17:30",
     requestFormTitle: config.form.title,
     requestFormDescription: config.form.description,
     requestTypeOptionsText: formOptionsText(template),
@@ -51,9 +54,11 @@ function defaultsFor(template: TemplateKey) {
 export default function AdminSettingsPage() {
   const guard = useOptionalAdminGuard();
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business";
-  const defaultTemplate = getDefaultTemplate();
+  const isLotus = isLotusAdminDemo();
+  const defaultTemplate = getLotusAwareTemplate(getDefaultTemplate());
+  const visibleTemplateKeys = isLotus ? lotusAdminTemplateKeys : templateKeys;
   const [form, setForm] = useState(defaultsFor(defaultTemplate));
-  const [status, setStatus] = useState("Site ayarları panelden yönetilebilir.");
+  const [status, setStatus] = useState(isLotus ? "Lotus site ayarları buradan yönetilir." : "Site ayarları panelden yönetilebilir.");
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
@@ -62,7 +67,7 @@ export default function AdminSettingsPage() {
       try {
         const settings = await getSiteSettings(businessId);
         if (settings) {
-          const selectedTemplate = settings.template || defaultTemplate;
+          const selectedTemplate = isLotus ? "cafe" : settings.template || defaultTemplate;
           const defaults = defaultsFor(selectedTemplate);
           setForm({
             template: selectedTemplate,
@@ -93,15 +98,15 @@ export default function AdminSettingsPage() {
           setStatus("Canlı site ayarları yüklendi.");
         } else {
           setForm(defaultsFor(defaultTemplate));
-          setStatus("Ayar kaydı yok, demo varsayılanları gösteriliyor.");
+          setStatus(isLotus ? "Lotus demo varsayılanları gösteriliyor." : "Ayar kaydı yok, demo varsayılanları gösteriliyor.");
         }
       } catch (error) {
         setForm(defaultsFor(defaultTemplate));
-        setStatus("Firebase bağlı değil, demo varsayılanları gösteriliyor.");
+        setStatus(isLotus ? "Firebase bağlı değil, Lotus demo varsayılanları gösteriliyor." : "Firebase bağlı değil, demo varsayılanları gösteriliyor.");
       }
     }
     loadSettings();
-  }, [businessId, defaultTemplate, guard.isAllowed]);
+  }, [businessId, defaultTemplate, guard.isAllowed, isLotus]);
 
   function updateField(key: keyof typeof form, value: string) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -112,6 +117,17 @@ export default function AdminSettingsPage() {
     setForm((current) => ({ ...defaults, template, layoutVariant: current.layoutVariant }));
   }
 
+  function applyColorPreset(preset: typeof lotusColorPresets[number]) {
+    setForm((current) => ({
+      ...current,
+      themePrimary: preset.primary,
+      themeSecondary: preset.secondary,
+      themeAccent: preset.accent,
+      themeSoft: preset.soft,
+      themeDark: preset.dark
+    }));
+  }
+
   async function saveSettings() {
     setIsSaving(true);
     setStatus("");
@@ -119,6 +135,7 @@ export default function AdminSettingsPage() {
       const { requestTypeOptionsText, themePrimary, themeSecondary, themeAccent, themeSoft, themeDark, ...sitePayload } = form;
       await saveSiteSettings(businessId, {
         ...sitePayload,
+        template: isLotus ? "cafe" : sitePayload.template,
         requestTypeOptions: splitOptions(requestTypeOptionsText),
         theme: {
           primary: themePrimary,
@@ -137,41 +154,41 @@ export default function AdminSettingsPage() {
   }
 
   if (guard.isChecking) {
-    return <main className="adminShell"><section className="adminMain"><header className="adminHeader"><h1>Admin kontrol ediliyor</h1><p>{guard.message}</p></header></section></main>;
+    return <main className={getAdminShellClassName()} style={getAdminShellStyle()}><section className="adminMain"><header className="adminHeader"><h1>Admin kontrol ediliyor</h1><p>{guard.message}</p></header></section></main>;
   }
 
   if (!guard.isAllowed) {
-    return <main className="adminShell"><section className="adminMain"><header className="adminHeader"><h1>Giriş gerekli</h1><p>{guard.message}</p><a className="pillButton navButtonLink" href="/login">Admin Giriş</a></header></section></main>;
+    return <main className={getAdminShellClassName()} style={getAdminShellStyle()}><section className="adminMain"><header className="adminHeader"><h1>Giriş gerekli</h1><p>{guard.message}</p><a className="pillButton navButtonLink" href="/login">Admin Giriş</a></header></section></main>;
   }
 
   return (
-    <main className="adminShell">
+    <main className={getAdminShellClassName()} style={getAdminShellStyle()}>
       <aside className="adminSidebar">
-        <a className="adminLogo" href="/admin"><span>FK</span><strong>Site Yönetimi</strong></a>
+        <a className="adminLogo" href="/admin"><span>{isLotus ? "LB" : "FK"}</span><strong>{isLotus ? "Lotus Ayarları" : "Site Yönetimi"}</strong></a>
         <nav>
           <a href="/admin">Talepler</a>
           <a className="active" href="/admin/settings">Site Ayarları</a>
           <a href="/admin/content">Kurumsal Metinler</a>
-          <a href="/admin/services">Hizmetler</a>
-          <a href="/admin/campaigns">Kampanyalar</a>
+          <a href="/admin/services">{isLotus ? "Menü Kartları" : "Hizmetler"}</a>
+          <a href="/admin/campaigns">{isLotus ? "Duyurular" : "Kampanyalar"}</a>
           <a href="/admin/gallery">Galeri</a>
-          <a href="/admin/properties/new">Yeni İlan</a>
+          {!isLotus ? <a href="/admin/properties/new">Yeni İlan</a> : null}
         </nav>
       </aside>
       <section className="adminMain">
         <header className="adminHeader">
           <div>
-            <span className="eyebrow">Müşteri Site Yönetimi</span>
+            <span className="eyebrow">{isLotus ? "Lotus Börek Evi" : "Müşteri Site Yönetimi"}</span>
             <h1>Site ayarları</h1>
-            <p>Firma bilgisi, ana sayfa metinleri, renkler, iletişim linkleri, form seçenekleri ve seçili arayüz buradan düzenlenir.</p>
+            <p>{isLotus ? "Lotus’un firma bilgisi, ana sayfa metinleri, renkleri, iletişim linkleri ve form seçenekleri buradan düzenlenir." : "Firma bilgisi, ana sayfa metinleri, renkler, iletişim linkleri, form seçenekleri ve seçili arayüz buradan düzenlenir."}</p>
             <p className="adminMode">{status}</p>
           </div>
-          <a className="pillButton navButtonLink" href={`/${form.template === "real-estate" ? "real-estate" : form.template}`}>Siteyi Aç</a>
+          <a className="pillButton navButtonLink" href={isLotus ? getDefaultTemplateRoute() : `/${form.template === "real-estate" ? "real-estate" : form.template}`}>Siteyi Aç</a>
         </header>
 
         <section className="adminCard">
           <div className="adminPropertyForm formFields">
-            <label className="field"><span>Aktif sektör</span><select value={form.template} onChange={(event) => changeTemplate(event.currentTarget.value as TemplateKey)}>{templateKeys.map((template) => <option value={template} key={template}>{templateConfigs[template].sector}</option>)}</select></label>
+            <label className="field"><span>Aktif sektör</span><select value={form.template} onChange={(event) => changeTemplate(event.currentTarget.value as TemplateKey)}>{visibleTemplateKeys.map((template) => <option value={template} key={template}>{getLotusAdminConfig(template, templateConfigs).sector}</option>)}</select></label>
             <label className="field"><span>Seçili arayüz</span><select value={form.layoutVariant} onChange={(event) => updateField("layoutVariant", event.currentTarget.value as LayoutVariant)}>{layoutKeys.map((layout) => <option value={layout} key={layout}>{layoutVariantLabels[layout]}</option>)}</select></label>
             <label className="field"><span>Firma adı</span><input value={form.brandName} onChange={(event) => updateField("brandName", event.currentTarget.value)} /></label>
             <label className="field"><span>Üst bar yazısı</span><input value={form.topBarText} onChange={(event) => updateField("topBarText", event.currentTarget.value)} /></label>
@@ -180,11 +197,21 @@ export default function AdminSettingsPage() {
             <label className="field"><span>Açıklama</span><textarea value={form.heroDescription} onChange={(event) => updateField("heroDescription", event.currentTarget.value)} /></label>
             <label className="field"><span>Birinci buton</span><input value={form.primaryCta} onChange={(event) => updateField("primaryCta", event.currentTarget.value)} /></label>
             <label className="field"><span>İkinci buton</span><input value={form.secondaryCta} onChange={(event) => updateField("secondaryCta", event.currentTarget.value)} /></label>
-            <label className="field"><span>Ana renk</span><input value={form.themePrimary} onChange={(event) => updateField("themePrimary", event.currentTarget.value)} placeholder="#4F46E5" /></label>
-            <label className="field"><span>İkinci renk</span><input value={form.themeSecondary} onChange={(event) => updateField("themeSecondary", event.currentTarget.value)} placeholder="#38BDF8" /></label>
-            <label className="field"><span>Vurgu rengi</span><input value={form.themeAccent} onChange={(event) => updateField("themeAccent", event.currentTarget.value)} placeholder="#FBBF24" /></label>
-            <label className="field"><span>Açık arka plan</span><input value={form.themeSoft} onChange={(event) => updateField("themeSoft", event.currentTarget.value)} placeholder="#EEF2FF" /></label>
-            <label className="field"><span>Koyu renk</span><input value={form.themeDark} onChange={(event) => updateField("themeDark", event.currentTarget.value)} placeholder="#312E81" /></label>
+
+            {isLotus ? (
+              <div className="lotusColorPresetPanel">
+                <span>Hazır renk seçenekleri</span>
+                <div>
+                  {lotusColorPresets.map((preset) => <button className="ghostButton" type="button" key={preset.label} onClick={() => applyColorPreset(preset)}>{preset.label}</button>)}
+                </div>
+              </div>
+            ) : null}
+
+            <label className="field"><span>Ana renk</span><input type={isLotus ? "color" : "text"} value={form.themePrimary} onChange={(event) => updateField("themePrimary", event.currentTarget.value)} placeholder="#4F46E5" /></label>
+            <label className="field"><span>İkinci renk</span><input type={isLotus ? "color" : "text"} value={form.themeSecondary} onChange={(event) => updateField("themeSecondary", event.currentTarget.value)} placeholder="#38BDF8" /></label>
+            <label className="field"><span>Vurgu rengi</span><input type={isLotus ? "color" : "text"} value={form.themeAccent} onChange={(event) => updateField("themeAccent", event.currentTarget.value)} placeholder="#FBBF24" /></label>
+            <label className="field"><span>Açık arka plan</span><input type={isLotus ? "color" : "text"} value={form.themeSoft} onChange={(event) => updateField("themeSoft", event.currentTarget.value)} placeholder="#EEF2FF" /></label>
+            <label className="field"><span>Koyu renk</span><input type={isLotus ? "color" : "text"} value={form.themeDark} onChange={(event) => updateField("themeDark", event.currentTarget.value)} placeholder="#312E81" /></label>
             <label className="field"><span>Form başlığı</span><input value={form.requestFormTitle} onChange={(event) => updateField("requestFormTitle", event.currentTarget.value)} /></label>
             <label className="field"><span>Form açıklaması</span><textarea value={form.requestFormDescription} onChange={(event) => updateField("requestFormDescription", event.currentTarget.value)} /></label>
             <label className="field"><span>Talep seçenekleri</span><textarea value={form.requestTypeOptionsText} onChange={(event) => updateField("requestTypeOptionsText", event.currentTarget.value)} placeholder="Her satıra bir seçenek yazın" /></label>
