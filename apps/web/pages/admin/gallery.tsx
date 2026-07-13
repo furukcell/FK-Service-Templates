@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { getSiteSettings, saveSiteSettings, uploadBusinessImage, type ManagedSiteSettings } from "@fk-templates/firebase";
 import type { TemplateKey, VisualItem } from "@fk-templates/shared";
+import { getDefaultTemplate } from "../../src/defaultTemplate";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
-const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate"];
+const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "cafe", "kindergarten", "event-venue"];
 
 export default function AdminGalleryPage() {
   const guard = useOptionalAdminGuard();
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business";
+  const defaultTemplate = getDefaultTemplate();
   const [settings, setSettings] = useState<ManagedSiteSettings | null>(null);
-  const [template, setTemplate] = useState<TemplateKey>("appointment");
-  const [items, setItems] = useState<VisualItem[]>([]);
+  const [template, setTemplate] = useState<TemplateKey>(defaultTemplate);
+  const [items, setItems] = useState<VisualItem[]>(templateConfigs[defaultTemplate].galleryItems || []);
   const [form, setForm] = useState<VisualItem>({ title: "", description: "", imageUrl: "" });
   const [status, setStatus] = useState("Galeri panelden yönetilebilir.");
   const [isSaving, setIsSaving] = useState(false);
@@ -23,17 +25,23 @@ export default function AdminGalleryPage() {
       try {
         const siteSettings = await getSiteSettings(businessId);
         setSettings(siteSettings);
-        const selectedTemplate = siteSettings?.template || "appointment";
+        const selectedTemplate = siteSettings?.template || defaultTemplate;
         setTemplate(selectedTemplate);
         setItems(siteSettings?.galleryItems?.length ? siteSettings.galleryItems : templateConfigs[selectedTemplate].galleryItems || []);
         setStatus(siteSettings?.galleryItems?.length ? "Canlı galeri yüklendi." : "Galeri kaydı yok, demo görsel kartları gösteriliyor.");
       } catch (error) {
+        setTemplate(defaultTemplate);
+        setItems(templateConfigs[defaultTemplate].galleryItems || []);
         setStatus("Firebase bağlı değil, demo görsel kartları gösteriliyor.");
-        setItems(templateConfigs.appointment.galleryItems || []);
       }
     }
     loadGallery();
-  }, [businessId, guard.isAllowed]);
+  }, [businessId, defaultTemplate, guard.isAllowed]);
+
+  function changeTemplate(selectedTemplate: TemplateKey) {
+    setTemplate(selectedTemplate);
+    setItems(templateConfigs[selectedTemplate].galleryItems || []);
+  }
 
   async function uploadSelectedImage(fileList: FileList | null) {
     const file = fileList?.[0];
@@ -111,7 +119,7 @@ export default function AdminGalleryPage() {
 
         <section className="adminCard">
           <div className="adminPropertyForm formFields">
-            <label className="field"><span>Aktif sektör</span><select value={template} onChange={(event) => setTemplate(event.currentTarget.value as TemplateKey)}>{templateKeys.map((item) => <option value={item} key={item}>{templateConfigs[item].sector}</option>)}</select></label>
+            <label className="field"><span>Aktif sektör</span><select value={template} onChange={(event) => changeTemplate(event.currentTarget.value as TemplateKey)}>{templateKeys.map((item) => <option value={item} key={item}>{templateConfigs[item].sector}</option>)}</select></label>
             <label className="field"><span>Görsel yükle</span><input type="file" accept="image/*" disabled={isUploading} onChange={(event) => uploadSelectedImage(event.currentTarget.files)} /></label>
             <label className="field"><span>Görsel URL</span><input value={form.imageUrl || ""} onChange={(event) => setForm((current) => ({ ...current, imageUrl: event.currentTarget.value }))} placeholder="İstersen manuel URL gir" /></label>
             <label className="field"><span>Başlık</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="Salon atmosferi" /></label>
