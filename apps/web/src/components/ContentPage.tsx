@@ -44,6 +44,18 @@ function whatsappHref(config: BusinessTemplateConfig, brandName: string, whatsap
   return normalized.length >= 10 ? `https://wa.me/${normalized}?text=${message}` : "";
 }
 
+function mapQuery(address: string, brandName: string) {
+  return address || brandName;
+}
+
+function mapEmbedUrl(address: string, brandName: string) {
+  return `https://www.google.com/maps?q=${encodeURIComponent(mapQuery(address, brandName))}&output=embed`;
+}
+
+function mapOpenUrl(config: BusinessTemplateConfig, address: string, brandName: string, mapsUrl?: string) {
+  return mapsUrl || config.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery(address, brandName))}`;
+}
+
 function FloatingWhatsappButton({ config, brandName, whatsapp, phone }: { config: BusinessTemplateConfig; brandName: string; whatsapp?: string; phone?: string }) {
   const href = whatsappHref(config, brandName, whatsapp, phone);
   if (!href) return null;
@@ -80,6 +92,7 @@ export function ContentPage({ pageKey, staticConfig, homePath, contentBasePath =
   const config = staticConfig || (settings?.template ? templateConfigs[settings.template] : fallbackConfig);
   const activeSettings = staticConfig ? null : settings;
   const brandName = activeSettings?.brandName || config.brandName;
+  const address = activeSettings?.address || config.address;
   const page = getManagedContentPage(config, activeSettings, pageKey);
   const activeHomePath = homePath || getHomePath();
   const contactHref = contentHref(contentPageRoutes.contact, contentBasePath);
@@ -105,12 +118,30 @@ export function ContentPage({ pageKey, staticConfig, homePath, contentBasePath =
       </section>
 
       {pageKey === "contact" ? (
-        <section className="contentInfoGrid">
-          <article><span>Telefon</span><strong>{activeSettings?.phone || config.phone}</strong></article>
-          <article><span>Adres</span><strong>{activeSettings?.address || config.address}</strong></article>
-          <article><span>Çalışma saatleri</span><strong>{activeSettings?.workingHours || "Her gün 07:00 - 20:00"}</strong></article>
-          <article><span>E-posta</span><strong>{activeSettings?.contactEmail || "info@ornekfirma.com"}</strong></article>
-        </section>
+        <>
+          <section className="contentInfoGrid">
+            <article><span>Telefon</span><strong>{activeSettings?.phone || config.phone}</strong></article>
+            <article><span>Adres</span><strong>{address}</strong></article>
+            <article><span>Çalışma saatleri</span><strong>{activeSettings?.workingHours || "Her gün 07:00 - 20:00"}</strong></article>
+            <article><span>E-posta</span><strong>{activeSettings?.contactEmail || "info@ornekfirma.com"}</strong></article>
+          </section>
+          <section className="contentMapCard">
+            <iframe
+              className="contentMapFrame"
+              title={`${brandName} harita konumu`}
+              src={mapEmbedUrl(address, brandName)}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+            <div>
+              <span>Konum</span>
+              <h2>Haritada yol tarifi alın</h2>
+              <p>{address}</p>
+              <a className="pillButton navButtonLink" href={mapOpenUrl(config, address, brandName, activeSettings?.mapsUrl || undefined)} target="_blank" rel="noreferrer">Haritada Aç</a>
+            </div>
+          </section>
+        </>
       ) : null}
 
       {pageKey === "about" ? (
