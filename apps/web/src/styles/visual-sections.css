@@ -37,7 +37,8 @@
 }
 
 .visualCard img,
-.visualPlaceholder {
+.visualPlaceholder,
+.mapEmbedFrame {
   width: 100%;
   height: 150px;
   object-fit: cover;
@@ -51,6 +52,11 @@
   background:
     radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.55), transparent 28%),
     linear-gradient(135deg, var(--dark), var(--primary), var(--secondary));
+}
+
+.mapEmbedFrame {
+  display: block;
+  border: 0;
 }
 
 .visualCard div:last-child {
@@ -74,15 +80,16 @@
 
 .locationCardWide {
   grid-column: span 4;
-  min-height: 230px;
+  min-height: 260px;
   display: grid;
-  grid-template-columns: 1fr 1.55fr;
+  grid-template-columns: 1.35fr 1fr;
 }
 
 .locationCardWide .visualPlaceholder,
-.locationCardWide img {
+.locationCardWide img,
+.locationCardWide .mapEmbedFrame {
   height: 100%;
-  min-height: 230px;
+  min-height: 260px;
 }
 
 .locationCardWide div:last-child {
