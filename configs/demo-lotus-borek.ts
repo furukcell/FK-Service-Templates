@@ -65,22 +65,32 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
     {
       title: "Taze börek vitrini",
       description: "Günlük çıkan börekler ve sıcak ürün vitrini.",
-      imageUrl: "/demo/lotus-borek/borek-vitrini.svg"
+      imageUrl: "/demo/lotus-borek/real-taze-borek-vitrini.svg"
     },
     {
-      title: "Hamur işleri",
-      description: "Simit, poğaça ve günlük sıcak hamur işi ürünleri.",
-      imageUrl: "/demo/lotus-borek/hamur-isleri.svg"
+      title: "Çıtır börek çeşitleri",
+      description: "El açması ve çıtır börek çeşitleri.",
+      imageUrl: "/demo/lotus-borek/real-citir-borek.svg"
     },
     {
-      title: "Tatlı ve baklava",
-      description: "Baklava, kurabiye ve günlük tatlı seçenekleri.",
-      imageUrl: "/demo/lotus-borek/tatlilar-baklava.svg"
+      title: "Sıcak simit",
+      description: "Sabah saatlerinde taze ve sıcak simit.",
+      imageUrl: "/demo/lotus-borek/real-sicak-simit.svg"
     },
     {
       title: "Kahvaltılıklar",
       description: "Simit, poğaça ve sabah ürünleri.",
-      imageUrl: "/demo/lotus-borek/kahvaltiliklar.svg"
+      imageUrl: "/demo/lotus-borek/real-kahvaltiliklar.svg"
+    },
+    {
+      title: "Tatlı ve baklava",
+      description: "Baklava, kurabiye ve günlük tatlı seçenekleri.",
+      imageUrl: "/demo/lotus-borek/real-tatli-baklava.svg"
+    },
+    {
+      title: "El açması börek",
+      description: "Günlük hazırlanan börek ve hamur işi çeşitleri.",
+      imageUrl: "/demo/lotus-borek/real-el-acmasi-borek.svg"
     }
   ],
   staff: [
