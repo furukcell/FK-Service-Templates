@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getSiteSettings, saveSiteSettings, uploadBusinessImage, type ManagedSiteSettings } from "@fk-templates/firebase";
 import type { TemplateKey, VisualItem } from "@fk-templates/shared";
 import { getDefaultTemplate } from "../../src/defaultTemplate";
+import { getAdminShellClassName, getAdminShellStyle, getLotusAdminConfig, getLotusAwareTemplate, isLotusAdminDemo, lotusAdminTemplateKeys } from "../../src/lotusAdmin";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
 
@@ -10,12 +11,14 @@ const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "caf
 export default function AdminGalleryPage() {
   const guard = useOptionalAdminGuard();
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business";
-  const defaultTemplate = getDefaultTemplate();
+  const isLotus = isLotusAdminDemo();
+  const defaultTemplate = getLotusAwareTemplate(getDefaultTemplate());
+  const visibleTemplateKeys = isLotus ? lotusAdminTemplateKeys : templateKeys;
   const [settings, setSettings] = useState<ManagedSiteSettings | null>(null);
   const [template, setTemplate] = useState<TemplateKey>(defaultTemplate);
-  const [items, setItems] = useState<VisualItem[]>(templateConfigs[defaultTemplate].galleryItems || []);
+  const [items, setItems] = useState<VisualItem[]>(getLotusAdminConfig(defaultTemplate, templateConfigs).galleryItems || []);
   const [form, setForm] = useState<VisualItem>({ title: "", description: "", imageUrl: "" });
-  const [status, setStatus] = useState("Galeri panelden yönetilebilir.");
+  const [status, setStatus] = useState(isLotus ? "Lotus galeri görselleri panelden yönetilebilir." : "Galeri panelden yönetilebilir.");
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -25,22 +28,22 @@ export default function AdminGalleryPage() {
       try {
         const siteSettings = await getSiteSettings(businessId);
         setSettings(siteSettings);
-        const selectedTemplate = siteSettings?.template || defaultTemplate;
+        const selectedTemplate = isLotus ? "cafe" : siteSettings?.template || defaultTemplate;
         setTemplate(selectedTemplate);
-        setItems(siteSettings?.galleryItems?.length ? siteSettings.galleryItems : templateConfigs[selectedTemplate].galleryItems || []);
-        setStatus(siteSettings?.galleryItems?.length ? "Canlı galeri yüklendi." : "Galeri kaydı yok, demo görsel kartları gösteriliyor.");
+        setItems(siteSettings?.galleryItems?.length ? siteSettings.galleryItems : getLotusAdminConfig(selectedTemplate, templateConfigs).galleryItems || []);
+        setStatus(siteSettings?.galleryItems?.length ? "Canlı galeri yüklendi." : isLotus ? "Kayıt yok, Lotus demo görsel kartları gösteriliyor." : "Galeri kaydı yok, demo görsel kartları gösteriliyor.");
       } catch (error) {
         setTemplate(defaultTemplate);
-        setItems(templateConfigs[defaultTemplate].galleryItems || []);
-        setStatus("Firebase bağlı değil, demo görsel kartları gösteriliyor.");
+        setItems(getLotusAdminConfig(defaultTemplate, templateConfigs).galleryItems || []);
+        setStatus(isLotus ? "Firebase bağlı değil, Lotus demo görsel kartları gösteriliyor." : "Firebase bağlı değil, demo görsel kartları gösteriliyor.");
       }
     }
     loadGallery();
-  }, [businessId, defaultTemplate, guard.isAllowed]);
+  }, [businessId, defaultTemplate, guard.isAllowed, isLotus]);
 
   function changeTemplate(selectedTemplate: TemplateKey) {
     setTemplate(selectedTemplate);
-    setItems(templateConfigs[selectedTemplate].galleryItems || []);
+    setItems(getLotusAdminConfig(selectedTemplate, templateConfigs).galleryItems || []);
   }
 
   async function uploadSelectedImage(fileList: FileList | null) {
@@ -76,7 +79,7 @@ export default function AdminGalleryPage() {
   async function saveGallery() {
     setIsSaving(true);
     try {
-      await saveSiteSettings(businessId, { ...(settings || {}), template, galleryItems: items });
+      await saveSiteSettings(businessId, { ...(settings || {}), template: isLotus ? "cafe" : template, galleryItems: items });
       setStatus("Galeri kaydedildi. Site bu görselleri canlı okuyacak.");
     } catch (error) {
       setStatus("Galeri kaydedilemedi. Admin giriş, Firebase env veya Firestore rules kontrol edilmeli.");
@@ -86,32 +89,32 @@ export default function AdminGalleryPage() {
   }
 
   if (guard.isChecking) {
-    return <main className="adminShell"><section className="adminMain"><header className="adminHeader"><h1>Admin kontrol ediliyor</h1><p>{guard.message}</p></header></section></main>;
+    return <main className={getAdminShellClassName()} style={getAdminShellStyle()}><section className="adminMain"><header className="adminHeader"><h1>Admin kontrol ediliyor</h1><p>{guard.message}</p></header></section></main>;
   }
 
   if (!guard.isAllowed) {
-    return <main className="adminShell"><section className="adminMain"><header className="adminHeader"><h1>Giriş gerekli</h1><p>{guard.message}</p><a className="pillButton navButtonLink" href="/login">Admin Giriş</a></header></section></main>;
+    return <main className={getAdminShellClassName()} style={getAdminShellStyle()}><section className="adminMain"><header className="adminHeader"><h1>Giriş gerekli</h1><p>{guard.message}</p><a className="pillButton navButtonLink" href="/login">Admin Giriş</a></header></section></main>;
   }
 
   return (
-    <main className="adminShell">
+    <main className={getAdminShellClassName()} style={getAdminShellStyle()}>
       <aside className="adminSidebar">
-        <a className="adminLogo" href="/admin"><span>FK</span><strong>Galeri</strong></a>
+        <a className="adminLogo" href="/admin"><span>{isLotus ? "LB" : "FK"}</span><strong>Galeri</strong></a>
         <nav>
           <a href="/admin">Talepler</a>
           <a href="/admin/settings">Site Ayarları</a>
-          <a href="/admin/services">Hizmetler</a>
-          <a href="/admin/campaigns">Kampanyalar</a>
+          <a href="/admin/services">{isLotus ? "Menü Kartları" : "Hizmetler"}</a>
+          <a href="/admin/campaigns">{isLotus ? "Duyurular" : "Kampanyalar"}</a>
           <a className="active" href="/admin/gallery">Galeri</a>
-          <a href="/admin/properties/new">Yeni İlan</a>
+          {!isLotus ? <a href="/admin/properties/new">Yeni İlan</a> : null}
         </nav>
       </aside>
       <section className="adminMain">
         <header className="adminHeader">
           <div>
-            <span className="eyebrow">Müşteri Site Yönetimi</span>
+            <span className="eyebrow">{isLotus ? "Lotus Görsel Yönetimi" : "Müşteri Site Yönetimi"}</span>
             <h1>Galeri yönetimi</h1>
-            <p>Müşteri galeri görsellerini yükleyip sitede yayınlayabilir.</p>
+            <p>{isLotus ? "Lotus’un vitrin, ürün ve mekan görsellerini yükleyip sitede yayınlayabilirsiniz." : "Müşteri galeri görsellerini yükleyip sitede yayınlayabilir."}</p>
             <p className="adminMode">{status}</p>
           </div>
           <button className="pillButton" type="button" disabled={isSaving} onClick={saveGallery}>{isSaving ? "Kaydediliyor..." : "Galeriyi Kaydet"}</button>
@@ -119,10 +122,10 @@ export default function AdminGalleryPage() {
 
         <section className="adminCard">
           <div className="adminPropertyForm formFields">
-            <label className="field"><span>Aktif sektör</span><select value={template} onChange={(event) => changeTemplate(event.currentTarget.value as TemplateKey)}>{templateKeys.map((item) => <option value={item} key={item}>{templateConfigs[item].sector}</option>)}</select></label>
+            {!isLotus ? <label className="field"><span>Aktif sektör</span><select value={template} onChange={(event) => changeTemplate(event.currentTarget.value as TemplateKey)}>{visibleTemplateKeys.map((item) => <option value={item} key={item}>{getLotusAdminConfig(item, templateConfigs).sector}</option>)}</select></label> : <div className="lotusAdminBadge">Lotus Börek Evi galerisi</div>}
             <label className="field"><span>Görsel yükle</span><input type="file" accept="image/*" disabled={isUploading} onChange={(event) => uploadSelectedImage(event.currentTarget.files)} /></label>
             <label className="field"><span>Görsel URL</span><input value={form.imageUrl || ""} onChange={(event) => setForm((current) => ({ ...current, imageUrl: event.currentTarget.value }))} placeholder="İstersen manuel URL gir" /></label>
-            <label className="field"><span>Başlık</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder="Salon atmosferi" /></label>
+            <label className="field"><span>Başlık</span><input value={form.title} onChange={(event) => setForm((current) => ({ ...current, title: event.currentTarget.value }))} placeholder={isLotus ? "Taze börek vitrini" : "Salon atmosferi"} /></label>
             <label className="field"><span>Açıklama</span><textarea value={form.description} onChange={(event) => setForm((current) => ({ ...current, description: event.currentTarget.value }))} placeholder="Görsel açıklaması" /></label>
             <button className="ghostButton" type="button" onClick={addGalleryItem}>Listeye Ekle</button>
           </div>
