@@ -9,13 +9,17 @@ import { useSiteContent } from "../useSiteContent";
 import { contentPageLabels, contentPageRoutes, getManagedContentPage, getManagedFaqItems } from "../siteContent";
 import { getDefaultTemplate } from "../defaultTemplate";
 
+function isLotusDemo() {
+  return process.env.NEXT_PUBLIC_BUSINESS_ID === "lotus-borek-demo" || process.env.NEXT_PUBLIC_DEFAULT_TEMPLATE === "cafe";
+}
+
 function getFallbackConfig(): BusinessTemplateConfig {
-  if (process.env.NEXT_PUBLIC_BUSINESS_ID === "lotus-borek-demo") return demoLotusBorekConfig;
+  if (isLotusDemo()) return demoLotusBorekConfig;
   return templateConfigs[getDefaultTemplate()];
 }
 
 function getHomePath() {
-  if (process.env.NEXT_PUBLIC_BUSINESS_ID === "lotus-borek-demo") return "/lotus-borek-evi";
+  if (isLotusDemo()) return "/lotus-borek-evi";
   return "/";
 }
 
