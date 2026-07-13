@@ -2,7 +2,7 @@ import type { BusinessTemplateConfig } from "@fk-templates/shared";
 
 export const demoLotusBorekConfig: BusinessTemplateConfig = {
   template: "cafe",
-  sector: "Pastane / Cafe / Börekçi",
+  sector: "Börek • Hamur İşi • Tatlı",
   brandName: "Lotus Börek Evi",
   eyebrow: "Milas’ta günlük taze lezzetler",
   heroTitle: "Günlük taze börek, hamur işi ve tatlı çeşitleri",
