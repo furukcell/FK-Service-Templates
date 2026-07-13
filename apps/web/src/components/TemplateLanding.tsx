@@ -17,6 +17,9 @@ type TemplateLandingProps = {
   showTemplateSwitch?: boolean;
   showLayoutSwitch?: boolean;
   contentBasePath?: string;
+  hideShowcaseServiceStrip?: boolean;
+  hidePreviewMiniGrid?: boolean;
+  prominentLocationCard?: boolean;
 };
 
 const layoutOrder: LayoutVariant[] = ["modern", "split", "showcase"];
@@ -34,6 +37,34 @@ function applyTheme(config: BusinessTemplateConfig): CSSProperties {
 function contentHref(path: string, contentBasePath = "") {
   if (!contentBasePath) return path;
   return `${contentBasePath}${path}`;
+}
+
+function normalizePhone(phone: string) {
+  return phone.replace(/[^0-9]/g, "");
+}
+
+function whatsappUrl(config: BusinessTemplateConfig) {
+  const normalized = normalizePhone(config.whatsapp || config.phone);
+  const message = encodeURIComponent(`Merhaba ${config.brandName}, sipariş vermek ve menü/fiyat bilgisi almak istiyorum.`);
+  return normalized ? `https://wa.me/${normalized}?text=${message}` : "#request-form";
+}
+
+function isWhatsappCta(label: string) {
+  return label.toLocaleLowerCase("tr-TR").includes("whatsapp");
+}
+
+function PrimaryCtaButton({ config }: { config: BusinessTemplateConfig }) {
+  const isWhatsapp = isWhatsappCta(config.primaryCta);
+  return (
+    <a
+      className="pillButton navButtonLink"
+      href={isWhatsapp ? whatsappUrl(config) : "#request-form"}
+      target={isWhatsapp ? "_blank" : undefined}
+      rel={isWhatsapp ? "noreferrer" : undefined}
+    >
+      {config.primaryCta}
+    </a>
+  );
 }
 
 function formDataToExtra(formData: FormData): Record<string, string> {
@@ -189,21 +220,23 @@ function Stats({ config }: { config: BusinessTemplateConfig }) {
   );
 }
 
-function PreviewPanel({ config }: { config: BusinessTemplateConfig }) {
+function PreviewPanel({ config, hideMiniGrid = false }: { config: BusinessTemplateConfig; hideMiniGrid?: boolean }) {
   return (
-    <div className="previewPanel">
+    <div className={`previewPanel ${hideMiniGrid ? "previewPanelCompact" : ""}`}>
       <div className="previewHeader"><span className="previewBadge">{config.sector}</span><span>{config.brandName}</span></div>
       <div className="previewCard">
         <h3>{config.form.title}</h3>
         <p>{config.form.description}</p>
         <span className="priceTag">Hızlı talep ve dönüş</span>
       </div>
-      <div className="previewMiniGrid">
-        {config.services.map((service) => <div key={service.title}>{service.title.split(" ")[0]}</div>)}
-      </div>
-      <div className="previewCard">
-        <h3>Güvenli başvuru</h3>
-        <p>Talep bilgileriniz işletmeye iletilir ve en kısa sürede sizinle iletişime geçilir.</p>
+      {!hideMiniGrid ? (
+        <div className="previewMiniGrid">
+          {config.services.map((service) => <div key={service.title}>{service.title.split(" ")[0]}</div>)}
+        </div>
+      ) : null}
+      <div className="previewCard previewCardSmall">
+        <h3>Hızlı geri dönüş</h3>
+        <p>Talebiniz işletmeye iletilir ve size en kısa sürede dönüş yapılır.</p>
       </div>
     </div>
   );
@@ -276,7 +309,7 @@ function StaffSection({ config }: { config: BusinessTemplateConfig }) {
   );
 }
 
-function VisualSection({ config }: { config: BusinessTemplateConfig }) {
+function VisualSection({ config, prominentLocationCard = false }: { config: BusinessTemplateConfig; prominentLocationCard?: boolean }) {
   if (!config.galleryItems?.length) return null;
   return (
     <section className="section">
@@ -294,11 +327,12 @@ function VisualSection({ config }: { config: BusinessTemplateConfig }) {
             </div>
           </article>
         ))}
-        <article className="visualCard locationCard">
+        <article className={`visualCard locationCard ${prominentLocationCard ? "locationCardWide" : ""}`}>
           <div className="visualPlaceholder">MAP</div>
           <div>
-            <h3>Konum ve sosyal medya</h3>
+            <h3>Konum ve iletişim</h3>
             <p>{config.address}</p>
+            <p>{config.phone}</p>
             <div className="heroActions">
               {config.mapsUrl ? <a className="ghostButton navButtonLink" href={config.mapsUrl} target="_blank" rel="noreferrer">Haritada Aç</a> : null}
               {config.instagramUrl ? <a className="pillButton navButtonLink" href={config.instagramUrl} target="_blank" rel="noreferrer">Instagram</a> : null}
@@ -349,7 +383,7 @@ function RequestFormSection({ config, handleSubmit, isSubmitting, submitStatus, 
   );
 }
 
-function ModernLayout({ config, switchers, form }: { config: BusinessTemplateConfig; switchers: ReactNode; form: ReactNode }) {
+function ModernLayout({ config, switchers, form, hidePreviewMiniGrid }: { config: BusinessTemplateConfig; switchers: ReactNode; form: ReactNode; hidePreviewMiniGrid?: boolean }) {
   return (
     <>
       <Nav config={config} />
@@ -358,11 +392,11 @@ function ModernLayout({ config, switchers, form }: { config: BusinessTemplateCon
           <span className="eyebrow">{config.eyebrow}</span>
           <h1 className="heroTitle">{config.heroTitle}</h1>
           <p className="heroDescription">{config.heroDescription}</p>
-          <div className="heroActions"><a className="pillButton navButtonLink" href="#request-form">{config.primaryCta}</a><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
+          <div className="heroActions"><PrimaryCtaButton config={config} /><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
           {switchers}
           <Stats config={config} />
         </div>
-        <PreviewPanel config={config} />
+        <PreviewPanel config={config} hideMiniGrid={hidePreviewMiniGrid} />
       </section>
       <ServicesSection config={config} />
       <CampaignSection config={config} />
@@ -383,7 +417,7 @@ function SplitLayout({ config, switchers, form }: { config: BusinessTemplateConf
           <span className="eyebrow">{config.eyebrow}</span>
           <h1 className="heroTitle">{config.heroTitle}</h1>
           <p className="heroDescription">{config.heroDescription}</p>
-          <div className="heroActions"><a className="pillButton navButtonLink" href="#request-form">{config.primaryCta}</a><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
+          <div className="heroActions"><PrimaryCtaButton config={config} /><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
           {switchers}
         </div>
       </section>
@@ -396,21 +430,23 @@ function SplitLayout({ config, switchers, form }: { config: BusinessTemplateConf
   );
 }
 
-function ShowcaseLayout({ config, switchers, form }: { config: BusinessTemplateConfig; switchers: ReactNode; form: ReactNode }) {
+function ShowcaseLayout({ config, switchers, form, hideShowcaseServiceStrip, hidePreviewMiniGrid, prominentLocationCard }: { config: BusinessTemplateConfig; switchers: ReactNode; form: ReactNode; hideShowcaseServiceStrip?: boolean; hidePreviewMiniGrid?: boolean; prominentLocationCard?: boolean }) {
   return (
     <>
       <Nav config={config} />
-      <section className="showcaseHero">
+      <section className={`showcaseHero ${hideShowcaseServiceStrip ? "showcaseHeroCompact" : ""}`}>
         <span className="eyebrow">{config.eyebrow}</span>
         <h1>{config.heroTitle}</h1>
         <p>{config.heroDescription}</p>
-        <div className="heroActions showcaseActions"><a className="pillButton navButtonLink" href="#request-form">{config.primaryCta}</a><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
+        <div className="heroActions showcaseActions"><PrimaryCtaButton config={config} /><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
         {switchers}
-        <div className="showcaseServiceStrip">
-          {config.services.map((service) => <article key={service.title}><span>{service.price || "Bilgi al"}</span><strong>{service.title}</strong></article>)}
-        </div>
+        {!hideShowcaseServiceStrip ? (
+          <div className="showcaseServiceStrip">
+            {config.services.map((service) => <article key={service.title}><span>{service.price || "Bilgi al"}</span><strong>{service.title}</strong></article>)}
+          </div>
+        ) : null}
       </section>
-      <section className="showcasePanelGrid"><PreviewPanel config={config} /><VisualSection config={config} /></section>
+      <section className={`showcasePanelGrid ${prominentLocationCard ? "showcasePanelGridWideMap" : ""}`}><PreviewPanel config={config} hideMiniGrid={hidePreviewMiniGrid} /><VisualSection config={config} prominentLocationCard={prominentLocationCard} /></section>
       <ServicesSection config={config} />
       <CampaignSection config={config} />
       <StaffSection config={config} />
@@ -419,7 +455,7 @@ function ShowcaseLayout({ config, switchers, form }: { config: BusinessTemplateC
   );
 }
 
-export function TemplateLanding({ config, activeTemplate, activeLayout = "modern", onTemplateChange, onLayoutChange, showTemplateSwitch = true, showLayoutSwitch = true, contentBasePath }: TemplateLandingProps) {
+export function TemplateLanding({ config, activeTemplate, activeLayout = "modern", onTemplateChange, onLayoutChange, showTemplateSwitch = true, showLayoutSwitch = true, contentBasePath, hideShowcaseServiceStrip, hidePreviewMiniGrid, prominentLocationCard }: TemplateLandingProps) {
   const [submitStatus, setSubmitStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -479,8 +515,8 @@ export function TemplateLanding({ config, activeTemplate, activeLayout = "modern
   return (
     <Shell config={config} contentBasePath={contentBasePath}>
       {activeLayout === "split" ? <SplitLayout config={config} switchers={switchers} form={form} /> : null}
-      {activeLayout === "showcase" ? <ShowcaseLayout config={config} switchers={switchers} form={form} /> : null}
-      {activeLayout === "modern" ? <ModernLayout config={config} switchers={switchers} form={form} /> : null}
+      {activeLayout === "showcase" ? <ShowcaseLayout config={config} switchers={switchers} form={form} hideShowcaseServiceStrip={hideShowcaseServiceStrip} hidePreviewMiniGrid={hidePreviewMiniGrid} prominentLocationCard={prominentLocationCard} /> : null}
+      {activeLayout === "modern" ? <ModernLayout config={config} switchers={switchers} form={form} hidePreviewMiniGrid={hidePreviewMiniGrid} /> : null}
     </Shell>
   );
 }
