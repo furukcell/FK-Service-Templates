@@ -9,6 +9,7 @@ import {
 } from "@fk-templates/firebase";
 import { demoProperties, demoRequests, statusLabels } from "../src/adminDemoData";
 import { getDefaultTemplateRoute } from "../src/defaultTemplate";
+import { getAdminShellClassName, getAdminShellStyle, isLotusAdminDemo } from "../src/lotusAdmin";
 import { isDemoMode } from "../src/runtimeMode";
 import { useOptionalAdminGuard } from "../src/useOptionalAdminGuard";
 
@@ -87,6 +88,7 @@ function playNotificationSound() {
 
 export default function AdminPage() {
   const guard = useOptionalAdminGuard();
+  const isLotus = isLotusAdminDemo();
   const [liveRequests, setLiveRequests] = useState<DisplayRequest[]>([]);
   const [dataMode, setDataMode] = useState(isDemoMode() ? "Demo kayıtlar" : "Canlı kayıtlar");
   const [actionStatus, setActionStatus] = useState("");
@@ -214,39 +216,39 @@ export default function AdminPage() {
   const summaryCards = useMemo(() => [
     { value: displayRequests.length.toString(), label: "toplam talep" },
     { value: unreadCount.toString(), label: "yeni talep" },
-    { value: isDemoMode() ? demoProperties.length.toString() : "0", label: isDemoMode() ? "demo ilan" : "vitrin ilan" },
-    { value: "3", label: "site bölümü" }
-  ], [displayRequests, unreadCount]);
+    isLotus ? { value: "Menü", label: "kart yönetimi" } : { value: isDemoMode() ? demoProperties.length.toString() : "0", label: isDemoMode() ? "demo ilan" : "vitrin ilan" },
+    { value: isLotus ? "Lotus" : "3", label: isLotus ? "demo panel" : "site bölümü" }
+  ], [displayRequests, unreadCount, isLotus]);
 
   if (guard.isChecking) {
-    return <main className="adminShell"><section className="adminMain"><header className="adminHeader"><div><span className="eyebrow">Yönetim Paneli</span><h1>Kontrol ediliyor</h1><p>{guard.message}</p></div></header></section></main>;
+    return <main className={getAdminShellClassName()} style={getAdminShellStyle()}><section className="adminMain"><header className="adminHeader"><div><span className="eyebrow">Yönetim Paneli</span><h1>Kontrol ediliyor</h1><p>{guard.message}</p></div></header></section></main>;
   }
 
   if (!guard.isAllowed) {
-    return <main className="adminShell"><section className="adminMain"><header className="adminHeader"><div><span className="eyebrow">Yönetim Paneli</span><h1>Giriş gerekli</h1><p>{guard.message}</p></div><a className="pillButton navButtonLink" href="/login">Admin Giriş</a></header></section></main>;
+    return <main className={getAdminShellClassName()} style={getAdminShellStyle()}><section className="adminMain"><header className="adminHeader"><div><span className="eyebrow">Yönetim Paneli</span><h1>Giriş gerekli</h1><p>{guard.message}</p></div><a className="pillButton navButtonLink" href="/login">Admin Giriş</a></header></section></main>;
   }
 
   return (
-    <main className="adminShell">
+    <main className={getAdminShellClassName()} style={getAdminShellStyle()}>
       <aside className="adminSidebar">
-        <a className="adminLogo" href="/admin"><span>YP</span><strong>Yönetim Paneli</strong></a>
+        <a className="adminLogo" href="/admin"><span>{isLotus ? "LB" : "YP"}</span><strong>{isLotus ? "Lotus Paneli" : "Yönetim Paneli"}</strong></a>
         <nav>
           <a className="active" href="#requests">Talepler {unreadCount ? `(${unreadCount})` : ""}</a>
           <a href="/admin/settings">Site Ayarları</a>
           <a href="/admin/content">Kurumsal Metinler</a>
-          <a href="/admin/services">Hizmetler</a>
-          <a href="/admin/campaigns">Kampanyalar</a>
+          <a href="/admin/services">Menü Kartları</a>
+          <a href="/admin/campaigns">Duyurular</a>
           <a href="/admin/gallery">Galeri</a>
-          <a href="/admin/properties">İlanlar</a>
+          {!isLotus ? <a href="/admin/properties">İlanlar</a> : null}
         </nav>
       </aside>
 
       <section className="adminMain">
         <header className="adminHeader">
           <div>
-            <span className="eyebrow">Yönetim Paneli</span>
-            <h1>Gelen talepler ve site yönetimi</h1>
-            <p>Form taleplerini takip edin, site içeriklerini düzenleyin, kampanya, galeri, hizmet ve ilanları yönetin.</p>
+            <span className="eyebrow">{isLotus ? "Lotus Börek Evi" : "Yönetim Paneli"}</span>
+            <h1>{isLotus ? "Lotus site yönetimi" : "Gelen talepler ve site yönetimi"}</h1>
+            <p>{isLotus ? "Lotus Börek Evi için gelen talepleri, menü kartlarını, görselleri, kampanya ve site ayarlarını buradan yönetin." : "Form taleplerini takip edin, site içeriklerini düzenleyin, kampanya, galeri, hizmet ve ilanları yönetin."}</p>
             {isDemoMode() ? <p className="adminMode">Veri modu: {dataMode}</p> : null}
             <p className="adminMode">Bildirim: {browserNotificationStatus}</p>
             {actionStatus ? <p className="adminMode">{actionStatus}</p> : null}
@@ -261,19 +263,19 @@ export default function AdminPage() {
         </div>
 
         <section className="adminCard">
-          <div className="adminSectionHead"><div><h2>Site yönetimi</h2><p>Site içeriğini buradan düzenleyebilirsiniz.</p></div></div>
+          <div className="adminSectionHead"><div><h2>{isLotus ? "Lotus site yönetimi" : "Site yönetimi"}</h2><p>{isLotus ? "Müşterinin göreceği metin, menü, duyuru ve görselleri buradan düzenleyebilirsiniz." : "Site içeriğini buradan düzenleyebilirsiniz."}</p></div></div>
           <div className="adminPropertyGrid">
-            <article className="adminProperty"><span>Yönetim</span><h3>Site Ayarları</h3><p>Firma adı, telefon, adres, başlıklar ve seçili arayüz.</p><a className="ghostButton navButtonLink" href="/admin/settings">Aç</a></article>
-            <article className="adminProperty"><span>Yönetim</span><h3>Kurumsal Metinler</h3><p>Hakkımızda, KVKK, gizlilik ve SSS metinleri.</p><a className="ghostButton navButtonLink" href="/admin/content">Aç</a></article>
-            <article className="adminProperty"><span>Yönetim</span><h3>Hizmetler</h3><p>Hizmet adı, açıklama ve fiyat listesi.</p><a className="ghostButton navButtonLink" href="/admin/services">Aç</a></article>
-            <article className="adminProperty"><span>Yönetim</span><h3>Kampanyalar</h3><p>Dönemsel kampanya ve paket kartları.</p><a className="ghostButton navButtonLink" href="/admin/campaigns">Aç</a></article>
-            <article className="adminProperty"><span>Yönetim</span><h3>Galeri</h3><p>Site görselleri, başlık ve açıklamalar.</p><a className="ghostButton navButtonLink" href="/admin/gallery">Aç</a></article>
-            <article className="adminProperty"><span>Yönetim</span><h3>İlanlar</h3><p>Emlak ilanlarını düzenleme ve yayından kaldırma.</p><a className="ghostButton navButtonLink" href="/admin/properties">Aç</a></article>
+            <article className="adminProperty"><span>Yönetim</span><h3>Site Ayarları</h3><p>Firma adı, telefon, adres, başlıklar, renkler ve seçili arayüz.</p><a className="ghostButton navButtonLink" href="/admin/settings">Aç</a></article>
+            <article className="adminProperty"><span>Yönetim</span><h3>Kurumsal Metinler</h3><p>Hakkımızda, iletişim, KVKK, gizlilik ve SSS metinleri.</p><a className="ghostButton navButtonLink" href="/admin/content">Aç</a></article>
+            <article className="adminProperty"><span>Yönetim</span><h3>{isLotus ? "Menü Kartları" : "Hizmetler"}</h3><p>{isLotus ? "Börek, hamur işi, tatlı ve toplu sipariş kartları." : "Hizmet adı, açıklama ve fiyat listesi."}</p><a className="ghostButton navButtonLink" href="/admin/services">Aç</a></article>
+            <article className="adminProperty"><span>Yönetim</span><h3>{isLotus ? "Duyurular" : "Kampanyalar"}</h3><p>{isLotus ? "Günlük ürün, toplu sipariş ve vitrin duyuruları." : "Dönemsel kampanya ve paket kartları."}</p><a className="ghostButton navButtonLink" href="/admin/campaigns">Aç</a></article>
+            <article className="adminProperty"><span>Yönetim</span><h3>Galeri</h3><p>Site görselleri, vitrin fotoğrafları, başlık ve açıklamalar.</p><a className="ghostButton navButtonLink" href="/admin/gallery">Aç</a></article>
+            {!isLotus ? <article className="adminProperty"><span>Yönetim</span><h3>İlanlar</h3><p>Emlak ilanlarını düzenleme ve yayından kaldırma.</p><a className="ghostButton navButtonLink" href="/admin/properties">Aç</a></article> : null}
           </div>
         </section>
 
         <section className="adminCard" id="requests">
-          <div className="adminSectionHead"><div><h2>Gelen talepler {unreadCount ? `(${unreadCount} yeni)` : ""}</h2><p>Web sitesinden gelen başvurular burada canlı listelenir.</p></div><button className="ghostButton" type="button" onClick={exportCsv}>CSV indir</button></div>
+          <div className="adminSectionHead"><div><h2>Gelen talepler {unreadCount ? `(${unreadCount} yeni)` : ""}</h2><p>{isLotus ? "Web sitesi ve WhatsApp üzerinden gelen sipariş / fiyat bilgisi talepleri burada listelenir." : "Web sitesinden gelen başvurular burada canlı listelenir."}</p></div><button className="ghostButton" type="button" onClick={exportCsv}>CSV indir</button></div>
           {displayRequests.length ? (
             <div className="adminRequestList">
               {displayRequests.map((request) => {
