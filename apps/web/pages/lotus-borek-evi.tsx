@@ -16,6 +16,10 @@ export default function LotusBorekDemoPage() {
           height: 98px;
         }
 
+        .lotusDemoPage .navbar .navActions .ghostButton {
+          display: none;
+        }
+
         .lotusDemoPage .logoLockup {
           gap: 0;
           min-width: 330px;
