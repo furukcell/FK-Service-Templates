@@ -68,11 +68,6 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
       imageUrl: "/demo/lotus-borek/real-taze-borek-vitrini.svg"
     },
     {
-      title: "Çıtır börek çeşitleri",
-      description: "El açması ve çıtır börek çeşitleri.",
-      imageUrl: "/demo/lotus-borek/real-citir-borek.svg"
-    },
-    {
       title: "Sıcak simit",
       description: "Sabah saatlerinde taze ve sıcak simit.",
       imageUrl: "/demo/lotus-borek/real-sicak-simit.svg"
@@ -86,11 +81,6 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
       title: "Tatlı ve baklava",
       description: "Baklava, kurabiye ve günlük tatlı seçenekleri.",
       imageUrl: "/demo/lotus-borek/real-tatli-baklava.svg"
-    },
-    {
-      title: "El açması börek",
-      description: "Günlük hazırlanan börek ve hamur işi çeşitleri.",
-      imageUrl: "/demo/lotus-borek/real-el-acmasi-borek.svg"
     }
   ],
   staff: [
