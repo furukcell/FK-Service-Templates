@@ -30,16 +30,31 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
     { value: "Toplu", label: "sipariş desteği" }
   ],
   services: [
-    { title: "Kol Böreği", description: "Günlük taze hazırlanan, kahvaltı ve gel-al siparişler için pratik börek seçeneği.", price: "Sipariş ver" },
-    { title: "Arnavut Böreği", description: "Özel lezzet arayanlar için doyurucu ve geleneksel Arnavut böreği seçeneği.", price: "Fiyat sor" },
-    { title: "Su Böreği", description: "Porsiyon, kilo veya tepsi olarak sipariş alınabilir; toplu siparişlere uygundur.", price: "Bilgi al" },
-    { title: "Gül Böreği", description: "Kahvaltı, ikram ve günlük tüketim için lezzetli gül böreği çeşitleri.", price: "Sipariş ver" },
-    { title: "Kalem Böreği", description: "Çay saatleri, davetler ve hızlı ikramlar için çıtır kalem böreği.", price: "Menü bilgisi" },
-    { title: "Hamur İşleri", description: "Simit, poğaça ve günlük çıkan diğer hamur işi çeşitleri.", price: "Günlük" },
-    { title: "Kahvaltılıklar", description: "Sabah servisleri, kahvaltı ürünleri ve sıcak fırın lezzetleri.", price: "Menüden seç" },
-    { title: "Cevizli Baklava", description: "Tatlı severler için cevizli baklava ve özel gün ikram seçenekleri.", price: "Fiyat sor" },
-    { title: "Kurabiye & Tatlılar", description: "Kurabiye, tatlı ve günlük tatlı çeşitleri için hızlı bilgi alınabilir.", price: "Bilgi al" },
-    { title: "Toplu Sipariş", description: "İş yeri, okul, toplantı, mevlüt ve özel günler için toplu sipariş desteği.", price: "Teklif al" }
+    {
+      title: "Börek Çeşitleri",
+      description: "Kol böreği, Arnavut böreği, su böreği, gül böreği ve kalem böreği günlük olarak hazırlanır.",
+      price: "Fiyat Sor"
+    },
+    {
+      title: "Hamur İşleri",
+      description: "Simit, poğaça ve günlük çıkan sıcak hamur işi çeşitleriyle gün boyu taze servis.",
+      price: "Fiyat Sor"
+    },
+    {
+      title: "Kahvaltılıklar",
+      description: "Sabah servisleri için kahvaltılık ürünler, sıcak fırın lezzetleri ve gel-al seçenekleri.",
+      price: "Fiyat Sor"
+    },
+    {
+      title: "Tatlı & Baklava",
+      description: "Cevizli baklava, kurabiye ve günlük tatlı çeşitleri özel sipariş ve günlük alım için hazırlanır.",
+      price: "Fiyat Sor"
+    },
+    {
+      title: "Toplu Sipariş",
+      description: "İş yeri, okul, toplantı ve özel günler için toplu börek, tatlı ve kahvaltılık siparişleri alınır.",
+      price: "Fiyat Sor"
+    }
   ],
   campaignItems: [
     { title: "Sabah Sıcak Lezzetler", description: "Simit, poğaça, börek ve kahvaltılık ürünlerle güne taze başlangıç.", price: "Günlük" },
