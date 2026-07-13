@@ -49,6 +49,18 @@ function whatsappUrl(config: BusinessTemplateConfig) {
   return normalized.length >= 10 ? `https://wa.me/${normalized}?text=${message}` : "#request-form";
 }
 
+function mapQuery(config: BusinessTemplateConfig) {
+  return config.address || config.brandName;
+}
+
+function mapEmbedUrl(config: BusinessTemplateConfig) {
+  return `https://www.google.com/maps?q=${encodeURIComponent(mapQuery(config))}&output=embed`;
+}
+
+function mapsUrl(config: BusinessTemplateConfig) {
+  return config.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery(config))}`;
+}
+
 function isWhatsappCta(label: string) {
   return label.toLocaleLowerCase("tr-TR").includes("whatsapp");
 }
@@ -76,6 +88,19 @@ function FloatingWhatsappButton({ config }: { config: BusinessTemplateConfig }) 
       <span className="floatingWhatsappMark" aria-hidden="true">WA</span>
       <span className="floatingWhatsappText"><strong>WhatsApp</strong><small>Hızlı sipariş</small></span>
     </a>
+  );
+}
+
+function MapEmbed({ config }: { config: BusinessTemplateConfig }) {
+  return (
+    <iframe
+      className="mapEmbedFrame"
+      title={`${config.brandName} harita konumu`}
+      src={mapEmbedUrl(config)}
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      allowFullScreen
+    />
   );
 }
 
@@ -341,13 +366,13 @@ function VisualSection({ config, prominentLocationCard = false }: { config: Busi
           </article>
         ))}
         <article className={`visualCard locationCard ${prominentLocationCard ? "locationCardWide" : ""}`}>
-          <div className="visualPlaceholder">MAP</div>
+          <MapEmbed config={config} />
           <div>
             <h3>Konum ve iletişim</h3>
             <p>{config.address}</p>
             <p>{config.phone}</p>
             <div className="heroActions">
-              {config.mapsUrl ? <a className="ghostButton navButtonLink" href={config.mapsUrl} target="_blank" rel="noreferrer">Haritada Aç</a> : null}
+              <a className="ghostButton navButtonLink" href={mapsUrl(config)} target="_blank" rel="noreferrer">Haritada Aç</a>
               {config.instagramUrl ? <a className="pillButton navButtonLink" href={config.instagramUrl} target="_blank" rel="noreferrer">Instagram</a> : null}
             </div>
           </div>
