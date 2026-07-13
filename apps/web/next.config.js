@@ -1,3 +1,5 @@
+const path = require("path");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -10,6 +12,10 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true
+  },
+  webpack: (config) => {
+    config.resolve.modules = [path.resolve(__dirname, "node_modules"), ...(config.resolve.modules || [])];
+    return config;
   }
 };
 
