@@ -6,10 +6,10 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
   brandName: "LOTUS BÖREK EVİ",
   eyebrow: "Milas’ta günlük taze lezzetler",
   heroTitle: "Günlük taze börek, hamur işi ve tatlı çeşitleri",
-  heroDescription: "Kol böreği, Arnavut böreği, su böreği, kahvaltılıklar, kurabiye ve cevizli baklava için hızlı sipariş ve menü bilgisi.",
+  heroDescription: "Kol böreği, Arnavut böreği, su böreği, sıcak simit, poğaça ve tatlı çeşitleri için WhatsApp’tan hızlı bilgi alın.",
   primaryCta: "WhatsApp’tan Sipariş Ver",
   secondaryCta: "Menüyü İncele",
-  topBarText: "Günlük taze börek • Hamur işleri • Kahvaltılıklar • Tatlı & baklava • WhatsApp sipariş",
+  topBarText: "Günlük taze börek • Sıcak simit • Hamur işleri • Tatlı & baklava • WhatsApp sipariş",
   phone: "+90 537 058 44 20",
   whatsapp: "+905370584420",
   address: "Cumhuriyet Mahallesi, Halil Bey Bulvarı No: 75/A, Milas / Muğla",
@@ -32,38 +32,38 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
   services: [
     {
       title: "Börek Çeşitleri",
-      description: "Kol böreği, Arnavut böreği, su böreği, gül böreği ve kalem böreği günlük olarak hazırlanır.",
+      description: "Kol, Arnavut, su, gül ve kalem böreği çeşitleri için günlük ürün bilgisi ve sipariş detaylarını WhatsApp’tan alabilirsiniz.",
       price: "Fiyat Sor"
     },
     {
       title: "Hamur İşleri",
-      description: "Simit, poğaça ve günlük çıkan sıcak hamur işi çeşitleriyle gün boyu taze servis.",
+      description: "Simit, poğaça ve günlük çıkan sıcak hamur işi çeşitleri sabah saatlerinden itibaren taze hazırlanır.",
       price: "Fiyat Sor"
     },
     {
       title: "Kahvaltılıklar",
-      description: "Sabah servisleri için kahvaltılık ürünler, sıcak fırın lezzetleri ve gel-al seçenekleri.",
+      description: "Sıcak fırın ürünleri, kahvaltılık seçenekler ve gel-al siparişleri için hızlı bilgi alabilirsiniz.",
       price: "Fiyat Sor"
     },
     {
       title: "Tatlı & Baklava",
-      description: "Cevizli baklava, kurabiye ve günlük tatlı çeşitleri özel sipariş ve günlük alım için hazırlanır.",
+      description: "Cevizli baklava, kurabiye ve günlük tatlı çeşitleri için güncel ürün bilgisini WhatsApp’tan sorabilirsiniz.",
       price: "Fiyat Sor"
     },
     {
       title: "Toplu Sipariş",
-      description: "İş yeri, okul, toplantı ve özel günler için toplu börek, tatlı ve kahvaltılık siparişleri alınır.",
+      description: "İş yeri, okul, toplantı ve özel günler için tepsi börek, tatlı ve kahvaltılık toplu sipariş desteği verilir.",
       price: "Fiyat Sor"
     }
   ],
   campaignItems: [
-    { title: "Sabah Sıcak Lezzetler", description: "Simit, poğaça, börek ve kahvaltılık ürünlerle güne taze başlangıç.", price: "Günlük" },
-    { title: "Tepsi ve Toplu Sipariş", description: "Özel gün, toplantı, okul ve iş yerleri için tepsi börek ve toplu sipariş hazırlığı.", price: "Teklif al" },
-    { title: "Tatlı & Baklava İkramı", description: "Cevizli baklava, kurabiye ve tatlı çeşitleri için WhatsApp üzerinden hızlı bilgi.", price: "Fiyat sor" }
+    { title: "Günün Sıcak Lezzetleri", description: "Simit, poğaça, börek ve kahvaltılık ürünler günlük olarak hazırlanır.", price: "Günlük" },
+    { title: "Tepsi Börek & Toplu Sipariş", description: "Toplantı, okul, iş yeri ve özel günler için tepsi börek ve toplu sipariş hazırlığı yapılır.", price: "Bilgi al" },
+    { title: "Tatlı & İkram Seçenekleri", description: "Baklava, kurabiye ve tatlı çeşitleri için güncel ürün bilgisini WhatsApp üzerinden alabilirsiniz.", price: "Fiyat sor" }
   ],
   galleryItems: [
     {
-      title: "Taze börek vitrini",
+      title: "Günlük börek vitrini",
       description: "Günlük çıkan börekler ve sıcak ürün vitrini.",
       imageUrl: "/demo/lotus-borek/taze-borek.jpg"
     },
@@ -73,27 +73,27 @@ export const demoLotusBorekConfig: BusinessTemplateConfig = {
       imageUrl: "/demo/lotus-borek/sicak-simit.jpg"
     },
     {
-      title: "Kahvaltılıklar",
+      title: "Kahvaltılık ürünler",
       description: "Simit, poğaça ve sabah ürünleri.",
       imageUrl: "/demo/lotus-borek/sicak-simit.jpg"
     },
     {
-      title: "Tatlı ve baklava",
+      title: "Tatlı & baklava",
       description: "Baklava, kurabiye ve günlük tatlı seçenekleri.",
       imageUrl: "/demo/lotus-borek/baklava.jpg"
     }
   ],
   staff: [
-    { name: "Lotus Börek Ekibi", role: "Günlük üretim", description: "Börek, hamur işi, kahvaltılık ve tatlı çeşitlerinin günlük hazırlanması." },
-    { name: "Sipariş Ekibi", role: "WhatsApp destek", description: "WhatsApp, telefon ve form taleplerine hızlı dönüş." }
+    { name: "Günlük hazırlık", role: "Taze üretim", description: "Börek, hamur işi, kahvaltılık ve tatlı çeşitleri günlük olarak hazırlanır." },
+    { name: "Sipariş desteği", role: "WhatsApp iletişim", description: "Menü, fiyat ve toplu sipariş bilgileri için telefon veya WhatsApp üzerinden dönüş yapılır." }
   ],
   form: {
-    title: "Sipariş ve menü bilgi talebi",
-    description: "Börek, hamur işi, kahvaltılık, baklava, kurabiye, tatlı veya toplu sipariş için formu doldurun. LOTUS BÖREK EVİ size telefon veya WhatsApp üzerinden dönüş yapsın.",
+    title: "Sipariş ve fiyat bilgisi alın",
+    description: "İstediğiniz ürün, adet ve teslim saati bilgisini yazın. LOTUS BÖREK EVİ size telefon veya WhatsApp üzerinden dönüş yapsın.",
     fields: [
       { key: "name", label: "Ad Soyad", type: "text", placeholder: "Adınız soyadınız" },
       { key: "phone", label: "Telefon", type: "tel", placeholder: "+90 5xx xxx xx xx" },
-      { key: "service", label: "Talep tipi", type: "select", options: ["Kol böreği", "Arnavut böreği", "Su böreği", "Gül böreği", "Kalem böreği", "Hamur işleri", "Kahvaltılıklar", "Cevizli baklava", "Kurabiye & tatlılar", "Toplu sipariş", "Menü ve fiyat bilgisi"] },
+      { key: "service", label: "Ürün / talep", type: "select", options: ["Kol böreği", "Arnavut böreği", "Su böreği", "Gül böreği", "Kalem böreği", "Hamur işleri", "Kahvaltılıklar", "Cevizli baklava", "Kurabiye & tatlılar", "Toplu sipariş", "Menü ve fiyat bilgisi"] },
       { key: "date", label: "Tercih edilen tarih", type: "date" },
       { key: "time", label: "Tercih edilen saat", type: "time" },
       { key: "note", label: "Not", type: "textarea", placeholder: "Ürün, adet, teslim saati veya özel notunuzu yazın" }
