@@ -13,7 +13,7 @@ const validTemplates: TemplateKey[] = ["appointment", "salon", "real-estate", "c
 
 export function getDefaultTemplate(): TemplateKey {
   const envTemplate = process.env.NEXT_PUBLIC_DEFAULT_TEMPLATE as TemplateKey | undefined;
-  return envTemplate && validTemplates.includes(envTemplate) ? envTemplate : "cafe";
+  return envTemplate && validTemplates.includes(envTemplate) ? envTemplate : "appointment";
 }
 
 export function getDefaultTemplateRoute() {
@@ -21,8 +21,7 @@ export function getDefaultTemplateRoute() {
   if (homePath) return homePath;
 
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID;
-  const defaultTemplate = getDefaultTemplate();
-  if (businessId === "lotus-borek-demo" || defaultTemplate === "cafe") return "/lotus-borek-evi";
+  if (businessId === "lotus-borek-demo") return "/lotus-borek-evi";
 
-  return templateRouteByKey[defaultTemplate];
+  return templateRouteByKey[getDefaultTemplate()];
 }
