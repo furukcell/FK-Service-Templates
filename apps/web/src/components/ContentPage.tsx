@@ -34,6 +34,28 @@ function contentHref(path: string, contentBasePath = "") {
   return `${contentBasePath}${path}`;
 }
 
+function normalizePhone(phone: string) {
+  return phone.replace(/[^0-9]/g, "");
+}
+
+function whatsappHref(config: BusinessTemplateConfig, brandName: string, whatsapp?: string, phone?: string) {
+  const normalized = normalizePhone(whatsapp || phone || config.whatsapp || config.phone);
+  const message = encodeURIComponent(`Merhaba ${brandName}, sipariş vermek ve menü/fiyat bilgisi almak istiyorum.`);
+  return normalized.length >= 10 ? `https://wa.me/${normalized}?text=${message}` : "";
+}
+
+function FloatingWhatsappButton({ config, brandName, whatsapp, phone }: { config: BusinessTemplateConfig; brandName: string; whatsapp?: string; phone?: string }) {
+  const href = whatsappHref(config, brandName, whatsapp, phone);
+  if (!href) return null;
+
+  return (
+    <a className="floatingWhatsappButton" href={href} target="_blank" rel="noreferrer" aria-label={`${brandName} WhatsApp iletişim`}>
+      <span className="floatingWhatsappMark" aria-hidden="true">WA</span>
+      <span className="floatingWhatsappText"><strong>WhatsApp</strong><small>Hızlı sipariş</small></span>
+    </a>
+  );
+}
+
 function paragraphs(body: string) {
   return body.split("\n").filter(Boolean);
 }
@@ -101,6 +123,7 @@ export function ContentPage({ pageKey, staticConfig, homePath, contentBasePath =
         {Object.entries(contentPageRoutes).map(([key, href]) => <a href={contentHref(href, contentBasePath)} key={key}>{contentPageLabels[key as ContentPageKey]}</a>)}
         <a href={contentHref("/sss", contentBasePath)}>SSS</a>
       </footer>
+      <FloatingWhatsappButton config={config} brandName={brandName} whatsapp={activeSettings?.whatsapp || undefined} phone={activeSettings?.phone || undefined} />
     </main>
   );
 }
@@ -131,6 +154,7 @@ export function FaqPage({ staticConfig, homePath, contentBasePath = "" }: Static
       <footer className="contentFooter">
         {Object.entries(contentPageRoutes).map(([key, href]) => <a href={contentHref(href, contentBasePath)} key={key}>{contentPageLabels[key as ContentPageKey]}</a>)}
       </footer>
+      <FloatingWhatsappButton config={config} brandName={brandName} whatsapp={activeSettings?.whatsapp || undefined} phone={activeSettings?.phone || undefined} />
     </main>
   );
 }
