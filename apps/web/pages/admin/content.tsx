@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getSiteSettings, saveSiteSettings, type ContentPageKey, type FaqItem, type ManagedContentPage, type ManagedSiteSettings } from "@fk-templates/firebase";
 import type { TemplateKey } from "@fk-templates/shared";
 import { getDefaultTemplate } from "../../src/defaultTemplate";
+import { getAdminShellClassName, getAdminShellStyle, getLotusAdminConfig, getLotusAwareTemplate, isLotusAdminDemo, lotusAdminTemplateKeys } from "../../src/lotusAdmin";
 import { contentPageLabels, contentPageOrder, defaultContentPages, defaultFaqItems } from "../../src/siteContent";
 import { templateConfigs } from "../../src/templateConfigs";
 import { useOptionalAdminGuard } from "../../src/useOptionalAdminGuard";
@@ -11,18 +12,20 @@ const templateKeys: TemplateKey[] = ["appointment", "salon", "real-estate", "caf
 export default function AdminContentPage() {
   const guard = useOptionalAdminGuard();
   const businessId = process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business";
-  const defaultTemplate = getDefaultTemplate();
+  const isLotus = isLotusAdminDemo();
+  const defaultTemplate = getLotusAwareTemplate(getDefaultTemplate());
+  const visibleTemplateKeys = isLotus ? lotusAdminTemplateKeys : templateKeys;
   const [settings, setSettings] = useState<ManagedSiteSettings | null>(null);
   const [template, setTemplate] = useState<TemplateKey>(defaultTemplate);
   const [activePage, setActivePage] = useState<ContentPageKey>("about");
-  const [pageForm, setPageForm] = useState<ManagedContentPage>(defaultContentPages(templateConfigs[defaultTemplate]).about);
-  const [faqItems, setFaqItems] = useState<FaqItem[]>(defaultFaqItems(templateConfigs[defaultTemplate]));
+  const [pageForm, setPageForm] = useState<ManagedContentPage>(defaultContentPages(getLotusAdminConfig(defaultTemplate, templateConfigs)).about);
+  const [faqItems, setFaqItems] = useState<FaqItem[]>(defaultFaqItems(getLotusAdminConfig(defaultTemplate, templateConfigs)));
   const [faqForm, setFaqForm] = useState<FaqItem>({ question: "", answer: "" });
-  const [status, setStatus] = useState("Kurumsal metinler panelden yönetilebilir.");
+  const [status, setStatus] = useState(isLotus ? "Lotus kurumsal metinleri panelden yönetilebilir." : "Kurumsal metinler panelden yönetilebilir.");
   const [isSaving, setIsSaving] = useState(false);
 
   function pageDefaults(selectedTemplate: TemplateKey, pageKey: ContentPageKey, siteSettings?: ManagedSiteSettings | null) {
-    return defaultContentPages(templateConfigs[selectedTemplate], siteSettings)[pageKey];
+    return defaultContentPages(getLotusAdminConfig(selectedTemplate, templateConfigs), siteSettings)[pageKey];
   }
 
   useEffect(() => {
@@ -30,26 +33,26 @@ export default function AdminContentPage() {
     async function loadContent() {
       try {
         const siteSettings = await getSiteSettings(businessId);
-        const selectedTemplate = siteSettings?.template || defaultTemplate;
+        const selectedTemplate = isLotus ? "cafe" : siteSettings?.template || defaultTemplate;
         setSettings(siteSettings);
         setTemplate(selectedTemplate);
         setPageForm(siteSettings?.contentPages?.[activePage] || pageDefaults(selectedTemplate, activePage, siteSettings));
-        setFaqItems(siteSettings?.faqItems?.length ? siteSettings.faqItems : defaultFaqItems(templateConfigs[selectedTemplate]));
-        setStatus(siteSettings?.contentPages ? "Canlı kurumsal metinler yüklendi." : "Metin kaydı yok, hazır şablon metinleri gösteriliyor.");
+        setFaqItems(siteSettings?.faqItems?.length ? siteSettings.faqItems : defaultFaqItems(getLotusAdminConfig(selectedTemplate, templateConfigs)));
+        setStatus(siteSettings?.contentPages ? "Canlı kurumsal metinler yüklendi." : isLotus ? "Kayıt yok, Lotus hazır metinleri gösteriliyor." : "Metin kaydı yok, hazır şablon metinleri gösteriliyor.");
       } catch (error) {
         setTemplate(defaultTemplate);
         setPageForm(pageDefaults(defaultTemplate, activePage));
-        setFaqItems(defaultFaqItems(templateConfigs[defaultTemplate]));
-        setStatus("Firebase bağlı değil, hazır şablon metinleri gösteriliyor.");
+        setFaqItems(defaultFaqItems(getLotusAdminConfig(defaultTemplate, templateConfigs)));
+        setStatus(isLotus ? "Firebase bağlı değil, Lotus hazır metinleri gösteriliyor." : "Firebase bağlı değil, hazır şablon metinleri gösteriliyor.");
       }
     }
     loadContent();
-  }, [activePage, businessId, defaultTemplate, guard.isAllowed]);
+  }, [activePage, businessId, defaultTemplate, guard.isAllowed, isLotus]);
 
   function changeTemplate(selectedTemplate: TemplateKey) {
     setTemplate(selectedTemplate);
     setPageForm(pageDefaults(selectedTemplate, activePage, settings));
-    setFaqItems(settings?.faqItems?.length ? settings.faqItems : defaultFaqItems(templateConfigs[selectedTemplate]));
+    setFaqItems(settings?.faqItems?.length ? settings.faqItems : defaultFaqItems(getLotusAdminConfig(selectedTemplate, templateConfigs)));
   }
 
   function changeActivePage(pageKey: ContentPageKey) {
@@ -76,7 +79,7 @@ export default function AdminContentPage() {
     try {
       await saveSiteSettings(businessId, {
         ...(settings || {}),
-        template,
+        template: isLotus ? "cafe" : template,
         contentPages: {
           ...(settings?.contentPages || {}),
           [activePage]: pageForm
@@ -94,33 +97,33 @@ export default function AdminContentPage() {
   }
 
   if (guard.isChecking) {
-    return <main className="adminShell"><section className="adminMain"><header className="adminHeader"><h1>Admin kontrol ediliyor</h1><p>{guard.message}</p></header></section></main>;
+    return <main className={getAdminShellClassName()} style={getAdminShellStyle()}><section className="adminMain"><header className="adminHeader"><h1>Admin kontrol ediliyor</h1><p>{guard.message}</p></header></section></main>;
   }
 
   if (!guard.isAllowed) {
-    return <main className="adminShell"><section className="adminMain"><header className="adminHeader"><h1>Giriş gerekli</h1><p>{guard.message}</p><a className="pillButton navButtonLink" href="/login">Admin Giriş</a></header></section></main>;
+    return <main className={getAdminShellClassName()} style={getAdminShellStyle()}><section className="adminMain"><header className="adminHeader"><h1>Giriş gerekli</h1><p>{guard.message}</p><a className="pillButton navButtonLink" href="/login">Admin Giriş</a></header></section></main>;
   }
 
   return (
-    <main className="adminShell">
+    <main className={getAdminShellClassName()} style={getAdminShellStyle()}>
       <aside className="adminSidebar">
-        <a className="adminLogo" href="/admin"><span>FK</span><strong>İçerik</strong></a>
+        <a className="adminLogo" href="/admin"><span>{isLotus ? "LB" : "FK"}</span><strong>{isLotus ? "Lotus İçerik" : "İçerik"}</strong></a>
         <nav>
           <a href="/admin">Talepler</a>
           <a href="/admin/settings">Site Ayarları</a>
           <a className="active" href="/admin/content">Kurumsal Metinler</a>
-          <a href="/admin/services">Hizmetler</a>
-          <a href="/admin/campaigns">Kampanyalar</a>
+          <a href="/admin/services">{isLotus ? "Menü Kartları" : "Hizmetler"}</a>
+          <a href="/admin/campaigns">{isLotus ? "Duyurular" : "Kampanyalar"}</a>
           <a href="/admin/gallery">Galeri</a>
-          <a href="/admin/properties/new">Yeni İlan</a>
+          {!isLotus ? <a href="/admin/properties/new">Yeni İlan</a> : null}
         </nav>
       </aside>
       <section className="adminMain">
         <header className="adminHeader">
           <div>
-            <span className="eyebrow">Legal + Trust Pages</span>
+            <span className="eyebrow">{isLotus ? "Lotus Kurumsal Metinleri" : "Legal + Trust Pages"}</span>
             <h1>Kurumsal metin yönetimi</h1>
-            <p>Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS metinleri buradan düzenlenir.</p>
+            <p>{isLotus ? "Hakkımızda, iletişim, gizlilik, KVKK, çerez ve SSS metinleri Lotus için buradan düzenlenir." : "Hakkımızda, iletişim, gizlilik, KVKK, çerez, kullanım koşulları ve SSS metinleri buradan düzenlenir."}</p>
             <p className="adminMode">{status}</p>
           </div>
           <button className="pillButton" type="button" disabled={isSaving} onClick={saveContent}>{isSaving ? "Kaydediliyor..." : "Metinleri Kaydet"}</button>
@@ -128,7 +131,7 @@ export default function AdminContentPage() {
 
         <section className="adminCard">
           <div className="adminPropertyForm formFields">
-            <label className="field"><span>Aktif sektör</span><select value={template} onChange={(event) => changeTemplate(event.currentTarget.value as TemplateKey)}>{templateKeys.map((item) => <option value={item} key={item}>{templateConfigs[item].sector}</option>)}</select></label>
+            {!isLotus ? <label className="field"><span>Aktif sektör</span><select value={template} onChange={(event) => changeTemplate(event.currentTarget.value as TemplateKey)}>{visibleTemplateKeys.map((item) => <option value={item} key={item}>{getLotusAdminConfig(item, templateConfigs).sector}</option>)}</select></label> : <div className="lotusAdminBadge">Lotus Börek Evi metinleri</div>}
             <label className="field"><span>Düzenlenecek sayfa</span><select value={activePage} onChange={(event) => changeActivePage(event.currentTarget.value as ContentPageKey)}>{contentPageOrder.map((item) => <option value={item} key={item}>{contentPageLabels[item]}</option>)}</select></label>
             <label className="field"><span>Sayfa başlığı</span><input value={pageForm.title} onChange={(event) => setPageForm((current) => ({ ...current, title: event.currentTarget.value }))} /></label>
             <label className="field"><span>Kısa açıklama</span><input value={pageForm.description} onChange={(event) => setPageForm((current) => ({ ...current, description: event.currentTarget.value }))} /></label>
