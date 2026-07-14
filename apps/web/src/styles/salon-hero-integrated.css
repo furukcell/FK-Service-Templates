@@ -1,0 +1,104 @@
+.salonEnhancedPage .heroWrap {
+  grid-template-columns: 1fr;
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(circle at 86% 12%, rgba(255, 255, 255, 0.22), transparent 27%),
+    radial-gradient(circle at 10% 88%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 30%),
+    linear-gradient(135deg, color-mix(in srgb, var(--dark) 96%, #000), var(--primary) 57%, var(--secondary));
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 36px 100px rgba(46, 4, 24, 0.22);
+}
+
+.salonEnhancedPage .heroText.salonHeroHost {
+  width: 100%;
+  max-width: none;
+}
+
+.salonEnhancedPage .splitHeroContent.salonHeroHost {
+  padding: 0;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.2), transparent 27%),
+    linear-gradient(135deg, color-mix(in srgb, var(--dark) 95%, #000), var(--primary) 58%, var(--secondary));
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 30px 90px rgba(46, 4, 24, 0.22);
+}
+
+.salonEnhancedPage .showcaseHero.salonHeroHost {
+  padding: 0;
+  overflow: hidden;
+}
+
+.salonEnhancedPage .salonHeroSliderMount {
+  width: 100%;
+}
+
+.salonEnhancedPage .salonHeroSlider {
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.salonEnhancedPage .salonHeroSlider::before {
+  right: -5%;
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 0 44px rgba(255, 255, 255, 0.035), 0 0 0 88px rgba(255, 255, 255, 0.02);
+}
+
+.salonEnhancedPage .salonHeroSlider::after {
+  opacity: 0.55;
+}
+
+.salonEnhancedPage .salonHeroSlide {
+  padding-right: clamp(78px, 8vw, 118px);
+  padding-left: clamp(78px, 8vw, 118px);
+}
+
+.salonEnhancedPage .salonHeroContent {
+  width: min(920px, 100%);
+}
+
+.salonEnhancedPage .salonHeroEdgeArrowLeft {
+  left: clamp(14px, 2vw, 28px);
+}
+
+.salonEnhancedPage .salonHeroEdgeArrowRight {
+  right: clamp(14px, 2vw, 28px);
+}
+
+.immersiveFlowPage.salonEnhancedPage .heroWrap {
+  min-height: clamp(610px, calc(100svh - 70px), 840px);
+}
+
+.immersiveFlowPage.salonEnhancedPage .salonHeroSlider,
+.immersiveFlowPage.salonEnhancedPage .salonHeroViewport,
+.immersiveFlowPage.salonEnhancedPage .salonHeroTrack,
+.immersiveFlowPage.salonEnhancedPage .salonHeroSlide {
+  min-height: clamp(610px, calc(100svh - 70px), 840px);
+}
+
+@media (max-width: 780px) {
+  .salonEnhancedPage .heroWrap,
+  .salonEnhancedPage .splitHeroContent.salonHeroHost,
+  .salonEnhancedPage .showcaseHero.salonHeroHost {
+    border-radius: 28px;
+  }
+
+  .salonEnhancedPage .salonHeroSlide {
+    padding-right: 52px;
+    padding-left: 52px;
+  }
+
+  .immersiveFlowPage.salonEnhancedPage .heroWrap,
+  .immersiveFlowPage.salonEnhancedPage .salonHeroSlider,
+  .immersiveFlowPage.salonEnhancedPage .salonHeroViewport,
+  .immersiveFlowPage.salonEnhancedPage .salonHeroTrack,
+  .immersiveFlowPage.salonEnhancedPage .salonHeroSlide {
+    min-height: 650px;
+  }
+}
