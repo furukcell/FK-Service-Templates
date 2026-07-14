@@ -1,0 +1,15 @@
+.salonFlowButton {
+  order: 4;
+}
+
+.immersiveFlowPage .layoutSwitch .templateButton.active:not(.salonFlowButton) {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: none;
+}
+
+.immersiveFlowPage .layoutSwitch .salonFlowButton.active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  box-shadow: 0 14px 30px rgba(15, 118, 110, 0.22);
+}
