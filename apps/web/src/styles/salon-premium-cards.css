@@ -1,0 +1,236 @@
+.salonEnhancedPage .salonHeroViewport {
+  cursor: grab;
+  overscroll-behavior-x: contain;
+}
+
+.salonEnhancedPage .salonHeroSlider.isDragging,
+.salonEnhancedPage .salonHeroSlider.isDragging * {
+  user-select: none;
+}
+
+.salonEnhancedPage .salonHeroSlider.isDragging .salonHeroViewport {
+  cursor: grabbing;
+}
+
+.salonEnhancedPage #campaigns,
+.salonEnhancedPage #about {
+  position: relative;
+  overflow: hidden;
+}
+
+.salonEnhancedPage #campaigns::before,
+.salonEnhancedPage #about::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  top: -150px;
+  right: -90px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--secondary) 14%, transparent);
+  pointer-events: none;
+}
+
+.salonEnhancedPage #campaigns .cardGrid,
+.salonEnhancedPage #about .cardGrid {
+  position: relative;
+  z-index: 1;
+  gap: 20px;
+}
+
+.salonEnhancedPage .campaignCard {
+  --campaign-accent: #db2777;
+  position: relative;
+  min-height: 265px;
+  overflow: hidden;
+  padding: 30px;
+  border: 1px solid color-mix(in srgb, var(--campaign-accent) 20%, #fff);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.95), transparent 28%),
+    linear-gradient(145deg, color-mix(in srgb, var(--campaign-accent) 12%, #fff), #fff 68%);
+  box-shadow: 0 22px 58px color-mix(in srgb, var(--campaign-accent) 12%, transparent);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.salonEnhancedPage .campaignCard:nth-child(2) { --campaign-accent: #8b5cf6; }
+.salonEnhancedPage .campaignCard:nth-child(3) { --campaign-accent: #0f9f8f; }
+.salonEnhancedPage .campaignCard:nth-child(4) { --campaign-accent: #f59e0b; }
+
+.salonEnhancedPage .campaignCard::before {
+  content: "✦";
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border-radius: 20px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--campaign-accent), color-mix(in srgb, var(--campaign-accent) 68%, #fff));
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--campaign-accent) 26%, transparent);
+  font-size: 1.35rem;
+}
+
+.salonEnhancedPage .campaignCard::after {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  right: -82px;
+  bottom: -105px;
+  border: 1px solid color-mix(in srgb, var(--campaign-accent) 18%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 26px color-mix(in srgb, var(--campaign-accent) 5%, transparent);
+  pointer-events: none;
+}
+
+.salonEnhancedPage .campaignCard:hover {
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--campaign-accent) 38%, #fff);
+  box-shadow: 0 30px 74px color-mix(in srgb, var(--campaign-accent) 18%, transparent);
+}
+
+.salonEnhancedPage .campaignCard > .priceTag {
+  position: relative;
+  z-index: 1;
+  margin: 0 72px 22px 0;
+  color: var(--campaign-accent);
+  background: color-mix(in srgb, var(--campaign-accent) 10%, #fff);
+  border: 1px solid color-mix(in srgb, var(--campaign-accent) 18%, #fff);
+}
+
+.salonEnhancedPage .campaignCard h3 {
+  position: relative;
+  z-index: 1;
+  max-width: 88%;
+  margin: 0 0 12px;
+  color: var(--dark);
+  font-size: clamp(24px, 2.4vw, 34px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.salonEnhancedPage .campaignCard p {
+  position: relative;
+  z-index: 1;
+  max-width: 88%;
+  margin: 0;
+  color: #64748b;
+  line-height: 1.65;
+}
+
+.salonEnhancedPage .campaignCard > strong {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 22px;
+  padding: 10px 15px;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--campaign-accent), color-mix(in srgb, var(--campaign-accent) 72%, #111827));
+  box-shadow: 0 14px 28px color-mix(in srgb, var(--campaign-accent) 20%, transparent);
+  font-size: 1.08rem;
+}
+
+.salonEnhancedPage #about .staffCard {
+  --staff-accent: #db2777;
+  position: relative;
+  min-height: 255px;
+  overflow: hidden;
+  padding: 94px 28px 28px;
+  border: 1px solid color-mix(in srgb, var(--staff-accent) 18%, #e5e7eb);
+  background:
+    radial-gradient(circle at 92% 10%, color-mix(in srgb, var(--staff-accent) 13%, transparent), transparent 31%),
+    linear-gradient(180deg, #fff, color-mix(in srgb, var(--staff-accent) 5%, #fff));
+  box-shadow: 0 20px 52px rgba(15, 23, 42, 0.07);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.salonEnhancedPage #about .staffCard:nth-child(2) { --staff-accent: #8b5cf6; }
+.salonEnhancedPage #about .staffCard:nth-child(3) { --staff-accent: #0f9f8f; }
+.salonEnhancedPage #about .staffCard:nth-child(4) { --staff-accent: #16a34a; }
+
+.salonEnhancedPage #about .staffCard::before {
+  content: "01";
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border-radius: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--staff-accent), color-mix(in srgb, var(--staff-accent) 68%, #fff));
+  box-shadow: 0 15px 32px color-mix(in srgb, var(--staff-accent) 24%, transparent);
+  font-size: 0.82rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+}
+
+.salonEnhancedPage #about .staffCard:nth-child(2)::before { content: "02"; }
+.salonEnhancedPage #about .staffCard:nth-child(3)::before { content: "03"; }
+.salonEnhancedPage #about .staffCard:nth-child(4)::before { content: "WA"; }
+
+.salonEnhancedPage #about .staffCard::after {
+  content: "";
+  position: absolute;
+  top: 48px;
+  right: -34px;
+  width: 118px;
+  height: 118px;
+  border: 1px solid color-mix(in srgb, var(--staff-accent) 16%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 20px color-mix(in srgb, var(--staff-accent) 4%, transparent);
+  pointer-events: none;
+}
+
+.salonEnhancedPage #about .staffCard:hover {
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--staff-accent) 36%, #fff);
+  box-shadow: 0 30px 72px color-mix(in srgb, var(--staff-accent) 14%, transparent);
+}
+
+.salonEnhancedPage #about .staffCard h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 12px;
+  color: var(--dark);
+  font-size: clamp(23px, 2vw, 30px);
+  letter-spacing: -0.04em;
+}
+
+.salonEnhancedPage #about .staffCard .priceTag {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 14px;
+  color: var(--staff-accent);
+  background: color-mix(in srgb, var(--staff-accent) 9%, #fff);
+  border: 1px solid color-mix(in srgb, var(--staff-accent) 16%, #fff);
+}
+
+.salonEnhancedPage #about .staffCard p {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+  color: #64748b;
+  line-height: 1.65;
+}
+
+@media (max-width: 760px) {
+  .salonEnhancedPage .campaignCard,
+  .salonEnhancedPage #about .staffCard {
+    min-height: 0;
+  }
+
+  .salonEnhancedPage .campaignCard {
+    padding: 25px;
+  }
+
+  .salonEnhancedPage #about .staffCard {
+    padding: 88px 24px 24px;
+  }
+}
