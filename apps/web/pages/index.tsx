@@ -3,6 +3,7 @@ import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { SalonFlowStyleButton } from "../src/components/SalonFlowStyleButton";
+import { SalonGalleryMount } from "../src/components/SalonGalleryMount";
 import { SalonHeroSliderMount } from "../src/components/SalonHeroSliderMount";
 import { SalonSiteEnhancements } from "../src/components/SalonSiteEnhancements";
 import { SeoHead } from "../src/components/SeoHead";
@@ -41,6 +42,7 @@ export default function HomePage() {
       />
       <SalonFlowStyleButton activeTemplate={activeTemplate} activeLayout={activeLayout} onSelect={setActiveLayout} />
       <SalonHeroSliderMount active={isSalon} config={config} />
+      <SalonGalleryMount active={isSalon} config={config} />
       {isSalonFlow ? <SalonBookingMount config={config} immersive /> : null}
       <ImmersiveScrollMount active={isSalonFlow} />
       <SalonSiteEnhancements active={isSalon} config={config} />
