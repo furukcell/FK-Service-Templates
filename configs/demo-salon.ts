@@ -40,9 +40,11 @@ export const demoSalonConfig: BusinessTemplateConfig = {
     { title: "Gelin hazırlık", description: "Saç, makyaj ve bakım için özel randevu paketi.", price: "Teklif al" }
   ],
   galleryItems: [
-    { title: "Instagram vitrini", description: "Salonun en iyi işleri için sosyal medya kartı." },
-    { title: "Öncesi / sonrası", description: "Saç, tırnak ve cilt bakımı sonuçları için görsel alan." },
-    { title: "Salon atmosferi", description: "Müşteriye güven veren modern işletme görselleri." }
+    { title: "Yeni sezon saç tasarımı", description: "Kesim, renk ve şekillendirme çalışmalarımızdan seçki.", category: "Saç", featured: true },
+    { title: "Kalıcı oje detayları", description: "Renk ve desen seçenekleriyle nail art uygulamaları.", category: "Nail" },
+    { title: "Cilt bakım sonuçları", description: "Kişiye özel bakım uygulamalarından örnekler.", category: "Cilt" },
+    { title: "Salon atmosferi", description: "Konforlu, hijyenik ve modern salon ortamımız.", category: "Salon" },
+    { title: "Özel gün hazırlığı", description: "Düğün ve davet öncesi saç ve bakım hazırlıkları.", category: "Diğer" }
   ],
   staff: [
     { name: "Elif", role: "Saç Tasarım", description: "Kesim, renklendirme ve özel gün hazırlığı." },
