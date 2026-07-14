@@ -45,6 +45,7 @@ export function SalonHeroSliderMount({
       hiddenElements = [];
       mount?.remove();
       mount = null;
+      currentHost?.classList.remove("salonHeroHost");
       currentHost = null;
       setTarget(null);
     }
@@ -62,8 +63,8 @@ export function SalonHeroSliderMount({
         directChild(currentHost, ".eyebrow"),
         directChild(currentHost, ".heroTitle"),
         directChild(currentHost, ".heroDescription"),
-        directChild(currentHost, ":scope > h1"),
-        directChild(currentHost, ":scope > p"),
+        directChild(currentHost, "h1"),
+        directChild(currentHost, "p"),
         directChild(currentHost, ".heroActions")
       ].filter((element): element is HTMLElement => Boolean(element));
 
@@ -90,7 +91,6 @@ export function SalonHeroSliderMount({
 
     return () => {
       observer.disconnect();
-      if (currentHost) currentHost.classList.remove("salonHeroHost");
       cleanupCurrent();
     };
   }, [active]);
