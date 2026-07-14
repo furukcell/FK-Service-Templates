@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { FocusEvent, TouchEvent } from "react";
+import type { PointerEvent } from "react";
 import type { BusinessTemplateConfig } from "@fk-templates/shared";
 
 const AUTO_PLAY_MS = 10000;
-const SWIPE_THRESHOLD = 55;
+const SWIPE_THRESHOLD = 48;
 
 type SlideAction = {
   label: string;
@@ -18,6 +18,12 @@ type SalonHeroSlide = {
   description: string;
   highlights?: string[];
   actions: SlideAction[];
+};
+
+type PointerStart = {
+  id: number;
+  x: number;
+  y: number;
 };
 
 function normalizePhone(phone: string) {
@@ -89,10 +95,11 @@ export function SalonHeroSlider({ config }: { config: BusinessTemplateConfig }) 
   const loopedSlides = useMemo(() => [slides[slides.length - 1], ...slides, slides[0]], [slides]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [trackIndex, setTrackIndex] = useState(1);
-  const [isPaused, setIsPaused] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
-  const touchStartX = useRef<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const pointerStart = useRef<PointerStart | null>(null);
 
   const moveBy = useCallback((direction: -1 | 1) => {
     if (isAnimating) return;
@@ -103,15 +110,15 @@ export function SalonHeroSlider({ config }: { config: BusinessTemplateConfig }) 
   }, [isAnimating, slides.length]);
 
   useEffect(() => {
-    if (isPaused || typeof window === "undefined") return undefined;
+    if (typeof window === "undefined" || isAnimating || isDragging) return undefined;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
 
-    const timer = window.setInterval(() => moveBy(1), AUTO_PLAY_MS);
-    return () => window.clearInterval(timer);
-  }, [isPaused, moveBy]);
+    const timer = window.setTimeout(() => moveBy(1), AUTO_PLAY_MS);
+    return () => window.clearTimeout(timer);
+  }, [activeIndex, isAnimating, isDragging, moveBy]);
 
   function showSlide(index: number) {
-    if (isAnimating || index === activeIndex) return;
+    if (isAnimating || isDragging || index === activeIndex) return;
     setTransitionEnabled(true);
     setIsAnimating(true);
     setActiveIndex(index);
@@ -129,44 +136,65 @@ export function SalonHeroSlider({ config }: { config: BusinessTemplateConfig }) 
     setIsAnimating(false);
   }
 
-  function handleBlur(event: FocusEvent<HTMLElement>) {
-    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsPaused(false);
+  function handlePointerDown(event: PointerEvent<HTMLElement>) {
+    if (isAnimating || (event.pointerType === "mouse" && event.button !== 0)) return;
+    if ((event.target as HTMLElement).closest("a, button")) return;
+
+    pointerStart.current = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    setTransitionEnabled(false);
+    setIsDragging(true);
+    setDragOffset(0);
   }
 
-  function handleTouchStart(event: TouchEvent<HTMLElement>) {
-    touchStartX.current = event.touches[0]?.clientX ?? null;
-    setIsPaused(true);
+  function handlePointerMove(event: PointerEvent<HTMLElement>) {
+    const start = pointerStart.current;
+    if (!start || start.id !== event.pointerId) return;
+
+    const distanceX = event.clientX - start.x;
+    const distanceY = event.clientY - start.y;
+    if (Math.abs(distanceY) > Math.abs(distanceX) && Math.abs(distanceY) > 12) return;
+
+    const limit = event.currentTarget.clientWidth * 0.72;
+    setDragOffset(Math.max(-limit, Math.min(limit, distanceX)));
   }
 
-  function handleTouchEnd(event: TouchEvent<HTMLElement>) {
-    const start = touchStartX.current;
-    const end = event.changedTouches[0]?.clientX;
-    touchStartX.current = null;
-    setIsPaused(false);
-    if (start === null || end === undefined) return;
-    const distance = end - start;
-    if (Math.abs(distance) < SWIPE_THRESHOLD) return;
-    moveBy(distance > 0 ? -1 : 1);
+  function finishPointerGesture(event: PointerEvent<HTMLElement>, cancelled = false) {
+    const start = pointerStart.current;
+    if (!start || start.id !== event.pointerId) return;
+
+    const distanceX = event.clientX - start.x;
+    const distanceY = event.clientY - start.y;
+    pointerStart.current = null;
+
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture?.(event.pointerId);
+    }
+
+    setIsDragging(false);
+    setTransitionEnabled(true);
+    setDragOffset(0);
+
+    const isHorizontalSwipe = Math.abs(distanceX) >= SWIPE_THRESHOLD && Math.abs(distanceX) > Math.abs(distanceY) * 1.1;
+    if (!cancelled && isHorizontalSwipe) moveBy(distanceX > 0 ? -1 : 1);
   }
 
   return (
     <section
-      className={`salonHeroSlider salonHeroSlideTone${activeIndex + 1}`}
+      className={`salonHeroSlider salonHeroSlideTone${activeIndex + 1} ${isDragging ? "isDragging" : ""}`}
       aria-label="Salon tanıtım slaytları"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocusCapture={() => setIsPaused(true)}
-      onBlurCapture={handleBlur}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      onPointerCancel={(event) => finishPointerGesture(event, true)}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={(event) => finishPointerGesture(event)}
     >
       <div className="salonHeroViewport">
         <div
           className="salonHeroTrack"
           onTransitionEnd={handleTransitionEnd}
           style={{
-            transform: `translate3d(-${trackIndex * 100}%, 0, 0)`,
-            transition: transitionEnabled ? undefined : "none"
+            transform: `translate3d(calc(-${trackIndex * 100}% + ${dragOffset}px), 0, 0)`,
+            transition: transitionEnabled && !isDragging ? undefined : "none"
           }}
         >
           {loopedSlides.map((slide, position) => {
@@ -210,7 +238,7 @@ export function SalonHeroSlider({ config }: { config: BusinessTemplateConfig }) 
       <button
         aria-label="Önceki tanıtım"
         className="salonHeroEdgeArrow salonHeroEdgeArrowLeft"
-        disabled={isAnimating}
+        disabled={isAnimating || isDragging}
         onClick={() => moveBy(-1)}
         type="button"
       >
@@ -219,7 +247,7 @@ export function SalonHeroSlider({ config }: { config: BusinessTemplateConfig }) 
       <button
         aria-label="Sonraki tanıtım"
         className="salonHeroEdgeArrow salonHeroEdgeArrowRight"
-        disabled={isAnimating}
+        disabled={isAnimating || isDragging}
         onClick={() => moveBy(1)}
         type="button"
       >
