@@ -1,0 +1,68 @@
+html.immersiveFlowRoot {
+  scroll-snap-type: none;
+}
+
+.immersiveFlowPage .immersiveFlowSection {
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
+}
+
+.salonEnhancedPage .salonCampaignQuoteOnly > strong {
+  display: none;
+}
+
+.salonCampaignAction {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 52px;
+  margin-top: 24px;
+  padding: 12px 14px 12px 18px;
+  border-radius: 16px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 950;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.salonCampaignAction strong {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 1.15rem;
+}
+
+.salonCampaignBooking {
+  background: linear-gradient(135deg, var(--campaign-accent, var(--primary)), color-mix(in srgb, var(--campaign-accent, var(--primary)) 74%, #111827));
+  box-shadow: 0 15px 32px color-mix(in srgb, var(--campaign-accent, var(--primary)) 22%, transparent);
+}
+
+.salonCampaignWhatsapp {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  box-shadow: 0 15px 32px rgba(22, 163, 74, 0.24);
+}
+
+.salonCampaignAction:hover {
+  transform: translateY(-2px);
+}
+
+.salonCampaignBooking:hover {
+  box-shadow: 0 20px 42px color-mix(in srgb, var(--campaign-accent, var(--primary)) 30%, transparent);
+}
+
+.salonCampaignWhatsapp:hover {
+  box-shadow: 0 20px 42px rgba(22, 163, 74, 0.32);
+}
+
+@media (max-width: 760px) {
+  .salonCampaignAction {
+    min-height: 52px;
+    border-radius: 16px;
+  }
+}
