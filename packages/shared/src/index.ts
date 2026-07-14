@@ -22,6 +22,8 @@ export type VisualItem = {
   title: string;
   description: string;
   imageUrl?: string;
+  category?: "Saç" | "Nail" | "Cilt" | "Salon" | "Diğer";
+  featured?: boolean;
 };
 
 export type BusinessTheme = {
