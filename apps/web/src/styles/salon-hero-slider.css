@@ -1,0 +1,301 @@
+.salonHeroSlider {
+  position: relative;
+  min-height: clamp(500px, 62vw, 660px);
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 38px;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.24), transparent 28%),
+    radial-gradient(circle at 72% 76%, rgba(251, 191, 36, 0.13), transparent 26%),
+    linear-gradient(135deg, rgba(80, 7, 36, 0.52), rgba(190, 24, 93, 0.18));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 28px 70px rgba(80, 7, 36, 0.2);
+  transition: background 0.8s ease;
+}
+
+.salonHeroSlider::before,
+.salonHeroSlider::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.salonHeroSlider::before {
+  width: clamp(260px, 34vw, 480px);
+  height: clamp(260px, 34vw, 480px);
+  top: -24%;
+  right: -8%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 80px rgba(255, 255, 255, 0.08);
+}
+
+.salonHeroSlider::after {
+  width: 260px;
+  height: 260px;
+  right: 13%;
+  bottom: -36%;
+  background: rgba(255, 255, 255, 0.07);
+  filter: blur(2px);
+}
+
+.salonHeroSlideTone2::before { transform: translate(-18%, 18%) scale(0.84); }
+.salonHeroSlideTone3::before { transform: translate(-42%, 32%) scale(1.08); }
+.salonHeroSlideTone4::before { transform: translate(-12%, 62%) scale(0.7); }
+.salonHeroSlideTone5::before { transform: translate(-52%, 8%) scale(1.18); }
+
+.salonHeroViewport {
+  position: relative;
+  min-height: clamp(430px, 55vw, 585px);
+}
+
+.salonHeroSlide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(32px, 6vw, 74px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(8%, 0, 0) scale(0.985);
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.8s;
+}
+
+.salonHeroSlide.active {
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition-delay: 0s;
+}
+
+.salonHeroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  margin-bottom: 18px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  font-size: 0.82rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.salonHeroSlide h1 {
+  max-width: 980px;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(52px, 7.4vw, 110px);
+  line-height: 0.93;
+  letter-spacing: -0.07em;
+  text-wrap: balance;
+}
+
+.salonHeroSlide p {
+  max-width: 790px;
+  margin: clamp(20px, 3vw, 30px) 0 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: clamp(18px, 2vw, 27px);
+  line-height: 1.55;
+}
+
+.salonHeroHighlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.salonHeroHighlights span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 9px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.84rem;
+  font-weight: 900;
+  backdrop-filter: blur(9px);
+}
+
+.salonHeroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(26px, 4vw, 38px);
+}
+
+.salonHeroActions .pillButton,
+.salonHeroActions .ghostButton {
+  min-height: 54px;
+  padding-inline: 24px;
+}
+
+.salonHeroActions .pillButton {
+  color: var(--dark);
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(80, 7, 36, 0.22);
+}
+
+.salonHeroActions .ghostButton {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.salonHeroControls {
+  position: absolute;
+  z-index: 5;
+  right: clamp(24px, 5vw, 60px);
+  bottom: clamp(22px, 4vw, 44px);
+  left: clamp(24px, 5vw, 60px);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 22px;
+}
+
+.salonHeroArrows {
+  display: flex;
+  gap: 8px;
+}
+
+.salonHeroArrows button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 1.65rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.salonHeroArrows button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.salonHeroDots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+}
+
+.salonHeroDots button {
+  width: 38px;
+  height: 22px;
+  padding: 9px 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.salonHeroDots span {
+  display: block;
+  width: 100%;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.salonHeroDots button.active span {
+  background: #fff;
+}
+
+.salonHeroCounter {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.8rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+}
+
+.showcaseHero .salonHeroSlider {
+  width: 100%;
+  margin-top: 18px;
+  text-align: left;
+}
+
+.showcaseHero .salonHeroSlide p {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.splitHeroContent .salonHeroSlider {
+  min-height: 570px;
+}
+
+@media (max-width: 780px) {
+  .salonHeroSlider {
+    min-height: 610px;
+    border-radius: 28px;
+  }
+
+  .salonHeroViewport {
+    min-height: 535px;
+  }
+
+  .salonHeroSlide {
+    justify-content: flex-start;
+    padding: 42px 24px 112px;
+  }
+
+  .salonHeroSlide h1 {
+    font-size: clamp(44px, 14vw, 68px);
+    line-height: 0.98;
+  }
+
+  .salonHeroSlide p {
+    font-size: 17px;
+  }
+
+  .salonHeroActions {
+    width: 100%;
+  }
+
+  .salonHeroActions a {
+    flex: 1 1 210px;
+    justify-content: center;
+  }
+
+  .salonHeroControls {
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+  }
+
+  .salonHeroDots {
+    justify-content: flex-end;
+  }
+
+  .salonHeroCounter {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .salonHeroSlide,
+  .salonHeroSlider::before,
+  .salonHeroSlider::after {
+    transition: none;
+  }
+}
