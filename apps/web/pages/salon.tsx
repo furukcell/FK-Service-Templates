@@ -2,6 +2,7 @@ import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
 import { SeoHead } from "../src/components/SeoHead";
 import { SiteSetupGuard } from "../src/components/SiteSetupGuard";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
+import { SalonGalleryMount } from "../src/components/SalonGalleryMount";
 import { SalonHeroSliderMount } from "../src/components/SalonHeroSliderMount";
 import { SalonSiteEnhancements } from "../src/components/SalonSiteEnhancements";
 import { TemplateLanding } from "../src/components/TemplateLanding";
@@ -28,6 +29,7 @@ export default function SalonTemplatePage() {
         showLayoutSwitch={false}
       />
       <SalonHeroSliderMount active config={config} />
+      <SalonGalleryMount active config={config} />
       <SalonBookingMount config={config} immersive={isImmersive} />
       <ImmersiveScrollMount active={isImmersive} />
       <SalonSiteEnhancements active config={config} />
