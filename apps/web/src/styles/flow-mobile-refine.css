@@ -1,0 +1,243 @@
+@media (max-width: 760px) {
+  .flowTemplatePage .topBar {
+    display: none;
+  }
+
+  .flowTemplatePage .navbar,
+  .immersiveFlowPage .navbar {
+    position: relative !important;
+    top: auto !important;
+    z-index: 30;
+    width: calc(100% - 16px);
+    margin: 8px auto 0;
+    padding: 11px 12px 10px;
+    gap: 8px;
+    border-radius: 23px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 13px 34px rgba(15, 23, 42, 0.09);
+    backdrop-filter: blur(18px);
+  }
+
+  .flowTemplatePage .logoLockup {
+    max-width: calc(100% - 122px);
+    min-width: 0;
+    gap: 8px;
+    font-size: 16px;
+    line-height: 1.02;
+  }
+
+  .flowTemplatePage .logoMark {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+  }
+
+  .flowTemplatePage .navActions {
+    margin-left: auto;
+  }
+
+  .flowTemplatePage .navActions a:first-child {
+    display: none;
+  }
+
+  .flowTemplatePage .navActions a:last-child {
+    min-height: 38px;
+    padding: 8px 12px;
+    border-radius: 14px;
+    font-size: 0.72rem;
+    line-height: 1.05;
+  }
+
+  .flowTemplatePage .navLinks {
+    order: 3;
+    width: 100%;
+    gap: 6px;
+    padding: 3px 0 0;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .flowTemplatePage .navLinks::-webkit-scrollbar {
+    display: none;
+  }
+
+  .flowTemplatePage .navLinks a {
+    flex: 0 0 auto;
+    min-height: 32px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    scroll-snap-align: start;
+  }
+
+  .flowTemplatePage .heroWrap,
+  .immersiveFlowPage.flowTemplatePage .heroWrap {
+    width: calc(100% - 16px);
+    min-height: 0;
+    margin: 10px auto 16px;
+    border-radius: 27px;
+  }
+
+  .flowTemplatePage .salonHeroSlider,
+  .flowTemplatePage .salonHeroViewport,
+  .flowTemplatePage .salonHeroTrack,
+  .flowTemplatePage .salonHeroSlide {
+    min-height: clamp(500px, 70svh, 550px);
+  }
+
+  .flowTemplatePage .salonHeroSlide {
+    align-items: center;
+    padding: 30px 42px 72px;
+  }
+
+  .flowTemplatePage .salonHeroContent {
+    width: 100%;
+  }
+
+  .flowTemplatePage .salonHeroEyebrow {
+    min-height: 29px;
+    margin-bottom: 11px;
+    padding: 6px 10px;
+    font-size: 0.66rem;
+  }
+
+  .flowTemplatePage .salonHeroSlide h1 {
+    max-width: 100%;
+    font-size: clamp(32px, 9.5vw, 43px);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .flowTemplatePage .salonHeroSlide p {
+    display: -webkit-box;
+    max-width: 100%;
+    margin-top: 14px;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 14.5px;
+    line-height: 1.48;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+
+  .flowTemplatePage .salonHeroHighlights {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .flowTemplatePage .salonHeroHighlights span {
+    min-height: 30px;
+    padding: 6px 8px;
+    justify-content: center;
+    font-size: 0.65rem;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .flowTemplatePage .salonHeroActions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .flowTemplatePage .salonHeroActions a {
+    width: 100%;
+    min-height: 46px;
+    padding: 9px 10px;
+    justify-content: center;
+    border-radius: 14px;
+    font-size: 0.72rem;
+    line-height: 1.12;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .flowTemplatePage .salonHeroEdgeArrow {
+    width: 32px;
+    height: 54px;
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.18);
+  }
+
+  .flowTemplatePage .salonHeroEdgeArrowLeft {
+    left: 5px;
+  }
+
+  .flowTemplatePage .salonHeroEdgeArrowRight {
+    right: 5px;
+  }
+
+  .flowTemplatePage .salonHeroEdgeArrow span {
+    font-size: 1.85rem;
+  }
+
+  .flowTemplatePage .salonHeroControls {
+    right: 14px;
+    bottom: 13px;
+    left: 14px;
+  }
+
+  .flowTemplatePage .salonHeroDots button {
+    width: 24px;
+    height: 20px;
+    padding: 8px 0;
+  }
+
+  .flowTemplatePage .salonHeroDots span {
+    height: 3px;
+  }
+
+  .flowTemplatePage .immersiveFlowSection {
+    min-height: auto;
+  }
+
+  .flowTemplatePage > .section,
+  .flowTemplatePage .immersiveFlowSection.section {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .flowTemplatePage .logoLockup {
+    max-width: calc(100% - 108px);
+    font-size: 15px;
+  }
+
+  .flowTemplatePage .navActions a:last-child {
+    padding-inline: 10px;
+    font-size: 0.68rem;
+  }
+
+  .flowTemplatePage .salonHeroSlider,
+  .flowTemplatePage .salonHeroViewport,
+  .flowTemplatePage .salonHeroTrack,
+  .flowTemplatePage .salonHeroSlide {
+    min-height: 520px;
+  }
+
+  .flowTemplatePage .salonHeroSlide {
+    padding: 28px 38px 70px;
+  }
+
+  .flowTemplatePage .salonHeroSlide h1 {
+    font-size: clamp(30px, 9.7vw, 40px);
+  }
+
+  .flowTemplatePage .salonHeroActions {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .flowTemplatePage .salonHeroActions a {
+    min-height: 42px;
+  }
+}
