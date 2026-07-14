@@ -46,6 +46,11 @@ function restoreAttribute(element: HTMLElement, attribute: string) {
   delete element.dataset[key];
 }
 
+function hasVisibleCampaignPrice(card: HTMLElement) {
+  const priceText = card.querySelector<HTMLElement>(":scope > strong")?.textContent?.trim() || "";
+  return /\d|₺|\bTL\b/i.test(priceText);
+}
+
 export function SalonSiteEnhancements({
   active,
   config
@@ -66,6 +71,7 @@ export function SalonSiteEnhancements({
     const touchedActions = new Set<HTMLAnchorElement>();
     const touchedWhatsapp = new Set<HTMLAnchorElement>();
     const touchedQuickCards = new Set<HTMLElement>();
+    const touchedQuoteCards = new Set<HTMLElement>();
 
     function assignSectionId(element: HTMLElement | null, id: string) {
       if (!element) return;
@@ -75,15 +81,23 @@ export function SalonSiteEnhancements({
 
     function enhanceCampaignCards(shell: HTMLElement) {
       shell.querySelectorAll<HTMLElement>("#campaigns .campaignCard").forEach((card) => {
-        if (card.querySelector(".salonCampaignWhatsapp")) return;
+        if (card.querySelector(".salonCampaignAction")) return;
+
         const title = card.querySelector<HTMLElement>("h3")?.textContent?.trim() || "Kampanya";
+        const pricedCampaign = hasVisibleCampaignPrice(card);
         const action = document.createElement("a");
-        action.className = "salonCampaignWhatsapp";
-        action.href = salonWhatsappUrl(config, title);
-        action.target = "_blank";
-        action.rel = "noreferrer";
-        action.setAttribute("aria-label", `${title} için WhatsApp’tan teklif al`);
-        action.innerHTML = '<span>Teklif Al</span><strong aria-hidden="true">→</strong>';
+        action.className = `salonCampaignAction ${pricedCampaign ? "salonCampaignBooking" : "salonCampaignWhatsapp"}`;
+        action.href = pricedCampaign ? "#request-form" : salonWhatsappUrl(config, title);
+        action.setAttribute("aria-label", pricedCampaign ? `${title} için randevu al` : `${title} için WhatsApp’tan teklif al`);
+
+        if (!pricedCampaign) {
+          action.target = "_blank";
+          action.rel = "noreferrer";
+          card.classList.add("salonCampaignQuoteOnly");
+          touchedQuoteCards.add(card);
+        }
+
+        action.innerHTML = `<span>${pricedCampaign ? "Randevu Al" : "Teklif Al"}</span><strong aria-hidden="true">→</strong>`;
         card.appendChild(action);
         addedCampaignActions.push(action);
       });
@@ -184,6 +198,7 @@ export function SalonSiteEnhancements({
       addedCampaignActions.forEach((action) => action.remove());
       addedPhoneActions.forEach((action) => action.remove());
       touchedQuickCards.forEach((card) => card.classList.remove("salonQuickContactCard"));
+      touchedQuoteCards.forEach((card) => card.classList.remove("salonCampaignQuoteOnly"));
       touchedNavLinks.forEach((link) => {
         restoreAttribute(link, "href");
         if (link.dataset.salonOriginalText !== undefined) {
