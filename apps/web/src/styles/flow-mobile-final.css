@@ -1,0 +1,247 @@
+@media (max-width: 760px) {
+  /* ===== ÜST MOBİL HEADER ===== */
+  .salonEnhancedPage .navbar {
+    top: 8px;
+    width: calc(100% - 16px);
+    margin: 8px auto 0;
+    padding: 14px 14px 12px;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 16px 40px rgba(42, 7, 25, 0.12);
+    backdrop-filter: blur(22px);
+  }
+
+  .salonEnhancedPage .logoLockup {
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    text-align: center;
+    min-width: 0;
+    font-size: 18px;
+    line-height: 1.08;
+  }
+
+  .salonEnhancedPage .logoLockup .logoMark {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    margin: 0 auto;
+  }
+
+  .salonEnhancedPage .logoLockup > span:last-child {
+    max-width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  .salonEnhancedPage .navActions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .salonEnhancedPage .navActions a {
+    min-height: 40px;
+    padding: 9px 12px;
+    border-radius: 14px;
+    font-size: 0.74rem;
+    text-align: center;
+  }
+
+  .salonEnhancedPage .navLinks {
+    width: 100%;
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    padding: 2px 0 0;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .salonEnhancedPage .navLinks::-webkit-scrollbar {
+    display: none;
+  }
+
+  .salonEnhancedPage .navLinks a {
+    flex: 0 0 auto;
+    min-height: 34px;
+    padding: 8px 11px;
+    border: 1px solid color-mix(in srgb, var(--primary) 10%, #e5e7eb);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 7px 18px rgba(15, 23, 42, 0.05);
+    font-size: 0.73rem;
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+
+  /* ===== HERO / KIRMIZI ALAN KISALT ===== */
+  .flowTemplatePage .heroWrap,
+  .immersiveFlowPage.flowTemplatePage .heroWrap,
+  .salonEnhancedPage .heroWrap,
+  .immersiveFlowPage.salonEnhancedPage .heroWrap {
+    min-height: 0 !important;
+    padding: 6px 0 8px !important;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .flowTemplatePage .salonHeroSlider,
+  .flowTemplatePage .salonHeroViewport,
+  .flowTemplatePage .salonHeroTrack,
+  .flowTemplatePage .salonHeroSlide,
+  .immersiveFlowPage.salonEnhancedPage .salonHeroSlider,
+  .immersiveFlowPage.salonEnhancedPage .salonHeroViewport,
+  .immersiveFlowPage.salonEnhancedPage .salonHeroTrack,
+  .immersiveFlowPage.salonEnhancedPage .salonHeroSlide {
+    min-height: 388px !important;
+  }
+
+  .flowTemplatePage .salonHeroViewport::after {
+    top: 16px;
+    right: 5px;
+    bottom: 24px;
+    width: 18px;
+  }
+
+  .flowTemplatePage .salonHeroSlide {
+    padding: 8px 0 18px !important;
+    align-items: center;
+  }
+
+  .flowTemplatePage .salonHeroContent {
+    width: calc(100% - 42px);
+    min-height: 348px !important;
+    margin-left: 10px;
+    margin-right: 30px;
+    padding: 22px 20px 58px;
+    border-radius: 22px;
+    opacity: 0.74;
+    transform: translate3d(0, 6px, 0) scale(0.95);
+  }
+
+  .flowTemplatePage .salonHeroSlide.active .salonHeroContent {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .flowTemplatePage .salonHeroEyebrow {
+    min-height: 24px;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    font-size: 0.58rem;
+  }
+
+  .flowTemplatePage .salonHeroSlide h1 {
+    font-size: clamp(25px, 8vw, 34px);
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  .flowTemplatePage .salonHeroSlide p {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.4;
+    -webkit-line-clamp: 3;
+  }
+
+  /* +25 hizmet / 4 uzman / hijyen vb küçült */
+  .flowTemplatePage .salonHeroHighlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+    margin-top: 10px;
+  }
+
+  .flowTemplatePage .salonHeroHighlights span {
+    min-height: 23px;
+    padding: 4px 6px;
+    border-radius: 999px;
+    font-size: 0.56rem;
+    line-height: 1.1;
+  }
+
+  .flowTemplatePage .salonHeroActions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 13px;
+  }
+
+  .flowTemplatePage .salonHeroActions a {
+    min-height: 38px;
+    padding: 8px 8px;
+    border-radius: 12px;
+    font-size: 0.66rem;
+  }
+
+  .flowTemplatePage .salonHeroEdgeArrow {
+    display: none;
+  }
+
+  .flowTemplatePage .salonHeroControls {
+    left: 18px;
+    right: 36px;
+    bottom: 14px;
+    justify-content: flex-start;
+  }
+
+  .flowTemplatePage .salonHeroDots {
+    gap: 4px;
+  }
+
+  .flowTemplatePage .salonHeroDots button {
+    width: 20px;
+    height: 16px;
+    padding: 6px 0;
+  }
+
+  .flowTemplatePage .salonHeroDots span {
+    height: 3px;
+  }
+}
+
+@media (max-width: 420px) {
+  .salonEnhancedPage .logoLockup {
+    font-size: 16px;
+  }
+
+  .flowTemplatePage .salonHeroSlider,
+  .flowTemplatePage .salonHeroViewport,
+  .flowTemplatePage .salonHeroTrack,
+  .flowTemplatePage .salonHeroSlide {
+    min-height: 374px !important;
+  }
+
+  .flowTemplatePage .salonHeroContent {
+    min-height: 336px !important;
+    padding: 20px 18px 54px;
+  }
+
+  .flowTemplatePage .salonHeroSlide h1 {
+    font-size: clamp(24px, 8.4vw, 31px);
+  }
+
+  .flowTemplatePage .salonHeroActions {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .flowTemplatePage .salonHeroActions a {
+    min-height: 36px;
+  }
+
+  .flowTemplatePage .salonHeroHighlights span {
+    font-size: 0.54rem;
+  }
+}
