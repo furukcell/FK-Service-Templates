@@ -1,3 +1,4 @@
+import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
 import { SeoHead } from "../src/components/SeoHead";
 import { SiteSetupGuard } from "../src/components/SiteSetupGuard";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
@@ -9,6 +10,8 @@ import { useManagedTemplateConfig } from "../src/useManagedTemplateConfig";
 export default function SalonTemplatePage() {
   const { config, layoutVariant, requiresSetup } = useManagedTemplateConfig(templateConfigs.salon);
   const activeLayout = useLayoutVariantFromQuery(layoutVariant || "modern");
+  const isImmersive = activeLayout === "flow";
+  const baseLayout = isImmersive ? "modern" : activeLayout;
 
   if (requiresSetup) return <SiteSetupGuard />;
 
@@ -18,11 +21,12 @@ export default function SalonTemplatePage() {
       <TemplateLanding
         config={config}
         activeTemplate="salon"
-        activeLayout={activeLayout}
+        activeLayout={baseLayout}
         showTemplateSwitch={false}
         showLayoutSwitch={false}
       />
-      <SalonBookingMount config={config} />
+      <SalonBookingMount config={config} immersive={isImmersive} />
+      <ImmersiveScrollMount active={isImmersive} />
     </>
   );
 }
