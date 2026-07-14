@@ -7,9 +7,10 @@ export function ImmersiveScrollMount({ active }: { active: boolean }) {
     const root = document.documentElement;
     const shell = document.querySelector<HTMLElement>(".pageShell");
     if (!shell) return undefined;
+    const pageShell = shell;
 
     root.classList.add("immersiveFlowRoot");
-    shell.classList.add("immersiveFlowPage");
+    pageShell.classList.add("immersiveFlowPage");
 
     const observed = new Set<HTMLElement>();
     const observer = new IntersectionObserver((entries) => {
@@ -19,7 +20,7 @@ export function ImmersiveScrollMount({ active }: { active: boolean }) {
     }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
 
     function registerSections() {
-      const sections = shell.querySelectorAll<HTMLElement>(
+      const sections = pageShell.querySelectorAll<HTMLElement>(
         ":scope > section, :scope > .salonBookingPortal > section, :scope > .immersiveSection"
       );
       sections.forEach((section, index) => {
@@ -33,7 +34,7 @@ export function ImmersiveScrollMount({ active }: { active: boolean }) {
 
     registerSections();
     const mutationObserver = new MutationObserver(registerSections);
-    mutationObserver.observe(shell, { childList: true, subtree: true });
+    mutationObserver.observe(pageShell, { childList: true, subtree: true });
 
     return () => {
       mutationObserver.disconnect();
@@ -42,7 +43,7 @@ export function ImmersiveScrollMount({ active }: { active: boolean }) {
         section.classList.remove("immersiveFlowSection", "immersiveReveal", "is-visible");
         section.style.removeProperty("--flow-index");
       });
-      shell.classList.remove("immersiveFlowPage");
+      pageShell.classList.remove("immersiveFlowPage");
       root.classList.remove("immersiveFlowRoot");
     };
   }, [active]);
