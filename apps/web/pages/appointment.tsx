@@ -1,3 +1,6 @@
+import { FlowTemplateEnhancements } from "../src/components/FlowTemplateEnhancements";
+import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
+import { SalonHeroSliderMount } from "../src/components/SalonHeroSliderMount";
 import { SeoHead } from "../src/components/SeoHead";
 import { SiteSetupGuard } from "../src/components/SiteSetupGuard";
 import { TemplateLanding } from "../src/components/TemplateLanding";
@@ -8,6 +11,7 @@ import { useManagedTemplateConfig } from "../src/useManagedTemplateConfig";
 export default function AppointmentTemplatePage() {
   const { config, layoutVariant, requiresSetup } = useManagedTemplateConfig(templateConfigs.appointment);
   const activeLayout = useLayoutVariantFromQuery(layoutVariant || "modern");
+  const isFlow = activeLayout === "flow";
 
   if (requiresSetup) return <SiteSetupGuard />;
 
@@ -17,10 +21,13 @@ export default function AppointmentTemplatePage() {
       <TemplateLanding
         config={config}
         activeTemplate="appointment"
-        activeLayout={activeLayout}
+        activeLayout={isFlow ? "modern" : activeLayout}
         showTemplateSwitch={false}
         showLayoutSwitch={false}
       />
+      <SalonHeroSliderMount active={isFlow} config={config} />
+      <ImmersiveScrollMount active={isFlow} />
+      <FlowTemplateEnhancements active={isFlow} config={config} />
     </>
   );
 }

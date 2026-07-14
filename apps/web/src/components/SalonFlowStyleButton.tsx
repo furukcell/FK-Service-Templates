@@ -15,11 +15,6 @@ export function SalonFlowStyleButton({
   const [target, setTarget] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (activeTemplate !== "salon") {
-      setTarget(null);
-      return undefined;
-    }
-
     const findTarget = () => {
       const layoutSwitch = document.querySelector<HTMLElement>(".layoutSwitch");
       if (layoutSwitch) setTarget(layoutSwitch);
@@ -31,11 +26,11 @@ export function SalonFlowStyleButton({
     return () => observer.disconnect();
   }, [activeTemplate]);
 
-  if (activeTemplate !== "salon" || !target) return null;
+  if (!target) return null;
 
   return createPortal(
     <button
-      className={`templateButton salonFlowButton ${activeLayout === "flow" ? "active" : ""}`}
+      className={`templateButton salonFlowButton flowStyleButton flowStyleButton-${activeTemplate} ${activeLayout === "flow" ? "active" : ""}`}
       onClick={() => onSelect("flow")}
       type="button"
     >
