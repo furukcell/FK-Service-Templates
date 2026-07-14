@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
+import { FlowTemplateEnhancements } from "../src/components/FlowTemplateEnhancements";
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { SalonFlowStyleButton } from "../src/components/SalonFlowStyleButton";
@@ -19,12 +20,8 @@ export default function HomePage() {
   const baseConfig = templateConfigs[activeTemplate];
   const { config, requiresSetup } = useManagedTemplateConfig(baseConfig);
   const isSalon = activeTemplate === "salon";
-  const isSalonFlow = isSalon && activeLayout === "flow";
-
-  function changeTemplate(template: TemplateKey) {
-    setActiveTemplate(template);
-    if (template !== "salon" && activeLayout === "flow") setActiveLayout("modern");
-  }
+  const isFlow = activeLayout === "flow";
+  const isSalonFlow = isSalon && isFlow;
 
   if (requiresSetup) return <SiteSetupGuard />;
 
@@ -34,17 +31,18 @@ export default function HomePage() {
       <TemplateLanding
         config={config}
         activeTemplate={activeTemplate}
-        activeLayout={isSalonFlow ? "modern" : activeLayout}
-        onTemplateChange={changeTemplate}
+        activeLayout={isFlow ? "modern" : activeLayout}
+        onTemplateChange={setActiveTemplate}
         onLayoutChange={setActiveLayout}
         showTemplateSwitch
         showLayoutSwitch
       />
       <SalonFlowStyleButton activeTemplate={activeTemplate} activeLayout={activeLayout} onSelect={setActiveLayout} />
-      <SalonHeroSliderMount active={isSalon} config={config} />
+      <SalonHeroSliderMount active={isSalon || isFlow} config={config} />
       <SalonGalleryMount active={isSalon} config={config} />
       {isSalonFlow ? <SalonBookingMount config={config} immersive /> : null}
-      <ImmersiveScrollMount active={isSalonFlow} />
+      <ImmersiveScrollMount active={isFlow} />
+      <FlowTemplateEnhancements active={isFlow} config={config} />
       <SalonSiteEnhancements active={isSalon} config={config} />
     </>
   );
