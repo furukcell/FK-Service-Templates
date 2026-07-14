@@ -27,6 +27,7 @@ import "../src/styles/salon-gallery-premium.css";
 import "../src/styles/flow-all-sectors.css";
 import "../src/styles/flow-mobile-refine.css";
 import "../src/styles/flow-mobile-deck.css";
+// Keep the final mobile flow overrides last so they win the cascade.
 import "../src/styles/flow-mobile-final.css";
 
 export default function App({ Component, pageProps }: AppProps) {
