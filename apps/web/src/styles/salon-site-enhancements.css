@@ -6,12 +6,20 @@
   white-space: nowrap;
 }
 
-.salonEnhancedPage .previewPanel > .previewCard:not(.previewCardSmall) {
+.salonEnhancedPage .previewPanel {
   display: none;
 }
 
-.salonEnhancedPage .previewPanel {
-  min-height: 0;
+.salonEnhancedPage .heroWrap {
+  grid-template-columns: 1fr;
+}
+
+.salonEnhancedPage .heroText {
+  max-width: 980px;
+}
+
+.salonEnhancedPage .showcasePanelGrid {
+  grid-template-columns: 1fr;
 }
 
 .salonEnhancedPage [id] {
