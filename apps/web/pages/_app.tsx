@@ -19,6 +19,7 @@ import "../src/styles/salon-flow-preview.css";
 import "../src/styles/salon-site-enhancements.css";
 import "../src/styles/salon-hero-slider.css";
 import "../src/styles/salon-hero-integrated.css";
+import "../src/styles/salon-premium-cards.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
