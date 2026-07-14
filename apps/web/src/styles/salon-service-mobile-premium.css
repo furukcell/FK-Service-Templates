@@ -1,0 +1,465 @@
+.salonEnhancedPage #services {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--secondary) 12%, transparent), transparent 28%),
+    radial-gradient(circle at 8% 92%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 30%),
+    rgba(255, 255, 255, 0.9);
+}
+
+.salonEnhancedPage #services::before {
+  content: "";
+  position: absolute;
+  width: 310px;
+  height: 310px;
+  top: -185px;
+  right: -118px;
+  border: 1px solid color-mix(in srgb, var(--primary) 11%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 34px color-mix(in srgb, var(--primary) 3%, transparent), 0 0 0 68px color-mix(in srgb, var(--secondary) 2%, transparent);
+  pointer-events: none;
+}
+
+.salonEnhancedPage #services .sectionHead,
+.salonEnhancedPage #services .cardGrid {
+  position: relative;
+  z-index: 1;
+}
+
+.salonEnhancedPage #services .cardGrid {
+  gap: 20px;
+}
+
+.salonEnhancedPage #services .serviceCard {
+  --service-accent: #db2777;
+  position: relative;
+  display: flex;
+  min-height: 282px;
+  overflow: hidden;
+  flex-direction: column;
+  padding: 94px 30px 30px;
+  border: 1px solid color-mix(in srgb, var(--service-accent) 18%, #e5e7eb);
+  background:
+    radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--service-accent) 14%, transparent), transparent 30%),
+    linear-gradient(155deg, #fff 36%, color-mix(in srgb, var(--service-accent) 7%, #fff));
+  box-shadow: 0 22px 58px color-mix(in srgb, var(--service-accent) 10%, transparent);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.salonEnhancedPage #services .serviceCard:nth-child(2) { --service-accent: #8b5cf6; }
+.salonEnhancedPage #services .serviceCard:nth-child(3) { --service-accent: #0f9f8f; }
+.salonEnhancedPage #services .serviceCard:nth-child(4) { --service-accent: #f59e0b; }
+.salonEnhancedPage #services .serviceCard:nth-child(5) { --service-accent: #2563eb; }
+.salonEnhancedPage #services .serviceCard:nth-child(6) { --service-accent: #e11d48; }
+
+.salonEnhancedPage #services .serviceCard::before {
+  content: "01";
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  display: grid;
+  width: 55px;
+  height: 55px;
+  place-items: center;
+  border-radius: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--service-accent), color-mix(in srgb, var(--service-accent) 68%, #fff));
+  box-shadow: 0 15px 32px color-mix(in srgb, var(--service-accent) 25%, transparent);
+  font-size: 0.8rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+}
+
+.salonEnhancedPage #services .serviceCard:nth-child(2)::before { content: "02"; }
+.salonEnhancedPage #services .serviceCard:nth-child(3)::before { content: "03"; }
+.salonEnhancedPage #services .serviceCard:nth-child(4)::before { content: "04"; }
+.salonEnhancedPage #services .serviceCard:nth-child(5)::before { content: "05"; }
+.salonEnhancedPage #services .serviceCard:nth-child(6)::before { content: "06"; }
+
+.salonEnhancedPage #services .serviceCard::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top: 42px;
+  right: -58px;
+  border: 1px solid color-mix(in srgb, var(--service-accent) 17%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 24px color-mix(in srgb, var(--service-accent) 4%, transparent);
+  pointer-events: none;
+}
+
+.salonEnhancedPage #services .serviceCard:hover {
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--service-accent) 36%, #fff);
+  box-shadow: 0 31px 76px color-mix(in srgb, var(--service-accent) 16%, transparent);
+}
+
+.salonEnhancedPage #services .serviceCard h3,
+.salonEnhancedPage #services .serviceCard p,
+.salonEnhancedPage #services .serviceCard .priceTag {
+  position: relative;
+  z-index: 1;
+}
+
+.salonEnhancedPage #services .serviceCard h3 {
+  margin: 0 0 13px;
+  color: var(--dark);
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.salonEnhancedPage #services .serviceCard p {
+  flex: 1;
+  margin: 0;
+  color: #64748b;
+  line-height: 1.67;
+}
+
+.salonEnhancedPage #services .serviceCard .priceTag {
+  width: fit-content;
+  margin-top: 22px;
+  color: var(--service-accent);
+  background: color-mix(in srgb, var(--service-accent) 9%, #fff);
+  border: 1px solid color-mix(in srgb, var(--service-accent) 16%, #fff);
+}
+
+.salonEnhancedPage .campaignCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.salonEnhancedPage .campaignCard p {
+  flex: 1;
+}
+
+.salonCampaignWhatsapp {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 52px;
+  margin-top: 24px;
+  padding: 12px 14px 12px 18px;
+  border-radius: 16px;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  box-shadow: 0 15px 32px rgba(22, 163, 74, 0.24);
+  font-weight: 950;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.salonCampaignWhatsapp strong {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 1.15rem;
+}
+
+.salonCampaignWhatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 42px rgba(22, 163, 74, 0.32);
+}
+
+.salonQuickContactCard > .priceTag {
+  display: none;
+}
+
+.salonPhoneCall {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4px 14px;
+  margin-top: 22px;
+  padding: 15px 16px;
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  border-radius: 18px;
+  color: #14532d;
+  text-decoration: none;
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  box-shadow: 0 15px 32px rgba(22, 163, 74, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.salonPhoneCall span {
+  color: #15803d;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.salonPhoneCall strong {
+  grid-column: 1;
+  font-size: 1.08rem;
+  letter-spacing: -0.025em;
+}
+
+.salonPhoneCall i {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: grid;
+  min-width: 48px;
+  min-height: 42px;
+  place-items: center;
+  border-radius: 13px;
+  color: #fff;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 950;
+}
+
+.salonPhoneCall:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 42px rgba(22, 163, 74, 0.18);
+}
+
+@media (max-width: 760px) {
+  body:has(.salonEnhancedPage) {
+    background:
+      radial-gradient(circle at 12% 4%, color-mix(in srgb, var(--secondary) 11%, transparent), transparent 24%),
+      linear-gradient(180deg, #fff, color-mix(in srgb, var(--soft) 48%, #fff));
+  }
+
+  .salonEnhancedPage .topBar {
+    padding: 8px 12px;
+    font-size: 0.76rem;
+  }
+
+  .salonEnhancedPage .navbar {
+    top: 8px;
+    width: calc(100% - 16px);
+    margin: 8px auto 0;
+    padding: 12px;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.84);
+    box-shadow: 0 16px 45px rgba(42, 7, 25, 0.12);
+    backdrop-filter: blur(22px);
+  }
+
+  .salonEnhancedPage .logoLockup {
+    min-width: 0;
+    flex: 1;
+    gap: 9px;
+    font-size: 18px;
+    line-height: 1.05;
+  }
+
+  .salonEnhancedPage .logoLockup .logoMark {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border-radius: 13px;
+    font-size: 0.84rem;
+  }
+
+  .salonEnhancedPage .logoLockup > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .salonEnhancedPage .navActions {
+    gap: 6px;
+  }
+
+  .salonEnhancedPage .navActions a {
+    min-height: 40px;
+    padding: 9px 11px;
+    font-size: 0.72rem;
+    text-align: center;
+  }
+
+  .salonEnhancedPage .navLinks {
+    order: 3;
+    width: calc(100% + 2px);
+    gap: 7px;
+    overflow-x: auto;
+    padding: 3px 1px 1px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .salonEnhancedPage .navLinks::-webkit-scrollbar {
+    display: none;
+  }
+
+  .salonEnhancedPage .navLinks a {
+    flex: 0 0 auto;
+    min-height: 35px;
+    padding: 8px 11px;
+    border: 1px solid color-mix(in srgb, var(--primary) 10%, #e5e7eb);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 7px 18px rgba(15, 23, 42, 0.05);
+    font-size: 0.74rem;
+    scroll-snap-align: start;
+  }
+
+  .salonEnhancedPage .heroWrap,
+  .salonEnhancedPage .splitHero,
+  .salonEnhancedPage .showcaseHero {
+    width: calc(100% - 16px);
+    margin: 12px auto 18px;
+    border-radius: 29px;
+  }
+
+  .salonEnhancedPage .salonHeroSlide {
+    padding: 38px 48px 92px;
+  }
+
+  .salonEnhancedPage .salonHeroSlide h1 {
+    font-size: clamp(37px, 11vw, 52px);
+    line-height: 0.98;
+  }
+
+  .salonEnhancedPage .salonHeroSlide p {
+    margin-top: 17px;
+    font-size: 15.5px;
+    line-height: 1.58;
+  }
+
+  .salonEnhancedPage .salonHeroActions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 9px;
+    margin-top: 23px;
+  }
+
+  .salonEnhancedPage .salonHeroActions a {
+    width: 100%;
+    min-height: 47px;
+  }
+
+  .salonEnhancedPage .section,
+  .immersiveFlowPage.salonEnhancedPage > .section:not(.salonWizardSection),
+  .salonEnhancedPage .salonWizardSection {
+    width: calc(100% - 16px);
+    margin: 16px auto;
+    padding: 22px;
+    border-radius: 29px;
+    box-shadow: 0 18px 52px rgba(15, 23, 42, 0.08);
+  }
+
+  .salonEnhancedPage .sectionHead {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .salonEnhancedPage .sectionHead h2 {
+    font-size: clamp(31px, 9vw, 42px);
+    line-height: 0.98;
+  }
+
+  .salonEnhancedPage .sectionHead p {
+    font-size: 0.93rem;
+    line-height: 1.58;
+  }
+
+  .salonEnhancedPage .cardGrid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .salonEnhancedPage #services .serviceCard,
+  .salonEnhancedPage .campaignCard,
+  .salonEnhancedPage #about .staffCard {
+    min-height: 0;
+    border-radius: 23px;
+  }
+
+  .salonEnhancedPage #services .serviceCard {
+    padding: 86px 23px 23px;
+  }
+
+  .salonEnhancedPage #services .serviceCard::before {
+    top: 21px;
+    left: 23px;
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+  }
+
+  .salonEnhancedPage #services .serviceCard h3 {
+    font-size: 25px;
+  }
+
+  .salonEnhancedPage .campaignCard {
+    padding: 24px;
+  }
+
+  .salonCampaignWhatsapp,
+  .salonPhoneCall {
+    min-height: 52px;
+    border-radius: 16px;
+  }
+
+  .salonEnhancedPage #about .staffCard {
+    padding: 86px 23px 23px;
+  }
+
+  .salonEnhancedPage .visualGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .salonEnhancedPage .floatingWhatsappButton {
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    min-width: 0;
+    padding: 8px;
+    border-radius: 18px;
+    box-shadow: 0 16px 36px rgba(22, 163, 74, 0.32);
+  }
+
+  .salonEnhancedPage .floatingWhatsappText {
+    display: none;
+  }
+
+  .salonEnhancedPage .floatingWhatsappMark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .salonEnhancedPage .footer {
+    width: calc(100% - 24px);
+    margin-bottom: 82px;
+    gap: 12px;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .salonEnhancedPage .logoLockup {
+    max-width: 154px;
+    font-size: 16px;
+  }
+
+  .salonEnhancedPage .navActions a:first-child {
+    display: none;
+  }
+
+  .salonEnhancedPage .salonHeroSlide {
+    padding-right: 44px;
+    padding-left: 44px;
+  }
+
+  .salonEnhancedPage .salonHeroEdgeArrow {
+    width: 34px;
+    height: 58px;
+  }
+}
