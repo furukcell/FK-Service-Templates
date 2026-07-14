@@ -1,0 +1,661 @@
+html.immersiveFlowRoot {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+.immersiveFlowPage {
+  overflow: clip;
+  background:
+    radial-gradient(circle at 8% 8%, color-mix(in srgb, var(--secondary) 14%, transparent), transparent 28%),
+    radial-gradient(circle at 92% 34%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 26%),
+    #fff;
+}
+
+.immersiveFlowPage .topBar {
+  position: relative;
+  z-index: 40;
+}
+
+.immersiveFlowPage .navbar {
+  position: sticky;
+  top: 14px;
+  z-index: 50;
+  width: min(1180px, 92vw);
+  margin: 14px auto 0;
+  border: 1px solid rgba(255,255,255,.74);
+  border-radius: 999px;
+  background: rgba(255,255,255,.76);
+  box-shadow: 0 20px 55px rgba(15,23,42,.10);
+  backdrop-filter: blur(22px);
+}
+
+.immersiveFlowSection {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  min-height: min(920px, calc(100svh - 24px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.immersiveReveal {
+  opacity: 0;
+  transform: translate3d(0, 56px, 0) scale(.975);
+  filter: blur(10px);
+  transition:
+    opacity .82s cubic-bezier(.2,.8,.2,1),
+    transform .92s cubic-bezier(.2,.8,.2,1),
+    filter .82s ease;
+  transition-delay: calc(min(var(--flow-index, 0), 4) * 35ms);
+}
+
+.immersiveReveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0,0,0) scale(1);
+  filter: blur(0);
+}
+
+.immersiveFlowPage .heroWrap {
+  width: min(1320px, 94vw);
+  min-height: calc(100svh - 58px);
+  margin: 20px auto 30px;
+  padding: clamp(34px, 6vw, 78px);
+  border-radius: clamp(30px, 4vw, 58px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 84% 16%, rgba(255,255,255,.92), transparent 22%),
+    radial-gradient(circle at 10% 84%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 32%),
+    linear-gradient(135deg, color-mix(in srgb, var(--dark) 94%, #000), var(--primary) 58%, var(--secondary));
+  color: #fff;
+  box-shadow: 0 45px 120px rgba(15,23,42,.22);
+}
+
+.immersiveFlowPage .heroWrap::before,
+.immersiveFlowPage .heroWrap::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.immersiveFlowPage .heroWrap::before {
+  width: 340px;
+  height: 340px;
+  right: -90px;
+  top: -110px;
+  border: 1px solid rgba(255,255,255,.30);
+  box-shadow: 0 0 0 45px rgba(255,255,255,.05), 0 0 0 90px rgba(255,255,255,.03);
+}
+
+.immersiveFlowPage .heroWrap::after {
+  width: 180px;
+  height: 180px;
+  left: 44%;
+  bottom: -105px;
+  background: color-mix(in srgb, var(--accent) 58%, transparent);
+  filter: blur(40px);
+}
+
+.immersiveFlowPage .heroText,
+.immersiveFlowPage .previewPanel {
+  position: relative;
+  z-index: 2;
+}
+
+.immersiveFlowPage .heroTitle,
+.immersiveFlowPage .heroDescription {
+  color: #fff;
+}
+
+.immersiveFlowPage .heroTitle {
+  max-width: 820px;
+  font-size: clamp(48px, 7vw, 102px);
+  line-height: .92;
+  letter-spacing: -.075em;
+}
+
+.immersiveFlowPage .heroDescription {
+  max-width: 680px;
+  color: rgba(255,255,255,.82);
+  font-size: clamp(17px, 1.8vw, 22px);
+}
+
+.immersiveFlowPage .heroWrap .eyebrow,
+.immersiveFlowPage .heroWrap .ghostButton {
+  color: #fff;
+  border-color: rgba(255,255,255,.28);
+  background: rgba(255,255,255,.12);
+}
+
+.immersiveFlowPage .heroWrap .previewPanel {
+  border: 1px solid rgba(255,255,255,.28);
+  background: rgba(255,255,255,.14);
+  box-shadow: 0 25px 70px rgba(0,0,0,.16);
+  backdrop-filter: blur(24px);
+}
+
+.immersiveFlowPage .heroWrap .previewCard,
+.immersiveFlowPage .heroWrap .previewMiniGrid > div {
+  border-color: rgba(255,255,255,.20);
+  background: rgba(255,255,255,.88);
+}
+
+.immersiveFlowPage > .section:not(.salonWizardSection) {
+  width: min(1240px, 92vw);
+  margin: 28px auto;
+  padding: clamp(34px, 6vw, 76px);
+  border: 1px solid color-mix(in srgb, var(--primary) 10%, #e5e7eb);
+  border-radius: clamp(28px, 4vw, 52px);
+  background: rgba(255,255,255,.90);
+  box-shadow: 0 28px 90px rgba(15,23,42,.08);
+}
+
+.immersiveFlowPage > .section:nth-of-type(even):not(.salonWizardSection) {
+  background:
+    radial-gradient(circle at 86% 18%, color-mix(in srgb, var(--secondary) 12%, transparent), transparent 26%),
+    color-mix(in srgb, var(--soft) 72%, #fff);
+}
+
+.immersiveFlowPage .sectionHead {
+  max-width: 790px;
+}
+
+.immersiveFlowPage .sectionHead h2 {
+  font-size: clamp(36px, 5vw, 68px);
+  line-height: .98;
+  letter-spacing: -.055em;
+}
+
+.immersiveFlowPage .serviceCard,
+.immersiveFlowPage .staffCard,
+.immersiveFlowPage .visualCard {
+  transition: transform .32s ease, box-shadow .32s ease, border-color .32s ease;
+}
+
+.immersiveFlowPage .serviceCard:hover,
+.immersiveFlowPage .staffCard:hover,
+.immersiveFlowPage .visualCard:hover {
+  transform: translateY(-9px);
+  border-color: color-mix(in srgb, var(--primary) 38%, #e5e7eb);
+  box-shadow: 0 28px 65px rgba(15,23,42,.12);
+}
+
+.salonBookingPortalImmersive {
+  width: 100%;
+}
+
+.salonWizardSection {
+  width: min(1320px, 94vw);
+  margin: 30px auto;
+  padding: clamp(34px, 5vw, 68px);
+  border-radius: clamp(30px, 4vw, 56px);
+  background:
+    radial-gradient(circle at 10% 10%, color-mix(in srgb, var(--secondary) 16%, transparent), transparent 28%),
+    radial-gradient(circle at 88% 78%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 25%),
+    linear-gradient(150deg, #fff, color-mix(in srgb, var(--soft) 72%, #fff));
+  box-shadow: 0 42px 120px rgba(15,23,42,.13);
+  border: 1px solid rgba(255,255,255,.78);
+}
+
+.salonWizardIntro {
+  max-width: 850px;
+  margin-bottom: 28px;
+}
+
+.salonWizardIntro h2 {
+  margin: 12px 0 14px;
+  color: var(--dark);
+  font-size: clamp(38px, 5.3vw, 76px);
+  line-height: .96;
+  letter-spacing: -.065em;
+}
+
+.salonWizardIntro p {
+  max-width: 720px;
+  margin: 0;
+  color: #64748b;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.salonWizardProgress {
+  margin: 26px 0 34px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(16px);
+}
+
+.salonWizardProgressBar {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e5e7eb;
+}
+
+.salonWizardProgressBar span {
+  display: block;
+  width: var(--wizard-progress);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  transition: width .42s cubic-bezier(.2,.8,.2,1);
+}
+
+.salonWizardStepLabels {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0,1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.salonWizardStepLabels button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: #94a3b8;
+  font: inherit;
+  font-weight: 800;
+}
+
+.salonWizardStepLabels button.complete,
+.salonWizardStepLabels button.active {
+  color: var(--dark);
+  cursor: pointer;
+}
+
+.salonWizardStepLabels button.active {
+  background: var(--soft);
+}
+
+.salonWizardStepLabels i {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  border-radius: 999px;
+  background: #e2e8f0;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.salonWizardStepLabels button.complete i,
+.salonWizardStepLabels button.active i {
+  background: var(--primary);
+  color: #fff;
+}
+
+.salonWizardLayout {
+  display: grid;
+  grid-template-columns: minmax(260px, .34fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.salonWizardSummary {
+  position: sticky;
+  top: 112px;
+  display: grid;
+  gap: 14px;
+  padding: 26px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 80% 10%, rgba(255,255,255,.22), transparent 25%),
+    linear-gradient(150deg, var(--dark), var(--primary));
+  color: #fff;
+  box-shadow: 0 28px 70px color-mix(in srgb, var(--primary) 24%, transparent);
+}
+
+.salonWizardSummaryLabel {
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.salonWizardSummary h3 {
+  margin: 2px 0 8px;
+  color: #fff;
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.05;
+}
+
+.salonWizardSummary > div {
+  display: grid;
+  gap: 3px;
+  padding: 11px 0;
+  border-top: 1px solid rgba(255,255,255,.13);
+}
+
+.salonWizardSummary > div span,
+.salonWizardSummary small {
+  color: rgba(255,255,255,.68);
+  font-size: 12px;
+}
+
+.salonWizardSummary > div strong {
+  font-size: 15px;
+}
+
+.salonWizardSummary small {
+  line-height: 1.55;
+}
+
+.salonWizardStage {
+  min-height: 620px;
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid #e5e7eb;
+  border-radius: 30px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 24px 65px rgba(15,23,42,.08);
+}
+
+.salonWizardStageHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.salonWizardStageHead span {
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.salonWizardStageHead strong {
+  color: var(--primary);
+  font-size: 14px;
+}
+
+.salonWizardPanel {
+  min-height: 430px;
+  animation: wizardPanelIn .42s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes wizardPanelIn {
+  from { opacity: 0; transform: translateX(24px) scale(.99); filter: blur(5px); }
+  to { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+}
+
+.salonWizardPanelTitle {
+  max-width: 720px;
+  margin-bottom: 22px;
+}
+
+.salonWizardPanelTitle h3 {
+  margin: 0 0 8px;
+  color: var(--dark);
+  font-size: clamp(25px, 3vw, 38px);
+  letter-spacing: -.035em;
+}
+
+.salonWizardPanelTitle p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+.wizardServiceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 13px;
+}
+
+.wizardChoiceCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 7px 13px;
+  min-height: 158px;
+  padding: 19px;
+  border: 1px solid #e5e7eb;
+  border-radius: 21px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: .24s ease;
+}
+
+.wizardChoiceCard:hover,
+.wizardChoiceCard.active {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--soft) 72%, #fff);
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--primary) 13%, transparent);
+}
+
+.wizardChoiceIcon {
+  grid-row: 1 / span 3;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--soft);
+  color: var(--primary);
+  font-size: 21px;
+}
+
+.wizardChoiceCard strong {
+  align-self: end;
+  color: var(--dark);
+  font-size: 18px;
+}
+
+.wizardChoiceCard p,
+.wizardChoiceCard small {
+  grid-column: 2;
+  margin: 0;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.wizardChoiceCard small {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.wizardStaffGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 13px;
+}
+
+.wizardStaffCard {
+  display: grid;
+  justify-items: center;
+  gap: 9px;
+  min-height: 178px;
+  padding: 23px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  background: #fff;
+  cursor: pointer;
+  transition: .24s ease;
+}
+
+.wizardStaffCard:hover,
+.wizardStaffCard.active {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  background: var(--soft);
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--primary) 13%, transparent);
+}
+
+.wizardStaffCard > span {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.wizardStaffCard strong { color: var(--dark); font-size: 17px; }
+.wizardStaffCard small { color: #64748b; }
+
+.wizardCalendarTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.wizardCalendar {
+  margin-top: 4px;
+}
+
+.wizardTimeGrid {
+  grid-template-columns: repeat(5, minmax(0,1fr));
+}
+
+.salonWizardActions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.salonWizardActions .pillButton,
+.salonWizardActions .ghostButton {
+  min-width: 132px;
+  justify-content: center;
+}
+
+.salonWizardActions button:disabled {
+  opacity: .46;
+  cursor: not-allowed;
+}
+
+.salonWizardStatus {
+  margin-top: 15px;
+}
+
+@media (max-width: 980px) {
+  html.immersiveFlowRoot {
+    scroll-snap-type: none;
+  }
+
+  .immersiveFlowSection {
+    min-height: auto;
+  }
+
+  .immersiveFlowPage .navbar {
+    top: 8px;
+    border-radius: 24px;
+  }
+
+  .immersiveFlowPage .heroWrap {
+    min-height: auto;
+    padding: 34px;
+  }
+
+  .salonWizardLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .salonWizardSummary {
+    position: relative;
+    top: auto;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+
+  .salonWizardSummaryLabel,
+  .salonWizardSummary h3,
+  .salonWizardSummary small {
+    grid-column: 1 / -1;
+  }
+
+  .wizardTimeGrid {
+    grid-template-columns: repeat(4, minmax(0,1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .immersiveFlowPage .navbar {
+    width: calc(100% - 20px);
+  }
+
+  .immersiveFlowPage .heroWrap,
+  .immersiveFlowPage > .section:not(.salonWizardSection),
+  .salonWizardSection {
+    width: calc(100% - 20px);
+    margin: 12px auto 22px;
+    padding: 22px;
+    border-radius: 28px;
+  }
+
+  .immersiveFlowPage .heroTitle {
+    font-size: clamp(42px, 15vw, 66px);
+  }
+
+  .salonWizardStepLabels button span {
+    display: none;
+  }
+
+  .salonWizardStepLabels button {
+    padding: 0;
+  }
+
+  .salonWizardSummary {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    padding: 21px;
+  }
+
+  .salonWizardStage {
+    min-height: 0;
+    padding: 19px;
+    border-radius: 23px;
+  }
+
+  .salonWizardPanel {
+    min-height: 0;
+  }
+
+  .wizardServiceGrid,
+  .wizardStaffGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .wizardCalendarTop {
+    display: grid;
+  }
+
+  .wizardTimeGrid {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.immersiveFlowRoot { scroll-behavior: auto; scroll-snap-type: none; }
+  .immersiveReveal,
+  .immersiveReveal.is-visible,
+  .salonWizardPanel,
+  .wizardChoiceCard,
+  .wizardStaffCard {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none;
+    transition: none;
+  }
+}

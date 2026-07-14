@@ -14,6 +14,7 @@ import "../src/styles/content-pages.css";
 import "../src/styles/floating-whatsapp.css";
 import "../src/styles/salon-booking.css";
 import "../src/styles/salon-admin.css";
+import "../src/styles/immersive-flow.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
