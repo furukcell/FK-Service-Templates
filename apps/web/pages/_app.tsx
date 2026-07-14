@@ -6,6 +6,7 @@ import "../src/styles/admin.css";
 import "../src/styles/admin-extra.css";
 import "../src/styles/admin-actions.css";
 import "../src/styles/admin-forms.css";
+import "../src/styles/admin-gallery-premium.css";
 import "../src/styles/forms.css";
 import "../src/styles/properties.css";
 import "../src/styles/visual-sections.css";
@@ -22,6 +23,7 @@ import "../src/styles/salon-hero-integrated.css";
 import "../src/styles/salon-premium-cards.css";
 import "../src/styles/salon-service-mobile-premium.css";
 import "../src/styles/salon-final-tweaks.css";
+import "../src/styles/salon-gallery-premium.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
