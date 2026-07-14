@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import type { BusinessTemplateConfig } from "@fk-templates/shared";
 import { SalonBooking } from "./SalonBooking";
+import { SalonBookingWizard } from "./SalonBookingWizard";
 
-export function SalonBookingMount({ config }: { config: BusinessTemplateConfig }) {
+export function SalonBookingMount({ config, immersive = false }: { config: BusinessTemplateConfig; immersive?: boolean }) {
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export function SalonBookingMount({ config }: { config: BusinessTemplateConfig }
     }
 
     const mount = document.createElement("div");
-    mount.className = "salonBookingPortal";
+    mount.className = immersive ? "salonBookingPortal salonBookingPortalImmersive" : "salonBookingPortal";
     const footer = shell.querySelector("footer.footer");
     shell.insertBefore(mount, footer || null);
     setTarget(mount);
@@ -29,7 +30,8 @@ export function SalonBookingMount({ config }: { config: BusinessTemplateConfig }
         legacyForm.style.display = "";
       }
     };
-  }, []);
+  }, [immersive]);
 
-  return target ? createPortal(<SalonBooking config={config} />, target) : null;
+  if (!target) return null;
+  return createPortal(immersive ? <SalonBookingWizard config={config} /> : <SalonBooking config={config} />, target);
 }
