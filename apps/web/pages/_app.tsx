@@ -26,6 +26,7 @@ import "../src/styles/salon-final-tweaks.css";
 import "../src/styles/salon-gallery-premium.css";
 import "../src/styles/flow-all-sectors.css";
 import "../src/styles/flow-mobile-refine.css";
+import "../src/styles/flow-mobile-deck.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
