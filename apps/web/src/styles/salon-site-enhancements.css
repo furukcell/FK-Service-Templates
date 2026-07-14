@@ -1,0 +1,40 @@
+.salonEnhancedPage .navLinks {
+  gap: clamp(14px, 1.8vw, 28px);
+}
+
+.salonEnhancedPage .navLinks a {
+  white-space: nowrap;
+}
+
+.salonEnhancedPage .previewPanel > .previewCard:not(.previewCardSmall) {
+  display: none;
+}
+
+.salonEnhancedPage .previewPanel {
+  min-height: 0;
+}
+
+.salonEnhancedPage [id] {
+  scroll-margin-top: 118px;
+}
+
+.salonsCreatedWhatsapp,
+.salonCreatedWhatsapp {
+  z-index: 90;
+}
+
+@media (max-width: 1180px) {
+  .salonEnhancedPage .navbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .salonEnhancedPage .navLinks {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+}
