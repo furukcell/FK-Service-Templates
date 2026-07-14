@@ -130,8 +130,8 @@ export function SalonSiteEnhancements({
       assignSectionId(shell.querySelector<HTMLElement>("#services"), "services");
       assignSectionId(shell.querySelector<HTMLElement>(".campaignCard")?.closest<HTMLElement>("section") || null, "campaigns");
       assignSectionId(shell.querySelector<HTMLElement>(".staffCard")?.closest<HTMLElement>("section") || null, "about");
-      assignSectionId(shell.querySelector<HTMLElement>(".visualGrid")?.closest<HTMLElement>("section") || null, "gallery");
-      assignSectionId(shell.querySelector<HTMLElement>(".locationCard"), "contact");
+      if (!document.querySelector(".salonGallerySection")) assignSectionId(shell.querySelector<HTMLElement>(".visualGrid")?.closest<HTMLElement>("section") || null, "gallery");
+      if (!document.querySelector(".salonContactSection")) assignSectionId(shell.querySelector<HTMLElement>(".locationCard"), "contact");
 
       const nav = shell.querySelector<HTMLElement>(".navLinks");
       if (nav) {
