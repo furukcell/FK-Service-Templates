@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
-import type { FocusEvent } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { FocusEvent, TouchEvent } from "react";
 import type { BusinessTemplateConfig } from "@fk-templates/shared";
 
 const AUTO_PLAY_MS = 10000;
+const SWIPE_THRESHOLD = 55;
 
 type SlideAction = {
   label: string;
@@ -85,26 +86,67 @@ function buildSlides(config: BusinessTemplateConfig): SalonHeroSlide[] {
 
 export function SalonHeroSlider({ config }: { config: BusinessTemplateConfig }) {
   const slides = useMemo(() => buildSlides(config), [config]);
+  const loopedSlides = useMemo(() => [slides[slides.length - 1], ...slides, slides[0]], [slides]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [trackIndex, setTrackIndex] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
+  const touchStartX = useRef<number | null>(null);
+
+  const moveBy = useCallback((direction: -1 | 1) => {
+    if (isAnimating) return;
+    setTransitionEnabled(true);
+    setIsAnimating(true);
+    setTrackIndex((current) => current + direction);
+    setActiveIndex((current) => (current + direction + slides.length) % slides.length);
+  }, [isAnimating, slides.length]);
 
   useEffect(() => {
     if (isPaused || typeof window === "undefined") return undefined;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
 
-    const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % slides.length);
-    }, AUTO_PLAY_MS);
-
+    const timer = window.setInterval(() => moveBy(1), AUTO_PLAY_MS);
     return () => window.clearInterval(timer);
-  }, [isPaused, slides.length]);
+  }, [isPaused, moveBy]);
 
   function showSlide(index: number) {
-    setActiveIndex((index + slides.length) % slides.length);
+    if (isAnimating || index === activeIndex) return;
+    setTransitionEnabled(true);
+    setIsAnimating(true);
+    setActiveIndex(index);
+    setTrackIndex(index + 1);
+  }
+
+  function handleTransitionEnd() {
+    if (trackIndex === 0) {
+      setTransitionEnabled(false);
+      setTrackIndex(slides.length);
+    } else if (trackIndex === slides.length + 1) {
+      setTransitionEnabled(false);
+      setTrackIndex(1);
+    }
+    setIsAnimating(false);
   }
 
   function handleBlur(event: FocusEvent<HTMLElement>) {
     if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsPaused(false);
+  }
+
+  function handleTouchStart(event: TouchEvent<HTMLElement>) {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+    setIsPaused(true);
+  }
+
+  function handleTouchEnd(event: TouchEvent<HTMLElement>) {
+    const start = touchStartX.current;
+    const end = event.changedTouches[0]?.clientX;
+    touchStartX.current = null;
+    setIsPaused(false);
+    if (start === null || end === undefined) return;
+    const distance = end - start;
+    if (Math.abs(distance) < SWIPE_THRESHOLD) return;
+    moveBy(distance > 0 ? -1 : 1);
   }
 
   return (
@@ -115,45 +157,76 @@ export function SalonHeroSlider({ config }: { config: BusinessTemplateConfig }) 
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
       onBlurCapture={handleBlur}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <div className="salonHeroViewport">
-        {slides.map((slide, index) => (
-          <article
-            aria-hidden={activeIndex !== index}
-            className={`salonHeroSlide ${activeIndex === index ? "active" : ""}`}
-            key={slide.title}
-          >
-            <span className="salonHeroEyebrow">{slide.eyebrow}</span>
-            <h1>{slide.title}</h1>
-            <p>{slide.description}</p>
-            {slide.highlights?.length ? (
-              <div className="salonHeroHighlights" aria-label="Öne çıkan özellikler">
-                {slide.highlights.map((highlight) => <span key={highlight}>{highlight}</span>)}
-              </div>
-            ) : null}
-            <div className="salonHeroActions">
-              {slide.actions.map((action) => (
-                <a
-                  className={action.variant === "primary" ? "pillButton navButtonLink" : "ghostButton navButtonLink"}
-                  href={action.href}
-                  key={action.label}
-                  rel={action.external ? "noreferrer" : undefined}
-                  target={action.external ? "_blank" : undefined}
-                  tabIndex={activeIndex === index ? 0 : -1}
-                >
-                  {action.label}
-                </a>
-              ))}
-            </div>
-          </article>
-        ))}
+        <div
+          className="salonHeroTrack"
+          onTransitionEnd={handleTransitionEnd}
+          style={{
+            transform: `translate3d(-${trackIndex * 100}%, 0, 0)`,
+            transition: transitionEnabled ? undefined : "none"
+          }}
+        >
+          {loopedSlides.map((slide, position) => {
+            const isCurrent = position === trackIndex;
+            return (
+              <article
+                aria-hidden={!isCurrent}
+                className={`salonHeroSlide ${isCurrent ? "active" : ""}`}
+                key={`${position}-${slide.title}`}
+              >
+                <div className="salonHeroContent">
+                  <span className="salonHeroEyebrow">{slide.eyebrow}</span>
+                  <h1>{slide.title}</h1>
+                  <p>{slide.description}</p>
+                  {slide.highlights?.length ? (
+                    <div className="salonHeroHighlights" aria-label="Öne çıkan özellikler">
+                      {slide.highlights.map((highlight) => <span key={highlight}>{highlight}</span>)}
+                    </div>
+                  ) : null}
+                  <div className="salonHeroActions">
+                    {slide.actions.map((action) => (
+                      <a
+                        className={action.variant === "primary" ? "pillButton navButtonLink" : "ghostButton navButtonLink"}
+                        href={action.href}
+                        key={action.label}
+                        rel={action.external ? "noreferrer" : undefined}
+                        target={action.external ? "_blank" : undefined}
+                        tabIndex={isCurrent ? 0 : -1}
+                      >
+                        {action.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
 
+      <button
+        aria-label="Önceki tanıtım"
+        className="salonHeroEdgeArrow salonHeroEdgeArrowLeft"
+        disabled={isAnimating}
+        onClick={() => moveBy(-1)}
+        type="button"
+      >
+        <span aria-hidden="true">‹</span>
+      </button>
+      <button
+        aria-label="Sonraki tanıtım"
+        className="salonHeroEdgeArrow salonHeroEdgeArrowRight"
+        disabled={isAnimating}
+        onClick={() => moveBy(1)}
+        type="button"
+      >
+        <span aria-hidden="true">›</span>
+      </button>
+
       <div className="salonHeroControls">
-        <div className="salonHeroArrows">
-          <button aria-label="Önceki tanıtım" onClick={() => showSlide(activeIndex - 1)} type="button">‹</button>
-          <button aria-label="Sonraki tanıtım" onClick={() => showSlide(activeIndex + 1)} type="button">›</button>
-        </div>
         <div className="salonHeroDots" aria-label="Tanıtım seçimi">
           {slides.map((slide, index) => (
             <button
