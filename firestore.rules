@@ -6,14 +6,44 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    function validPublicAppointment() {
+      return request.resource.data.status == "pending"
+        && request.resource.data.businessId is string
+        && request.resource.data.serviceId is string
+        && request.resource.data.serviceName is string
+        && request.resource.data.staffId is string
+        && request.resource.data.staffName is string
+        && request.resource.data.customerName is string
+        && request.resource.data.customerPhone is string
+        && request.resource.data.date is string
+        && request.resource.data.startTime is string
+        && request.resource.data.endTime is string
+        && request.resource.data.durationMinutes is int
+        && request.resource.data.slotKeys is list;
+    }
+
     match /requests/{requestId} {
       allow create: if true;
       allow read, update, delete: if signedIn();
     }
 
     match /appointments/{appointmentId} {
-      allow create: if true;
+      allow create: if signedIn() || validPublicAppointment();
       allow read, update, delete: if signedIn();
+    }
+
+    match /bookingSlots/{slotId} {
+      allow read: if true;
+      allow create: if signedIn() || (
+        request.resource.data.active == true
+        && request.resource.data.businessId is string
+        && request.resource.data.staffId is string
+        && request.resource.data.date is string
+        && request.resource.data.time is string
+        && request.resource.data.appointmentId is string
+        && existsAfter(/databases/$(database)/documents/appointments/$(request.resource.data.appointmentId))
+      );
+      allow update, delete: if signedIn();
     }
 
     match /properties/{propertyId} {

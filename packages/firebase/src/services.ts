@@ -6,9 +6,12 @@ import { getFirestoreDb } from "./client";
 export type BusinessService = {
   id: string;
   template: TemplateKey;
+  businessId?: string;
   title: string;
   description: string;
   price?: string;
+  durationMinutes?: number;
+  staffIds?: string[];
   isActive: boolean;
   createdAt?: unknown;
   updatedAt?: unknown;
@@ -16,9 +19,12 @@ export type BusinessService = {
 
 export type CreateBusinessServicePayload = {
   template: TemplateKey;
+  businessId?: string;
   title: string;
   description: string;
   price?: string;
+  durationMinutes?: number;
+  staffIds?: string[];
   isActive?: boolean;
 };
 

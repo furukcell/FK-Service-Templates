@@ -1,0 +1,85 @@
+.salonAdminShell {
+  --primary: #be185d;
+  --secondary: #ec4899;
+  --soft: #fdf2f8;
+  --dark: #500724;
+}
+
+.adminCheckboxGroup {
+  display: grid;
+  gap: 10px;
+  grid-column: 1 / -1;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  background: #fafafa;
+}
+
+.adminCheckboxGroup > strong {
+  color: var(--dark, #111827);
+}
+
+.adminCheckboxGroup > p {
+  margin: 0;
+  color: #6b7280;
+  font-size: .84rem;
+}
+
+.adminDayGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.adminDayGrid label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.adminDayGrid input {
+  accent-color: var(--primary, #be185d);
+}
+
+.adminDayGrid span {
+  color: #374151;
+  font-size: .84rem;
+  font-weight: 700;
+}
+
+.adminTimeGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.salonsAdminStatusBadge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 8px 11px;
+  border-radius: 999px;
+  background: var(--soft, #fdf2f8);
+  color: var(--primary, #be185d);
+  font-size: .78rem;
+  font-weight: 900;
+}
+
+@media (max-width: 1000px) {
+  .adminTimeGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .adminDayGrid,
+  .adminTimeGrid {
+    grid-template-columns: 1fr;
+  }
+}

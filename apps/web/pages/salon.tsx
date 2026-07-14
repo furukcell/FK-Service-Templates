@@ -1,5 +1,6 @@
 import { SeoHead } from "../src/components/SeoHead";
 import { SiteSetupGuard } from "../src/components/SiteSetupGuard";
+import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { TemplateLanding } from "../src/components/TemplateLanding";
 import { templateConfigs } from "../src/templateConfigs";
 import { useLayoutVariantFromQuery } from "../src/useLayoutVariantFromQuery";
@@ -21,6 +22,7 @@ export default function SalonTemplatePage() {
         showTemplateSwitch={false}
         showLayoutSwitch={false}
       />
+      <SalonBookingMount config={config} />
     </>
   );
 }
