@@ -1,0 +1,205 @@
+.adminGalleryBulkPanel,
+.adminGallerySinglePanel {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #fff, #fafafa);
+}
+
+.adminGalleryBulkPanel {
+  grid-template-columns: minmax(0, 1.3fr) minmax(180px, .5fr) minmax(220px, .7fr);
+  align-items: end;
+  border-color: color-mix(in srgb, var(--primary, #be185d) 18%, #e5e7eb);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--soft, #fdf2f8) 55%, #fff), #fff);
+}
+
+.adminGalleryBulkPanel > div {
+  align-self: center;
+}
+
+.adminGalleryBulkPanel strong,
+.adminGallerySinglePanel > strong {
+  color: var(--dark, #111827);
+  font-size: 1.02rem;
+}
+
+.adminGalleryBulkPanel p {
+  margin: 6px 0 0;
+  color: #6b7280;
+  font-size: .84rem;
+  line-height: 1.55;
+}
+
+.adminGallerySinglePanel {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.adminGallerySinglePanel > strong,
+.adminGallerySinglePanel > button,
+.adminGallerySinglePanel .adminGalleryCheck {
+  grid-column: 1 / -1;
+}
+
+.adminGalleryCheck {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #fff;
+  color: #374151;
+  font-size: .85rem;
+  font-weight: 800;
+}
+
+.adminGalleryCheck input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary, #be185d);
+}
+
+.adminGalleryEditorGrid {
+  display: grid;
+  gap: 15px;
+}
+
+.adminGalleryEditorCard {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 16px;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, .05);
+}
+
+.adminGalleryEditorCard.featured {
+  border-color: color-mix(in srgb, var(--primary, #be185d) 38%, #fff);
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--primary, #be185d) 12%, transparent);
+}
+
+.adminGalleryMedia {
+  position: relative;
+  display: grid;
+  min-height: 165px;
+  overflow: hidden;
+  place-items: center;
+  border-radius: 17px;
+  color: #fff;
+  background: linear-gradient(145deg, var(--dark, #500724), var(--primary, #be185d), var(--secondary, #ec4899));
+}
+
+.adminGalleryMedia img {
+  width: 100%;
+  height: 100%;
+  min-height: 165px;
+  object-fit: cover;
+}
+
+.adminGalleryMedia > span {
+  font-size: 2.5rem;
+  font-weight: 950;
+  letter-spacing: -.05em;
+}
+
+.adminGalleryMedia mark {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary, #be185d), var(--secondary, #ec4899));
+  font-size: .67rem;
+  font-weight: 900;
+}
+
+.adminGalleryFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 10px;
+}
+
+.adminGalleryFields .field:nth-child(2) {
+  grid-column: 1 / -1;
+}
+
+.adminGalleryFields textarea {
+  min-height: 82px;
+}
+
+.adminGalleryActions {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  min-width: 112px;
+}
+
+.adminGalleryActions .ghostButton {
+  width: 100%;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.adminGalleryActions .dangerButton {
+  color: #b91c1c;
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+@media (max-width: 1050px) {
+  .adminGalleryBulkPanel {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .adminGalleryBulkPanel > div {
+    grid-column: 1 / -1;
+  }
+
+  .adminGalleryEditorCard {
+    grid-template-columns: 160px minmax(0, 1fr);
+  }
+
+  .adminGalleryActions {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .adminGalleryBulkPanel,
+  .adminGallerySinglePanel,
+  .adminGalleryFields {
+    grid-template-columns: 1fr;
+  }
+
+  .adminGalleryBulkPanel > div,
+  .adminGallerySinglePanel > strong,
+  .adminGallerySinglePanel > button,
+  .adminGallerySinglePanel .adminGalleryCheck,
+  .adminGalleryFields .field:nth-child(2) {
+    grid-column: auto;
+  }
+
+  .adminGalleryEditorCard {
+    grid-template-columns: 1fr;
+  }
+
+  .adminGalleryMedia,
+  .adminGalleryMedia img {
+    min-height: 230px;
+  }
+
+  .adminGalleryActions {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+}
