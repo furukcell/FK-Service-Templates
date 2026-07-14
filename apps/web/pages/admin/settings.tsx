@@ -71,7 +71,7 @@ export default function AdminSettingsPage() {
           const defaults = defaultsFor(selectedTemplate);
           setForm({
             template: selectedTemplate,
-            layoutVariant: selectedTemplate === "salon" ? settings.layoutVariant || defaults.layoutVariant : settings.layoutVariant === "flow" ? "modern" : settings.layoutVariant || defaults.layoutVariant,
+            layoutVariant: settings.layoutVariant || defaults.layoutVariant,
             brandName: settings.brandName || defaults.brandName,
             eyebrow: settings.eyebrow || defaults.eyebrow,
             heroTitle: settings.heroTitle || defaults.heroTitle,
@@ -117,7 +117,7 @@ export default function AdminSettingsPage() {
     setForm((current) => ({
       ...defaults,
       template,
-      layoutVariant: template === "salon" ? current.layoutVariant : current.layoutVariant === "flow" ? "modern" : current.layoutVariant
+      layoutVariant: current.layoutVariant
     }));
   }
 
@@ -165,7 +165,7 @@ export default function AdminSettingsPage() {
     return <main className={getAdminShellClassName()} style={getAdminShellStyle()}><section className="adminMain"><header className="adminHeader"><h1>Giriş gerekli</h1><p>{guard.message}</p><a className="pillButton navButtonLink" href="/login">Admin Giriş</a></header></section></main>;
   }
 
-  const visibleLayoutKeys = form.template === "salon" ? layoutKeys : layoutKeys.filter((layout) => layout !== "flow");
+  const visibleLayoutKeys = layoutKeys;
 
   return (
     <main className={getAdminShellClassName()} style={getAdminShellStyle()}>
@@ -196,7 +196,7 @@ export default function AdminSettingsPage() {
           <div className="adminPropertyForm formFields">
             <label className="field"><span>Aktif sektör</span><select value={form.template} onChange={(event) => changeTemplate(event.currentTarget.value as TemplateKey)}>{visibleTemplateKeys.map((template) => <option value={template} key={template}>{getLotusAdminConfig(template, templateConfigs).sector}</option>)}</select></label>
             <label className="field"><span>Seçili arayüz</span><select value={form.layoutVariant} onChange={(event) => updateField("layoutVariant", event.currentTarget.value as LayoutVariant)}>{visibleLayoutKeys.map((layout) => <option value={layout} key={layout}>{layoutVariantLabels[layout]}</option>)}</select></label>
-            {form.template === "salon" ? <p className="adminMode">Akışkan Premium; ekran ekran kayan geçişleri ve adımlı randevu sihirbazını açar.</p> : null}
+            <p className="adminMode">Akışkan Premium; seçilen sektöre özel 5 ekranlı otomatik kayan vitrin, mobil kaydırma ve yumuşak bölüm geçişlerini açar.{form.template === "salon" ? " Salon sürümünde ayrıca adımlı randevu sistemi kullanılır." : ""}</p>
             <label className="field"><span>Firma adı</span><input value={form.brandName} onChange={(event) => updateField("brandName", event.currentTarget.value)} /></label>
             <label className="field"><span>Üst bar yazısı</span><input value={form.topBarText} onChange={(event) => updateField("topBarText", event.currentTarget.value)} /></label>
             <label className="field"><span>Küçük başlık</span><input value={form.eyebrow} onChange={(event) => updateField("eyebrow", event.currentTarget.value)} /></label>
