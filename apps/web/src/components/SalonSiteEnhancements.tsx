@@ -14,12 +14,21 @@ function normalizePhone(phone: string) {
   return phone.replace(/[^0-9]/g, "");
 }
 
-function salonWhatsappUrl(config: BusinessTemplateConfig) {
+function salonWhatsappUrl(config: BusinessTemplateConfig, subject?: string) {
   const phone = normalizePhone(config.whatsapp || config.phone);
-  const message = encodeURIComponent(`Merhaba ${config.brandName}, hizmetleriniz ve randevu seçenekleriniz hakkında bilgi almak istiyorum.`);
+  const message = encodeURIComponent(
+    subject
+      ? `Merhaba ${config.brandName}, “${subject}” kampanyası için teklif ve randevu bilgisi almak istiyorum.`
+      : `Merhaba ${config.brandName}, hizmetleriniz ve randevu seçenekleriniz hakkında bilgi almak istiyorum.`
+  );
   return phone.length >= 10
     ? `https://wa.me/${phone}?text=${message}`
     : `https://api.whatsapp.com/send?text=${message}`;
+}
+
+function salonTelephoneUrl(config: BusinessTemplateConfig) {
+  const phone = normalizePhone(config.phone);
+  return phone.length >= 10 ? `tel:+${phone}` : `tel:${config.phone}`;
 }
 
 function rememberAttribute(element: HTMLElement, attribute: string, value: string) {
@@ -50,15 +59,52 @@ export function SalonSiteEnhancements({
     let createdWhatsapp: HTMLAnchorElement | null = null;
     let scheduled = false;
     const addedNavLinks: HTMLAnchorElement[] = [];
+    const addedCampaignActions: HTMLAnchorElement[] = [];
+    const addedPhoneActions: HTMLAnchorElement[] = [];
     const touchedNavLinks = new Set<HTMLAnchorElement>();
     const touchedIds = new Set<HTMLElement>();
     const touchedActions = new Set<HTMLAnchorElement>();
     const touchedWhatsapp = new Set<HTMLAnchorElement>();
+    const touchedQuickCards = new Set<HTMLElement>();
 
     function assignSectionId(element: HTMLElement | null, id: string) {
       if (!element) return;
       rememberAttribute(element, "id", id);
       touchedIds.add(element);
+    }
+
+    function enhanceCampaignCards(shell: HTMLElement) {
+      shell.querySelectorAll<HTMLElement>("#campaigns .campaignCard").forEach((card) => {
+        if (card.querySelector(".salonCampaignWhatsapp")) return;
+        const title = card.querySelector<HTMLElement>("h3")?.textContent?.trim() || "Kampanya";
+        const action = document.createElement("a");
+        action.className = "salonCampaignWhatsapp";
+        action.href = salonWhatsappUrl(config, title);
+        action.target = "_blank";
+        action.rel = "noreferrer";
+        action.setAttribute("aria-label", `${title} için WhatsApp’tan teklif al`);
+        action.innerHTML = '<span>Teklif Al</span><strong aria-hidden="true">→</strong>';
+        card.appendChild(action);
+        addedCampaignActions.push(action);
+      });
+    }
+
+    function enhanceQuickContact(shell: HTMLElement) {
+      const quickCard = Array.from(shell.querySelectorAll<HTMLElement>("#about .staffCard"))
+        .find((card) => card.querySelector<HTMLElement>("h3")?.textContent?.trim() === "Hızlı İletişim");
+      if (!quickCard) return;
+
+      quickCard.classList.add("salonQuickContactCard");
+      touchedQuickCards.add(quickCard);
+      if (quickCard.querySelector(".salonPhoneCall")) return;
+
+      const phoneAction = document.createElement("a");
+      phoneAction.className = "salonPhoneCall";
+      phoneAction.href = salonTelephoneUrl(config);
+      phoneAction.setAttribute("aria-label", `${config.phone} numarasını ara`);
+      phoneAction.innerHTML = `<span>Telefon</span><strong>${config.phone}</strong><i aria-hidden="true">Ara</i>`;
+      quickCard.appendChild(phoneAction);
+      addedPhoneActions.push(phoneAction);
     }
 
     function applyEnhancements() {
@@ -97,6 +143,9 @@ export function SalonSiteEnhancements({
         touchedActions.add(action);
       });
 
+      enhanceCampaignCards(shell);
+      enhanceQuickContact(shell);
+
       const href = salonWhatsappUrl(config);
       let whatsapp = shell.querySelector<HTMLAnchorElement>(".floatingWhatsappButton");
       if (!whatsapp) {
@@ -132,6 +181,9 @@ export function SalonSiteEnhancements({
       observer.disconnect();
       document.querySelector<HTMLElement>(".pageShell")?.classList.remove("salonEnhancedPage");
       addedNavLinks.forEach((link) => link.remove());
+      addedCampaignActions.forEach((action) => action.remove());
+      addedPhoneActions.forEach((action) => action.remove());
+      touchedQuickCards.forEach((card) => card.classList.remove("salonQuickContactCard"));
       touchedNavLinks.forEach((link) => {
         restoreAttribute(link, "href");
         if (link.dataset.salonOriginalText !== undefined) {
