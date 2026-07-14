@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import type { FocusEvent } from "react";
 import type { BusinessTemplateConfig } from "@fk-templates/shared";
 
 const AUTO_PLAY_MS = 10000;
@@ -102,7 +103,7 @@ export function SalonHeroSlider({ config }: { config: BusinessTemplateConfig }) 
     setActiveIndex((index + slides.length) % slides.length);
   }
 
-  function handleBlur(event: React.FocusEvent<HTMLElement>) {
+  function handleBlur(event: FocusEvent<HTMLElement>) {
     if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsPaused(false);
   }
 
