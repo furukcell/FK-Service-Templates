@@ -1,3 +1,4 @@
+import { FlowTemplateEnhancements } from "../src/components/FlowTemplateEnhancements";
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
 import { SeoHead } from "../src/components/SeoHead";
 import { SiteSetupGuard } from "../src/components/SiteSetupGuard";
@@ -32,6 +33,7 @@ export default function SalonTemplatePage() {
       <SalonGalleryMount active config={config} />
       <SalonBookingMount config={config} immersive={isImmersive} />
       <ImmersiveScrollMount active={isImmersive} />
+      <FlowTemplateEnhancements active={isImmersive} config={config} />
       <SalonSiteEnhancements active config={config} />
     </>
   );
