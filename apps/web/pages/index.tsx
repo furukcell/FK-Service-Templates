@@ -3,6 +3,7 @@ import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { SalonFlowStyleButton } from "../src/components/SalonFlowStyleButton";
+import { SalonSiteEnhancements } from "../src/components/SalonSiteEnhancements";
 import { SeoHead } from "../src/components/SeoHead";
 import { SiteSetupGuard } from "../src/components/SiteSetupGuard";
 import { TemplateLanding } from "../src/components/TemplateLanding";
@@ -15,7 +16,8 @@ export default function HomePage() {
   const [activeLayout, setActiveLayout] = useState<LayoutVariant>("modern");
   const baseConfig = templateConfigs[activeTemplate];
   const { config, requiresSetup } = useManagedTemplateConfig(baseConfig);
-  const isSalonFlow = activeTemplate === "salon" && activeLayout === "flow";
+  const isSalon = activeTemplate === "salon";
+  const isSalonFlow = isSalon && activeLayout === "flow";
 
   function changeTemplate(template: TemplateKey) {
     setActiveTemplate(template);
@@ -39,6 +41,7 @@ export default function HomePage() {
       <SalonFlowStyleButton activeTemplate={activeTemplate} activeLayout={activeLayout} onSelect={setActiveLayout} />
       {isSalonFlow ? <SalonBookingMount config={config} immersive /> : null}
       <ImmersiveScrollMount active={isSalonFlow} />
+      <SalonSiteEnhancements active={isSalon} config={config} />
     </>
   );
 }
