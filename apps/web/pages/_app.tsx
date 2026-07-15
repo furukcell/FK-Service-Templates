@@ -29,8 +29,6 @@ import "../src/styles/flow-mobile-refine.css";
 import "../src/styles/flow-mobile-deck.css";
 // Keep the final mobile flow overrides last so they win the cascade.
 import "../src/styles/flow-mobile-final.css";
-// The hybrid salon header and hero intentionally override the legacy flow chrome.
-import "../src/styles/salon-hybrid-hero.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
