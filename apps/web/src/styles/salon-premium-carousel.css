@@ -1,0 +1,97 @@
+.salonPremiumStage {
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.salonPremiumStage.isDragging {
+  cursor: grabbing;
+}
+
+.salonPremiumViewport {
+  position: relative;
+  width: 100%;
+  min-height: 650px;
+  overflow: hidden;
+  border-radius: inherit;
+  touch-action: pan-y;
+}
+
+.salonPremiumTrack {
+  display: flex;
+  width: 100%;
+  min-height: 650px;
+  will-change: transform;
+  transition: transform 0.76s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.salonPremiumSlide {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 100%;
+  min-height: 650px;
+  overflow: hidden;
+}
+
+.salonPremiumSlide .salonPremiumCopy {
+  opacity: 0.46;
+  transform: translate3d(0, 12px, 0);
+  animation: none;
+  transition: opacity 0.42s ease, transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.salonPremiumSlide .salonPremiumPortraitStack {
+  opacity: 0.72;
+  transform: scale(0.982);
+  transition: opacity 0.44s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.salonPremiumSlide .salonPremiumBenefits {
+  opacity: 0.64;
+  transform: translate3d(0, 8px, 0);
+  transition: opacity 0.38s ease, transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.salonPremiumSlide.isActive .salonPremiumCopy,
+.salonPremiumSlide.isActive .salonPremiumPortraitStack,
+.salonPremiumSlide.isActive .salonPremiumBenefits {
+  opacity: 1;
+  transform: none;
+}
+
+.salonPremiumStage.isDragging .salonPremiumTrack {
+  transition: none;
+}
+
+@media (max-width: 980px) {
+  .salonPremiumViewport,
+  .salonPremiumTrack,
+  .salonPremiumSlide {
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 760px) {
+  .salonPremiumViewport,
+  .salonPremiumTrack,
+  .salonPremiumSlide {
+    min-height: 620px;
+  }
+}
+
+@media (max-width: 430px) {
+  .salonPremiumViewport,
+  .salonPremiumTrack,
+  .salonPremiumSlide {
+    min-height: 590px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .salonPremiumTrack,
+  .salonPremiumSlide .salonPremiumCopy,
+  .salonPremiumSlide .salonPremiumPortraitStack,
+  .salonPremiumSlide .salonPremiumBenefits {
+    transition: none;
+  }
+}
