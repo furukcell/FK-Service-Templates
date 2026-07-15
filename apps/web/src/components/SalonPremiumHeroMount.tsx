@@ -1,6 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { PointerEvent, TransitionEvent } from "react";
 import { createPortal } from "react-dom";
 import type { BusinessTemplateConfig } from "@fk-templates/shared";
+
+const AUTO_PLAY_MS = 10000;
+const SWIPE_THRESHOLD = 48;
 
 type PremiumSlide = {
   eyebrow: string;
@@ -17,6 +21,12 @@ type IconName = "leaf" | "tag" | "calendar" | "gallery" | "user" | "phone" | "di
 type DetachedNode = {
   node: HTMLElement;
   marker: Comment;
+};
+
+type PointerStart = {
+  id: number;
+  x: number;
+  y: number;
 };
 
 const NAV_ITEMS: Array<{ label: string; href: string; icon: IconName }> = [
@@ -110,17 +120,101 @@ function buildSlides(config: BusinessTemplateConfig): PremiumSlide[] {
 
 function SalonPremiumHero({ config }: { config: BusinessTemplateConfig }) {
   const slides = useMemo(() => buildSlides(config), [config]);
+  const loopedSlides = useMemo(() => [slides[slides.length - 1], ...slides, slides[0]], [slides]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [trackIndex, setTrackIndex] = useState(1);
   const [activeNav, setActiveNav] = useState("#request-form");
-  const activeSlide = slides[activeIndex];
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
+  const [dragOffset, setDragOffset] = useState(0);
+  const pointerStart = useRef<PointerStart | null>(null);
   const managedImage = config.galleryItems?.find((item) => Boolean(item.imageUrl))?.imageUrl;
   const imageUrl = managedImage || FALLBACK_IMAGE;
 
+  const moveBy = useCallback((direction: -1 | 1) => {
+    if (isAnimating) return;
+    setTransitionEnabled(true);
+    setIsAnimating(true);
+    setTrackIndex((current) => current + direction);
+    setActiveIndex((current) => (current + direction + slides.length) % slides.length);
+  }, [isAnimating, slides.length]);
+
   useEffect(() => {
-    if (typeof window === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
-    const timer = window.setTimeout(() => setActiveIndex((current) => (current + 1) % slides.length), 8500);
+    if (typeof window === "undefined" || isAnimating || isDragging) return undefined;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    const timer = window.setTimeout(() => moveBy(1), AUTO_PLAY_MS);
     return () => window.clearTimeout(timer);
-  }, [activeIndex, slides.length]);
+  }, [activeIndex, isAnimating, isDragging, moveBy]);
+
+  useEffect(() => {
+    setActiveIndex(0);
+    setTrackIndex(1);
+    setIsAnimating(false);
+    setIsDragging(false);
+    setTransitionEnabled(true);
+    setDragOffset(0);
+    pointerStart.current = null;
+  }, [config.brandName]);
+
+  function showSlide(index: number) {
+    if (isAnimating || isDragging || index === activeIndex) return;
+    setTransitionEnabled(true);
+    setIsAnimating(true);
+    setActiveIndex(index);
+    setTrackIndex(index + 1);
+  }
+
+  function handleTransitionEnd(event: TransitionEvent<HTMLDivElement>) {
+    if (event.target !== event.currentTarget) return;
+    if (trackIndex === 0) {
+      setTransitionEnabled(false);
+      setTrackIndex(slides.length);
+    } else if (trackIndex === slides.length + 1) {
+      setTransitionEnabled(false);
+      setTrackIndex(1);
+    }
+    setIsAnimating(false);
+  }
+
+  function handlePointerDown(event: PointerEvent<HTMLElement>) {
+    if (isAnimating || (event.pointerType === "mouse" && event.button !== 0)) return;
+    if ((event.target as HTMLElement).closest("a, button")) return;
+    pointerStart.current = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    setTransitionEnabled(false);
+    setIsDragging(true);
+    setDragOffset(0);
+  }
+
+  function handlePointerMove(event: PointerEvent<HTMLElement>) {
+    const start = pointerStart.current;
+    if (!start || start.id !== event.pointerId) return;
+    const distanceX = event.clientX - start.x;
+    const distanceY = event.clientY - start.y;
+    if (Math.abs(distanceY) > Math.abs(distanceX) && Math.abs(distanceY) > 12) return;
+    const limit = event.currentTarget.clientWidth * 0.78;
+    setDragOffset(Math.max(-limit, Math.min(limit, distanceX)));
+  }
+
+  function finishPointerGesture(event: PointerEvent<HTMLElement>, cancelled = false) {
+    const start = pointerStart.current;
+    if (!start || start.id !== event.pointerId) return;
+    const distanceX = event.clientX - start.x;
+    const distanceY = event.clientY - start.y;
+    pointerStart.current = null;
+
+    if (event.currentTarget.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture?.(event.pointerId);
+    }
+
+    setIsDragging(false);
+    setTransitionEnabled(true);
+    setDragOffset(0);
+
+    const isHorizontalSwipe = Math.abs(distanceX) >= SWIPE_THRESHOLD && Math.abs(distanceX) > Math.abs(distanceY) * 1.1;
+    if (!cancelled && isHorizontalSwipe) moveBy(distanceX > 0 ? -1 : 1);
+  }
 
   return (
     <div className="salonPremiumShell">
@@ -146,41 +240,70 @@ function SalonPremiumHero({ config }: { config: BusinessTemplateConfig }) {
         </nav>
       </header>
 
-      <div className={`salonPremiumStage salonPremiumStage-${activeIndex + 1}`}>
-        <div className="salonPremiumCopy" key={activeSlide.title}>
-          <span className="salonPremiumEyebrow">{activeSlide.eyebrow}</span>
-          <h1>{activeSlide.title}</h1>
-          <span className="salonPremiumTitleOrnament" aria-hidden="true"><i />✦</span>
-          <p>{activeSlide.description}</p>
-          <div className="salonPremiumActions">
-            <a className="salonPremiumPrimary" href={activeSlide.primaryHref}>{activeSlide.primaryLabel}<span aria-hidden="true">→</span></a>
-            <a
-              className="salonPremiumSecondary"
-              href={activeSlide.secondaryHref}
-              rel={activeSlide.secondaryHref.startsWith("https://") ? "noreferrer" : undefined}
-              target={activeSlide.secondaryHref.startsWith("https://") ? "_blank" : undefined}
-            >
-              {activeSlide.secondaryLabel}<span aria-hidden="true">→</span>
-            </a>
+      <div
+        className={`salonPremiumStage ${isDragging ? "isDragging" : ""}`}
+        onPointerCancel={(event) => finishPointerGesture(event, true)}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={(event) => finishPointerGesture(event)}
+      >
+        <div className="salonPremiumViewport">
+          <div
+            className="salonPremiumTrack"
+            onTransitionEnd={handleTransitionEnd}
+            style={{
+              transform: `translate3d(calc(-${trackIndex * 100}% + ${dragOffset}px), 0, 0)`,
+              transition: transitionEnabled && !isDragging ? undefined : "none"
+            }}
+          >
+            {loopedSlides.map((slide, position) => {
+              const isCurrent = position === trackIndex;
+              return (
+                <article
+                  aria-hidden={!isCurrent}
+                  className={`salonPremiumSlide ${isCurrent ? "isActive" : ""}`}
+                  key={`${position}-${slide.title}`}
+                >
+                  <div className="salonPremiumCopy">
+                    <span className="salonPremiumEyebrow">{slide.eyebrow}</span>
+                    <h1>{slide.title}</h1>
+                    <span className="salonPremiumTitleOrnament" aria-hidden="true"><i />✦</span>
+                    <p>{slide.description}</p>
+                    <div className="salonPremiumActions">
+                      <a className="salonPremiumPrimary" href={slide.primaryHref} tabIndex={isCurrent ? 0 : -1}>{slide.primaryLabel}<span aria-hidden="true">→</span></a>
+                      <a
+                        className="salonPremiumSecondary"
+                        href={slide.secondaryHref}
+                        rel={slide.secondaryHref.startsWith("https://") ? "noreferrer" : undefined}
+                        target={slide.secondaryHref.startsWith("https://") ? "_blank" : undefined}
+                        tabIndex={isCurrent ? 0 : -1}
+                      >
+                        {slide.secondaryLabel}<span aria-hidden="true">→</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="salonPremiumPortraitStack" aria-hidden="true">
+                    <span className="salonPremiumBackCard salonPremiumBackCardOne" />
+                    <span className="salonPremiumBackCard salonPremiumBackCardTwo" />
+                    <div className="salonPremiumPortrait" style={{ backgroundImage: `url(${imageUrl})` }} />
+                    <span className="salonPremiumPetal salonPremiumPetalOne" />
+                    <span className="salonPremiumPetal salonPremiumPetalTwo" />
+                    <span className="salonPremiumPetal salonPremiumPetalThree" />
+                  </div>
+
+                  <div className="salonPremiumBenefits" aria-label="Salonun öne çıkan özellikleri">
+                    {BENEFITS.map((benefit) => (
+                      <div key={benefit.title}>
+                        <span className="salonPremiumBenefitIcon"><Icon name={benefit.icon} /></span>
+                        <span><strong>{benefit.title}</strong><small>{benefit.subtitle}</small></span>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              );
+            })}
           </div>
-        </div>
-
-        <div className="salonPremiumPortraitStack" aria-hidden="true">
-          <span className="salonPremiumBackCard salonPremiumBackCardOne" />
-          <span className="salonPremiumBackCard salonPremiumBackCardTwo" />
-          <div className="salonPremiumPortrait" style={{ backgroundImage: `url(${imageUrl})` }} />
-          <span className="salonPremiumPetal salonPremiumPetalOne" />
-          <span className="salonPremiumPetal salonPremiumPetalTwo" />
-          <span className="salonPremiumPetal salonPremiumPetalThree" />
-        </div>
-
-        <div className="salonPremiumBenefits" aria-label="Salonun öne çıkan özellikleri">
-          {BENEFITS.map((benefit) => (
-            <div key={benefit.title}>
-              <span className="salonPremiumBenefitIcon"><Icon name={benefit.icon} /></span>
-              <span><strong>{benefit.title}</strong><small>{benefit.subtitle}</small></span>
-            </div>
-          ))}
         </div>
       </div>
 
@@ -191,7 +314,7 @@ function SalonPremiumHero({ config }: { config: BusinessTemplateConfig }) {
             aria-current={activeIndex === index ? "true" : undefined}
             className={activeIndex === index ? "isActive" : ""}
             key={slide.title}
-            onClick={() => setActiveIndex(index)}
+            onClick={() => showSlide(index)}
             type="button"
           />
         ))}
