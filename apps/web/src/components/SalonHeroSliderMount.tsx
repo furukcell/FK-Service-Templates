@@ -65,7 +65,9 @@ export function SalonHeroSliderMount({
         directChild(currentHost, ".heroDescription"),
         directChild(currentHost, "h1"),
         directChild(currentHost, "p"),
-        directChild(currentHost, ".heroActions")
+        directChild(currentHost, ".heroActions"),
+        directChild(currentHost, ".variantControlDeck"),
+        directChild(currentHost, ".statsGrid")
       ].filter((element): element is HTMLElement => Boolean(element));
 
       Array.from(new Set(candidates)).forEach((element) => {
