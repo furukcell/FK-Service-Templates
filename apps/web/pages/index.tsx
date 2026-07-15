@@ -6,6 +6,7 @@ import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { SalonFlowStyleButton } from "../src/components/SalonFlowStyleButton";
 import { SalonGalleryMount } from "../src/components/SalonGalleryMount";
 import { SalonHeroSliderMount } from "../src/components/SalonHeroSliderMount";
+import { SalonPremiumHeroMount } from "../src/components/SalonPremiumHeroMount";
 import { SalonSiteEnhancements } from "../src/components/SalonSiteEnhancements";
 import { SeoHead } from "../src/components/SeoHead";
 import { SiteSetupGuard } from "../src/components/SiteSetupGuard";
@@ -38,7 +39,8 @@ export default function HomePage() {
         showLayoutSwitch
       />
       <SalonFlowStyleButton activeTemplate={activeTemplate} activeLayout={activeLayout} onSelect={setActiveLayout} />
-      <SalonHeroSliderMount active={isSalon || isFlow} config={config} />
+      <SalonPremiumHeroMount active={isSalonFlow} config={config} />
+      <SalonHeroSliderMount active={isSalon && !isFlow} config={config} />
       <SalonGalleryMount active={isSalon} config={config} />
       {isSalonFlow ? <SalonBookingMount config={config} immersive /> : null}
       <ImmersiveScrollMount active={isFlow} />
