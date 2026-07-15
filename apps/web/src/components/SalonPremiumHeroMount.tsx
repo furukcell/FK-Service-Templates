@@ -86,7 +86,7 @@ function buildSlides(config: BusinessTemplateConfig): PremiumSlide[] {
       primaryHref: "#request-form",
       secondaryLabel: "İletişime Geç",
       secondaryHref: "#contact",
-      imageUrl: "/salon/slide-1.svg"
+      imageUrl: "/salon/slide-1.png"
     },
     {
       eyebrow: "Size özel bakım",
@@ -96,7 +96,7 @@ function buildSlides(config: BusinessTemplateConfig): PremiumSlide[] {
       primaryHref: "#services",
       secondaryLabel: "Kampanyaları Gör",
       secondaryHref: "#campaigns",
-      imageUrl: "/salon/slide-2.svg"
+      imageUrl: "/salon/slide-2.png"
     },
     {
       eyebrow: "Uzman dokunuş",
@@ -106,7 +106,7 @@ function buildSlides(config: BusinessTemplateConfig): PremiumSlide[] {
       primaryHref: "#about",
       secondaryLabel: "Galeriyi Aç",
       secondaryHref: "#gallery",
-      imageUrl: "/salon/slide-3.svg"
+      imageUrl: "/salon/slide-3.png"
     },
     {
       eyebrow: "Kolay randevu",
@@ -116,7 +116,7 @@ function buildSlides(config: BusinessTemplateConfig): PremiumSlide[] {
       primaryHref: "#request-form",
       secondaryLabel: "WhatsApp’tan Sor",
       secondaryHref: whatsappUrl(config),
-      imageUrl: "/salon/slide-4.svg"
+      imageUrl: "/salon/slide-4.png"
     }
   ];
 }
