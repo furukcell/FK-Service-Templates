@@ -32,6 +32,10 @@ import "../src/styles/flow-mobile-final.css";
 // Approved salon header and hero use unique classes and intentionally load last.
 import "../src/styles/salon-premium-approved.css";
 import "../src/styles/salon-premium-carousel.css";
+import "../src/styles/salon-premium-art-1.css";
+import "../src/styles/salon-premium-art-2.css";
+import "../src/styles/salon-premium-art-3.css";
+import "../src/styles/salon-premium-art-4.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
