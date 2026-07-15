@@ -14,6 +14,7 @@ type PremiumSlide = {
   primaryHref: string;
   secondaryLabel: string;
   secondaryHref: string;
+  imageUrl: string;
 };
 
 type IconName = "leaf" | "tag" | "calendar" | "gallery" | "user" | "phone" | "diamond" | "team" | "whatsapp";
@@ -44,8 +45,6 @@ const BENEFITS: Array<{ title: string; subtitle: string; icon: IconName }> = [
   { title: "Uzman", subtitle: "ekip", icon: "team" },
   { title: "WhatsApp", subtitle: "destek", icon: "whatsapp" }
 ];
-
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=1200&q=88";
 
 function Icon({ name }: { name: IconName }) {
   const common = {
@@ -86,7 +85,8 @@ function buildSlides(config: BusinessTemplateConfig): PremiumSlide[] {
       primaryLabel: "Randevu Oluştur",
       primaryHref: "#request-form",
       secondaryLabel: "İletişime Geç",
-      secondaryHref: "#contact"
+      secondaryHref: "#contact",
+      imageUrl: "/salon/slide-1.svg"
     },
     {
       eyebrow: "Size özel bakım",
@@ -95,7 +95,8 @@ function buildSlides(config: BusinessTemplateConfig): PremiumSlide[] {
       primaryLabel: "Hizmetleri İncele",
       primaryHref: "#services",
       secondaryLabel: "Kampanyaları Gör",
-      secondaryHref: "#campaigns"
+      secondaryHref: "#campaigns",
+      imageUrl: "/salon/slide-2.svg"
     },
     {
       eyebrow: "Uzman dokunuş",
@@ -104,7 +105,8 @@ function buildSlides(config: BusinessTemplateConfig): PremiumSlide[] {
       primaryLabel: "Ekibimizi Tanıyın",
       primaryHref: "#about",
       secondaryLabel: "Galeriyi Aç",
-      secondaryHref: "#gallery"
+      secondaryHref: "#gallery",
+      imageUrl: "/salon/slide-3.svg"
     },
     {
       eyebrow: "Kolay randevu",
@@ -113,7 +115,8 @@ function buildSlides(config: BusinessTemplateConfig): PremiumSlide[] {
       primaryLabel: "Hemen Randevu Al",
       primaryHref: "#request-form",
       secondaryLabel: "WhatsApp’tan Sor",
-      secondaryHref: whatsappUrl(config)
+      secondaryHref: whatsappUrl(config),
+      imageUrl: "/salon/slide-4.svg"
     }
   ];
 }
@@ -129,8 +132,6 @@ function SalonPremiumHero({ config }: { config: BusinessTemplateConfig }) {
   const [transitionEnabled, setTransitionEnabled] = useState(true);
   const [dragOffset, setDragOffset] = useState(0);
   const pointerStart = useRef<PointerStart | null>(null);
-  const managedImage = config.galleryItems?.find((item) => Boolean(item.imageUrl))?.imageUrl;
-  const imageUrl = managedImage || FALLBACK_IMAGE;
 
   const moveBy = useCallback((direction: -1 | 1) => {
     if (isAnimating) return;
@@ -286,7 +287,7 @@ function SalonPremiumHero({ config }: { config: BusinessTemplateConfig }) {
                   <div className="salonPremiumPortraitStack" aria-hidden="true">
                     <span className="salonPremiumBackCard salonPremiumBackCardOne" />
                     <span className="salonPremiumBackCard salonPremiumBackCardTwo" />
-                    <div className="salonPremiumPortrait" style={{ backgroundImage: `url(${imageUrl})` }} />
+                    <div className="salonPremiumPortrait" style={{ backgroundImage: `url(${slide.imageUrl})` }} />
                     <span className="salonPremiumPetal salonPremiumPetalOne" />
                     <span className="salonPremiumPetal salonPremiumPetalTwo" />
                     <span className="salonPremiumPetal salonPremiumPetalThree" />
