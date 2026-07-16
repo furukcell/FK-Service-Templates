@@ -1,6 +1,6 @@
 import { FlowTemplateEnhancements } from "../src/components/FlowTemplateEnhancements";
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
-import { SalonHeroSliderMount } from "../src/components/SalonHeroSliderMount";
+import { KindergartenPremiumHeroMount } from "../src/components/KindergartenPremiumHeroMount";
 import { SeoHead } from "../src/components/SeoHead";
 import { SiteSetupGuard } from "../src/components/SiteSetupGuard";
 import { TemplateLanding } from "../src/components/TemplateLanding";
@@ -25,7 +25,7 @@ export default function KindergartenTemplatePage() {
         showTemplateSwitch={false}
         showLayoutSwitch={false}
       />
-      <SalonHeroSliderMount active={isFlow} config={config} />
+      <KindergartenPremiumHeroMount active={isFlow} config={config} />
       <ImmersiveScrollMount active={isFlow} />
       <FlowTemplateEnhancements active={isFlow} config={config} />
     </>
