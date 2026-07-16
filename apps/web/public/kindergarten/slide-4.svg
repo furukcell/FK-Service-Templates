@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-labelledby="title desc">
+  <title id="title">Kolay kayıt ve veli iletişimi</title>
+  <desc id="desc">Telefonda takvim, mesajlaşma ve kreş binası bulunan pastel illüstrasyon.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8f7ff"/><stop offset=".52" stop-color="#f3efff"/><stop offset="1" stop-color="#fff0cf"/></linearGradient>
+    <linearGradient id="phone" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#394782"/><stop offset="1" stop-color="#7667e8"/></linearGradient>
+    <linearGradient id="school" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd76d"/><stop offset="1" stop-color="#ffae68"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="24" stdDeviation="27" flood-color="#26386e" flood-opacity=".15"/></filter>
+  </defs>
+  <rect width="1200" height="1500" rx="90" fill="url(#bg)"/>
+  <circle cx="1020" cy="185" r="170" fill="#fff" opacity=".45"/>
+  <circle cx="155" cy="1270" r="220" fill="#7fd8bd" opacity=".2"/>
+  <rect x="115" y="105" width="970" height="1190" rx="60" fill="#fffdf9" opacity=".84" filter="url(#shadow)"/>
+  <g transform="translate(150 170)" filter="url(#shadow)">
+    <rect x="0" y="0" width="470" height="950" rx="72" fill="url(#phone)"/>
+    <rect x="28" y="30" width="414" height="890" rx="55" fill="#f9fbff"/>
+    <rect x="170" y="48" width="130" height="18" rx="9" fill="#4a568c" opacity=".45"/>
+    <circle cx="235" cy="875" r="24" fill="#dfe5ff"/>
+    <rect x="70" y="110" width="330" height="210" rx="34" fill="#e5f8f2"/>
+    <circle cx="128" cy="171" r="39" fill="#55c8bc"/>
+    <path d="m111 171 13 13 27-31" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="185" y="143" width="150" height="18" rx="9" fill="#4f5a8d" opacity=".65"/>
+    <rect x="185" y="180" width="108" height="14" rx="7" fill="#55c8bc" opacity=".75"/>
+    <rect x="185" y="211" width="130" height="14" rx="7" fill="#8c96bd" opacity=".42"/>
+    <g transform="translate(70 360)">
+      <rect width="330" height="250" rx="34" fill="#fff1d8"/>
+      <rect x="36" y="38" width="258" height="42" rx="15" fill="#ffba63" opacity=".35"/>
+      <circle cx="67" cy="59" r="13" fill="#ffb45d"/>
+      <rect x="94" y="51" width="135" height="15" rx="8" fill="#6d6599" opacity=".55"/>
+      <g fill="#fff">
+        <rect x="36" y="104" width="70" height="52" rx="15"/><rect x="130" y="104" width="70" height="52" rx="15"/><rect x="224" y="104" width="70" height="52" rx="15"/>
+        <rect x="36" y="174" width="70" height="52" rx="15"/><rect x="130" y="174" width="70" height="52" rx="15"/><rect x="224" y="174" width="70" height="52" rx="15"/>
+      </g>
+      <circle cx="165" cy="200" r="18" fill="#7667e8"/>
+    </g>
+    <g transform="translate(70 650)">
+      <rect width="250" height="80" rx="28" fill="#7667e8"/>
+      <rect x="32" y="26" width="150" height="16" rx="8" fill="#fff" opacity=".86"/>
+      <rect x="32" y="51" width="100" height="12" rx="6" fill="#fff" opacity=".55"/>
+      <path d="m222 40-22-17v34z" fill="#fff" opacity=".9"/>
+      <rect x="70" y="100" width="270" height="90" rx="28" fill="#e4f7f0"/>
+      <circle cx="108" cy="145" r="22" fill="#55c8bc"/>
+      <rect x="145" y="130" width="155" height="15" rx="8" fill="#4d5b8c" opacity=".55"/>
+      <rect x="145" y="158" width="110" height="12" rx="6" fill="#55c8bc" opacity=".7"/>
+    </g>
+  </g>
+  <g transform="translate(640 180)">
+    <path d="M40 420 240 260l200 160v330H40z" fill="url(#school)" filter="url(#shadow)"/>
+    <path d="M10 425 240 225l230 200" fill="none" stroke="#7667e8" stroke-width="38" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="185" y="520" width="110" height="230" rx="28" fill="#7667e8"/>
+    <rect x="85" y="490" width="70" height="90" rx="18" fill="#e7f7ff"/>
+    <rect x="325" y="490" width="70" height="90" rx="18" fill="#e7f7ff"/>
+    <path d="M240 225v-92" stroke="#7667e8" stroke-width="28" stroke-linecap="round"/>
+    <path d="m240 135 115 45-115 45z" fill="#55c8bc"/>
+    <circle cx="240" cy="420" r="56" fill="#fff" opacity=".9"/>
+    <path d="M212 421h56M240 393v56" stroke="#ffb35e" stroke-width="18" stroke-linecap="round"/>
+    <g transform="translate(15 770)">
+      <ellipse cx="225" cy="145" rx="225" ry="92" fill="#d6e6ff" opacity=".8"/>
+      <rect x="76" y="15" width="38" height="150" rx="19" fill="#9c754e"/>
+      <ellipse cx="95" cy="20" rx="82" ry="52" fill="#5cc28f"/>
+      <ellipse cx="48" cy="-25" rx="66" ry="38" fill="#76d3a1" transform="rotate(-28 48 -25)"/>
+      <ellipse cx="145" cy="-35" rx="66" ry="38" fill="#4fb77e" transform="rotate(28 145 -35)"/>
+      <rect x="340" y="45" width="36" height="120" rx="18" fill="#9c754e"/>
+      <ellipse cx="358" cy="48" rx="70" ry="44" fill="#65c996"/>
+      <ellipse cx="315" cy="10" rx="55" ry="32" fill="#81d7aa" transform="rotate(-25 315 10)"/>
+      <ellipse cx="400" cy="5" rx="55" ry="32" fill="#55bc85" transform="rotate(25 400 5)"/>
+    </g>
+  </g>
+  <g transform="translate(660 985)" filter="url(#shadow)">
+    <rect width="340" height="120" rx="36" fill="#fff"/>
+    <circle cx="62" cy="60" r="34" fill="#ff8fa3"/>
+    <path d="M47 62c9-10 22-10 31 0M48 51h.01M76 51h.01" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+    <rect x="118" y="37" width="155" height="16" rx="8" fill="#56618f" opacity=".58"/>
+    <rect x="118" y="70" width="112" height="13" rx="7" fill="#55c8bc" opacity=".72"/>
+    <path d="m304 59-20-16v32z" fill="#7667e8"/>
+  </g>
+  <g transform="translate(730 1180)">
+    <circle cx="60" cy="60" r="52" fill="#ffd45c"/>
+    <path d="m39 61 14 14 30-34" fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="190" cy="60" r="52" fill="#55c8bc"/>
+    <path d="M166 62h48M190 38v48" stroke="#fff" stroke-width="13" stroke-linecap="round"/>
+  </g>
+</svg>
