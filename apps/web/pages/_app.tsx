@@ -29,9 +29,10 @@ import "../src/styles/flow-mobile-refine.css";
 import "../src/styles/flow-mobile-deck.css";
 // Keep the final mobile flow overrides last so they win the cascade.
 import "../src/styles/flow-mobile-final.css";
-// Approved salon header and hero use unique classes and intentionally load last.
+// Approved premium headers and heroes intentionally load last.
 import "../src/styles/salon-premium-approved.css";
 import "../src/styles/salon-premium-carousel.css";
+import "../src/styles/kindergarten-premium.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
