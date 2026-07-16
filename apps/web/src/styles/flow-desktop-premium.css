@@ -117,6 +117,58 @@
   .kindergartenPremiumHeroMount .salonPremiumCopy h1 {
     font-size: clamp(46px, 4.15vw, 68px);
   }
+
+  /* Match every lower Akışkan Premium section to the desktop hero width. */
+  .flowTemplatePage.immersiveFlowPage > .section:not(.salonWizardSection) {
+    display: block;
+    width: min(1480px, calc(100% - 48px));
+    min-height: 0 !important;
+    margin: 30px auto 42px;
+    padding: clamp(44px, 4vw, 64px);
+    border-radius: 38px;
+    scroll-snap-align: start;
+  }
+
+  .flowTemplatePage.immersiveFlowPage > .section:not(.salonWizardSection) .sectionHead {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+    align-items: end;
+    gap: clamp(30px, 4.5vw, 76px);
+    max-width: none;
+    margin-bottom: 34px;
+  }
+
+  .flowTemplatePage.immersiveFlowPage > .section:not(.salonWizardSection) .sectionHead h2 {
+    max-width: 650px;
+    font-size: clamp(42px, 4.2vw, 64px);
+    line-height: 0.98;
+  }
+
+  .flowTemplatePage.immersiveFlowPage > .section:not(.salonWizardSection) .sectionHead p {
+    max-width: 610px;
+    justify-self: end;
+    font-size: clamp(15px, 1.05vw, 17px);
+    line-height: 1.65;
+  }
+
+  .flowTemplatePage.immersiveFlowPage > .section:not(.salonWizardSection) .cardGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+
+  .flowTemplatePage.immersiveFlowPage > .section:not(.salonWizardSection) .serviceCard,
+  .flowTemplatePage.immersiveFlowPage > .section:not(.salonWizardSection) .staffCard {
+    min-height: 250px;
+  }
+
+  .flowTemplatePage.immersiveFlowPage > .section:not(.salonWizardSection) .visualGrid,
+  .flowTemplatePage.immersiveFlowPage > .section:not(.salonWizardSection) .formLayout {
+    gap: 22px;
+  }
+
+  .flowTemplatePage.immersiveFlowPage .footer {
+    width: min(1480px, calc(100% - 48px));
+  }
 }
 
 /* Wide desktop: turn the tall mobile-inspired masthead into a true web header. */
@@ -185,7 +237,8 @@
 
 @media (min-width: 1500px) {
   .salonPremiumHeroMount,
-  .salonPremiumHeroMount.immersiveFlowSection {
+  .salonPremiumHeroMount.immersiveFlowSection,
+  .flowTemplatePage.immersiveFlowPage > .section:not(.salonWizardSection) {
     width: min(1540px, calc(100% - 64px));
   }
 
@@ -196,5 +249,9 @@
   .salonPremiumPortraitStack {
     right: 30px;
     width: 52%;
+  }
+
+  .flowTemplatePage.immersiveFlowPage .footer {
+    width: min(1540px, calc(100% - 64px));
   }
 }
