@@ -33,6 +33,8 @@ import "../src/styles/flow-mobile-final.css";
 import "../src/styles/salon-premium-approved.css";
 import "../src/styles/salon-premium-carousel.css";
 import "../src/styles/kindergarten-premium.css";
+// Desktop-only Akışkan Premium refinements. Mobile/tablet rules remain untouched.
+import "../src/styles/flow-desktop-premium.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
