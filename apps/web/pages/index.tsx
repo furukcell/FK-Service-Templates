@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { FlowTemplateEnhancements } from "../src/components/FlowTemplateEnhancements";
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
+import { KindergartenPremiumHeroMount } from "../src/components/KindergartenPremiumHeroMount";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { SalonFlowStyleButton } from "../src/components/SalonFlowStyleButton";
 import { SalonGalleryMount } from "../src/components/SalonGalleryMount";
@@ -21,8 +22,10 @@ export default function HomePage() {
   const baseConfig = templateConfigs[activeTemplate];
   const { config, requiresSetup } = useManagedTemplateConfig(baseConfig);
   const isSalon = activeTemplate === "salon";
+  const isKindergarten = activeTemplate === "kindergarten";
   const isFlow = activeLayout === "flow";
   const isSalonFlow = isSalon && isFlow;
+  const isKindergartenFlow = isKindergarten && isFlow;
 
   if (requiresSetup) return <SiteSetupGuard />;
 
@@ -40,6 +43,7 @@ export default function HomePage() {
       />
       <SalonFlowStyleButton activeTemplate={activeTemplate} activeLayout={activeLayout} onSelect={setActiveLayout} />
       <SalonPremiumHeroMount active={isSalonFlow} config={config} />
+      <KindergartenPremiumHeroMount active={isKindergartenFlow} config={config} />
       <SalonHeroSliderMount active={isSalon && !isFlow} config={config} />
       <SalonGalleryMount active={isSalon} config={config} />
       {isSalonFlow ? <SalonBookingMount config={config} immersive /> : null}
