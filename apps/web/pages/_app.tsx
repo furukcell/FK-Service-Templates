@@ -36,6 +36,7 @@ import "../src/styles/kindergarten-premium.css";
 // Desktop-only Akışkan Premium refinements. Mobile/tablet rules remain untouched.
 import "../src/styles/flow-desktop-premium.css";
 import "../src/styles/ada-site.css";
+import "../src/styles/ada-tabs.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
