@@ -1,0 +1,125 @@
+.adaSiteTabsWrap {
+  width: min(1240px, 92vw);
+  margin: 18px auto 0;
+  position: sticky;
+  top: 12px;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18px 55px rgba(49, 46, 129, 0.14);
+  backdrop-filter: blur(22px);
+}
+
+.adaSiteMiniBrand {
+  min-width: 138px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: #312e81;
+  text-decoration: none;
+  font-weight: 950;
+}
+
+.adaSiteMiniBrand span {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  box-shadow: 0 12px 28px rgba(124, 58, 237, 0.2);
+}
+
+.adaSiteTabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.adaSiteTab {
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  color: #5b4d78;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(124, 58, 237, 0.1);
+  transition: 0.2s ease;
+}
+
+.adaSiteTab small {
+  color: #8b7aa8;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.adaSiteTab strong {
+  color: inherit;
+  font-size: clamp(15px, 1.6vw, 22px);
+  letter-spacing: -0.035em;
+}
+
+.adaSiteTab:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.adaSiteTab.isActive {
+  color: #fff;
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  box-shadow: 0 16px 34px rgba(124, 58, 237, 0.22);
+}
+
+.adaSiteTab.isActive small,
+.adaSiteTab.isActive strong {
+  color: #fff;
+}
+
+.adaSiteTabsWrap + .adaGatewayHero {
+  margin-top: 14px;
+}
+
+.adaGatewayCardsCompact .adaChoiceCard {
+  min-height: 260px;
+}
+
+@media (max-width: 760px) {
+  .adaSiteTabsWrap {
+    top: 8px;
+    grid-template-columns: 1fr;
+    border-radius: 28px;
+    padding: 10px;
+  }
+
+  .adaSiteMiniBrand {
+    justify-content: center;
+  }
+
+  .adaSiteTabs {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .adaSiteTab {
+    min-height: 58px;
+    padding: 9px 10px;
+    text-align: center;
+  }
+
+  .adaSiteTab small {
+    font-size: 10px;
+  }
+}
