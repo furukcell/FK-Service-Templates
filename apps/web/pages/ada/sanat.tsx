@@ -1,3 +1,4 @@
+import { AdaSiteTabs } from "../../src/components/AdaSiteTabs";
 import { FlowTemplateEnhancements } from "../../src/components/FlowTemplateEnhancements";
 import { ImmersiveScrollMount } from "../../src/components/ImmersiveScrollMount";
 import { SalonBookingMount } from "../../src/components/SalonBookingMount";
@@ -13,7 +14,7 @@ export default function AdaSanatPage() {
   return (
     <>
       <SeoHead title={`${adaSanatConfig.brandName} | ${adaSanatConfig.sector}`} description={adaSanatConfig.heroDescription} canonicalPath="/ada/sanat" />
-      <div className="adaSubsiteTopLink"><a href="/ada">← Ada ana sayfa</a><a href="/ada/kres">Ada Kreş</a></div>
+      <AdaSiteTabs active="sanat" />
       <TemplateLanding
         config={adaSanatConfig}
         activeTemplate="salon"
