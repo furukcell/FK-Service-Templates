@@ -1,3 +1,4 @@
+import { AdaSiteTabs } from "../../src/components/AdaSiteTabs";
 import { FlowTemplateEnhancements } from "../../src/components/FlowTemplateEnhancements";
 import { ImmersiveScrollMount } from "../../src/components/ImmersiveScrollMount";
 import { KindergartenPremiumHeroMount } from "../../src/components/KindergartenPremiumHeroMount";
@@ -9,7 +10,7 @@ export default function AdaKresPage() {
   return (
     <>
       <SeoHead title={`${adaKresConfig.brandName} | ${adaKresConfig.sector}`} description={adaKresConfig.heroDescription} canonicalPath="/ada/kres" />
-      <div className="adaSubsiteTopLink"><a href="/ada">← Ada ana sayfa</a><a href="/ada/sanat">Müzik & Dans Okulu</a></div>
+      <AdaSiteTabs active="kres" />
       <TemplateLanding
         config={adaKresConfig}
         activeTemplate="kindergarten"
