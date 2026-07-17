@@ -1,3 +1,4 @@
+import { AdaSiteTabs } from "../../src/components/AdaSiteTabs";
 import { SeoHead } from "../../src/components/SeoHead";
 
 const paths = [
@@ -11,10 +12,10 @@ const paths = [
   },
   {
     href: "/ada/sanat",
-    eyebrow: "Ada Müzik & Dans Okulu",
+    eyebrow: "Ada Dans & Müzik Okulu",
     title: "Müzik, ritim ve dansla özgüven kazandıran sanat okulu",
-    description: "Dans, müzik, ritim, deneme dersi ve sanat programları için müzik & dans okulu bölümünü inceleyin.",
-    cta: "Müzik & Dans Sayfasına Git",
+    description: "Dans, müzik, ritim, deneme dersi ve sanat programları için dans & müzik okulu bölümünü inceleyin.",
+    cta: "Dans & Müzik Sayfasına Git",
     mark: "S"
   }
 ];
@@ -23,37 +24,28 @@ export default function AdaGatewayPage() {
   return (
     <main className="adaGateway">
       <SeoHead
-        title="Ada Kreş & Müzik Dans Okulu | Milas"
-        description="Ada çatısı altında kreş, müzik ve dans okulu için iki ayrı bölümden oluşan kurumsal tanıtım sitesi."
+        title="Ada Kreş & Dans Müzik Okulu | Milas"
+        description="Ada çatısı altında kreş, dans ve müzik okulu için sekmeli iki ayrı bölümden oluşan kurumsal tanıtım sitesi."
         canonicalPath="/ada"
       />
+      <AdaSiteTabs active="home" />
       <section className="adaGatewayHero">
         <div className="adaGatewayGlow adaGatewayGlowOne" />
         <div className="adaGatewayGlow adaGatewayGlowTwo" />
-        <nav className="adaGatewayNav">
-          <a className="adaGatewayLogo" href="/ada" aria-label="Ada ana sayfa">
-            <span>A</span>
-            <strong>Ada</strong>
-          </a>
-          <div>
-            <a href="/ada/kres">Kreş</a>
-            <a href="/ada/sanat">Müzik & Dans</a>
-          </div>
-        </nav>
 
         <div className="adaGatewayContent">
           <span className="adaGatewayBadge">Ada Kreş & Sanat Akademisi</span>
-          <h1>Tek çatı altında iki ayrı deneyim: güvenli kreş, ilham veren müzik ve dans okulu.</h1>
+          <h1>Üstteki sekmeden kreş veya dans & müzik okulunu seçin.</h1>
           <p>
-            Ada; çocukların hem güvenli bir kreş ortamında büyümesini hem de sanat, ritim ve hareketle özgüven kazanmasını destekleyen çift yönlü bir kurum yapısı sunar.
+            Ada; aynı çatı altında iki ayrı kurumsal deneyim sunar. Kreş bölümü güvenli eğitim ve günlük akışı anlatır; dans & müzik okulu bölümü ise sanat programları, deneme dersleri ve kayıt taleplerine odaklanır.
           </p>
           <div className="adaGatewayActions">
-            <a className="adaGatewayPrimary" href="/ada/kres">Kreşi İncele</a>
-            <a className="adaGatewaySecondary" href="/ada/sanat">Müzik & Dansı İncele</a>
+            <a className="adaGatewayPrimary" href="/ada/kres">Kreş Sekmesine Git</a>
+            <a className="adaGatewaySecondary" href="/ada/sanat">Dans & Müzik Sekmesine Git</a>
           </div>
         </div>
 
-        <div className="adaGatewayCards" aria-label="Ada bölümleri">
+        <div className="adaGatewayCards adaGatewayCardsCompact" aria-label="Ada bölümleri">
           {paths.map((item) => (
             <a className="adaChoiceCard" href={item.href} key={item.href}>
               <span className="adaChoiceMark">{item.mark}</span>
