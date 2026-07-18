@@ -37,6 +37,7 @@ import "../src/styles/kindergarten-premium.css";
 import "../src/styles/flow-desktop-premium.css";
 import "../src/styles/ada-site.css";
 import "../src/styles/ada-tabs.css";
+import "../src/styles/ada-desktop-fit.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
