@@ -1,0 +1,830 @@
+.adaPlayPage {
+  min-height: 100vh;
+  padding: 30px clamp(18px, 4vw, 54px) 0;
+  color: #07194f;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(37, 99, 235, .08), transparent 23%),
+    radial-gradient(circle at 86% 16%, rgba(217, 70, 239, .12), transparent 26%),
+    radial-gradient(circle at 72% 86%, rgba(20, 184, 166, .12), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #f7fbff 48%, #ffffff 100%);
+  overflow-x: hidden;
+}
+
+.adaPlayPage * {
+  box-sizing: border-box;
+}
+
+.adaPlayHeader,
+.adaPlayHero,
+.adaPlayFeatures,
+.adaPlayTrustAndCta,
+.adaPlayFooter {
+  width: min(1500px, 96vw);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.adaPlayHeader,
+.adaPlayTabs,
+.adaPlayTopLinks,
+.adaPlayHeroActions,
+.adaPlayTrustAndCta,
+.adaPlayFooter,
+.adaPlayFooter article {
+  display: flex;
+  align-items: center;
+}
+
+.adaPlayHeader {
+  gap: 26px;
+  justify-content: space-between;
+  padding: 6px 0 22px;
+}
+
+.adaPlayLogo,
+.adaPlayTabs a,
+.adaPlayTopLinks a,
+.adaPlayPrimary,
+.adaPlayPurple,
+.adaPlayOutline,
+.adaPlayYellowCta a {
+  text-decoration: none;
+}
+
+.adaPlayLogo {
+  flex: 0 0 auto;
+  color: #0b1d55;
+}
+
+.adaLogoWord {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  font-size: clamp(46px, 5.5vw, 78px);
+  line-height: .78;
+  letter-spacing: -.075em;
+  font-weight: 950;
+}
+
+.adaLogoWord b:nth-child(1) { color: #0057ff; }
+.adaLogoWord b:nth-child(2) { color: #ff4d35; }
+.adaLogoWord b:nth-child(3) { color: #55c925; }
+
+.adaLogoWord i {
+  position: absolute;
+  right: -18px;
+  top: -4px;
+  color: #ffbe0b;
+  font-size: 26px;
+  font-style: normal;
+}
+
+.adaPlayLogo small {
+  display: block;
+  margin-top: 7px;
+  color: #07194f;
+  font-size: 14px;
+  font-weight: 950;
+  letter-spacing: .055em;
+}
+
+.adaPlayTabs {
+  flex: 1 1 560px;
+  max-width: 585px;
+  min-height: 66px;
+  padding: 6px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0c63f4, #8d18dc);
+  box-shadow: 0 24px 55px rgba(91, 47, 210, .24);
+}
+
+.adaPlayTabs a {
+  flex: 1;
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 950;
+  border-radius: 999px;
+  transition: transform .18s ease, background .18s ease;
+}
+
+.adaPlayTabs a:not(.isActive) {
+  background: rgba(255, 255, 255, .1);
+}
+
+.adaPlayTabs a:hover {
+  transform: translateY(-2px);
+}
+
+.adaPlayTabs span {
+  font-size: 24px;
+}
+
+.adaPlayTopLinks {
+  flex: 0 0 auto;
+  gap: 20px;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.adaPlayTopLinks a {
+  color: #07194f;
+  white-space: nowrap;
+}
+
+.adaPlayTopLinks .adaPlayCall {
+  padding: 14px 20px;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, #ff6b4a, #ff3f34);
+  box-shadow: 0 14px 34px rgba(255, 81, 64, .24);
+}
+
+.adaPlayHero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.adaPlayHeroCard {
+  min-height: 520px;
+  position: relative;
+  overflow: hidden;
+  padding: clamp(34px, 4vw, 58px);
+  border-radius: 42px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, .08);
+}
+
+.adaPlayKresCard {
+  background:
+    radial-gradient(circle at 85% 14%, rgba(253, 224, 71, .34), transparent 12%),
+    radial-gradient(circle at 2% 94%, rgba(37, 99, 235, .18), transparent 22%),
+    linear-gradient(135deg, #ecf7ff 0%, #ffffff 54%, #f7fbff 100%);
+}
+
+.adaPlayArtCard {
+  background:
+    radial-gradient(circle at 76% 22%, rgba(255, 255, 255, .42), transparent 16%),
+    radial-gradient(circle at 15% 8%, rgba(255, 255, 255, .5), transparent 18%),
+    linear-gradient(135deg, #fff1ff 0%, #8a2ce2 52%, #d946ef 100%);
+}
+
+.adaPlayBlob {
+  position: absolute;
+  inset: auto;
+  pointer-events: none;
+  border-radius: 999px;
+}
+
+.adaPlayBlobBlue {
+  width: 310px;
+  height: 310px;
+  left: -155px;
+  bottom: -115px;
+  background: #075cf7;
+}
+
+.adaPlayBlobPink {
+  width: 290px;
+  height: 220px;
+  right: -94px;
+  bottom: -80px;
+  background: #ff5b49;
+  transform: rotate(-10deg);
+}
+
+.adaPlayBadge {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  color: #fff;
+  background: #075cf7;
+  font-size: 15px;
+  font-weight: 950;
+}
+
+.adaPlayPurpleBadge {
+  background: #6d15dc;
+}
+
+.adaPlayHeroCard h1,
+.adaPlayHeroCard h2 {
+  position: relative;
+  z-index: 3;
+  max-width: 430px;
+  margin: 24px 0 18px;
+  color: #07194f;
+  font-size: clamp(48px, 4.8vw, 72px);
+  line-height: .98;
+  letter-spacing: -.065em;
+  font-weight: 950;
+}
+
+.adaPlayHeroCard h1 {
+  color: #07194f;
+}
+
+.adaPlayHeroCard h1::first-line {
+  color: #07194f;
+}
+
+.adaPlayKresCard h1 {
+  color: #075cf7;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+.adaPlayKresCard h1::first-line {
+  color: #07194f;
+}
+
+.adaPlayArtCard h2 {
+  color: #07194f;
+}
+
+.adaPlayArtCard h2 strong {
+  color: #6d15dc;
+  font-style: normal;
+}
+
+.adaPlayHeroCard p {
+  position: relative;
+  z-index: 3;
+  max-width: 350px;
+  margin: 0 0 28px;
+  color: #17275f;
+  font-size: 17px;
+  line-height: 1.58;
+  font-weight: 650;
+}
+
+.adaPlayArtCard p {
+  color: #17275f;
+  max-width: 390px;
+}
+
+.adaPlayPrimary,
+.adaPlayPurple,
+.adaPlayOutline,
+.adaPlayYellowCta a {
+  position: relative;
+  z-index: 4;
+  min-height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 26px;
+  border-radius: 999px;
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.adaPlayPrimary {
+  color: #fff;
+  background: #075cf7;
+  box-shadow: 0 18px 42px rgba(7, 92, 247, .28);
+}
+
+.adaPlayPurple {
+  color: #fff;
+  background: #6d15dc;
+  box-shadow: 0 18px 42px rgba(109, 21, 220, .25);
+}
+
+.adaPlayOutline {
+  color: #6d15dc;
+  background: rgba(255,255,255,.78);
+  border: 2px solid rgba(109, 21, 220, .45);
+}
+
+.adaPlayHeroActions {
+  position: relative;
+  z-index: 4;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.adaPlayPhoto,
+.adaPlayDancer {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.adaPlayPhotoKres {
+  right: -18px;
+  bottom: 0;
+  width: 52%;
+  height: 76%;
+  border-top-left-radius: 56px;
+  border-bottom-left-radius: 56px;
+  filter: saturate(1.08);
+}
+
+.adaPlayPhoto img,
+.adaPlayDancer img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.adaPlayDancer {
+  right: -42px;
+  bottom: 0;
+  width: 48%;
+  height: 86%;
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+  filter: saturate(1.08);
+}
+
+.adaPlayDancer::after,
+.adaPlayPhotoKres::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,.48), transparent 42%);
+}
+
+.adaPlayMusicKid {
+  position: absolute;
+  right: 19%;
+  bottom: 10%;
+  z-index: 4;
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  color: #fff;
+  background: rgba(255, 91, 73, .92);
+  font-size: 34px;
+  box-shadow: 0 20px 42px rgba(101, 14, 170, .25);
+}
+
+.adaPlaySun,
+.adaPlayCloud,
+.adaPlayNotes {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.adaPlaySun {
+  top: 72px;
+  left: 52%;
+  color: #ffbf00;
+  font-size: 66px;
+}
+
+.adaPlayCloud {
+  top: 126px;
+  left: 48%;
+  color: rgba(255,255,255,.92);
+  font-size: 38px;
+}
+
+.adaPlayNotes {
+  top: 82px;
+  right: 34px;
+  color: rgba(255,255,255,.95);
+  font-size: 58px;
+  letter-spacing: 16px;
+  transform: rotate(-9deg);
+}
+
+.adaPlayFeatures {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: -24px;
+  position: relative;
+  z-index: 7;
+}
+
+.adaPlayFeature {
+  min-height: 138px;
+  padding: 24px;
+  border-radius: 26px;
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 16px 42px rgba(15, 23, 42, .09);
+  border: 1px solid rgba(15, 23, 42, .05);
+}
+
+.adaPlayFeature b {
+  display: block;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.adaPlayFeature h3 {
+  margin: 12px 0 6px;
+  font-size: 23px;
+  letter-spacing: -.035em;
+}
+
+.adaPlayFeature p {
+  margin: 0;
+  color: #34416c;
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 750;
+}
+
+.adaPlayFeature i {
+  display: block;
+  width: 38px;
+  height: 4px;
+  margin-top: 14px;
+  border-radius: 999px;
+}
+
+.adaAccent-purple h3 { color: #7c1de2; }
+.adaAccent-purple i { background: #7c1de2; }
+.adaAccent-teal h3 { color: #00a8b8; }
+.adaAccent-teal i { background: #00a8b8; }
+.adaAccent-orange h3 { color: #f97316; }
+.adaAccent-orange i { background: #f97316; }
+.adaAccent-blue h3 { color: #2563eb; }
+.adaAccent-blue i { background: #2563eb; }
+.adaAccent-pink h3 { color: #ec4899; }
+.adaAccent-pink i { background: #ec4899; }
+
+.adaPlayTrustAndCta {
+  gap: 24px;
+  align-items: stretch;
+  margin-top: 28px;
+}
+
+.adaPlayTrustBand {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 26px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.94);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, .08);
+}
+
+.adaPlayTrustBand article {
+  padding: 6px 20px;
+  border-right: 1px dashed rgba(93, 95, 239, .22);
+}
+
+.adaPlayTrustBand article:last-child {
+  border-right: 0;
+}
+
+.adaPlayTrustBand b {
+  display: block;
+  font-size: 42px;
+}
+
+.adaPlayTrustBand h3 {
+  margin: 10px 0 8px;
+  color: #075cf7;
+  font-size: 18px;
+}
+
+.adaPlayTrustBand p {
+  margin: 0;
+  color: #34416c;
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.adaPlayYellowCta {
+  flex: 0 0 39%;
+  min-height: 188px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  overflow: hidden;
+  padding: 30px;
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(255,255,255,.42), transparent 22%),
+    linear-gradient(135deg, #ffd43b, #ffb703);
+  box-shadow: 0 18px 45px rgba(245, 158, 11, .17);
+}
+
+.adaPlayYellowCta h2 {
+  margin: 0 0 18px;
+  color: #07194f;
+  font-size: clamp(30px, 3vw, 40px);
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.adaPlayYellowCta a {
+  min-height: 50px;
+  color: #fff;
+  background: #ff503d;
+  box-shadow: 0 14px 34px rgba(255, 80, 61, .22);
+  font-size: 15px;
+}
+
+.adaPlayHappyKids {
+  flex: 0 0 150px;
+  align-self: end;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  font-size: 54px;
+}
+
+.adaPlayHappyKids span,
+.adaPlayHappyKids strong {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  border-radius: 26px;
+  background: rgba(255,255,255,.55);
+  transform: rotate(-7deg);
+}
+
+.adaPlayHappyKids strong {
+  transform: rotate(8deg);
+}
+
+.adaPlayFooter {
+  position: relative;
+  gap: 34px;
+  margin-top: 24px;
+  padding: 28px 40px;
+  border-radius: 46px 46px 0 0;
+  color: #fff;
+  background:
+    radial-gradient(circle at 82% 20%, rgba(56, 189, 248, .56), transparent 32%),
+    linear-gradient(135deg, #064ce7 0%, #0047db 54%, #009bff 100%);
+}
+
+.adaPlayFooter article {
+  gap: 13px;
+  min-width: 0;
+}
+
+.adaPlayFooter b {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #fff;
+  color: #075cf7;
+  font-size: 25px;
+}
+
+.adaPlayFooter h3,
+.adaPlayFooter p {
+  margin: 0;
+}
+
+.adaPlayFooter h3 {
+  font-size: 16px;
+}
+
+.adaPlayFooter p {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255,255,255,.88);
+  font-weight: 700;
+}
+
+.adaPlayFooter > strong {
+  margin-left: auto;
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 500;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+@media (max-width: 1120px) {
+  .adaPlayHeader {
+    flex-wrap: wrap;
+  }
+
+  .adaPlayTabs {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .adaPlayHero {
+    grid-template-columns: 1fr;
+  }
+
+  .adaPlayFeatures {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 22px;
+  }
+
+  .adaPlayTrustAndCta {
+    flex-direction: column;
+  }
+
+  .adaPlayYellowCta {
+    flex-basis: auto;
+  }
+
+  .adaPlayFooter {
+    flex-wrap: wrap;
+  }
+
+  .adaPlayFooter > strong {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 760px) {
+  .adaPlayPage {
+    padding: 12px 12px 0;
+  }
+
+  .adaPlayHeader,
+  .adaPlayHero,
+  .adaPlayFeatures,
+  .adaPlayTrustAndCta,
+  .adaPlayFooter {
+    width: 100%;
+  }
+
+  .adaPlayHeader {
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .adaPlayLogo {
+    width: 100%;
+    text-align: center;
+  }
+
+  .adaLogoWord {
+    font-size: 48px;
+  }
+
+  .adaPlayLogo small {
+    font-size: 11px;
+  }
+
+  .adaPlayTopLinks {
+    display: none;
+  }
+
+  .adaPlayTabs {
+    min-height: 52px;
+    padding: 5px;
+    border-radius: 22px;
+  }
+
+  .adaPlayTabs a {
+    height: 44px;
+    gap: 6px;
+    font-size: 13px;
+    border-radius: 18px;
+  }
+
+  .adaPlayTabs span {
+    font-size: 16px;
+  }
+
+  .adaPlayHero {
+    gap: 14px;
+  }
+
+  .adaPlayHeroCard {
+    min-height: auto;
+    padding: 24px 20px 260px;
+    border-radius: 28px;
+  }
+
+  .adaPlayHeroCard h1,
+  .adaPlayHeroCard h2 {
+    max-width: none;
+    margin: 18px 0 14px;
+    font-size: clamp(42px, 12vw, 56px);
+  }
+
+  .adaPlayHeroCard p {
+    max-width: none;
+    font-size: 15px;
+  }
+
+  .adaPlayPrimary,
+  .adaPlayPurple,
+  .adaPlayOutline {
+    min-height: 50px;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+
+  .adaPlayPhotoKres,
+  .adaPlayDancer {
+    width: 100%;
+    height: 240px;
+    right: 0;
+    bottom: 0;
+    border-radius: 0 0 28px 28px;
+  }
+
+  .adaPlayDancer {
+    width: 82%;
+    right: 0;
+    border-top-left-radius: 120px;
+  }
+
+  .adaPlaySun {
+    top: 32px;
+    left: auto;
+    right: 26px;
+    font-size: 44px;
+  }
+
+  .adaPlayCloud,
+  .adaPlayMusicKid {
+    display: none;
+  }
+
+  .adaPlayNotes {
+    top: 36px;
+    right: 14px;
+    font-size: 34px;
+    letter-spacing: 8px;
+  }
+
+  .adaPlayFeatures {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .adaPlayFeature {
+    min-height: 122px;
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .adaPlayFeature b {
+    font-size: 34px;
+  }
+
+  .adaPlayFeature h3 {
+    font-size: 20px;
+  }
+
+  .adaPlayTrustBand {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .adaPlayTrustBand article {
+    padding: 14px;
+    border: 0;
+    border-radius: 18px;
+    background: rgba(245, 248, 255, .9);
+  }
+
+  .adaPlayYellowCta {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .adaPlayHappyKids {
+    display: none;
+  }
+
+  .adaPlayFooter {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 22px;
+    border-radius: 28px 28px 0 0;
+  }
+
+  .adaPlayFooter > strong {
+    font-size: 28px;
+    white-space: normal;
+  }
+}
