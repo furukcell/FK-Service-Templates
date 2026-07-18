@@ -1,0 +1,79 @@
+/* Ada Yeni hero card silhouette fix
+   The generated hero assets already contain artwork, but the browser panel box was still
+   reading as a flat rectangle. These final overrides carve a visible white wave over the
+   top edge so the live site matches the reference poster feeling more closely. */
+
+.adaPosterPage .adaPosterHero {
+  padding-top: 10px;
+}
+
+.adaPosterPage .adaPosterPanel {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.adaPosterPage .adaPosterPanel::after {
+  content: "";
+  position: absolute;
+  top: -88px;
+  left: -4%;
+  width: 108%;
+  height: 132px;
+  z-index: 3;
+  pointer-events: none;
+  background: #fff;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+
+.adaPosterPage .adaPosterKresPanel::after {
+  top: -92px;
+  height: 138px;
+  transform: rotate(-1.2deg) translateY(2px);
+  border-bottom-left-radius: 58% 110%;
+  border-bottom-right-radius: 42% 95%;
+}
+
+.adaPosterPage .adaPosterArtPanel::after {
+  top: -95px;
+  height: 146px;
+  transform: rotate(1.4deg) translateY(0);
+  border-bottom-left-radius: 42% 95%;
+  border-bottom-right-radius: 60% 115%;
+}
+
+/* Keep copy and CTA above the decorative cutout. */
+.adaPosterPage .adaPosterTextBlock,
+.adaPosterPage .adaPosterBadge,
+.adaPosterPage .adaPosterPrimary,
+.adaPosterPage .adaPosterPurple,
+.adaPosterPage .adaPosterOutline {
+  position: relative;
+  z-index: 12;
+}
+
+/* The new full-card artworks should sit slightly higher so their own internal wave is visible too. */
+.adaPosterPage .adaPosterKresPanel,
+.adaPosterPage .adaPosterArtPanel {
+  background-size: cover;
+}
+
+.adaPosterPage .adaPosterKresPanel {
+  background-position: center top;
+}
+
+.adaPosterPage .adaPosterArtPanel {
+  background-position: center top;
+}
+
+@media (max-width: 900px) {
+  .adaPosterPage .adaPosterPanel::after {
+    top: -66px;
+    height: 98px;
+  }
+
+  .adaPosterPage .adaPosterKresPanel::after,
+  .adaPosterPage .adaPosterArtPanel::after {
+    top: -68px;
+    height: 104px;
+  }
+}
