@@ -39,6 +39,7 @@ import "../src/styles/ada-site.css";
 import "../src/styles/ada-tabs.css";
 import "../src/styles/ada-desktop-fit.css";
 import "../src/styles/ada-mobile-fit.css";
+import "../src/styles/ada-playful-home.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
