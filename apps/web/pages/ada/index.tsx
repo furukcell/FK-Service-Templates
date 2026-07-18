@@ -62,7 +62,7 @@ export default function AdaGatewayPage() {
           <div className="adaPlayCloud" aria-hidden="true">☁</div>
           <figure className="adaPlayPhoto adaPlayPhotoKres" aria-label="Oyunla öğrenen çocuklar">
             <img
-              src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=900&q=80"
+              src="/ada/ada-kres-bloklar.png"
               alt="Renkli bloklarla oynayan çocuklar"
             />
           </figure>
@@ -80,13 +80,18 @@ export default function AdaGatewayPage() {
             <a className="adaPlayOutline" href="/ada/sanat#request-form">▣ Deneme Dersi Al</a>
           </div>
           <div className="adaPlayNotes" aria-hidden="true">♪ ♫ ✦</div>
-          <figure className="adaPlayDancer" aria-label="Dans ve müzik eğitimi alan çocuklar">
+          <figure className="adaPlayDancer" aria-label="Dans eğitimi alan çocuk">
             <img
-              src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=900&q=80"
-              alt="Dans eden çocuk"
+              src="/ada/ada-bale.png"
+              alt="Bale yapan çocuk"
             />
           </figure>
-          <div className="adaPlayMusicKid" aria-hidden="true">🎸</div>
+          <figure className="adaPlayMusicKid" aria-label="Müzik eğitimi alan çocuk">
+            <img
+              src="/ada/ada-gitar.png"
+              alt="Gitar çalan çocuk"
+            />
+          </figure>
         </article>
       </section>
 
@@ -117,10 +122,12 @@ export default function AdaGatewayPage() {
             <h2>Mutlu çocuklar,<br />güçlü yarınlar!</h2>
             <a href="https://wa.me/905xxxxxxxxx" target="_blank" rel="noreferrer">Hemen İletişime Geç <span>→</span></a>
           </div>
-          <div className="adaPlayHappyKids" aria-hidden="true">
-            <span>🎨</span>
-            <strong>🎤</strong>
-          </div>
+          <figure className="adaPlayHappyKids" aria-label="Sanatla mutlu çocuklar">
+            <img
+              src="/ada/ada-renkli-eller.png"
+              alt="Renkli boyalı ellerini gösteren çocuklar"
+            />
+          </figure>
         </aside>
       </section>
 
