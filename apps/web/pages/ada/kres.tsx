@@ -8,7 +8,7 @@ import { adaKresConfig } from "../../../../configs/ada-kres";
 
 export default function AdaKresPage() {
   return (
-    <>
+    <main className="adaPage adaKresPage">
       <SeoHead title={`${adaKresConfig.brandName} | ${adaKresConfig.sector}`} description={adaKresConfig.heroDescription} canonicalPath="/ada/kres" />
       <AdaSiteTabs active="kres" />
       <TemplateLanding
@@ -22,6 +22,6 @@ export default function AdaKresPage() {
       <KindergartenPremiumHeroMount active config={adaKresConfig} />
       <ImmersiveScrollMount active />
       <FlowTemplateEnhancements active config={adaKresConfig} />
-    </>
+    </main>
   );
 }
