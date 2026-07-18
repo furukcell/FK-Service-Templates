@@ -42,6 +42,7 @@ import "../src/styles/ada-mobile-fit.css";
 import "../src/styles/ada-playful-home.css";
 import "../src/styles/ada-playful-images.css";
 import "../src/styles/ada-reference-final.css";
+import "../src/styles/ada-yeni-reference.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
