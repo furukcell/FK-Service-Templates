@@ -2,14 +2,14 @@ import type { BusinessTemplateConfig } from "@fk-templates/shared";
 
 export const adaSanatConfig: BusinessTemplateConfig = {
   template: "salon",
-  sector: "Müzik & Dans Okulu",
-  brandName: "Ada Müzik & Dans Okulu",
+  sector: "Dans & Müzik Okulu",
+  brandName: "Ada Dans & Müzik Okulu",
   eyebrow: "Ritim, hareket ve sahne özgüveni kazandıran sanat okulu",
-  heroTitle: "Müzik ve dansla çocukların enerjisini özgüvene dönüştüren modern eğitim alanı.",
-  heroDescription: "Ada Müzik & Dans Okulu; dans, ritim, müzik ve sahne çalışmalarıyla çocukların beden farkındalığını, sosyal iletişimini ve özgüvenini destekler.",
-  primaryCta: "Ders Bilgisi Al",
+  heroTitle: "Ritimle özgüven, dansla hareket, müzikle ifade.",
+  heroDescription: "Ada Dans & Müzik Okulu; çocukların beden farkındalığını, ritim duygusunu, sosyal iletişimini ve sahne özgüvenini destekleyen enerjik bir sanat eğitim alanıdır.",
+  primaryCta: "Deneme Dersi Al",
   secondaryCta: "Programları İncele",
-  topBarText: "Ada Müzik & Dans Okulu • Dans • Müzik • Ritim • Sahne özgüveni",
+  topBarText: "Ada Dans & Müzik Okulu • Dans • Müzik • Ritim • Sahne özgüveni",
   phone: "+90 5xx xxx xx xx",
   whatsapp: "+905xxxxxxxxx",
   address: "Milas / Muğla",
@@ -18,21 +18,21 @@ export const adaSanatConfig: BusinessTemplateConfig = {
   theme: {
     primary: "#BE185D",
     secondary: "#7C3AED",
-    accent: "#F59E0B",
-    soft: "#FDF2F8",
+    accent: "#F8B84E",
+    soft: "#FFF1F8",
     dark: "#4A044E"
   },
-  navItems: ["Programlar", "Dersler", "Galeri", "Kayıt"],
+  navItems: ["Programlar", "Dersler", "Deneme Dersi", "Galeri", "Kayıt", "İletişim"],
   stats: [
     { value: "Dans", label: "hareket ve ritim" },
-    { value: "Müzik", label: "yaratıcı gelişim" },
+    { value: "Müzik", label: "yaratıcı ifade" },
     { value: "Grup", label: "sosyal özgüven" },
     { value: "1 dk", label: "bilgi talebi" }
   ],
   services: [
     { title: "Çocuk Dans Programı", description: "Ritim, koordinasyon, beden farkındalığı ve grup uyumunu destekleyen eğlenceli dans dersleri.", price: "Bilgi al" },
     { title: "Müzik ve Ritim", description: "Çocukların müziği keşfetmesini, ritim duygusunu ve yaratıcı ifadesini güçlendiren çalışmalar.", price: "Program sor" },
-    { title: "Gösteri Hazırlık", description: "Sahne duruşu, özgüven ve grup performansı için dönemsel etkinlik ve gösteri hazırlıkları.", price: "Ön görüşme" }
+    { title: "Gösteri Hazırlık", description: "Sahne duruşu, özgüven ve grup performansı için dönemsel etkinlik ve gösteri hazırlıkları.", price: "Deneme dersi" }
   ],
   campaignItems: [
     { title: "Yeni dönem kayıtları", description: "Dans, müzik ve ritim dersleri için kayıt ve kontenjan bilgisi alabilirsiniz.", price: "Kayıt" },
