@@ -5,18 +5,20 @@ const paths = [
   {
     href: "/ada/kres",
     eyebrow: "Ada Kreş",
-    title: "Güvenli, sevgi dolu ve düzenli kreş ortamı",
-    description: "Yaş grupları, günlük akış, sanatla desteklenen gelişim ve ön kayıt bilgileri için kreş bölümünü inceleyin.",
-    cta: "Kreş Sayfasına Git",
-    mark: "K"
+    title: "Güvenle büyüyen, sanatla gelişen çocuklar",
+    description: "Okul öncesi eğitim, günlük akış, yaş grupları, galeri ve ön kayıt bilgileri için kreş bölümünü inceleyin.",
+    cta: "Kreş Bölümünü Aç",
+    mark: "K",
+    tags: ["2-6 yaş", "Günlük akış", "Ön kayıt"]
   },
   {
     href: "/ada/sanat",
     eyebrow: "Ada Dans & Müzik Okulu",
-    title: "Müzik, ritim ve dansla özgüven kazandıran sanat okulu",
-    description: "Dans, müzik, ritim, deneme dersi ve sanat programları için dans & müzik okulu bölümünü inceleyin.",
-    cta: "Dans & Müzik Sayfasına Git",
-    mark: "S"
+    title: "Ritim, hareket ve müzikle özgüven kazandıran sanat okulu",
+    description: "Dans, müzik, ritim, deneme dersi ve dönem programları için dans & müzik okulu bölümünü inceleyin.",
+    cta: "Dans & Müzik Bölümünü Aç",
+    mark: "S",
+    tags: ["Dans", "Müzik", "Deneme dersi"]
   }
 ];
 
@@ -35,13 +37,13 @@ export default function AdaGatewayPage() {
 
         <div className="adaGatewayContent">
           <span className="adaGatewayBadge">Ada Kreş & Sanat Akademisi</span>
-          <h1>Üstteki sekmeden kreş veya dans & müzik okulunu seçin.</h1>
+          <h1>Çocukların güvenle büyüdüğü, sanatla geliştiği sıcak bir eğitim ortamı.</h1>
           <p>
-            Ada; aynı çatı altında iki ayrı kurumsal deneyim sunar. Kreş bölümü güvenli eğitim ve günlük akışı anlatır; dans & müzik okulu bölümü ise sanat programları, deneme dersleri ve kayıt taleplerine odaklanır.
+            Ada; kreş ve dans & müzik okulunu aynı marka çatısı altında sunar. Veliler tek siteden hem okul öncesi eğitim yaklaşımını hem de sanat programlarını inceleyip hızlıca bilgi talebi bırakabilir.
           </p>
           <div className="adaGatewayActions">
-            <a className="adaGatewayPrimary" href="/ada/kres">Kreş Sekmesine Git</a>
-            <a className="adaGatewaySecondary" href="/ada/sanat">Dans & Müzik Sekmesine Git</a>
+            <a className="adaGatewayPrimary" href="/ada/kres">Kreş Ön Kayıt</a>
+            <a className="adaGatewaySecondary" href="/ada/sanat">Deneme Dersi Bilgisi</a>
           </div>
         </div>
 
@@ -52,6 +54,9 @@ export default function AdaGatewayPage() {
               <small>{item.eyebrow}</small>
               <h2>{item.title}</h2>
               <p>{item.description}</p>
+              <div className="adaChoiceTags">
+                {item.tags.map((tag) => <span key={tag}>{tag}</span>)}
+              </div>
               <strong>{item.cta}</strong>
             </a>
           ))}
