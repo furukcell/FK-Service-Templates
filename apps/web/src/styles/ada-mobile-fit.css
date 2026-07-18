@@ -1,43 +1,45 @@
 @media (max-width: 760px) {
   .adaGateway,
   .adaPage {
-    padding-bottom: 26px;
+    padding-bottom: 24px;
   }
 
   .adaSiteTabsOuter {
     position: relative;
     top: auto;
     width: min(92vw, 420px);
-    margin: 12px auto 14px;
+    margin: 10px auto 12px;
   }
 
   .adaSiteTabsWrap {
-    padding: 14px;
-    gap: 14px;
-    border-radius: 30px;
-    box-shadow: 0 18px 46px rgba(67, 56, 202, 0.12);
+    padding: 10px;
+    gap: 10px;
+    border-radius: 24px;
+    box-shadow: 0 14px 36px rgba(67, 56, 202, 0.11);
   }
 
   .adaSiteMiniBrand {
     width: 100%;
     min-width: 0;
-    justify-content: center;
-    gap: 10px;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 2px 4px 4px;
   }
 
   .adaSiteMiniBrand span {
-    width: 48px;
-    height: 48px;
-    border-radius: 17px;
-    font-size: 19px;
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    font-size: 17px;
+    box-shadow: 0 10px 22px rgba(101, 89, 236, 0.18);
   }
 
   .adaSiteMiniBrand strong {
-    font-size: 23px;
+    font-size: 20px;
   }
 
   .adaSiteMiniBrand small {
-    font-size: 12px;
+    font-size: 10px;
     white-space: nowrap;
   }
 
@@ -45,24 +47,27 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 8px;
   }
 
   .adaSiteTab {
-    min-height: 74px;
-    padding: 10px 8px;
+    min-height: 58px;
+    padding: 8px 7px;
     justify-content: center;
     text-align: center;
-    border-radius: 28px;
+    border-radius: 22px;
   }
 
   .adaSiteTab small {
-    font-size: 12px;
+    font-size: 10px;
+    line-height: 1.1;
   }
 
   .adaSiteTab strong {
-    font-size: 21px;
-    line-height: 1.08;
+    margin-top: 3px;
+    font-size: 17px;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
   }
 
   .adaGatewayHero,
@@ -75,52 +80,52 @@
   }
 
   .adaHero {
-    margin-top: 12px;
-    padding: 26px 22px;
-    gap: 22px;
-    border-radius: 30px;
+    margin-top: 10px;
+    padding: 24px 20px;
+    gap: 20px;
+    border-radius: 28px;
   }
 
   .adaGatewayHero {
     min-height: auto;
-    padding: 26px 22px;
-    border-radius: 30px;
+    padding: 24px 20px;
+    border-radius: 28px;
   }
 
   .adaGatewayContent {
-    margin: 18px auto 26px;
+    margin: 16px auto 24px;
     text-align: left;
   }
 
   .adaGatewayContent h1,
   .adaHeroCopy h1 {
     max-width: none;
-    margin: 18px 0 16px;
-    font-size: clamp(42px, 12vw, 54px);
-    line-height: 0.98;
-    letter-spacing: -0.075em;
+    margin: 16px 0 14px;
+    font-size: clamp(39px, 10.8vw, 50px);
+    line-height: 0.99;
+    letter-spacing: -0.073em;
   }
 
   .adaGatewayContent p,
   .adaHeroCopy p {
     max-width: none;
-    font-size: 17px;
-    line-height: 1.62;
+    font-size: 16px;
+    line-height: 1.58;
   }
 
   .adaPill,
   .adaGatewayBadge {
     max-width: 100%;
-    padding: 9px 13px;
-    font-size: 14px;
-    line-height: 1.25;
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 1.2;
     text-align: center;
   }
 
   .adaHeroActions,
   .adaGatewayActions {
     gap: 10px;
-    margin-top: 24px;
+    margin-top: 22px;
     justify-content: flex-start;
   }
 
@@ -130,91 +135,91 @@
   .adaSecondary,
   .adaGatewayPrimary,
   .adaGatewaySecondary {
-    min-height: 54px;
-    padding: 14px 18px;
-    font-size: 15px;
+    min-height: 50px;
+    padding: 13px 17px;
+    font-size: 14px;
   }
 
   .adaKresVisual,
   .adaArtVisual {
-    min-height: 240px;
-    border-radius: 28px;
+    min-height: 230px;
+    border-radius: 26px;
   }
 
   .adaVisualCard {
-    width: min(250px, 84%);
-    padding: 24px;
-    border-radius: 28px;
+    width: min(240px, 84%);
+    padding: 22px;
+    border-radius: 26px;
   }
 
   .adaVisualCard strong {
-    font-size: 24px;
+    font-size: 23px;
   }
 
   .adaChild {
-    width: 54px;
-    height: 54px;
-    border-radius: 18px;
-    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    border-radius: 17px;
+    font-size: 22px;
   }
 
   .adaChildOne {
-    left: 24px;
-    bottom: 28px;
-  }
-
-  .adaChildTwo {
-    right: 24px;
+    left: 22px;
     bottom: 26px;
   }
 
+  .adaChildTwo {
+    right: 22px;
+    bottom: 24px;
+  }
+
   .adaSun {
-    width: 96px;
-    height: 96px;
-    top: 26px;
-    right: 28px;
+    width: 88px;
+    height: 88px;
+    top: 24px;
+    right: 24px;
   }
 
   .adaArtVisual strong {
-    font-size: 52px;
+    font-size: 48px;
   }
 
   .adaNote {
-    font-size: 42px;
+    font-size: 38px;
   }
 
   .adaStats {
-    margin-top: 14px;
+    margin-top: 12px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    gap: 9px;
   }
 
   .adaStats div {
-    padding: 16px;
-    border-radius: 20px;
+    padding: 15px;
+    border-radius: 19px;
   }
 
   .adaStats strong {
-    font-size: 22px;
+    font-size: 21px;
   }
 
   .adaStats span {
     font-size: 12px;
-    line-height: 1.35;
+    line-height: 1.32;
   }
 
   .adaSection,
   .adaSplitSection,
   .adaFormBand {
-    margin-top: 16px;
-    padding: 24px 20px;
-    border-radius: 28px;
+    margin-top: 15px;
+    padding: 23px 19px;
+    border-radius: 27px;
   }
 
   .adaSectionHead h2,
   .adaSplitSection h2,
   .adaFormBand h2 {
-    font-size: clamp(30px, 9vw, 40px);
+    font-size: clamp(29px, 8.6vw, 39px);
   }
 
   .adaCardGrid,
@@ -223,49 +228,68 @@
   }
 
   .adaInfoCard {
-    padding: 20px;
-    border-radius: 24px;
+    padding: 19px;
+    border-radius: 23px;
   }
 
   .adaInfoCard h3,
   .adaGalleryItem strong {
-    font-size: 22px;
+    font-size: 21px;
   }
 
   .adaGalleryItem {
-    min-height: 150px;
-    border-radius: 24px;
+    min-height: 145px;
+    border-radius: 23px;
   }
 
   .adaMiniPoster {
-    min-height: 210px;
-    border-radius: 26px;
+    min-height: 200px;
+    border-radius: 25px;
   }
 
   .adaMiniPoster strong {
-    font-size: 30px;
+    font-size: 29px;
   }
 }
 
 @media (max-width: 390px) {
+  .adaSiteTabsWrap {
+    padding: 9px;
+    gap: 9px;
+  }
+
+  .adaSiteMiniBrand span {
+    width: 38px;
+    height: 38px;
+  }
+
   .adaSiteMiniBrand strong {
-    font-size: 21px;
+    font-size: 19px;
   }
 
   .adaSiteMiniBrand small {
-    font-size: 11px;
+    font-size: 9.5px;
+  }
+
+  .adaSiteTab {
+    min-height: 54px;
+    border-radius: 20px;
+  }
+
+  .adaSiteTab small {
+    font-size: 9.5px;
   }
 
   .adaSiteTab strong {
-    font-size: 19px;
+    font-size: 16px;
   }
 
   .adaGatewayContent h1,
   .adaHeroCopy h1 {
-    font-size: clamp(38px, 11vw, 48px);
+    font-size: clamp(36px, 10.4vw, 46px);
   }
 
   .adaHero {
-    padding: 24px 18px;
+    padding: 22px 18px;
   }
 }
