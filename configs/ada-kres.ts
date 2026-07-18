@@ -5,24 +5,24 @@ export const adaKresConfig: BusinessTemplateConfig = {
   sector: "Kreş / Anaokulu",
   brandName: "Ada Kreş",
   eyebrow: "Sevgi dolu, güvenli ve sanatla desteklenen kreş ortamı",
-  heroTitle: "Çocukların kendini güvende hissettiği, keşfederek büyüdüğü sıcak bir başlangıç.",
-  heroDescription: "Ada Kreş; küçük yaş grupları için güvenli sınıf ortamı, düzenli günlük akış, oyun temelli öğrenme, sanat ve müzikle desteklenen gelişim yaklaşımı sunar.",
-  primaryCta: "Ön Kayıt Bilgisi Al",
-  secondaryCta: "Sınıfları İncele",
-  topBarText: "Ada Kreş • Güvenli ortam • Günlük akış • Sanatla desteklenen gelişim",
+  heroTitle: "Güvenle büyüyen, sanatla gelişen çocuklar.",
+  heroDescription: "Ada Kreş; çocukların kendini güvende hissettiği, günlük rutini düzenli, oyun ve sanatla desteklenen sıcak bir okul öncesi eğitim ortamı sunar.",
+  primaryCta: "Ön Kayıt Oluştur",
+  secondaryCta: "WhatsApp’tan Bilgi Al",
+  topBarText: "Ada Kreş • Güvenli ortam • Günlük akış • Sanatla desteklenen okul öncesi eğitim",
   phone: "+90 5xx xxx xx xx",
   whatsapp: "+905xxxxxxxxx",
   address: "Milas / Muğla",
   mapsUrl: "https://maps.google.com/?q=Milas%20Mu%C4%9Fla",
   instagramUrl: "https://instagram.com/",
   theme: {
-    primary: "#7C3AED",
-    secondary: "#06B6D4",
-    accent: "#F59E0B",
-    soft: "#F5F3FF",
-    dark: "#312E81"
+    primary: "#6559EC",
+    secondary: "#31C7B7",
+    accent: "#F6B84B",
+    soft: "#FFF8E8",
+    dark: "#2F2A72"
   },
-  navItems: ["Sınıflar", "Günlük Akış", "Galeri", "Kayıt"],
+  navItems: ["Eğitim Yaklaşımı", "Yaş Grupları", "Günlük Akış", "Galeri", "Ön Kayıt", "İletişim"],
   stats: [
     { value: "2-6", label: "yaş grubu" },
     { value: "30", label: "öğrenci kapasitesi" },
@@ -35,14 +35,14 @@ export const adaKresConfig: BusinessTemplateConfig = {
     { title: "Okula Hazırlık", description: "5-6 yaş grubu için dikkat, sorumluluk, sosyal uyum ve temel akademik hazırlık çalışmaları.", price: "Ön görüşme" }
   ],
   campaignItems: [
-    { title: "Yeni dönem kayıtları", description: "Kayıt, kontenjan ve görüşme bilgisi için hızlı ön başvuru bırakabilirsiniz.", price: "Kayıt bilgisi" },
+    { title: "Yeni dönem kayıtları", description: "Kayıt, kontenjan ve görüşme bilgisi için hızlı ön başvuru bırakabilirsiniz.", price: "Ön kayıt" },
     { title: "Sanatla desteklenen gelişim", description: "Müzik, ritim, dans ve yaratıcı etkinliklerle çocukların kendini ifade etmesi desteklenir.", price: "Etkinlik" },
     { title: "Düzenli veli iletişimi", description: "Günlük akış, duyurular ve etkinlik bilgilendirmeleri düzenli şekilde paylaşılır.", price: "Veli iletişimi" }
   ],
   galleryItems: [
-    { title: "Sınıf ortamı", description: "Çocukların güvenle vakit geçireceği sıcak, sade ve düzenli sınıf alanları." },
-    { title: "Oyun ve etkinlik", description: "Oyun temelli öğrenme, sanat ve keşif etkinlikleri için hazırlanmış alanlar." },
-    { title: "Bahçe ve hareket", description: "Hareket, oyun ve sosyal gelişimi destekleyen açık alan kullanımı." }
+    { title: "Sıcak sınıf ortamı", description: "Çocukların güvenle vakit geçireceği sade, düzenli ve yaş grubuna uygun sınıf alanları." },
+    { title: "Oyun ve sanat etkinlikleri", description: "Oyun temelli öğrenme, sanat, müzik ve keşif etkinlikleri için hazırlanmış alanlar." },
+    { title: "Hareket ve bahçe zamanı", description: "Hareket, oyun ve sosyal gelişimi destekleyen açık alan ve grup etkinlikleri." }
   ],
   staff: [
     { name: "Eğitim Ekibi", role: "Sınıf ve Gelişim Takibi", description: "Çocukların günlük rutinini, etkinlik katılımını ve sınıf içi gelişimini takip eder." },
