@@ -1,10 +1,14 @@
+/* Ada reference landing - final desktop/mobile polish
+   Purpose: make /ada look closer to the approved colorful reference mockup.
+   This file intentionally loads last and only targets Ada playful landing classes. */
+
 .adaPlayPage {
   min-height: 100vh;
-  padding: 18px clamp(18px, 3.4vw, 58px) 0;
+  padding: 16px clamp(16px, 3.2vw, 52px) 0;
   color: #061a55;
   background:
-    radial-gradient(circle at 4% 25%, rgba(5, 99, 246, .10), transparent 23%),
-    radial-gradient(circle at 96% 12%, rgba(207, 54, 246, .12), transparent 21%),
+    radial-gradient(circle at 3% 26%, rgba(5, 99, 246, .10), transparent 22%),
+    radial-gradient(circle at 96% 12%, rgba(207, 54, 246, .13), transparent 21%),
     radial-gradient(circle at 92% 78%, rgba(20, 184, 166, .12), transparent 24%),
     linear-gradient(180deg, #ffffff 0%, #f8fbff 58%, #ffffff 100%);
 }
@@ -14,24 +18,24 @@
 .adaPlayFeatures,
 .adaPlayTrustAndCta,
 .adaPlayFooter {
-  width: min(1620px, 94vw);
+  width: min(1660px, 94vw);
   margin-left: auto;
   margin-right: auto;
 }
 
 .adaPlayHeader {
-  min-height: 108px;
+  min-height: 104px;
   padding: 0 0 12px;
-  gap: 34px;
+  gap: 32px;
   align-items: center;
 }
 
 .adaPlayLogo {
-  min-width: 300px;
+  min-width: 310px;
 }
 
 .adaLogoWord {
-  font-size: clamp(66px, 5.7vw, 104px);
+  font-size: clamp(66px, 5.6vw, 104px);
   line-height: .72;
   letter-spacing: -.085em;
 }
@@ -51,7 +55,7 @@
 .adaPlayTabs {
   flex: 1 1 610px;
   max-width: 610px;
-  min-height: 64px;
+  min-height: 62px;
   padding: 5px;
   border-radius: 999px;
   background: linear-gradient(135deg, #075cf7 0%, #1554ee 42%, #9119db 100%);
@@ -59,7 +63,7 @@
 }
 
 .adaPlayTabs a {
-  height: 54px;
+  height: 52px;
   gap: 12px;
   font-size: 18px;
   font-weight: 950;
@@ -89,8 +93,8 @@
 }
 
 .adaPlayHeroCard {
-  min-height: 462px;
-  padding: 48px 56px 44px;
+  min-height: 452px;
+  padding: 46px 54px 42px;
   box-shadow: none;
   overflow: hidden;
 }
@@ -106,8 +110,8 @@
 .adaPlayArtCard {
   border-radius: 0 58px 58px 0;
   background:
-    radial-gradient(circle at 80% 15%, rgba(255, 255, 255, .55), transparent 15%),
-    radial-gradient(circle at 27% 30%, rgba(255, 255, 255, .50), transparent 24%),
+    radial-gradient(circle at 82% 14%, rgba(255, 255, 255, .60), transparent 15%),
+    radial-gradient(circle at 26% 30%, rgba(255, 255, 255, .50), transparent 24%),
     linear-gradient(135deg, #ffe8ff 0%, #b553eb 43%, #9119db 100%);
 }
 
@@ -119,16 +123,15 @@
 .adaPlayHeroCard h1,
 .adaPlayHeroCard h2 {
   position: relative;
-  z-index: 5;
-  max-width: 500px;
+  z-index: 8;
   margin: 24px 0 18px;
-  font-size: clamp(50px, 4.05vw, 69px);
+  font-size: clamp(48px, 3.85vw, 64px);
   line-height: .96;
   letter-spacing: -.067em;
 }
 
 .adaPlayKresCard h1 {
-  max-width: 430px;
+  max-width: 350px;
 }
 
 .adaPlayArtCard h2 {
@@ -137,12 +140,16 @@
 
 .adaPlayHeroCard p {
   position: relative;
-  z-index: 5;
-  max-width: 360px;
-  margin: 0 0 26px;
-  font-size: 15.8px;
+  z-index: 8;
+  max-width: 335px;
+  margin: 0 0 25px;
+  font-size: 15.5px;
   line-height: 1.55;
   font-weight: 760;
+}
+
+.adaPlayArtCard p {
+  max-width: 385px;
 }
 
 .adaPlayPrimary,
@@ -174,51 +181,85 @@
   background: #ff5b49;
 }
 
+/* HERO PHOTO MASKS: same design language on both sides */
+.adaPlayPhoto,
+.adaPlayDancer,
+.adaPlayMusicKid {
+  pointer-events: none;
+}
+
 .adaPlayPhotoKres {
-  right: -1px;
+  right: 0;
   bottom: 0;
-  width: 56%;
-  height: 77%;
-  border-top-left-radius: 86px;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  width: 53%;
+  height: 74%;
+  border-radius: 92px 0 0 92px;
+  overflow: hidden;
+  box-shadow: -22px 0 44px rgba(7, 92, 247, .06);
+}
+
+.adaPlayPhotoKres::before {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  left: -34px;
+  top: -20px;
+  width: 95px;
+  height: 118%;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(90deg, rgba(232,247,255,.98), rgba(232,247,255,.68) 45%, transparent 100%);
+  pointer-events: none;
+}
+
+.adaPlayPhotoKres::after {
+  background: linear-gradient(90deg, rgba(232,247,255,.58) 0%, rgba(255,255,255,.16) 28%, transparent 58%);
 }
 
 .adaPlayPhotoKres img {
   object-fit: cover;
-  object-position: center center;
-}
-
-.adaPlayPhotoKres::after {
-  background: linear-gradient(90deg, rgba(232,247,255,.82) 0%, rgba(255,255,255,.26) 25%, transparent 50%);
+  object-position: 47% 52%;
+  transform: scale(1.035);
 }
 
 .adaPlayDancer {
   right: 0;
   bottom: 0;
-  width: 44%;
+  width: 43%;
   height: 88%;
-  border-top-left-radius: 999px;
-  border-bottom-left-radius: 999px;
-  background: rgba(255,255,255,.25);
+  border-radius: 999px 0 0 999px;
+  background: rgba(255,255,255,.24);
+  overflow: hidden;
+  box-shadow: -18px 0 38px rgba(255,255,255,.10);
+}
+
+.adaPlayDancer::before {
+  content: "";
+  position: absolute;
+  inset: 16px 0 16px -28px;
+  z-index: 2;
+  border-radius: 999px 0 0 999px;
+  border: 24px solid rgba(255,255,255,.44);
+  border-right: 0;
+  pointer-events: none;
+}
+
+.adaPlayDancer::after {
+  z-index: 3;
+  background: linear-gradient(90deg, rgba(255,255,255,.55), rgba(255,255,255,.04) 45%, transparent 70%);
 }
 
 .adaPlayDancer img {
   object-fit: cover;
   object-position: center 30%;
-}
-
-.adaPlayDancer::after {
-  background: linear-gradient(90deg, rgba(255,255,255,.55), rgba(255,255,255,.05) 45%, transparent 70%);
+  transform: scale(1.04);
 }
 
 .adaPlayMusicKid {
-  right: 23%;
+  right: 22%;
   bottom: 13%;
   width: 150px;
   height: 96px;
-  border: 9px solid rgba(255,255,255,.9);
+  border: 9px solid rgba(255,255,255,.92);
   border-radius: 28px;
   overflow: hidden;
   background: #fff;
@@ -234,20 +275,23 @@
 
 .adaPlaySun {
   top: 66px;
-  left: 51%;
+  left: 48%;
+  z-index: 9;
   font-size: 62px;
   filter: drop-shadow(0 5px 0 rgba(255,255,255,.75));
 }
 
 .adaPlayCloud {
   top: 126px;
-  left: 44%;
+  left: 42%;
+  z-index: 9;
   font-size: 34px;
 }
 
 .adaPlayNotes {
   top: 74px;
   right: 28px;
+  z-index: 9;
   font-size: 54px;
   letter-spacing: 16px;
 }
@@ -257,15 +301,16 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 22px;
-  margin-top: -34px;
-  z-index: 8;
+  margin-top: -30px;
+  position: relative;
+  z-index: 10;
 }
 
 .adaPlayFeature {
   min-height: 118px;
   padding: 20px 22px;
   border-radius: 25px;
-  background: rgba(255,255,255,.96);
+  background: rgba(255,255,255,.97);
   box-shadow: 0 14px 40px rgba(15, 23, 42, .095);
 }
 
@@ -392,12 +437,12 @@
 
 @media (min-width: 1500px) {
   .adaPlayHeroCard {
-    min-height: 500px;
+    min-height: 486px;
   }
 
   .adaPlayHeroCard h1,
   .adaPlayHeroCard h2 {
-    font-size: 68px;
+    font-size: 66px;
   }
 }
 
@@ -411,28 +456,42 @@
   .adaPlayFeatures {
     width: min(1520px, 88vw);
   }
-
-  .adaPlayTrustAndCta {
-    width: min(1640px, 94vw);
-  }
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 1320px) {
   .adaPlayHeader {
-    flex-wrap: wrap;
+    gap: 18px;
   }
 
-  .adaPlayTabs {
-    order: 3;
-    max-width: none;
-    flex-basis: 100%;
+  .adaPlayLogo {
+    min-width: 245px;
+  }
+
+  .adaLogoWord {
+    font-size: 72px;
+  }
+
+  .adaPlayHeroCard {
+    padding: 36px 40px 36px;
+  }
+
+  .adaPlayHeroCard h1,
+  .adaPlayHeroCard h2 {
+    font-size: 52px;
+  }
+
+  .adaPlayKresCard h1 {
+    max-width: 315px;
+  }
+
+  .adaPlayPhotoKres {
+    width: 51%;
   }
 }
 
 @media (max-width: 1120px) {
   .adaPlayHero {
     gap: 16px;
-    grid-template-columns: 1fr;
   }
 
   .adaPlayKresCard,
@@ -440,21 +499,13 @@
     border-radius: 42px;
   }
 
-  .adaPlayFeatures {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-top: 22px;
-  }
-
-  .adaPlayTrustAndCta {
-    grid-template-columns: 1fr;
+  .adaPlayPhotoKres {
+    right: 0;
+    border-radius: 86px 0 0 42px;
   }
 }
 
 @media (max-width: 760px) {
-  .adaPlayPage {
-    padding: 12px 12px 0;
-  }
-
   .adaPlayHeader,
   .adaPlayHero,
   .adaPlayFeatures,
@@ -466,21 +517,14 @@
   .adaPlayHeader {
     min-height: auto;
     padding-top: 8px;
-    gap: 12px;
   }
 
   .adaPlayLogo {
     min-width: 0;
-    width: 100%;
-    text-align: center;
   }
 
   .adaLogoWord {
     font-size: 50px;
-  }
-
-  .adaPlayLogo small {
-    font-size: 11px;
   }
 
   .adaPlayTabs {
@@ -490,12 +534,7 @@
 
   .adaPlayTabs a {
     height: 40px;
-    gap: 6px;
     font-size: 12px;
-  }
-
-  .adaPlayTopLinks {
-    display: none;
   }
 
   .adaPlayHero {
@@ -503,21 +542,13 @@
   }
 
   .adaPlayHeroCard {
-    min-height: auto;
     padding: 24px 20px 245px;
     border-radius: 28px;
   }
 
   .adaPlayHeroCard h1,
   .adaPlayHeroCard h2 {
-    max-width: none;
-    margin: 18px 0 14px;
     font-size: clamp(38px, 10.7vw, 50px);
-  }
-
-  .adaPlayHeroCard p {
-    max-width: none;
-    font-size: 15px;
   }
 
   .adaPlayPhotoKres,
@@ -526,6 +557,11 @@
     width: 100%;
     right: 0;
     border-radius: 0 0 28px 28px;
+  }
+
+  .adaPlayPhotoKres::before,
+  .adaPlayDancer::before {
+    display: none;
   }
 
   .adaPlayDancer {
@@ -542,49 +578,15 @@
     border-width: 6px;
   }
 
-  .adaPlaySun {
-    top: 32px;
-    left: auto;
-    right: 26px;
-    font-size: 44px;
-  }
-
-  .adaPlayCloud {
-    display: none;
-  }
-
-  .adaPlayNotes {
-    top: 36px;
-    right: 14px;
-    font-size: 34px;
-    letter-spacing: 8px;
-  }
-
   .adaPlayFeatures {
     width: 100%;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
     margin-top: 14px;
   }
 
-  .adaPlayFeature {
-    min-height: 122px;
-    padding: 18px;
-    border-radius: 22px;
-  }
-
-  .adaPlayTrustBand {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    padding: 16px;
-    border-radius: 24px;
-  }
-
-  .adaPlayTrustBand article {
-    padding: 14px;
-    border: 0;
-    border-radius: 18px;
-    background: rgba(245, 248, 255, .9);
+  .adaPlayTrustAndCta {
+    display: flex;
+    flex-direction: column;
   }
 
   .adaPlayYellowCta {
@@ -599,18 +601,5 @@
     right: 0;
     bottom: 0;
     border-radius: 0 0 24px 24px;
-  }
-
-  .adaPlayFooter {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 22px;
-    border-radius: 28px 28px 0 0;
-  }
-
-  .adaPlayFooter > strong {
-    font-size: 28px;
-    white-space: normal;
   }
 }
