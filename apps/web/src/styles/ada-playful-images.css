@@ -1,0 +1,71 @@
+.adaPlayMusicKid,
+.adaPlayHappyKids {
+  overflow: hidden;
+}
+
+.adaPlayMusicKid img,
+.adaPlayHappyKids img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.adaPlayMusicKid {
+  right: 14%;
+  bottom: 8%;
+  width: 170px;
+  height: 156px;
+  padding: 0;
+  border: 6px solid rgba(255, 255, 255, .72);
+  border-radius: 38px;
+  background: rgba(255, 255, 255, .18);
+  transform: rotate(4deg);
+}
+
+.adaPlayMusicKid img {
+  object-position: 50% 34%;
+}
+
+.adaPlayHappyKids {
+  flex: 0 0 230px;
+  align-self: stretch;
+  margin: -18px -28px -30px 2px;
+  border-radius: 34px 30px 30px 34px;
+  box-shadow: -18px 0 36px rgba(251, 191, 36, .22);
+}
+
+.adaPlayHappyKids img {
+  object-position: 50% 36%;
+}
+
+.adaPlayPhotoKres img {
+  object-position: 52% 50%;
+}
+
+.adaPlayDancer img {
+  object-position: 54% 44%;
+}
+
+@media (max-width: 1120px) {
+  .adaPlayMusicKid {
+    right: 10%;
+    bottom: 7%;
+  }
+
+  .adaPlayHappyKids {
+    flex-basis: 260px;
+    min-height: 210px;
+    margin: 0 -18px -30px 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .adaPlayMusicKid {
+    display: none;
+  }
+
+  .adaPlayHappyKids {
+    display: none;
+  }
+}
