@@ -138,24 +138,38 @@
   min-height: 520px;
   position: relative;
   overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.adaPosterPanel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .adaPosterKresPanel {
   padding: 56px 56px 52px 58px;
   border-radius: 62px 0 0 62px;
-  background:
-    radial-gradient(circle at 72% 15%, rgba(255, 217, 59, .42), transparent 13%),
-    radial-gradient(circle at 7% 92%, rgba(7, 92, 247, .36), transparent 21%),
-    linear-gradient(135deg, #eaf8ff 0%, #faffff 52%, #ffffff 100%);
+  background-image: url('/ada/ada-hero-kres-bg.png');
+  background-position: center center;
+}
+
+.adaPosterKresPanel::before {
+  background: linear-gradient(90deg, rgba(255,255,255,.70) 0%, rgba(255,255,255,.42) 30%, rgba(255,255,255,.08) 56%, transparent 100%);
 }
 
 .adaPosterArtPanel {
   padding: 56px 56px 52px 60px;
   border-radius: 0 62px 62px 0;
-  background:
-    radial-gradient(circle at 82% 12%, rgba(255,255,255,.58), transparent 16%),
-    radial-gradient(circle at 24% 28%, rgba(255,255,255,.54), transparent 24%),
-    linear-gradient(135deg, #ffe9ff 0%, #b857ec 42%, #9017db 100%);
+  background-image: url('/ada/ada-hero-sanat-bg.png');
+  background-position: center center;
+}
+
+.adaPosterArtPanel::before {
+  background: linear-gradient(90deg, rgba(255,255,255,.64) 0%, rgba(255,255,255,.28) 33%, rgba(255,255,255,.03) 58%, transparent 100%);
 }
 
 .adaPosterTextBlock {
@@ -165,7 +179,7 @@
 }
 
 .adaPosterKresText { max-width: 405px; }
-.adaPosterArtText { max-width: 500px; }
+.adaPosterArtText { max-width: 520px; }
 
 .adaPosterBadge {
   display: inline-flex;
@@ -245,186 +259,14 @@
 
 .adaPosterActions { gap: 14px; flex-wrap: wrap; }
 
-.adaPosterKresImage,
-.adaPosterStage,
-.adaPosterBaleImage,
-.adaPosterGuitarCard,
-.adaPosterSun,
-.adaPosterCloud,
-.adaPosterBlueShape,
-.adaPosterTealShape,
-.adaPosterCoralShape,
-.adaPosterNotes {
-  pointer-events: none;
-}
-
-/* --- SOL PANEL: Kreş görseli --- */
-/* Organik blob köşeler: her kenar farklı kavis alıyor, düz rounded-rectangle değil */
-.adaPosterKresImage {
-  position: absolute;
-  z-index: 4;
-  right: 28px;
-  top: 28px;
-  bottom: 28px;
-  width: 56%;
-  margin: 0;
-  overflow: hidden;
-  border-radius: 62% 38% 55% 45% / 48% 55% 45% 52%;
-  clip-path: none;
-  box-shadow: 0 24px 60px rgba(7, 26, 85, .18);
-}
-
-.adaPosterKresImage img,
-.adaPosterBaleImage img,
-.adaPosterGuitarCard img,
-.adaPosterCta img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.adaPosterKresImage img {
-  object-position: center 30%;
-}
-
-.adaPosterKresImage::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(90deg, rgba(234,248,255,.35), transparent 30%);
-}
-
-/* --- SAĞ PANEL: Dans & Müzik sahnesi --- */
-/* Bale görseli ana zemin, gitar görseli maskeyle eritilip aynı sahnenin parçası gibi kaynaşıyor */
-.adaPosterStage {
-  position: absolute;
-  z-index: 4;
-  right: 28px;
-  top: 28px;
-  bottom: 28px;
-  width: 56%;
-  isolation: isolate;
-  overflow: visible;
-  border-radius: 58% 42% 50% 50% / 52% 48% 52% 48%;
-  clip-path: none;
-}
-
-.adaPosterStage::before {
-  display: none;
-}
-
-.adaPosterBaleImage {
-  position: absolute;
-  z-index: 5;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  border-radius: 58% 42% 50% 50% / 52% 48% 52% 48%;
-  box-shadow: 0 24px 60px rgba(60, 10, 110, .28);
-}
-
-.adaPosterBaleImage img {
-  object-fit: cover;
-  object-position: center 20%;
-}
-
-.adaPosterGuitarCard {
-  position: absolute;
-  z-index: 6;
-  left: -10%;
-  bottom: -6%;
-  width: 58%;
-  height: 58%;
-  margin: 0;
-  overflow: hidden;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  opacity: 1;
-  filter: none;
-  -webkit-mask-image: radial-gradient(ellipse 78% 78% at 55% 60%, #000 55%, transparent 92%);
-  mask-image: radial-gradient(ellipse 78% 78% at 55% 60%, #000 55%, transparent 92%);
-}
-
-.adaPosterGuitarCard img {
-  object-position: center center;
-}
-
-.adaPosterNotes {
-  position: absolute;
-  z-index: 8;
-  top: 20px;
-  right: 20px;
-  color: rgba(255,255,255,.9);
-  font-size: 48px;
-  letter-spacing: 12px;
-  transform: rotate(-8deg);
-}
-
-.adaPosterSun {
-  position: absolute;
-  z-index: 11;
-  top: 78px;
-  left: 48%;
-  color: #ffbf00;
-  font-size: 70px;
-  filter: drop-shadow(0 5px 0 rgba(255,255,255,.82));
-}
-
-.adaPosterCloud {
-  position: absolute;
-  z-index: 11;
-  top: 142px;
-  left: 41%;
-  color: rgba(255,255,255,.95);
-  font-size: 38px;
-}
-
-.adaPosterBlueShape {
-  position: absolute;
-  left: -120px;
-  bottom: -82px;
-  width: 300px;
-  height: 300px;
-  border-radius: 999px;
-  background: #075cf7;
-}
-
-.adaPosterTealShape {
-  position: absolute;
-  right: 10%;
-  bottom: -64px;
-  width: 150px;
-  height: 130px;
-  border-radius: 999px 999px 0 0;
-  background: #29c6c7;
-}
-
-.adaPosterCoralShape {
-  position: absolute;
-  z-index: 2;
-  right: -72px;
-  bottom: -70px;
-  width: 330px;
-  height: 235px;
-  border-radius: 999px;
-  background: #ff5b49;
-  transform: rotate(-9deg);
-}
-
 .adaPosterFeatures {
   width: min(1480px, 90vw);
-  margin: -34px auto 0;
+  margin: -30px auto 0;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 22px;
   position: relative;
-  z-index: 20;
+  z-index: 8;
 }
 
 .adaPosterFeature {
@@ -432,8 +274,7 @@
   padding: 21px 24px;
   border-radius: 26px;
   background: rgba(255,255,255,.96);
-  box-shadow: 0 14px 40px rgba(15, 23, 42, .095);
-  border: 1px solid rgba(15, 23, 42, .05);
+  box-shadow: 0 16px 42px rgba(15, 23, 42, .095);
 }
 
 .adaPosterFeature b {
@@ -444,175 +285,178 @@
 
 .adaPosterFeature h3 {
   margin: 10px 0 5px;
-  font-size: 21px;
-  letter-spacing: -.035em;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 950;
 }
 
 .adaPosterFeature p {
   margin: 0;
-  color: #34416c;
-  font-size: 12.5px;
+  color: #1c2b61;
+  font-size: 12px;
   line-height: 1.42;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .adaPosterFeature i {
   display: block;
-  width: 38px;
+  width: 42px;
   height: 4px;
-  margin-top: 11px;
+  margin-top: 13px;
   border-radius: 999px;
+  background: currentColor;
 }
 
-.tone-purple h3 { color: #7c1de2; }
-.tone-purple i { background: #7c1de2; }
-.tone-teal h3 { color: #00a8b8; }
-.tone-teal i { background: #00a8b8; }
-.tone-orange h3 { color: #f97316; }
-.tone-orange i { background: #f97316; }
-.tone-blue h3 { color: #2563eb; }
-.tone-blue i { background: #2563eb; }
-.tone-pink h3 { color: #ec4899; }
-.tone-pink i { background: #ec4899; }
+.adaPosterFeature.tone-purple h3,
+.adaPosterFeature.tone-purple i { color: #8424dc; }
+.adaPosterFeature.tone-teal h3,
+.adaPosterFeature.tone-teal i { color: #12b8b6; }
+.adaPosterFeature.tone-orange h3,
+.adaPosterFeature.tone-orange i { color: #ff7900; }
+.adaPosterFeature.tone-blue h3,
+.adaPosterFeature.tone-blue i { color: #075cf7; }
+.adaPosterFeature.tone-pink h3,
+.adaPosterFeature.tone-pink i { color: #ef3f9b; }
 
 .adaPosterInfoRow {
   width: min(1560px, 94vw);
-  margin: 22px auto 0;
+  margin: 26px auto 0;
   display: grid;
   grid-template-columns: 1.22fr .78fr;
-  gap: 20px;
+  gap: 22px;
   align-items: stretch;
 }
 
 .adaPosterTrust {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding: 22px;
-  border-radius: 28px;
-  background: rgba(255,255,255,.95);
+  gap: 0;
+  padding: 24px;
+  border-radius: 30px;
+  background: rgba(255,255,255,.94);
   box-shadow: 0 16px 44px rgba(15, 23, 42, .075);
 }
 
 .adaPosterTrust article {
+  text-align: center;
   padding: 4px 18px;
-  border-right: 1px dashed rgba(93, 95, 239, .22);
+  border-right: 1px dashed rgba(39, 35, 104, .22);
 }
 
 .adaPosterTrust article:last-child { border-right: 0; }
 
 .adaPosterTrust b {
   display: block;
-  font-size: 34px;
+  font-size: 36px;
 }
 
 .adaPosterTrust h3 {
-  margin: 8px 0 6px;
+  margin: 9px 0 6px;
   color: #075cf7;
   font-size: 16px;
+  font-weight: 950;
 }
 
 .adaPosterTrust p {
   margin: 0;
-  color: #34416c;
+  color: #23305e;
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.45;
   font-weight: 700;
 }
 
 .adaPosterCta {
-  min-height: 166px;
-  padding: 24px 24px 20px;
-  border-radius: 30px;
   position: relative;
-  display: flex;
-  align-items: center;
+  min-height: 176px;
+  padding: 27px 27px 22px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, #ffd941 0%, #ffbb24 100%);
   overflow: hidden;
-  background:
-    radial-gradient(circle at 84% 18%, rgba(255,255,255,.42), transparent 22%),
-    linear-gradient(135deg, #ffd43b, #ffb703);
-  box-shadow: 0 18px 45px rgba(245, 158, 11, .17);
+  box-shadow: 0 16px 44px rgba(255, 171, 36, .20);
+}
+
+.adaPosterCta div {
+  position: relative;
+  z-index: 2;
+  max-width: 300px;
 }
 
 .adaPosterCta h2 {
-  position: relative;
-  z-index: 3;
-  max-width: 260px;
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   color: #07194f;
-  font-size: clamp(28px, 2.65vw, 38px);
-  line-height: 1;
-  letter-spacing: -.045em;
+  font-size: clamp(28px, 2.6vw, 38px);
+  line-height: .98;
+  letter-spacing: -.04em;
+  font-weight: 950;
 }
 
 .adaPosterCta a {
-  position: relative;
-  z-index: 3;
   min-height: 48px;
   color: #fff;
-  background: #ff503d;
-  box-shadow: 0 14px 34px rgba(255, 80, 61, .22);
+  background: linear-gradient(135deg, #ff6950, #ff4638);
 }
 
 .adaPosterCta figure {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 47%;
+  width: 48%;
   height: 112%;
   margin: 0;
-  border-radius: 30px;
   overflow: hidden;
+  border-radius: 30px;
 }
 
 .adaPosterCta img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
   object-position: center 36%;
 }
 
 .adaPosterFooter {
-  width: min(1640px, 94vw);
-  min-height: 108px;
-  margin: 20px auto 0;
-  padding: 22px 34px;
-  gap: 34px;
+  width: min(1640px, 96vw);
+  min-height: 112px;
+  margin: 22px auto 0;
+  padding: 24px 36px;
   border-radius: 44px 44px 0 0;
+  gap: 38px;
   color: #fff;
-  background:
-    radial-gradient(circle at 82% 20%, rgba(56, 189, 248, .56), transparent 32%),
-    linear-gradient(135deg, #064ce7 0%, #0047db 54%, #009bff 100%);
+  background: linear-gradient(135deg, #075cf7 0%, #0059e8 62%, #034ad4 100%);
 }
 
 .adaPosterFooter article {
-  gap: 12px;
+  gap: 13px;
   min-width: 0;
 }
 
 .adaPosterFooter b {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  border-radius: 999px;
-  background: #fff;
+  border-radius: 50%;
+  background: rgba(255,255,255,.95);
   color: #075cf7;
   font-size: 22px;
 }
 
-.adaPosterFooter h3,
+.adaPosterFooter h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 950;
+}
+
 .adaPosterFooter p {
   margin: 0;
-}
-
-.adaPosterFooter h3 {
-  font-size: 15px;
-}
-
-.adaPosterFooter p {
-  margin-top: 4px;
+  max-width: 180px;
   font-size: 12px;
-  line-height: 1.4;
-  color: rgba(255,255,255,.88);
+  line-height: 1.35;
   font-weight: 700;
+  opacity: .94;
 }
 
 .adaPosterFooter > strong {
@@ -623,83 +467,231 @@
   white-space: nowrap;
 }
 
-@media (max-width: 1180px) {
-  .adaPosterHeader { flex-wrap: wrap; }
-  .adaPosterTabs { order: 3; width: 100%; max-width: none; }
-  .adaPosterHero { grid-template-columns: 1fr; gap: 16px; }
-  .adaPosterKresPanel,
-  .adaPosterArtPanel { border-radius: 42px; }
-  .adaPosterFeatures { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 18px; }
-  .adaPosterInfoRow { grid-template-columns: 1fr; }
-  .adaPosterFooter { flex-wrap: wrap; }
-  .adaPosterFooter > strong { margin-left: 0; width: 100%; }
+@media (min-width: 1700px) {
+  .adaPosterShell { width: min(1720px, 96vw); }
+  .adaPosterPanel { min-height: 555px; }
+  .adaPosterHero h1,
+  .adaPosterHero h2 { font-size: 80px; }
 }
 
-@media (max-width: 760px) {
-  .adaPosterPage { padding: 12px 12px 0; }
+@media (max-width: 1280px) {
+  .adaPosterHeader {
+    flex-wrap: wrap;
+  }
+
+  .adaPosterLogo { min-width: 240px; }
+  .adaPosterTabs { order: 3; width: 100%; max-width: 720px; margin: 0 auto; }
+  .adaPosterLinks { margin-left: auto; }
+
+  .adaPosterPanel { min-height: 500px; }
+  .adaPosterHero h1,
+  .adaPosterHero h2 { font-size: clamp(42px, 5vw, 60px); }
+}
+
+@media (max-width: 980px) {
+  .adaPosterHero,
+  .adaPosterInfoRow {
+    grid-template-columns: 1fr;
+  }
+
+  .adaPosterKresPanel,
+  .adaPosterArtPanel {
+    border-radius: 40px;
+  }
+
+  .adaPosterFeatures {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 20px;
+  }
+
+  .adaPosterTrust {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .adaPosterFooter {
+    flex-wrap: wrap;
+  }
+
+  .adaPosterFooter > strong {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .adaPosterPage {
+    padding: 16px 14px 0;
+  }
+
   .adaPosterShell,
   .adaPosterInfoRow,
-  .adaPosterFooter { width: 100%; }
-  .adaPosterHeader { min-height: auto; gap: 12px; }
-  .adaPosterLogo { width: 100%; min-width: 0; text-align: center; }
-  .adaPosterLogoText { font-size: 50px; }
-  .adaPosterLogo small { font-size: 11px; }
-  .adaPosterLinks { display: none; }
-  .adaPosterTabs { min-height: 50px; padding: 5px; }
-  .adaPosterTabs a { height: 40px; gap: 6px; font-size: 12px; }
-  .adaPosterTabs span { font-size: 16px; }
-  .adaPosterKresPanel,
-  .adaPosterArtPanel { min-height: auto; padding: 24px 20px 245px; }
+  .adaPosterFooter {
+    width: 100%;
+  }
+
+  .adaPosterHeader {
+    min-height: auto;
+    gap: 14px;
+  }
+
+  .adaPosterLogo {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .adaPosterLogoText {
+    font-size: 54px;
+  }
+
+  .adaPosterLogo small {
+    font-size: 11px;
+  }
+
+  .adaPosterLinks {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+  .adaPosterContact {
+    padding: 11px 13px;
+  }
+
+  .adaPosterTabs {
+    width: 100%;
+    min-height: 50px;
+    padding: 5px;
+    order: 2;
+  }
+
+  .adaPosterTabs a {
+    height: 40px;
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  .adaPosterTabs span {
+    font-size: 17px;
+  }
+
+  .adaPosterPanel {
+    min-height: 560px;
+    padding: 32px 24px 26px;
+    border-radius: 30px;
+    background-size: cover;
+  }
+
+  .adaPosterKresPanel {
+    background-position: 63% center;
+  }
+
+  .adaPosterArtPanel {
+    background-position: 64% center;
+  }
+
+  .adaPosterKresPanel::before,
+  .adaPosterArtPanel::before {
+    background: linear-gradient(180deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.55) 42%, rgba(255,255,255,.06) 82%, transparent 100%);
+  }
+
+  .adaPosterTextBlock,
+  .adaPosterKresText,
+  .adaPosterArtText {
+    max-width: 100%;
+  }
+
+  .adaPosterBadge {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
   .adaPosterHero h1,
-  .adaPosterHero h2 { font-size: clamp(38px, 10.7vw, 50px); }
-  .adaPosterHero p { font-size: 15px; }
+  .adaPosterHero h2 {
+    margin: 20px 0 14px;
+    font-size: clamp(38px, 11vw, 52px);
+  }
+
+  .adaPosterHero p {
+    max-width: 300px;
+    font-size: 14px;
+  }
+
+  .adaPosterActions {
+    align-items: stretch;
+  }
+
   .adaPosterPrimary,
   .adaPosterPurple,
-  .adaPosterOutline { min-height: 50px; padding: 0 20px; font-size: 14px; }
+  .adaPosterOutline {
+    min-height: 50px;
+    padding: 0 20px;
+    font-size: 13px;
+  }
 
-  /* Mobilde blob abartılmıyor, sade rounded-corner kartlara dönüyor */
-  .adaPosterKresImage {
-    width: calc(100% - 24px);
-    height: 220px;
-    right: 12px;
-    left: 12px;
-    top: auto;
-    bottom: 12px;
+  .adaPosterFeatures {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .adaPosterFeature {
+    min-height: 128px;
+    padding: 18px;
+  }
+
+  .adaPosterFeature b {
+    font-size: 30px;
+  }
+
+  .adaPosterFeature h3 {
+    font-size: 18px;
+  }
+
+  .adaPosterInfoRow {
+    gap: 14px;
+  }
+
+  .adaPosterTrust {
+    grid-template-columns: 1fr;
+    padding: 18px;
     border-radius: 24px;
   }
 
-  .adaPosterStage {
-    width: calc(100% - 24px);
-    height: 240px;
-    right: 12px;
-    left: 12px;
-    top: auto;
-    bottom: 12px;
-    border-radius: 24px;
+  .adaPosterTrust article {
+    border-right: 0;
+    border-bottom: 1px dashed rgba(39, 35, 104, .22);
+    padding: 14px 8px;
   }
 
-  .adaPosterBaleImage { border-radius: 24px; }
-
-  .adaPosterGuitarCard {
-    width: 46%;
-    height: 130px;
-    left: 8px;
-    bottom: -16px;
-    -webkit-mask-image: none;
-    mask-image: none;
-    border-radius: 18px;
-    overflow: hidden;
+  .adaPosterTrust article:last-child {
+    border-bottom: 0;
   }
 
-  .adaPosterSun { top: 32px; left: auto; right: 26px; font-size: 44px; }
-  .adaPosterCloud { display: none; }
-  .adaPosterNotes { top: 28px; right: 14px; font-size: 34px; letter-spacing: 8px; }
-  .adaPosterFeatures { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
-  .adaPosterFeature { min-height: 122px; padding: 18px; border-radius: 22px; }
-  .adaPosterTrust { grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px; }
-  .adaPosterTrust article { padding: 14px; border: 0; border-radius: 18px; background: rgba(245, 248, 255, .9); }
-  .adaPosterCta { min-height: 220px; padding-bottom: 128px; }
-  .adaPosterCta figure { width: 100%; height: 130px; border-radius: 0 0 24px 24px; }
-  .adaPosterFooter { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 22px; border-radius: 28px 28px 0 0; }
-  .adaPosterFooter > strong { font-size: 28px; white-space: normal; }
+  .adaPosterCta {
+    min-height: 280px;
+    padding: 24px 22px 150px;
+    border-radius: 26px;
+  }
+
+  .adaPosterCta figure {
+    width: 100%;
+    height: 145px;
+    border-radius: 0 0 26px 26px;
+  }
+
+  .adaPosterFooter {
+    padding: 22px;
+    border-radius: 28px 28px 0 0;
+    gap: 18px;
+  }
+
+  .adaPosterFooter article {
+    width: 100%;
+  }
+
+  .adaPosterFooter > strong {
+    font-size: 24px;
+    white-space: normal;
+  }
 }
