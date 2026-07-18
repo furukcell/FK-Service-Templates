@@ -22,6 +22,20 @@
 
   .adaSiteTabsWrap {
     padding: 12px 14px;
+    gap: 16px;
+  }
+
+  .adaSiteMiniBrand {
+    min-width: 260px;
+    padding-left: 8px;
+  }
+
+  .adaSiteTabs {
+    gap: 12px;
+  }
+
+  .adaSiteTab {
+    min-height: 72px;
   }
 
   .adaHero {
@@ -72,6 +86,14 @@
     width: min(1560px, 94vw);
   }
 
+  .adaSiteMiniBrand {
+    min-width: 300px;
+  }
+
+  .adaSiteTab {
+    min-height: 76px;
+  }
+
   .adaHero {
     padding: 64px 72px;
   }
@@ -95,5 +117,9 @@
   .adaSplitSection,
   .adaFormBand {
     width: min(1660px, 95vw);
+  }
+
+  .adaSiteMiniBrand {
+    min-width: 330px;
   }
 }
