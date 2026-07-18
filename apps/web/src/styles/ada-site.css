@@ -1,25 +1,155 @@
-.adaGateway {
+.adaGateway,
+.adaPage {
   min-height: 100vh;
-  color: #1f1437;
+  color: #21163a;
   background:
     radial-gradient(circle at 14% 12%, rgba(255, 255, 255, 0.98), transparent 24%),
-    radial-gradient(circle at 82% 20%, rgba(6, 182, 212, 0.18), transparent 28%),
-    linear-gradient(135deg, #fff7ed 0%, #f5f3ff 42%, #ecfeff 100%);
+    radial-gradient(circle at 82% 18%, rgba(49, 199, 183, 0.18), transparent 29%),
+    radial-gradient(circle at 18% 88%, rgba(246, 184, 75, 0.18), transparent 24%),
+    linear-gradient(135deg, #fff8ec 0%, #f8f3ff 44%, #e8fbf7 100%);
+}
+
+.adaPage {
+  padding-bottom: 44px;
+}
+
+.adaSiteTabsOuter {
+  position: sticky;
+  top: 14px;
+  z-index: 90;
+  width: min(1120px, 92vw);
+  margin: 18px auto 14px;
+}
+
+.adaSiteTabsWrap,
+.adaSiteMiniBrand,
+.adaSiteTabs,
+.adaSiteTab,
+.adaGatewayActions,
+.adaSubsiteTopLink {
+  display: flex;
+  align-items: center;
+}
+
+.adaSiteTabsWrap {
+  gap: 14px;
+  padding: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 22px 58px rgba(67, 56, 202, 0.14);
+  backdrop-filter: blur(18px);
+}
+
+.adaSiteMiniBrand,
+.adaSiteTab,
+.adaGatewayPrimary,
+.adaGatewaySecondary,
+.adaChoiceCard,
+.adaSubsiteTopLink a {
+  text-decoration: none;
+}
+
+.adaSiteMiniBrand {
+  flex: 0 0 auto;
+  gap: 11px;
+  min-width: 176px;
+  color: #312e81;
+}
+
+.adaSiteMiniBrand span {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  color: #fff;
+  font-weight: 950;
+  background: linear-gradient(135deg, #6559ec, #31c7b7);
+  box-shadow: 0 15px 28px rgba(101, 89, 236, 0.22);
+}
+
+.adaSiteMiniBrand strong {
+  display: block;
+  line-height: 1;
+  font-size: 19px;
+  letter-spacing: -0.04em;
+}
+
+.adaSiteMiniBrand small {
+  display: block;
+  margin-top: 3px;
+  color: #7a7194;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.adaSiteTabs {
+  flex: 1;
+  gap: 10px;
+}
+
+.adaSiteTab {
+  flex: 1;
+  min-height: 64px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 999px;
+  color: #51446f;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(101, 89, 236, 0.12);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.adaSiteTab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(79, 70, 229, 0.12);
+}
+
+.adaSiteTab small {
+  color: #7c6d97;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.adaSiteTab strong {
+  margin-top: 4px;
+  font-size: clamp(17px, 1.35vw, 22px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.adaSiteTab.isActive {
+  color: #fff;
+  background: linear-gradient(135deg, #6559ec 0%, #31c7b7 100%);
+  box-shadow: 0 20px 48px rgba(101, 89, 236, 0.27);
+}
+
+.adaSiteTab.isActive small {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.adaGateway {
   overflow: hidden;
 }
 
 .adaGatewayHero {
-  width: min(1240px, 92vw);
-  min-height: calc(100vh - 48px);
-  margin: 24px auto;
-  padding: 28px;
-  border-radius: 44px;
+  width: min(1120px, 92vw);
+  min-height: calc(100vh - 150px);
+  margin: 14px auto 34px;
+  padding: clamp(26px, 4vw, 54px);
+  border-radius: 46px;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.86);
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.62)),
-    radial-gradient(circle at 78% 82%, rgba(124, 58, 237, 0.12), transparent 28%);
-  box-shadow: 0 34px 110px rgba(49, 46, 129, 0.18);
+    linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.66)),
+    radial-gradient(circle at 80% 20%, rgba(49, 199, 183, 0.16), transparent 30%),
+    radial-gradient(circle at 16% 90%, rgba(246, 184, 75, 0.16), transparent 25%);
+  box-shadow: 0 34px 110px rgba(49, 46, 129, 0.16);
 }
 
 .adaGatewayGlow {
@@ -35,7 +165,7 @@
   height: 260px;
   right: -68px;
   top: 88px;
-  background: #bae6fd;
+  background: #bdf2eb;
 }
 
 .adaGatewayGlowTwo {
@@ -43,73 +173,14 @@
   height: 220px;
   left: -42px;
   bottom: 86px;
-  background: #fbcfe8;
-}
-
-.adaGatewayNav,
-.adaGatewayNav div,
-.adaGatewayLogo,
-.adaGatewayActions,
-.adaSubsiteTopLink {
-  display: flex;
-  align-items: center;
-}
-
-.adaGatewayNav {
-  justify-content: space-between;
-  gap: 16px;
-  position: relative;
-  z-index: 2;
-}
-
-.adaGatewayNav div {
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.adaGatewayNav a,
-.adaGatewayLogo,
-.adaGatewayPrimary,
-.adaGatewaySecondary,
-.adaChoiceCard,
-.adaSubsiteTopLink a {
-  text-decoration: none;
-}
-
-.adaGatewayNav div a,
-.adaSubsiteTopLink a {
-  padding: 12px 16px;
-  border-radius: 999px;
-  color: #312e81;
-  font-weight: 900;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(124, 58, 237, 0.12);
-}
-
-.adaGatewayLogo {
-  gap: 12px;
-  color: #312e81;
-  font-size: 26px;
-  letter-spacing: -0.04em;
-}
-
-.adaGatewayLogo span {
-  width: 48px;
-  height: 48px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 18px;
-  color: #fff;
-  background: linear-gradient(135deg, #7c3aed, #06b6d4);
-  box-shadow: 0 16px 34px rgba(124, 58, 237, 0.24);
+  background: #ffe4b8;
 }
 
 .adaGatewayContent {
   position: relative;
   z-index: 2;
   max-width: 900px;
-  margin: 96px auto 48px;
+  margin: 74px auto 46px;
   text-align: center;
 }
 
@@ -117,16 +188,17 @@
   display: inline-flex;
   padding: 10px 16px;
   border-radius: 999px;
-  color: #7c3aed;
-  background: rgba(255, 255, 255, 0.84);
-  border: 1px solid rgba(124, 58, 237, 0.15);
+  color: #6559ec;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(101, 89, 236, 0.15);
   font-weight: 950;
 }
 
 .adaGatewayContent h1 {
   margin: 24px 0 18px;
-  font-size: clamp(44px, 6.2vw, 88px);
-  line-height: 0.94;
+  color: #21163a;
+  font-size: clamp(42px, 5.4vw, 82px);
+  line-height: 0.96;
   letter-spacing: -0.075em;
 }
 
@@ -154,13 +226,13 @@
 
 .adaGatewayPrimary {
   color: #fff;
-  background: linear-gradient(135deg, #7c3aed, #06b6d4);
-  box-shadow: 0 18px 38px rgba(124, 58, 237, 0.22);
+  background: linear-gradient(135deg, #6559ec, #31c7b7);
+  box-shadow: 0 18px 38px rgba(101, 89, 236, 0.22);
 }
 
 .adaGatewaySecondary {
   color: #4a044e;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.86);
   border: 1px solid rgba(190, 24, 93, 0.16);
 }
 
@@ -173,12 +245,12 @@
 }
 
 .adaChoiceCard {
-  min-height: 330px;
+  min-height: 318px;
   padding: 28px;
   border-radius: 34px;
   color: #25123d;
   background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: 0 20px 62px rgba(49, 46, 129, 0.12);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
@@ -198,7 +270,7 @@
   color: #fff;
   font-weight: 950;
   font-size: 25px;
-  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  background: linear-gradient(135deg, #6559ec, #31c7b7);
 }
 
 .adaChoiceCard:nth-child(2) .adaChoiceMark {
@@ -208,7 +280,7 @@
 .adaChoiceCard small {
   display: block;
   margin-top: 22px;
-  color: #7c3aed;
+  color: #6559ec;
   font-weight: 950;
 }
 
@@ -226,8 +298,24 @@
 
 .adaChoiceCard strong {
   display: inline-flex;
-  margin-top: 14px;
+  margin-top: 16px;
   color: #312e81;
+}
+
+.adaChoiceTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.adaChoiceTags span {
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: #4f46e5;
+  background: rgba(101, 89, 236, 0.08);
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .adaSubsiteTopLink {
@@ -239,19 +327,179 @@
   z-index: 11;
 }
 
-@media (max-width: 820px) {
-  .adaGatewayHero {
-    padding: 20px;
-    border-radius: 30px;
-  }
+.adaSubsiteTopLink a {
+  padding: 12px 16px;
+  border-radius: 999px;
+  color: #312e81;
+  font-weight: 900;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(124, 58, 237, 0.12);
+}
 
-  .adaGatewayNav {
-    align-items: flex-start;
+.adaKresPage .pageShell,
+.adaSanatPage .pageShell {
+  width: min(1280px, 92vw);
+  border-radius: 42px;
+  box-shadow: 0 30px 92px rgba(49, 46, 129, 0.12);
+}
+
+.adaKresPage .kindergartenPremiumHeroMount,
+.adaKresPage .kindergartenPremiumHeroMount.immersiveFlowSection {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 255, 255, 0.98), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(49, 199, 183, 0.18), transparent 25%),
+    linear-gradient(145deg, #fff9eb 0%, #f3f1ff 48%, #e2fbf5 100%);
+}
+
+.adaKresPage .kindergartenPremiumHeroMount .salonPremiumCopy h1 {
+  color: #272169;
+  letter-spacing: -0.06em;
+}
+
+.adaKresPage .kindergartenPremiumHeroMount .salonPremiumPrimary {
+  background: linear-gradient(90deg, #6559ec, #31c7b7);
+}
+
+.adaKresPage .kindergartenPremiumHeroMount .salonPremiumSecondary {
+  color: #2f2a72;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.adaKresPage .kindergartenPremiumHeroMount .salonPremiumStage,
+.adaKresPage .kindergartenPremiumHeroMount .salonPremiumSlide {
+  background:
+    radial-gradient(circle at 74% 16%, rgba(255, 255, 255, 0.95), transparent 23%),
+    linear-gradient(90deg, #fffdf6 0%, #f6f3ff 50%, #e0faf4 100%);
+}
+
+.adaKresPage .kindergartenPremiumHeroMount .salonPremiumBenefitIcon {
+  color: #6559ec;
+  background: linear-gradient(145deg, #fff, #e2fbf5);
+}
+
+.adaArtLead {
+  width: min(1280px, 92vw);
+  margin: 14px auto 18px;
+  padding: clamp(28px, 5vw, 62px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  gap: 28px;
+  align-items: center;
+  border-radius: 42px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  background:
+    radial-gradient(circle at 84% 10%, rgba(251, 113, 133, 0.18), transparent 28%),
+    radial-gradient(circle at 18% 90%, rgba(248, 184, 78, 0.16), transparent 24%),
+    linear-gradient(135deg, rgba(255,255,255,0.94), rgba(255,241,248,0.76));
+  box-shadow: 0 30px 90px rgba(190, 24, 93, 0.12);
+}
+
+.adaArtLeadCopy span {
+  display: inline-flex;
+  padding: 9px 14px;
+  border-radius: 999px;
+  color: #be185d;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(190, 24, 93, 0.13);
+  font-weight: 950;
+}
+
+.adaArtLeadCopy h1 {
+  max-width: 740px;
+  margin: 20px 0 16px;
+  color: #3b0a3d;
+  font-size: clamp(42px, 5.5vw, 78px);
+  line-height: 0.96;
+  letter-spacing: -0.075em;
+}
+
+.adaArtLeadCopy p {
+  max-width: 660px;
+  margin: 0;
+  color: #71516f;
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.adaArtLeadCopy div {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.adaArtLeadVisual {
+  min-height: 360px;
+  border-radius: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255,255,255,0.32), transparent 23%),
+    linear-gradient(135deg, #be185d, #7c3aed 62%, #f8b84e);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18), 0 30px 60px rgba(190, 24, 93, 0.22);
+}
+
+.adaArtLeadVisual span {
+  font-size: 80px;
+  line-height: 1;
+}
+
+.adaArtLeadVisual strong {
+  display: block;
+  margin-top: 12px;
+  font-size: clamp(44px, 5vw, 76px);
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+}
+
+.adaArtLeadVisual em {
+  margin-top: 18px;
+  color: rgba(255,255,255,0.82);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.adaSanatPage .pageShell {
+  background:
+    radial-gradient(circle at 80% 10%, rgba(251, 113, 133, 0.12), transparent 26%),
+    linear-gradient(145deg, rgba(255,255,255,0.96), rgba(255,241,248,0.88));
+}
+
+@media (max-width: 920px) {
+  .adaSiteTabsWrap {
+    align-items: stretch;
+    border-radius: 28px;
     flex-direction: column;
   }
 
+  .adaSiteTabs {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .adaSiteMiniBrand {
+    width: 100%;
+  }
+
+  .adaArtLead {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 820px) {
+  .adaGatewayHero {
+    padding: 22px;
+    border-radius: 30px;
+  }
+
   .adaGatewayContent {
-    margin: 62px auto 34px;
+    margin: 54px auto 34px;
     text-align: left;
   }
 
@@ -270,5 +518,31 @@
   .adaSubsiteTopLink {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 540px) {
+  .adaSiteTabsOuter {
+    top: 8px;
+    width: min(94vw, 520px);
+    margin-top: 8px;
+  }
+
+  .adaSiteTabsWrap {
+    padding: 10px;
+  }
+
+  .adaSiteTab {
+    min-height: 58px;
+    padding: 10px 16px;
+  }
+
+  .adaGatewayContent h1,
+  .adaArtLeadCopy h1 {
+    font-size: clamp(36px, 11vw, 50px);
+  }
+
+  .adaArtLeadVisual {
+    min-height: 260px;
   }
 }
