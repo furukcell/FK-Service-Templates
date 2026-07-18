@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { SeoHead } from "../../src/components/SeoHead";
 
 const features = [
@@ -22,8 +23,12 @@ const footer = [
 ];
 
 export default function AdaPage() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <main className="adaPosterPage">
+    // adaClassicPage: sadece bu sayfaya özel mobil düzenlemeleri CSS'te
+    // güvenle scope'lamak için eklendi. /ada-yeni ve desktop görünüm etkilenmez.
+    <main className="adaPosterPage adaClassicPage">
       <SeoHead
         title="Ada Kreş & Sanat Akademisi | Kreş, Dans ve Müzik Okulu"
         description="Ada Kreş & Sanat Akademisi için kreş, dans ve müzik okulunu tek çatı altında tanıtan renkli ve modern demo site."
@@ -47,6 +52,40 @@ export default function AdaPage() {
             <a href="#iletisim">☻ İletişim</a>
             <a className="adaPosterContact" href="https://wa.me/905xxxxxxxxx" target="_blank" rel="noreferrer">☎ Bize Ulaşın</a>
           </div>
+
+          {/* Mobil hamburger buton - sadece <1024px görünür (CSS) */}
+          <button
+            type="button"
+            className="adaPosterMobileMenuBtn"
+            aria-label={isMenuOpen ? "Menüyü kapat" : "Menüyü aç"}
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
+          {/* Mobil açılır menü - sadece <1024px görünür (CSS) */}
+          <nav className={`adaPosterMobileMenu${isMenuOpen ? " isOpen" : ""}`} aria-label="Mobil menü">
+            <a href="/ada/kres" className="isActive" onClick={() => setIsMenuOpen(false)}>
+              <span>🏡</span> Kreş
+            </a>
+            <a href="/ada/sanat" onClick={() => setIsMenuOpen(false)}>
+              <span>♫</span> Dans &amp; Müzik Okulu
+            </a>
+            <a href="#hakkimizda" onClick={() => setIsMenuOpen(false)}>◎ Hakkımızda</a>
+            <a href="#iletisim" onClick={() => setIsMenuOpen(false)}>☻ İletişim</a>
+            <a
+              className="adaPosterContact"
+              href="https://wa.me/905xxxxxxxxx"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              ☎ Bize Ulaşın
+            </a>
+          </nav>
         </header>
 
         <section className="adaPosterHero">
@@ -60,6 +99,11 @@ export default function AdaPage() {
               </p>
               <a className="adaPosterPrimary" href="/ada/kres">Kreşi İncele <span>→</span></a>
             </div>
+
+            {/* Sadece mobilde görünen hero görseli (desktop'ta display:none) */}
+            <figure className="adaPosterMobileHeroFigure">
+              <img src="/ada/ada-hero-kres-bg.png" alt="Kreşte oynayan çocuklar" />
+            </figure>
           </article>
 
           <article className="adaPosterPanel adaPosterArtPanel">
@@ -74,6 +118,11 @@ export default function AdaPage() {
                 <a className="adaPosterOutline" href="/ada/sanat#request-form">▣ Deneme Dersi Al</a>
               </div>
             </div>
+
+            {/* Sadece mobilde görünen hero görseli (desktop'ta display:none) */}
+            <figure className="adaPosterMobileHeroFigure">
+              <img src="/ada/ada-hero-sanat-bg.png" alt="Dans eden bale öğrencisi" />
+            </figure>
           </article>
         </section>
 
