@@ -60,15 +60,6 @@ export default function AdaYeniPage() {
               </p>
               <a className="adaPosterPrimary" href="/ada/kres">Kreşi İncele <span>→</span></a>
             </div>
-
-            <figure className="adaPosterKresImage" aria-label="Renkli bloklarla oynayan çocuklar">
-              <img src="/ada/ada-kres-bloklar.png" alt="Renkli bloklarla oynayan çocuklar" />
-            </figure>
-
-            <span className="adaPosterSun" aria-hidden="true">☀</span>
-            <span className="adaPosterCloud" aria-hidden="true">☁</span>
-            <span className="adaPosterBlueShape" aria-hidden="true" />
-            <span className="adaPosterTealShape" aria-hidden="true" />
           </article>
 
           <article className="adaPosterPanel adaPosterArtPanel">
@@ -83,18 +74,6 @@ export default function AdaYeniPage() {
                 <a className="adaPosterOutline" href="/ada/sanat#request-form">▣ Deneme Dersi Al</a>
               </div>
             </div>
-
-            <div className="adaPosterStage" aria-hidden="true">
-              <figure className="adaPosterBaleImage">
-                <img src="/ada/ada-bale.png" alt="Bale yapan çocuk" />
-              </figure>
-              <figure className="adaPosterGuitarCard">
-                <img src="/ada/ada-gitar.png" alt="Gitar çalan çocuk" />
-              </figure>
-              <span className="adaPosterNotes">♪ ♫ ✦</span>
-            </div>
-
-            <span className="adaPosterCoralShape" aria-hidden="true" />
           </article>
         </section>
 
