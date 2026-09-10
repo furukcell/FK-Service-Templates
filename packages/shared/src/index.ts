@@ -80,43 +80,36 @@ export type NurseryEnabledFeatures = {
 
 export type BusinessTemplateConfig = {
   template: TemplateKey;
-  sector: string;
   brandName: string;
-  eyebrow: string;
+  sector: string;
+  topBarText: string;
+  navItems: string[];
+  primaryCta: string;
   heroTitle: string;
   heroDescription: string;
-  primaryCta: string;
-  secondaryCta: string;
-  topBarText: string;
+  heroSlides?: HeroSlide[];
+  services: ServiceItem[];
+  staff: StaffMember[];
+  galleryItems: VisualItem[];
+  campaignItems: VisualItem[];
+  stats: StatItem[];
+  whyUs: WhyUsItem[];
+  workshops?: Workshop[];
+  testimonials?: Testimonial[];
   phone: string;
   whatsapp: string;
   address: string;
   mapsUrl?: string;
   instagramUrl?: string;
+  facebookUrl?: string;
+  youtubeUrl?: string;
   theme: BusinessTheme;
-  navItems: string[];
-  stats: StatItem[];
-  services: ServiceItem[];
-  staff: StaffMember[];
-  galleryItems?: VisualItem[];
-  campaignItems?: ServiceItem[];
-  whyUs?: WhyUsItem[];
-  branches?: Branch[];
-  workshops?: Workshop[];
-  testimonials?: Testimonial[];
-  heroSlides?: HeroSlide[];
-  enabledFeatures?: NurseryEnabledFeatures;
   form: {
     title: string;
     description: string;
-    fields: Array<{
-      key: string;
-      label: string;
-      type: "text" | "tel" | "date" | "time" | "select" | "textarea";
-      placeholder?: string;
-      options?: string[];
-    }>;
   };
+  nurseryFeatures?: NurseryEnabledFeatures;
+  branches?: Branch[];
 };
 
 export const templateLabels: Record<TemplateKey, string> = {
@@ -134,5 +127,5 @@ export const layoutVariantLabels: Record<LayoutVariant, string> = {
   showcase: "Showcase Vitrin",
   flow: "Akışkan Premium",
   corporate: "Kurumsal Vitrin",
-  "kindergarten-reference": "Minik Adımlar"
+  "kindergarten-reference": "Bilim Çocuk"
 };
