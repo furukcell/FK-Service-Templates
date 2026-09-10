@@ -1,0 +1,129 @@
+/* FK Preschool Corporate — colorful chapter scenes. */
+
+@media (min-width:981px) {
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupsSection,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .branchesSection,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .testimonialsSection,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .campaignSection,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualSection { position:relative; }
+
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupItem,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopCard,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .branchCard,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .staffCard,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .testimonialCard,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .campaignCard,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualCard {
+    border-radius:28px;
+    border:2px solid rgba(41,32,68,.06);
+    background:#fff;
+    box-shadow:0 15px 35px rgba(39,21,74,.08);
+  }
+
+  /* Age groups become playful oversized tiles. */
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupsSection {
+    background:#fff4c9;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupsSection .sectionHead h2,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection .sectionHead h2,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualSection .sectionHead h2 {
+    font-size:clamp(42px,5vw,72px);
+    line-height:.98;
+    letter-spacing:-.05em;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupsSection .ageGroupItem {
+    border-radius:24px;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupsSection .ageGroupItem:hover {
+    transform:translateY(-6px) rotate(-.4deg);
+    box-shadow:0 20px 40px rgba(39,21,74,.12);
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupsSection .ageGroupItem:nth-child(2n) { transform:rotate(1deg); }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupsSection .ageGroupItem:nth-child(2n):hover { transform:translateY(-6px) rotate(1.4deg); }
+
+  /* Workshops: image-first, scrapbook-like cards. */
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection {
+    background:#e8f7ff;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection .workshopCard {
+    overflow:hidden;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection .workshopCard:nth-child(1) { transform:rotate(-1.2deg); }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection .workshopCard:nth-child(2) { transform:rotate(.8deg); }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection .workshopCard:nth-child(3) { transform:rotate(-.6deg); }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection .workshopCard:hover { transform:translateY(-8px) rotate(0deg); }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection .workshopCard img { border-radius:22px 22px 0 0; }
+
+  /* Branches: clean map chapter with bright locator cards. */
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .branchesSection {
+    background:#f4edff;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .branchesSection .branchCard {
+    border-radius:30px;
+  }
+
+  /* Testimonials: pink, warm and human. */
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .testimonialsSection {
+    background:#ffe5ee;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .testimonialsSection .testimonialCard {
+    min-height:260px;
+    padding:30px;
+    border-radius:34px;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .testimonialCard blockquote {
+    font-size:clamp(20px,1.8vw,28px);
+    line-height:1.35;
+  }
+
+  /* Campaign becomes the energetic yellow CTA chapter. */
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .campaignSection {
+    background:#ffc83d;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .campaignSection .campaignCard {
+    background:#fff;
+    border-radius:34px;
+    box-shadow:0 20px 48px rgba(83,55,5,.14);
+  }
+
+  /* Gallery closes the visual loop. */
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualSection {
+    background:#eaf7d7;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualSection .visualCard {
+    border-radius:30px;
+    overflow:hidden;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualSection .visualCard img { border-radius:0; }
+
+  /* Little hand-drawn circles behind selected chapters. */
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupsSection::before,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection::before,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .testimonialsSection::before {
+    content:"";
+    position:absolute;
+    width:180px;height:180px;
+    border:3px dashed rgba(41,32,68,.12);
+    border-radius:50%;
+    pointer-events:none;
+  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupsSection::before { right:-80px; top:80px; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection::before { left:-75px; bottom:80px; border-color:rgba(43,183,233,.2); }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .testimonialsSection::before { right:-75px; bottom:70px; border-color:rgba(255,79,135,.18); }
+}
+
+@media (max-width:980px) {
+  .pageShell:has(.ageGroupsSection) .ageGroupsSection,
+  .pageShell:has(.ageGroupsSection) .workshopsSection,
+  .pageShell:has(.ageGroupsSection) .branchesSection,
+  .pageShell:has(.ageGroupsSection) .testimonialsSection,
+  .pageShell:has(.ageGroupsSection) .campaignSection,
+  .pageShell:has(.ageGroupsSection) .visualSection { overflow:hidden; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .ageGroupsSection .ageGroupItem,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopsSection .workshopCard { transition:none; }
+}
