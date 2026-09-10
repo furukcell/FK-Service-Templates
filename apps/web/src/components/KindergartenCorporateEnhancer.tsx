@@ -16,45 +16,63 @@ const SELECTORS = [
   ".pageShell:has(.ageGroupsSection) .formPanel"
 ].join(",");
 
-function enhanceHeroMedia() {
+function mountHeroVideo() {
   const slides = Array.from(document.querySelectorAll<HTMLElement>(
     ".pageShell:has(.ageGroupsSection) .corporateHeroSlide"
   ));
 
   slides.forEach((slide) => {
-    if (slide.querySelector(".pk-hero-video")) return;
+    if (slide.querySelector(".pk-heroVideo")) return;
 
-    const background = window.getComputedStyle(slide).backgroundImage;
-    const match = background.match(/url\\(["']?(.*?)["']?\\)/i);
-    const source = match?.[1];
-    if (!source || !/\\.(mp4|webm|ogg)(?:[?#]|$)/i.test(source)) return;
+    const background = slide.style.backgroundImage;
+    const match = background.match(/url\\([\"']?(.+?)[\"']?\\)/i);
+    const url = match?.[1];
+    if (!url || !/\\.(mp4|webm|ogg)(\\?|#|$)/i.test(url)) return;
 
+    slide.style.backgroundImage = "none";
     const video = document.createElement("video");
-    video.className = "pk-hero-video";
-    video.src = source;
+    video.className = "pk-heroVideo";
+    video.src = url;
     video.autoplay = true;
     video.muted = true;
     video.loop = true;
     video.playsInline = true;
     video.setAttribute("aria-hidden", "true");
     video.preload = "metadata";
-    slide.style.backgroundImage = "none";
     slide.prepend(video);
     void video.play().catch(() => undefined);
   });
 }
 
+function mountHeroDecorations() {
+  const hero = document.querySelector<HTMLElement>(
+    ".pageShell:has(.ageGroupsSection) .corporateHeroSlider"
+  );
+  if (!hero || hero.querySelector(".pk-heroDecor")) return;
+
+  const decor = document.createElement("div");
+  decor.className = "pk-heroDecor";
+  decor.setAttribute("aria-hidden", "true");
+  decor.innerHTML = `
+    <span class="pk-heroDoodle pk-doodle-sun">☀</span>
+    <span class="pk-heroDoodle pk-doodle-cloud">☁</span>
+    <span class="pk-heroDoodle pk-doodle-bear">🧸</span>
+    <span class="pk-heroDoodle pk-doodle-rocket">🚀</span>
+    <span class="pk-heroDoodle pk-doodle-ball">⚽</span>
+    <span class="pk-heroDoodle pk-doodle-butterfly">🦋</span>
+  `;
+  hero.appendChild(decor);
+}
+
 export function KindergartenCorporateEnhancer({ active }: Props) {
   useEffect(() => {
-    if (typeof document === "undefined") return;
-
-    document.documentElement.classList.toggle("pk-kindergarten-premium-scroll", active);
-
     if (!active || typeof window === "undefined") return;
 
-    enhanceHeroMedia();
-
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.documentElement.classList.add("pk-kindergarten-premium-scroll");
+    mountHeroVideo();
+    mountHeroDecorations();
+
     const nodes = Array.from(document.querySelectorAll<HTMLElement>(SELECTORS));
     if (!nodes.length) return;
 
