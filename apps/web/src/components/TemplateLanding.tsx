@@ -1,5 +1,5 @@
 import type { CSSProperties, FormEvent, ReactNode } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createBusinessRequest } from "@fk-templates/firebase";
 import type { BusinessTemplateConfig, LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { layoutVariantLabels } from "@fk-templates/shared";
@@ -585,18 +585,72 @@ function ShowcaseLayout({ config, switchers, form, hideShowcaseServiceStrip, hid
   );
 }
 
+function CorporateHeroSlider({ config, switchers }: { config: BusinessTemplateConfig; switchers: ReactNode }) {
+  const slides = config.heroSlides!;
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (slides.length < 2) return undefined;
+    const timer = window.setInterval(() => {
+      setActive((current) => (current + 1) % slides.length);
+    }, 6000);
+    return () => window.clearInterval(timer);
+  }, [slides.length]);
+
+  return (
+    <section className="showcaseHero corporateHero corporateHeroSlider">
+      {slides.map((slide, index) => (
+        <div
+          className={`corporateHeroSlide ${index === active ? "isActive" : ""}`}
+          key={slide.title}
+          style={{ backgroundImage: `url(${slide.imageUrl})` }}
+          aria-hidden={index === active ? undefined : true}
+        >
+          <div className="corporateHeroSlideOverlay" />
+          <div className="corporateHeroSlideContent">
+            <span className="eyebrow">{config.eyebrow}</span>
+            <h1>{slide.title}</h1>
+            <p>{slide.description}</p>
+            <div className="heroActions showcaseActions"><PrimaryCtaButton config={config} /><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
+          </div>
+        </div>
+      ))}
+      {slides.length > 1 ? (
+        <div className="corporateHeroDots" role="tablist" aria-label="Hero slaytları">
+          {slides.map((slide, index) => (
+            <button
+              key={slide.title}
+              type="button"
+              role="tab"
+              aria-selected={index === active}
+              aria-label={`${index + 1}. slayt`}
+              className={`corporateHeroDot ${index === active ? "isActive" : ""}`}
+              onClick={() => setActive(index)}
+            />
+          ))}
+        </div>
+      ) : null}
+      <div className="corporateHeroSwitchers">{switchers}</div>
+    </section>
+  );
+}
+
 function CorporateLayout({ config, switchers, form }: { config: BusinessTemplateConfig; switchers: ReactNode; form: ReactNode }) {
   const showTeacherCards = config.enabledFeatures?.teacherCards !== false;
   return (
     <>
       <Nav config={config} />
-      <section className="showcaseHero corporateHero">
-        <span className="eyebrow">{config.eyebrow}</span>
-        <h1>{config.heroTitle}</h1>
-        <p>{config.heroDescription}</p>
-        <div className="heroActions showcaseActions"><PrimaryCtaButton config={config} /><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
-        {switchers}
-      </section>
+      {config.heroSlides?.length ? (
+        <CorporateHeroSlider config={config} switchers={switchers} />
+      ) : (
+        <section className="showcaseHero corporateHero">
+          <span className="eyebrow">{config.eyebrow}</span>
+          <h1>{config.heroTitle}</h1>
+          <p>{config.heroDescription}</p>
+          <div className="heroActions showcaseActions"><PrimaryCtaButton config={config} /><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
+          {switchers}
+        </section>
+      )}
       <WhyUsSection config={config} />
       <section className="section compactStats"><Stats config={config} /></section>
       <ServicesSection config={config} />
