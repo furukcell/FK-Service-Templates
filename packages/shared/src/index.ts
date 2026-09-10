@@ -62,6 +62,12 @@ export type Testimonial = {
   quote: string;
 };
 
+export type HeroSlide = {
+  title: string;
+  description: string;
+  imageUrl: string;
+};
+
 export type NurseryEnabledFeatures = {
   enrollment?: boolean;
   multiBranch?: boolean;
@@ -100,6 +106,7 @@ export type BusinessTemplateConfig = {
   branches?: Branch[];
   workshops?: Workshop[];
   testimonials?: Testimonial[];
+  heroSlides?: HeroSlide[];
   enabledFeatures?: NurseryEnabledFeatures;
   form: {
     title: string;
