@@ -3,6 +3,7 @@ import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { FlowTemplateEnhancements } from "../src/components/FlowTemplateEnhancements";
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
 import { KindergartenPremiumHeroMount } from "../src/components/KindergartenPremiumHeroMount";
+import { KindergartenReferenceLayout } from "../src/components/KindergartenReferenceLayout";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { SalonFlowStyleButton } from "../src/components/SalonFlowStyleButton";
 import { SalonGalleryMount } from "../src/components/SalonGalleryMount";
@@ -24,6 +25,7 @@ export default function HomePage() {
   const isSalon = activeTemplate === "salon";
   const isKindergarten = activeTemplate === "kindergarten";
   const isFlow = activeLayout === "flow";
+  const isReferenceKindergarten = isKindergarten && activeLayout === "kindergarten-reference";
   const isSalonFlow = isSalon && isFlow;
   const isKindergartenFlow = isKindergarten && isFlow;
 
@@ -32,15 +34,19 @@ export default function HomePage() {
   return (
     <>
       <SeoHead title={`${config.brandName} | ${config.sector}`} description={config.heroDescription} canonicalPath="/" />
-      <TemplateLanding
-        config={config}
-        activeTemplate={activeTemplate}
-        activeLayout={isFlow ? "modern" : activeLayout}
-        onTemplateChange={setActiveTemplate}
-        onLayoutChange={setActiveLayout}
-        showTemplateSwitch
-        showLayoutSwitch
-      />
+      {isReferenceKindergarten ? (
+        <KindergartenReferenceLayout config={config} onLayoutChange={setActiveLayout} />
+      ) : (
+        <TemplateLanding
+          config={config}
+          activeTemplate={activeTemplate}
+          activeLayout={isFlow ? "modern" : activeLayout}
+          onTemplateChange={setActiveTemplate}
+          onLayoutChange={setActiveLayout}
+          showTemplateSwitch
+          showLayoutSwitch
+        />
+      )}
       <SalonFlowStyleButton activeTemplate={activeTemplate} activeLayout={activeLayout} onSelect={setActiveLayout} />
       <SalonPremiumHeroMount active={isSalonFlow} config={config} />
       <KindergartenPremiumHeroMount active={isKindergartenFlow} config={config} />
