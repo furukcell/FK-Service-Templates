@@ -43,6 +43,8 @@ import "../src/styles/ada-yeni-reference.css";
 import "../src/styles/ada-yeni-wave-fix.css";
 import "../src/styles/nursery-corporate.css";
 import "../src/styles/kindergarten-reference.css";
+import "../src/styles/kindergarten-blue-enhancements.css";
+import "../src/styles/kindergarten-design-chooser.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
