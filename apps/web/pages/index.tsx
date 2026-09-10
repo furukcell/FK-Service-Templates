@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { FlowTemplateEnhancements } from "../src/components/FlowTemplateEnhancements";
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
+import { KindergartenCorporateEnhancer } from "../src/components/KindergartenCorporateEnhancer";
 import { KindergartenPremiumHeroMount } from "../src/components/KindergartenPremiumHeroMount";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { SalonFlowStyleButton } from "../src/components/SalonFlowStyleButton";
@@ -41,6 +42,7 @@ export default function HomePage() {
         showTemplateSwitch
         showLayoutSwitch
       />
+      <KindergartenCorporateEnhancer active={isKindergarten} />
       <SalonFlowStyleButton activeTemplate={activeTemplate} activeLayout={activeLayout} onSelect={setActiveLayout} />
       <SalonPremiumHeroMount active={isSalonFlow} config={config} />
       <KindergartenPremiumHeroMount active={isKindergartenFlow} config={config} />
