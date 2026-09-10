@@ -60,7 +60,13 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         <div className="kr-navLinks">
           {['Ana Sayfa', 'Kurumsal', 'Atölyelerimiz', 'Galeri', 'Duyurular', 'İletişim'].map((item, i) => <a key={item} className={i === 0 ? 'active' : ''} href={i === 0 ? '#top' : i === 1 ? '#about' : i === 2 ? '#news' : i === 3 ? '#news' : i === 4 ? '#news' : '#contact'}>{item}</a>)}
         </div>
-        <div className="kr-navRight"><button className="kr-search" aria-label="Ara">⌕</button><a className="kr-navCta" href="#contact">Kayıt &amp; Bilgi Al</a></div>
+        <div className="kr-navRight">
+          <div className="kr-layoutPicker" aria-label="Kreş tasarım seçimi">
+            <button className="isActive" type="button" aria-current="page">Minik Adımlar</button>
+            {onLayoutChange ? <button type="button" onClick={() => onLayoutChange('corporate')}>Kurumsal</button> : null}
+          </div>
+          <button className="kr-search" aria-label="Ara">⌕</button><a className="kr-navCta" href="#contact">Kayıt &amp; Bilgi Al</a>
+        </div>
       </nav>
 
       <header id="top" className="kr-hero">
