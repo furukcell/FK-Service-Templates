@@ -1,0 +1,63 @@
+/* Bilim Çocuk — reference fidelity layer
+   Decorative geometry intentionally mirrors the supplied reference composition. */
+.kr-site{--ref-blue:#1976d2;--ref-sky:#62b9eb;--ref-deep:#0d47a1;--ref-pale:#f8fcff}
+
+/* Organic landscape under the hero: layered silhouettes instead of flat rounded blocks. */
+.kr-hero::after{content:"";position:absolute;z-index:11;left:-2%;right:-2%;bottom:-2px;height:118px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 170' preserveAspectRatio='none'%3E%3Cpath fill='%236bc4ed' d='M0 92 C100 55 210 126 330 89 C455 50 560 119 690 82 C820 45 935 117 1065 78 C1190 42 1320 106 1440 65 L1440 170 L0 170 Z'/%3E%3Cpath fill='%2343a5df' d='M0 116 C120 79 245 144 370 108 C500 70 615 141 755 102 C890 65 1010 139 1140 99 C1260 62 1350 116 1440 90 L1440 170 L0 170 Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.kr-hero::before{content:"";position:absolute;z-index:10;left:0;right:0;bottom:54px;height:72px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath fill='%23a8d95c' d='M0 83 C125 54 220 95 350 72 C470 51 560 92 690 69 C820 45 930 91 1060 66 C1190 42 1300 84 1440 55 L1440 100 L0 100 Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.kr-hero .kr-teddy{bottom:48px}.kr-hero .kr-sign{bottom:17%}
+
+/* Reference-style hand-drawn scenery accents. */
+.kr-story:before{content:"";position:absolute;z-index:2;right:6%;top:55px;width:130px;height:110px;opacity:.75;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 130'%3E%3Cpath d='M12 100c24-24 45-30 69-18 17 9 31 10 54-7' fill='none' stroke='%2343a5df' stroke-width='3' stroke-dasharray='5 8' stroke-linecap='round'/%3E%3Ccircle cx='23' cy='100' r='7' fill='%2342a5f5'/%3E%3Ccircle cx='92' cy='82' r='8' fill='%238fd3ff'/%3E%3Cpath d='M126 28c7-15 25-14 29 1-9-4-18-2-29-1Z' fill='%2343a5df'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
+.kr-story .kr-storyPhotos:after{content:"✦";position:absolute;right:9%;bottom:22px;font-size:38px;color:#42a5f5;transform:rotate(18deg)}
+
+/* Stats becomes a landscape strip: soft sky/ground layers and floating confetti. */
+.kr-stats:after{z-index:1!important}
+.kr-stats .kr-statsInner{padding-top:10px}
+.kr-stats:before{z-index:2!important}
+.kr-stats::marker{display:none}
+.kr-stats .kr-bee{animation:kr-buzz 4s ease-in-out infinite}
+@keyframes kr-buzz{0%,100%{transform:translate(0,0) rotate(-4deg)}50%{transform:translate(-8px,-7px) rotate(4deg)}}
+.kr-stats{background:linear-gradient(180deg,#2495d6 0%,#49b5e8 100%)!important}
+
+/* Give the news area the same airy illustrated stage as the reference. */
+.kr-news{background:#f8fcff!important}
+.kr-news:after{height:118px!important}
+.kr-newsGrid{margin-top:30px}
+.kr-newsCard{border-radius:14px!important;transform:translateZ(0);transition:transform .28s ease,box-shadow .28s ease}
+.kr-newsCard:hover{transform:translateY(-7px) rotate(-.35deg);box-shadow:0 18px 34px rgba(13,71,161,.16)}
+.kr-newsCard:nth-child(2):hover{transform:translateY(-7px) rotate(.35deg)}
+.kr-newsCard:nth-child(3):hover{transform:translateY(-7px) rotate(-.2deg)}
+
+/* Polaroids: closer to the overlapping, playful reference framing. */
+.kr-photo{border-radius:4px!important;box-shadow:0 14px 28px rgba(13,71,161,.15)!important}
+.kr-storyPhotos .photoA{transform:rotate(6deg);transform-origin:center center}
+.kr-storyPhotos .photoB{transform:rotate(-5deg);transform-origin:center center}
+
+/* Section entrance: stagger children for a flowing rather than flat scroll. */
+@supports (animation-timeline:view()){
+ .kr-story .kr-storyCopy{animation:kr-copy-in linear both;animation-timeline:view();animation-range:entry 0% cover 38%}
+ .kr-story .kr-storyPhotos{animation:kr-photos-in linear both;animation-timeline:view();animation-range:entry 0% cover 38%}
+ .kr-stats .kr-stat:nth-child(1){animation-delay:.03s}.kr-stats .kr-stat:nth-child(2){animation-delay:.10s}.kr-stats .kr-stat:nth-child(3){animation-delay:.17s}.kr-stats .kr-stat:nth-child(4){animation-delay:.24s}
+ .kr-stats .kr-stat{animation:kr-stat-in linear both;animation-timeline:view();animation-range:entry 0% cover 34%}
+}
+@keyframes kr-copy-in{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes kr-photos-in{from{opacity:0;transform:translateY(34px) rotate(-1deg)}to{opacity:1;transform:none}}
+@keyframes kr-stat-in{from{opacity:0;transform:translateY(24px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* Keep the reference's generous desktop composition while preventing huge empty gaps. */
+@media (min-width:981px){
+ .kr-story{min-height:515px;padding-top:78px;padding-bottom:126px}
+ .kr-storyPhotos{height:390px}
+ .kr-storyCopy{padding-left:18px}
+ .kr-stats{min-height:330px}
+ .kr-news{min-height:470px}
+}
+@media (max-width:760px){
+ .kr-hero::after{height:82px}
+ .kr-hero::before{bottom:37px;height:48px}
+ .kr-story:before{display:none}
+ .kr-story{padding-top:64px;padding-bottom:108px}
+ .kr-storyPhotos .photoA{transform:rotate(5deg)}
+ .kr-storyPhotos .photoB{transform:rotate(-5deg)}
+}
