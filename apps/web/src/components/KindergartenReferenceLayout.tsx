@@ -103,7 +103,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         <Hill className="heroHill" />
       </header>
 
-      <section id="about" className="kr-story kr-paper">
+      <section id="about" className="kr-story kr-paper kr-reveal">
         <div className="kr-storyInner">
           <div className="kr-storyPhotos">
             <Photo src={photoA} title="Sınıf etkinliği" className="photoA" />
@@ -123,7 +123,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         </div>
       </section>
 
-      <section className="kr-stats">
+      <section className="kr-stats kr-reveal">
         <Hill className="statsHill" />
         <div className="kr-statsInner">
           {stats.map(stat => <article className="kr-stat" key={stat.label}><div className="kr-statIcon">{stat.icon}</div><strong>{stat.value}</strong><span>{stat.label}</span></article>)}
@@ -132,7 +132,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         <div className="kr-bee">🐝</div>
       </section>
 
-      <section id="news" className="kr-news kr-paper">
+      <section id="news" className="kr-news kr-paper kr-reveal">
         <Cloud className="newsCloud l" /><Cloud className="newsCloud r" /><Elephant />
         <div className="kr-sectionHead"><span className="kr-kicker">BİLİM ÇOCUK’TAN HABERLER</span><h2>Duyurular &amp; Etkinlikler <i>〽</i></h2><a href="#contact">Tüm Duyurular →</a></div>
         <div className="kr-newsGrid">
@@ -143,7 +143,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         </div>
       </section>
 
-      <section id="join" className="kr-join">
+      <section id="join" className="kr-join kr-reveal">
         <Hill className="joinHill" /><Bunny />
         <div><span>Gelin, Bilim Çocuk Ailemize Katılın</span><small>Çocuğunuzun mutlu, meraklı ve başarılı bir geleceğe adım atması için bizimle iletişime geçin.</small></div>
         <a href="#contact">Randevu Al →</a>
