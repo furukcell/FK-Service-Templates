@@ -5,17 +5,18 @@ type Props = {
   onLayoutChange?: (layout: "corporate" | "kindergarten-reference") => void;
 };
 
-const fallbackHero = "https://picsum.photos/seed/minik-adimlar-reference/1800/1050";
+const fallbackHero = "https://picsum.photos/seed/bilim-cocuk-anaokulu/1800/1050";
+const schoolName = "Bilim Çocuk Anaokulu";
 
 function logoMark() {
   return (
     <span className="kr-logoMark" aria-hidden="true">
       <svg viewBox="0 0 54 54" role="img">
         <circle cx="27" cy="27" r="25" fill="#fff" />
-        <path d="M16 32c-7-8 1-19 10-12 4-8 17-3 15 7-1 8-12 11-25 5Z" fill="#ff4b87" />
-        <circle cx="21" cy="22" r="4" fill="#ffd447" />
-        <circle cx="35" cy="20" r="4" fill="#69c95b" />
-        <path d="M18 34c4 7 17 9 22 0" fill="none" stroke="#34206e" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M16 32c-7-8 1-19 10-12 4-8 17-3 15 7-1 8-12 11-25 5Z" fill="#2196f3" />
+        <circle cx="21" cy="22" r="4" fill="#64b5f6" />
+        <circle cx="35" cy="20" r="4" fill="#1565c0" />
+        <path d="M18 34c4 7 17 9 22 0" fill="none" stroke="#0d47a1" strokeWidth="2.5" strokeLinecap="round" />
       </svg>
     </span>
   );
@@ -55,14 +56,32 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
 
   return (
     <main className="kr-site">
+      <style>{`
+        .kr-site{--pink:#1976d2;--pink2:#42a5f5;--purple:#0d47a1;--purple2:#1565c0;--green:#43a5df;--green2:#2f8fc8;--blue:#64c5f3;--lav:#9acbff}
+        .kr-navLinks a.active,.kr-navCta,.kr-pinkBtn{background:linear-gradient(135deg,#1976d2,#42a5f5)!important}
+        .kr-facts article>span{background:#1976d2!important;box-shadow:0 0 0 1px #1976d2!important}
+        .kr-facts article:nth-child(2)>span{background:#42a5f5!important;box-shadow:0 0 0 1px #42a5f5!important}
+        .kr-stats{background:linear-gradient(135deg,#1687cf,#49b5e8)!important}
+        .kr-signpost b{background:#1976d2!important}.kr-signpost b:nth-child(2){background:#42a5f5!important}.kr-signpost b:nth-child(3){background:#0d47a1!important}
+        .kr-join{background:linear-gradient(90deg,#0d47a1,#42a5f5)!important}
+        .kr-newsImage>span{background:#42a5f5!important;color:#fff!important}
+        .kr-join>a{color:#0d47a1!important}
+        .kr-kicker,.kr-newsBody a,.kr-sectionHead>a{color:#1976d2!important}
+        .kr-search{border-color:#1976d2!important;color:#1976d2!important}
+        .kr-brand b{color:#1976d2!important}
+        .kr-logoMark svg path{fill:#2196f3}.kr-logoMark svg circle:nth-of-type(1){fill:#eaf6ff}.kr-logoMark svg circle:nth-of-type(2){fill:#64b5f6}.kr-logoMark svg circle:nth-of-type(3){fill:#1565c0}.kr-logoMark svg path:last-child{stroke:#0d47a1}
+        .kr-hero h1 strong{color:#8fd3ff!important}
+        .kr-sectionHead h2 i{color:#42a5f5!important}
+        .kr-navCta,.kr-pinkBtn{box-shadow:0 8px 18px rgba(25,118,210,.24)!important}
+      `}</style>
       <nav className="kr-nav">
-        <a className="kr-brand" href="#top" aria-label={config.brandName}>{logoMark()}<span><b>{config.brandName}</b><small>Bugünün minikleri, yarının büyük adamları</small></span></a>
+        <a className="kr-brand" href="#top" aria-label={schoolName}>{logoMark()}<span><b>{schoolName}</b><small>Bilimle büyüyen, mutlu çocuklar</small></span></a>
         <div className="kr-navLinks">
           {['Ana Sayfa', 'Kurumsal', 'Atölyelerimiz', 'Galeri', 'Duyurular', 'İletişim'].map((item, i) => <a key={item} className={i === 0 ? 'active' : ''} href={i === 0 ? '#top' : i === 1 ? '#about' : i === 2 ? '#news' : i === 3 ? '#news' : i === 4 ? '#news' : '#contact'}>{item}</a>)}
         </div>
         <div className="kr-navRight">
-          <div className="kr-layoutPicker" aria-label="Kreş tasarım seçimi">
-            <button className="isActive" type="button" aria-current="page">Minik Adımlar</button>
+          <div className="kr-layoutPicker" aria-label="Anaokulu tasarım seçimi">
+            <button className="isActive" type="button" aria-current="page">Bilim Çocuk</button>
             {onLayoutChange ? <button type="button" onClick={() => onLayoutChange('corporate')}>Kurumsal</button> : null}
           </div>
           <button className="kr-search" aria-label="Ara">⌕</button><a className="kr-navCta" href="#contact">Kayıt &amp; Bilgi Al</a>
@@ -70,12 +89,12 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       </nav>
 
       <header id="top" className="kr-hero">
-        <div className="kr-heroImage" style={{ backgroundImage: `linear-gradient(90deg, rgba(19,15,45,.5), rgba(19,15,45,.08) 62%, rgba(19,15,45,0)), url(${hero})` }} />
+        <div className="kr-heroImage" style={{ backgroundImage: `linear-gradient(90deg, rgba(5,39,78,.55), rgba(5,39,78,.12) 62%, rgba(5,39,78,0)), url(${hero})` }} />
         <div className="kr-heroOverlay" />
         <Sun /><Cloud className="heroCloud" /><Rocket /><Teddy />
         <div className="kr-heroCopy">
-          <span className="kr-scribble">SEVGİ • GÜVEN • KEŞİF</span>
-          <h1><span>Minik Adımlar</span><strong>Büyük Yarınlara</strong></h1>
+          <span className="kr-scribble">SEVGİ • BİLİM • KEŞİF</span>
+          <h1><span>Bilim Çocuk</span><strong>Büyük Yarınlara</strong></h1>
           <p>Sevgi, güven ve keşifle dolu<br />bir öğrenme yolculuğu...</p>
           <a className="kr-pinkBtn" href="#contact">Okulumuzu Keşfedin <b>→</b></a>
         </div>
@@ -94,7 +113,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
           <div className="kr-storyCopy">
             <span className="kr-kicker">BİZİM İÇİN EN DEĞERLİSİ</span>
             <h2>Odağımız Çocuklarımızın <strong>İyiliği</strong></h2>
-            <p>Minik Adımlar Kreşi olarak, her çocuğun kendine özgü bir keşif yolculuğuna sahip olduğuna inanıyoruz. Sevgi dolu, güvenli ve destekleyici bir ortamda çocuklarımızın potansiyellerini en iyi şekilde ortaya çıkarmaları için çalışıyoruz.</p>
+            <p>Bilim Çocuk Anaokulu olarak, her çocuğun kendine özgü bir keşif yolculuğuna sahip olduğuna inanıyoruz. Sevgi dolu, güvenli ve destekleyici bir ortamda çocuklarımızın potansiyellerini en iyi şekilde ortaya çıkarmaları için çalışıyoruz.</p>
             <div className="kr-facts">
               <article><span>♡</span><div><b>Güvenli Ortam</b><small>Çocuklarımızın fiziksel, duygusal ve sosyal olarak güvende hissettiği bir ortam.</small></div></article>
               <article><span>♟</span><div><b>Uzman Kadro</b><small>Alanında deneyimli, çocuk gelişimi konusunda uzman öğretmenler.</small></div></article>
@@ -115,7 +134,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
 
       <section id="news" className="kr-news kr-paper">
         <Cloud className="newsCloud l" /><Cloud className="newsCloud r" /><Elephant />
-        <div className="kr-sectionHead"><span className="kr-kicker">MİNİK ADIMLAR’DAN HABERLER</span><h2>Duyurular &amp; Etkinlikler <i>〽</i></h2><a href="#contact">Tüm Duyurular →</a></div>
+        <div className="kr-sectionHead"><span className="kr-kicker">BİLİM ÇOCUK’TAN HABERLER</span><h2>Duyurular &amp; Etkinlikler <i>〽</i></h2><a href="#contact">Tüm Duyurular →</a></div>
         <div className="kr-newsGrid">
           {news.map((item, index) => <article className="kr-newsCard" key={`${item.title}-${index}`}>
             <div className="kr-newsImage"><Photo src={gallery[index]?.imageUrl} title={item.title} /><span>{index === 0 ? '12 EYLÜL 2025' : index === 1 ? '5 EYLÜL 2025' : '1 EYLÜL 2025'}</span></div>
@@ -126,18 +145,18 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
 
       <section id="join" className="kr-join">
         <Hill className="joinHill" /><Bunny />
-        <div><span>Gelin, Minik Adımlar Ailemize Katılın</span><small>Çocuğunuzun mutlu ve başarılı bir geleceğe adım atması için bizimle iletişime geçin.</small></div>
+        <div><span>Gelin, Bilim Çocuk Ailemize Katılın</span><small>Çocuğunuzun mutlu, meraklı ve başarılı bir geleceğe adım atması için bizimle iletişime geçin.</small></div>
         <a href="#contact">Randevu Al →</a>
       </section>
 
       <section id="contact" className="kr-footer">
         <div className="kr-footerTop">
-          <a className="kr-brand footerBrand" href="#top">{logoMark()}<span><b>{config.brandName}</b><small>Bugünün minikleri, yarının büyük adamları</small></span></a>
+          <a className="kr-brand footerBrand" href="#top">{logoMark()}<span><b>{schoolName}</b><small>Bilimle büyüyen, mutlu çocuklar</small></span></a>
           <div><b>Hızlı Erişim</b><a href="#top">Ana Sayfa</a><a href="#about">Kurumsal</a><a href="#news">Atölyelerimiz</a><a href="#news">Duyurular</a><a href="#contact">İletişim</a></div>
-          <div><b>Bize Ulaşın</b><span>☎ {config.phone}</span><span>✉ info@minikadimlar.com</span><span>⌖ {config.address}</span></div>
+          <div><b>Bize Ulaşın</b><span>☎ {config.phone}</span><span>✉ info@bilimcocukanaokulu.com</span><span>⌖ {config.address}</span></div>
           <div className="kr-social"><a href={config.instagramUrl || '#'}>◎</a><a href="#contact">f</a><a href="#contact">▶</a></div>
         </div>
-        <div className="kr-footerBottom">© 2025 {config.brandName}. Tüm Hakları Saklıdır.<span>Tasarım: FK Digital</span></div>
+        <div className="kr-footerBottom">© 2026 {schoolName}. Tüm Hakları Saklıdır.<span>Tasarım: FK Digital</span></div>
         {onLayoutChange ? <button className="kr-backToCorporate" type="button" onClick={() => onLayoutChange('corporate')}>Kurumsal tasarıma dön</button> : null}
       </section>
     </main>
