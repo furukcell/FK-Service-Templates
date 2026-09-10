@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
+import type { ReactNode } from 'react';
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   stagger?: boolean;
 };
