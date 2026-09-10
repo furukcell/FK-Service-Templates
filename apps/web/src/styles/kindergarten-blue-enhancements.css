@@ -12,26 +12,24 @@
 .kr-join{background:linear-gradient(90deg,#0d47a1,#42a5f5)!important}.kr-footer{background:#fff}.kr-footerBottom{border-color:#dceef9}
 .kr-logoMark{filter:drop-shadow(0 4px 8px rgba(13,71,161,.12))}
 
-/* Reference'taki organik, birbirine akan bölüm geçişleri */
+/* Reference görselindeki organik bölüm geometrisi — gerçek responsive SVG dalgalar */
 .kr-story,.kr-stats,.kr-news,.kr-join{position:relative;overflow:hidden}
-.kr-story{padding-bottom:125px}
-.kr-story::after{content:"";position:absolute;z-index:1;left:-8%;bottom:-72px;width:116%;height:145px;background:linear-gradient(100deg,#53b9e9,#2f91ca);border-radius:52% 48% 0 0/72% 68% 0 0;transform:rotate(-1deg);pointer-events:none}
-.kr-storyInner{position:relative;z-index:3}
-.kr-stats{padding-top:78px;padding-bottom:105px}
-.kr-stats::before{content:"";position:absolute;z-index:1;left:-10%;top:-65px;width:120%;height:130px;background:#f8fcff;border-radius:48% 52% 0 0/75% 72% 0 0;transform:rotate(1deg);pointer-events:none}
-.kr-stats::after{content:"";position:absolute;z-index:1;left:-9%;bottom:-72px;width:118%;height:140px;background:#f8fcff;border-radius:48% 52% 0 0/70% 70% 0 0;transform:rotate(-1.2deg);pointer-events:none}
-.kr-statsInner,.kr-signpost,.kr-bee{position:relative;z-index:5}
-.kr-stats .statsHill{display:none}
-.kr-news{padding-top:105px;padding-bottom:115px}
-.kr-news::before{content:"";position:absolute;z-index:1;left:-10%;top:-58px;width:120%;height:115px;background:#f8fcff;border-radius:48% 52% 0 0/78% 70% 0 0;transform:rotate(-1deg);pointer-events:none}
-.kr-news::after{content:"";position:absolute;z-index:1;left:-9%;bottom:-62px;width:118%;height:125px;background:#9d91ee;border-radius:52% 48% 0 0/72% 70% 0 0;transform:rotate(1deg);pointer-events:none}
-.kr-newsGrid,.kr-sectionHead,.kr-news>.kr-cloud,.kr-news>.kr-elephant{z-index:4}
-.kr-join{margin-top:0;min-height:175px;padding-top:42px;padding-bottom:42px;clip-path:none;border-radius:0;overflow:hidden}
-.kr-join::before{content:"";position:absolute;left:-8%;top:-55px;width:116%;height:105px;background:#f8fcff;border-radius:50% 50% 0 0/85% 80% 0 0;transform:rotate(-1deg);pointer-events:none}
-.kr-join::after{content:"";position:absolute;left:-8%;bottom:-55px;width:116%;height:105px;background:#fff;border-radius:50% 50% 0 0/85% 80% 0 0;transform:rotate(1deg);pointer-events:none}
+.kr-story{padding-bottom:145px}
+.kr-story::after{content:"";position:absolute;z-index:2;left:0;bottom:-1px;width:100%;height:135px;background-color:transparent;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 180' preserveAspectRatio='none'%3E%3Cpath d='M0 105 C150 160 315 35 510 85 C720 140 860 30 1050 82 C1210 126 1320 48 1440 92 L1440 180 L0 180 Z' fill='%2349b5e8'/%3E%3C/svg%3E");background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}
+.kr-stats{padding-top:105px;padding-bottom:125px}
+.kr-stats::before{content:"";position:absolute;z-index:2;left:0;top:-1px;width:100%;height:105px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 140' preserveAspectRatio='none'%3E%3Cpath d='M0 42 C165 105 330 8 520 50 C720 95 890 12 1080 58 C1230 92 1335 25 1440 48 L1440 0 L0 0 Z' fill='%23f8fcff'/%3E%3C/svg%3E");background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}
+.kr-stats::after{content:"";position:absolute;z-index:2;left:0;bottom:-1px;width:100%;height:115px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 150' preserveAspectRatio='none'%3E%3Cpath d='M0 55 C160 15 330 100 520 55 C730 5 900 100 1090 48 C1240 12 1335 75 1440 42 L1440 150 L0 150 Z' fill='%23f8fcff'/%3E%3C/svg%3E");background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}
+.kr-statsInner,.kr-signpost,.kr-bee{position:relative;z-index:5}.kr-stats .statsHill{display:none}
+.kr-news{padding-top:112px;padding-bottom:125px}
+.kr-news::before{content:"";position:absolute;z-index:2;left:0;top:-1px;width:100%;height:105px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 140' preserveAspectRatio='none'%3E%3Cpath d='M0 52 C170 110 335 12 520 58 C735 108 900 15 1080 60 C1240 98 1330 28 1440 50 L1440 0 L0 0 Z' fill='%23f8fcff'/%3E%3C/svg%3E");background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}
+.kr-news::after{content:"";position:absolute;z-index:2;left:0;bottom:-1px;width:100%;height:125px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 165' preserveAspectRatio='none'%3E%3Cpath d='M0 70 C170 5 330 112 530 58 C720 5 900 105 1090 55 C1240 18 1330 90 1440 52 L1440 165 L0 165 Z' fill='%239d91ee'/%3E%3C/svg%3E");background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}
+.kr-newsGrid,.kr-sectionHead,.kr-news>.kr-cloud,.kr-news>.kr-elephant{position:relative;z-index:4}
+.kr-join{margin-top:0;min-height:205px;padding-top:62px;padding-bottom:62px;clip-path:none;border-radius:0;overflow:hidden}
+.kr-join::before{content:"";position:absolute;z-index:2;left:0;top:-1px;width:100%;height:85px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath d='M0 42 C170 100 335 8 520 48 C720 88 900 10 1080 52 C1230 82 1330 22 1440 45 L1440 0 L0 0 Z' fill='%23f8fcff'/%3E%3C/svg%3E");background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}
+.kr-join::after{content:"";position:absolute;z-index:2;left:0;bottom:-1px;width:100%;height:80px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 115' preserveAspectRatio='none'%3E%3Cpath d='M0 52 C170 12 330 94 520 50 C720 5 900 92 1090 45 C1240 15 1330 72 1440 42 L1440 115 L0 115 Z' fill='%23ffffff'/%3E%3C/svg%3E");background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}
 .kr-join>div,.kr-join>a,.kr-join>.kr-bunny{position:relative;z-index:4}
 
-/* Kaydırırken referanstaki yumuşak hareket hissi */
+/* Referanstaki akıcı scroll hissi */
 html{scroll-behavior:smooth}
 .kr-site{scroll-margin-top:20px}
 .kr-story,.kr-stats,.kr-news,.kr-join{scroll-snap-align:start}
@@ -41,10 +39,7 @@ html{scroll-behavior:smooth}
   .kr-reveal{animation:kr-section-in linear both;animation-timeline:view();animation-range:entry 0% cover 28%}
   .kr-reveal .photoA{animation:kr-photo-float linear both;animation-timeline:view();animation-range:entry 0% cover 35%}
 }
-@media (min-width:981px){
-  .kr-site{scroll-snap-type:y proximity}
-  .kr-story,.kr-stats,.kr-news,.kr-join{scroll-snap-stop:normal}
-}
+@media (min-width:981px){.kr-site{scroll-snap-type:y proximity}.kr-story,.kr-stats,.kr-news,.kr-join{scroll-snap-stop:normal}}
 
-@media (max-width:980px){.kr-nav{width:calc(100% - 20px);height:auto;min-height:66px}.kr-brand{min-width:auto}.kr-navLinks{display:none}.kr-navRight{margin-left:auto}.kr-hero{height:760px}.kr-storyInner{grid-template-columns:1fr}.kr-story{padding-bottom:110px}.kr-statsInner{grid-template-columns:repeat(2,1fr);gap:18px}.kr-signpost{right:2%;bottom:18px}.kr-newsGrid{grid-template-columns:1fr;max-width:520px}.kr-newsImage{height:210px}.kr-sectionHead>a{position:static;display:inline-block;margin-top:12px}.kr-join{gap:20px}.kr-join::before{top:-42px}.kr-join::after{bottom:-42px}.kr-join>div>span{font-size:20px}}
-@media (max-width:600px){.kr-nav{padding:7px 10px}.kr-brand b{font-size:14px}.kr-brand small{font-size:6px}.kr-layoutPicker{display:none}.kr-search{display:none}.kr-navCta{font-size:8px;padding:10px 12px}.kr-hero{height:720px;min-height:720px}.kr-heroCopy{left:7%;right:7%;top:25%}.kr-hero h1{font-size:52px}.kr-heroCopy p{font-size:14px}.kr-rocket{font-size:48px;right:4%;top:11%}.kr-sun{left:4%;top:12%;width:55px;height:55px}.kr-teddy{transform:scale(.75);transform-origin:left bottom}.kr-sign{right:3%;bottom:16%;transform:scale(.8)}.kr-story{padding:70px 6% 105px}.kr-storyPhotos{height:330px}.photoA{width:230px;height:165px}.photoB{width:240px;height:170px;left:19%;top:155px}.kr-facts{grid-template-columns:1fr}.kr-stats{padding:62px 6% 95px}.kr-stats::before{top:-40px;height:85px}.kr-stats::after{bottom:-48px;height:90px}.kr-stat{width:125px;height:125px}.kr-signpost{display:none}.kr-news{padding:72px 6% 105px}.kr-news::before{top:-40px;height:82px}.kr-news::after{bottom:-45px;height:90px}.kr-join{padding:38px 7% 48px;flex-direction:column;text-align:center;min-height:210px}.kr-bunny{display:none}}
+@media (max-width:980px){.kr-nav{width:calc(100% - 20px);height:auto;min-height:66px}.kr-brand{min-width:auto}.kr-navLinks{display:none}.kr-navRight{margin-left:auto}.kr-hero{height:760px}.kr-storyInner{grid-template-columns:1fr}.kr-story{padding-bottom:125px}.kr-statsInner{grid-template-columns:repeat(2,1fr);gap:18px}.kr-signpost{right:2%;bottom:18px}.kr-newsGrid{grid-template-columns:1fr;max-width:520px}.kr-newsImage{height:210px}.kr-sectionHead>a{position:static;display:inline-block;margin-top:12px}.kr-join{gap:20px}.kr-join>div>span{font-size:20px}}
+@media (max-width:600px){.kr-nav{padding:7px 10px}.kr-brand b{font-size:14px}.kr-brand small{font-size:6px}.kr-layoutPicker{display:none}.kr-search{display:none}.kr-navCta{font-size:8px;padding:10px 12px}.kr-hero{height:720px;min-height:720px}.kr-heroCopy{left:7%;right:7%;top:25%}.kr-hero h1{font-size:52px}.kr-heroCopy p{font-size:14px}.kr-rocket{font-size:48px;right:4%;top:11%}.kr-sun{left:4%;top:12%;width:55px;height:55px}.kr-teddy{transform:scale(.75);transform-origin:left bottom}.kr-sign{right:3%;bottom:16%;transform:scale(.8)}.kr-story{padding:70px 6% 115px}.kr-story::after{height:92px}.kr-storyPhotos{height:330px}.photoA{width:230px;height:165px}.photoB{width:240px;height:170px;left:19%;top:155px}.kr-facts{grid-template-columns:1fr}.kr-stats{padding:78px 6% 105px}.kr-stats::before{height:72px}.kr-stats::after{height:78px}.kr-stat{width:125px;height:125px}.kr-signpost{display:none}.kr-news{padding:78px 6% 112px}.kr-news::before{height:72px}.kr-news::after{height:82px}.kr-join{padding:70px 7% 72px;flex-direction:column;text-align:center;min-height:225px}.kr-join::before{height:58px}.kr-join::after{height:58px}.kr-bunny{display:none}}
