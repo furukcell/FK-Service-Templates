@@ -2,273 +2,73 @@
  * Targets only the kindergarten corporate page detected by .ageGroupsSection.
  */
 
-.pageShell:has(.ageGroupsSection) .section {
-  isolation: isolate;
-}
-
-.pageShell:has(.ageGroupsSection) .section:not(.compactStats)::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  width: 190px;
-  height: 190px;
-  border: 2px dashed rgba(255,79,135,.12);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.pageShell:has(.ageGroupsSection) .section:nth-of-type(3)::before {
-  left: -90px;
-  top: 90px;
-}
-
-.pageShell:has(.ageGroupsSection) .section:nth-of-type(5)::before {
-  right: -80px;
-  bottom: 70px;
-  border-color: rgba(43,183,233,.13);
-}
-
-.pageShell:has(.ageGroupsSection) .corporateHeroSlider::before {
-  content: "";
-  position: absolute;
-  right: 7%;
-  bottom: -95px;
-  width: 250px;
-  height: 250px;
-  border: 2px dashed rgba(255,255,255,.25);
-  border-radius: 50%;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.pageShell:has(.ageGroupsSection) .corporateHeroSlideContent {
-  animation: pkHeroContentIn .8s cubic-bezier(.2,.8,.2,1) both;
-}
-
-@keyframes pkHeroContentIn {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.pageShell:has(.ageGroupsSection) .whyUsCard {
-  position: relative;
-  overflow: hidden;
-}
-
-.pageShell:has(.ageGroupsSection) .whyUsCard::after {
-  content: "";
-  position: absolute;
-  width: 105px;
-  height: 105px;
-  right: -38px;
-  top: -38px;
-  border-radius: 50%;
-  border: 2px dashed rgba(41,32,68,.12);
-  transition: transform .45s ease;
-  pointer-events: none;
-}
-
-.pageShell:has(.ageGroupsSection) .whyUsCard:hover::after {
-  transform: scale(1.35) rotate(18deg);
-}
-
-.pageShell:has(.ageGroupsSection) .ageGroupItem {
-  overflow: hidden;
-  background: #fff;
-}
-
-.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(1) .ageGroupHeader { border-left: 5px solid #ff6470; }
-.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(2) .ageGroupHeader { border-left: 5px solid #ffc21e; }
-.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(3) .ageGroupHeader { border-left: 5px solid #a8d24a; }
-.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(4) .ageGroupHeader { border-left: 5px solid #25afe5; }
-.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(5) .ageGroupHeader { border-left: 5px solid #9b6cff; }
-
-.pageShell:has(.ageGroupsSection) .ageGroupHeader {
-  transition: background .25s ease, padding-left .25s ease;
-}
-
+.pageShell:has(.ageGroupsSection) .section { isolation: isolate; }
+.pageShell:has(.ageGroupsSection) .section:not(.compactStats)::before { content:""; position:absolute; z-index:-1; width:190px; height:190px; border:2px dashed rgba(255,79,135,.12); border-radius:50%; pointer-events:none; }
+.pageShell:has(.ageGroupsSection) .section:nth-of-type(3)::before { left:-90px; top:90px; }
+.pageShell:has(.ageGroupsSection) .section:nth-of-type(5)::before { right:-80px; bottom:70px; border-color:rgba(43,183,233,.13); }
+.pageShell:has(.ageGroupsSection) .corporateHeroSlider::before { content:""; position:absolute; right:7%; bottom:-95px; width:250px; height:250px; border:2px dashed rgba(255,255,255,.25); border-radius:50%; z-index:3; pointer-events:none; }
+.pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { animation:pkHeroContentIn .8s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes pkHeroContentIn { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+.pageShell:has(.ageGroupsSection) .whyUsCard { position:relative; overflow:hidden; }
+.pageShell:has(.ageGroupsSection) .whyUsCard::after { content:""; position:absolute; width:105px; height:105px; right:-38px; top:-38px; border-radius:50%; border:2px dashed rgba(41,32,68,.12); transition:transform .45s ease; pointer-events:none; }
+.pageShell:has(.ageGroupsSection) .whyUsCard:hover::after { transform:scale(1.35) rotate(18deg); }
+.pageShell:has(.ageGroupsSection) .ageGroupItem { overflow:hidden; background:#fff; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(1) .ageGroupHeader { border-left:5px solid #ff6470; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(2) .ageGroupHeader { border-left:5px solid #ffc21e; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(3) .ageGroupHeader { border-left:5px solid #a8d24a; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(4) .ageGroupHeader { border-left:5px solid #25afe5; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(5) .ageGroupHeader { border-left:5px solid #9b6cff; }
+.pageShell:has(.ageGroupsSection) .ageGroupHeader { transition:background .25s ease, padding-left .25s ease; }
 .pageShell:has(.ageGroupsSection) .ageGroupItem:hover .ageGroupHeader,
-.pageShell:has(.ageGroupsSection) .ageGroupItem.isOpen .ageGroupHeader {
-  background: #fff7fa;
-  padding-left: 22px;
-}
-
-.pageShell:has(.ageGroupsSection) .ageGroupToggleIcon {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: #fff0f5;
-  color: #ff4f87;
-  font-weight: 900;
-  transition: transform .25s ease, background .25s ease;
-}
-
-.pageShell:has(.ageGroupsSection) .ageGroupItem.isOpen .ageGroupToggleIcon {
-  transform: rotate(180deg);
-  background: #ff4f87;
-  color: #fff;
-}
-
+.pageShell:has(.ageGroupsSection) .ageGroupItem.isOpen .ageGroupHeader { background:#fff7fa; padding-left:22px; }
+.pageShell:has(.ageGroupsSection) .ageGroupToggleIcon { width:38px; height:38px; display:grid; place-items:center; border-radius:50%; background:#fff0f5; color:#ff4f87; font-weight:900; transition:transform .25s ease, background .25s ease; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem.isOpen .ageGroupToggleIcon { transform:rotate(180deg); background:#ff4f87; color:#fff; }
 .pageShell:has(.ageGroupsSection) .workshopCard,
-.pageShell:has(.ageGroupsSection) .visualCard {
-  position: relative;
-}
-
+.pageShell:has(.ageGroupsSection) .visualCard { position:relative; }
 .pageShell:has(.ageGroupsSection) .workshopCard::after,
-.pageShell:has(.ageGroupsSection) .visualCard::after {
-  content: "";
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  right: -45px;
-  bottom: -45px;
-  border: 2px dashed rgba(255,79,135,.14);
-  border-radius: 50%;
-  pointer-events: none;
-}
+.pageShell:has(.ageGroupsSection) .visualCard::after { content:""; position:absolute; width:90px; height:90px; right:-45px; bottom:-45px; border:2px dashed rgba(255,79,135,.14); border-radius:50%; pointer-events:none; }
+.pageShell:has(.ageGroupsSection) .testimonialCard blockquote { position:relative; z-index:1; }
+.pageShell:has(.ageGroupsSection) .campaignCard strong { display:inline-flex; margin-top:18px; padding:8px 13px; border-radius:999px; background:#fff0f5; color:#ff4f87; }
+.pageShell:has(.ageGroupsSection) .locationCard { border:2px solid rgba(43,183,233,.14); }
+.pageShell:has(.ageGroupsSection) .locationCard .mapEmbedFrame { min-height:310px; filter:saturate(.9) contrast(1.02); }
+.pageShell:has(.ageGroupsSection) .formPanel h3 { color:#292044; }
+.pageShell:has(.ageGroupsSection) .footer { background:#28164b; color:rgba(255,255,255,.88); }
 
-.pageShell:has(.ageGroupsSection) .testimonialCard blockquote {
-  position: relative;
-  z-index: 1;
-}
-
-.pageShell:has(.ageGroupsSection) .campaignCard strong {
-  display: inline-flex;
-  margin-top: 18px;
-  padding: 8px 13px;
-  border-radius: 999px;
-  background: #fff0f5;
-  color: #ff4f87;
-}
-
-.pageShell:has(.ageGroupsSection) .locationCard {
-  border: 2px solid rgba(43,183,233,.14);
-}
-
-.pageShell:has(.ageGroupsSection) .locationCard .mapEmbedFrame {
-  min-height: 310px;
-  filter: saturate(.9) contrast(1.02);
-}
-
-.pageShell:has(.ageGroupsSection) .formPanel h3 {
-  color: #292044;
-}
-
-.pageShell:has(.ageGroupsSection) .footer {
-  background: #28164b;
-  color: rgba(255,255,255,.88);
-}
-
-/* Akışkan Premium hissi: masaüstünde içerik bölüm bölüm ilerler. */
-@media (min-width: 981px) {
-  html.pk-kindergarten-premium-scroll {
-    scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
-    scroll-padding-top: 92px;
-    background: #f3eef7;
-  }
-
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) {
-    background: #f3eef7;
-    overflow: visible;
-  }
-
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlider {
-    min-height: calc(100svh - 92px);
-    height: calc(100svh - 92px);
-    max-height: 900px;
-    margin: 0;
-    border-radius: 0;
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-  }
-
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide {
-    position: absolute;
-    inset: 0;
-    background-position: center;
-    background-size: cover;
-  }
-
-  /* Tek, güçlü hero: slider mantığı kapalı görünür; ilk görsel sabit kalır. */
+@media (min-width:981px) {
+  html.pk-kindergarten-premium-scroll { scroll-behavior:smooth; scroll-snap-type:y proximity; scroll-padding-top:92px; background:#f3eef7; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) { background:#f3eef7; overflow:visible; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlider { min-height:calc(100svh - 92px); height:calc(100svh - 92px); max-height:900px; margin:0; border-radius:0; scroll-snap-align:start; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide { position:absolute; inset:0; background-position:center; background-size:cover; }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:not(:first-of-type),
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroDots {
-    display: none;
-  }
-
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type {
-    display: block;
-  }
-
-  /* Fotoğrafa yavaş kamera hareketi — drone/kurum fotoğrafında premium bir giriş verir. */
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type {
-    animation: pkHeroKenBurns 18s ease-out both;
-  }
-
-  @keyframes pkHeroKenBurns {
-    from { transform: scale(1.04); }
-    to { transform: scale(1.11); }
-  }
-
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .section {
-    width: min(1480px, calc(100% - 48px));
-    min-height: 0;
-    margin: 30px auto 42px;
-    padding: clamp(44px, 4vw, 64px);
-    border-radius: 38px;
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-    box-shadow: 0 20px 58px rgba(39,21,74,.10);
-  }
-
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .section.compactStats {
-    padding-top: 28px;
-    padding-bottom: 28px;
-    border-radius: 30px;
-  }
-
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .sectionHead {
-    max-width: none;
-    margin-bottom: 34px;
-  }
-
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroDots { display:none; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type { display:block; animation:pkHeroKenBurns 18s ease-out both; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; pointer-events:none; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlideOverlay { z-index:1; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { position:relative; z-index:2; }
+  @keyframes pkHeroKenBurns { from { transform:scale(1.04); } to { transform:scale(1.11); } }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .section { width:min(1480px,calc(100% - 48px)); min-height:0; margin:30px auto 42px; padding:clamp(44px,4vw,64px); border-radius:38px; scroll-snap-align:start; box-shadow:0 20px 58px rgba(39,21,74,.10); }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .section.compactStats { padding-top:28px; padding-bottom:28px; border-radius:30px; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .sectionHead { max-width:none; margin-bottom:34px; }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .whyUsGrid,
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .cardGrid,
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualGrid {
-    gap: 22px;
-  }
-
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualGrid { gap:22px; }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .whyUsCard,
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .serviceCard,
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualCard,
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .formPanel {
-    box-shadow: 0 14px 38px rgba(39,21,74,.08);
-  }
-
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .footer {
-    margin-top: 20px;
-  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .formPanel { box-shadow:0 14px 38px rgba(39,21,74,.08); }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .footer { margin-top:20px; }
 }
 
-@media (max-width: 960px) {
-  .pageShell:has(.ageGroupsSection) .corporateHeroSlider::before { right: -50px; }
+@media (max-width:960px) { .pageShell:has(.ageGroupsSection) .corporateHeroSlider::before { right:-50px; } }
+@media (max-width:640px) {
+  .pageShell:has(.ageGroupsSection) .section:not(.compactStats)::before { width:120px; height:120px; }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlider::before { display:none; }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { animation:none; }
 }
-
-@media (max-width: 640px) {
-  .pageShell:has(.ageGroupsSection) .section:not(.compactStats)::before { width: 120px; height: 120px; }
-  .pageShell:has(.ageGroupsSection) .corporateHeroSlider::before { display: none; }
-  .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { animation: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html.pk-kindergarten-premium-scroll {
-    scroll-behavior: auto;
-    scroll-snap-type: none;
-  }
+@media (prefers-reduced-motion:reduce) {
+  html.pk-kindergarten-premium-scroll { scroll-behavior:auto; scroll-snap-type:none; }
   .pageShell:has(.ageGroupsSection) .whyUsCard::after,
-  .pageShell:has(.ageGroupsSection) .ageGroupToggleIcon { transition: none !important; }
+  .pageShell:has(.ageGroupsSection) .ageGroupToggleIcon { transition:none !important; }
   .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent,
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type { animation: none !important; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type { animation:none !important; }
 }
