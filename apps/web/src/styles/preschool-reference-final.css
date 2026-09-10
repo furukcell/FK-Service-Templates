@@ -1,0 +1,401 @@
+/*
+ * MINIK ADIMLAR — reference landing system
+ * This file intentionally overrides the experimental kindergarten layers.
+ * Goal: one continuous, playful, premium landing page; no snap scrolling.
+ */
+
+.pageShell:has(.ageGroupsSection) {
+  --pk-purple:#32216b;
+  --pk-pink:#ff3f83;
+  --pk-yellow:#ffd43b;
+  --pk-green:#acd83d;
+  --pk-blue:#55bfea;
+  --pk-cream:#fffaf2;
+  --pk-ink:#2d2357;
+  display:flex;
+  flex-direction:column;
+  overflow-x:clip;
+  background:var(--pk-cream);
+  color:var(--pk-ink);
+}
+
+.pageShell:has(.ageGroupsSection) .topBar,
+.pageShell:has(.ageGroupsSection) .corporateHeroSwitchers,
+.pageShell:has(.ageGroupsSection) .variantControlDeck { display:none !important; }
+
+.pageShell:has(.ageGroupsSection) .navbar {
+  position:absolute;
+  z-index:50;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(980px,calc(100% - 44px));
+  min-height:64px;
+  padding:9px 12px 9px 18px;
+  border:0;
+  border-radius:999px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 14px 40px rgba(38,24,87,.16);
+  backdrop-filter:blur(12px);
+}
+.pageShell:has(.ageGroupsSection) .logoLockup { gap:9px; color:var(--pk-purple); font-weight:900; }
+.pageShell:has(.ageGroupsSection) .logoMark { width:44px; height:44px; border-radius:14px; font-size:15px; background:linear-gradient(135deg,#ff5d91,#ffd43b); }
+.pageShell:has(.ageGroupsSection) .navLinks { gap:4px; }
+.pageShell:has(.ageGroupsSection) .navLinks a { padding:10px 11px; color:#34295e; font-size:12px; font-weight:800; }
+.pageShell:has(.ageGroupsSection) .navLinks a:hover { background:#fff0f6; color:var(--pk-pink); transform:none; }
+.pageShell:has(.ageGroupsSection) .navActions { gap:8px; }
+.pageShell:has(.ageGroupsSection) .navActions .ghostButton { display:none; }
+.pageShell:has(.ageGroupsSection) .navActions .pillButton { min-height:42px; padding:11px 18px; border-radius:999px; background:linear-gradient(135deg,#ff3f83,#ff5c98); box-shadow:none; }
+
+/* HERO — one full-bleed photo with a soft storybook overlay. */
+.pageShell:has(.ageGroupsSection) .corporateHeroSlider {
+  order:1;
+  position:relative;
+  width:100%;
+  min-height:760px;
+  height:min(860px,100svh);
+  margin:0;
+  border-radius:0;
+  overflow:hidden;
+  isolation:isolate;
+  background:#5d49a8;
+}
+.pageShell:has(.ageGroupsSection) .corporateHeroSlide,
+.pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type {
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+  opacity:0 !important;
+  visibility:hidden;
+  transform:none !important;
+  background-size:cover !important;
+  background-position:center !important;
+  transition:none !important;
+  animation:none !important;
+}
+.pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type { opacity:1 !important; visibility:visible; }
+.pageShell:has(.ageGroupsSection) .corporateHeroSlideOverlay {
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(31,18,73,.72) 0%,rgba(31,18,73,.46) 36%,rgba(31,18,73,.08) 74%,rgba(31,18,73,.12) 100%);
+  z-index:1;
+}
+.pageShell:has(.ageGroupsSection) .corporateHeroSlideContent {
+  position:relative;
+  z-index:5;
+  width:min(560px,48vw);
+  max-width:none;
+  padding:205px 0 120px max(8vw,70px);
+  margin:0;
+  text-align:left;
+  animation:none !important;
+}
+.pageShell:has(.ageGroupsSection) .corporateHeroSlideContent .eyebrow {
+  padding:8px 13px;
+  border:0;
+  border-radius:999px;
+  background:#ff3f83;
+  color:#fff;
+  font-size:12px;
+  font-weight:900;
+  backdrop-filter:none;
+}
+.pageShell:has(.ageGroupsSection) .corporateHeroSlideContent h1 {
+  max-width:540px;
+  margin:16px 0 0;
+  color:#fff;
+  font-size:clamp(52px,6.3vw,92px);
+  line-height:.93;
+  letter-spacing:-.055em;
+  text-shadow:0 8px 25px rgba(26,13,63,.22);
+}
+.pageShell:has(.ageGroupsSection) .corporateHeroSlideContent p {
+  max-width:480px;
+  margin:24px 0 0;
+  color:#fff;
+  font-size:18px;
+  line-height:1.55;
+  text-shadow:0 4px 15px rgba(26,13,63,.22);
+}
+.pageShell:has(.ageGroupsSection) .corporateHeroSlideContent .heroActions { margin-top:30px; }
+.pageShell:has(.ageGroupsSection) .corporateHeroSlideContent .pillButton {
+  min-height:52px;
+  padding:15px 23px;
+  border-radius:999px;
+  background:#ff3f83;
+  box-shadow:0 13px 28px rgba(42,14,80,.22);
+}
+.pageShell:has(.ageGroupsSection) .corporateHeroSlideContent .ghostButton { display:none; }
+.pageShell:has(.ageGroupsSection) .corporateHeroSlider::after {
+  content:"";
+  position:absolute;
+  z-index:8;
+  left:-5%; right:-5%; bottom:-55px;
+  height:125px;
+  background:var(--pk-cream);
+  border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  pointer-events:none;
+}
+.pageShell:has(.ageGroupsSection) .corporateHeroSlider::before {
+  content:"";
+  position:absolute;
+  z-index:6;
+  right:8%; bottom:70px;
+  width:160px; height:160px;
+  border:2px dashed rgba(255,255,255,.55);
+  border-radius:50%;
+  pointer-events:none;
+}
+.pageShell:has(.ageGroupsSection) .corporateHeroDots { display:none !important; }
+
+/* STORY */
+.pageShell:has(.ageGroupsSection) .pk-storyScene {
+  order:2;
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:center;
+  gap:clamp(45px,7vw,100px);
+  width:100%;
+  min-height:620px;
+  padding:85px max(8vw,55px) 105px;
+  margin:0;
+  background:var(--pk-cream);
+  overflow:hidden;
+  isolation:isolate;
+}
+.pageShell:has(.ageGroupsSection) .pk-storyScene::after {
+  content:"";
+  position:absolute;
+  left:-5%; right:-5%; bottom:-78px;
+  height:145px;
+  background:var(--pk-green);
+  border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  z-index:-1;
+}
+.pageShell:has(.ageGroupsSection) .pk-storyPhotos { min-height:500px; position:relative; }
+.pageShell:has(.ageGroupsSection) .pk-polaroid {
+  width:min(390px,65%);
+  aspect-ratio:1.24;
+  padding:13px 13px 48px;
+  border-radius:7px;
+  background-color:#fff;
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 20px 42px rgba(42,26,89,.16);
+  animation:none !important;
+}
+.pageShell:has(.ageGroupsSection) .pk-polaroid-a { left:5%; top:4%; transform:rotate(-5deg); }
+.pageShell:has(.ageGroupsSection) .pk-polaroid-b { right:5%; bottom:2%; transform:rotate(5deg); }
+.pageShell:has(.ageGroupsSection) .pk-polaroid:not([style*="background-image"]) { background:linear-gradient(135deg,#ffe2ed 0%,#fff5c8 100%); }
+.pageShell:has(.ageGroupsSection) .pk-storyCopy { max-width:600px; }
+.pageShell:has(.ageGroupsSection) .pk-storyEyebrow { color:var(--pk-pink); font-size:13px; font-weight:900; letter-spacing:.13em; }
+.pageShell:has(.ageGroupsSection) .pk-storyCopy h2 { margin:14px 0 18px; color:var(--pk-purple); font-size:clamp(44px,4.8vw,72px); line-height:.96; letter-spacing:-.055em; }
+.pageShell:has(.ageGroupsSection) .pk-storyCopy > p { margin:0; max-width:560px; color:#6f6980; font-size:17px; line-height:1.7; }
+.pageShell:has(.ageGroupsSection) .pk-storyFacts { margin:28px 0 30px; gap:20px; }
+.pageShell:has(.ageGroupsSection) .pk-storyFacts > div { background:transparent; border:0; box-shadow:none; padding:0; }
+.pageShell:has(.ageGroupsSection) .pk-storyFacts b { width:56px; height:56px; flex-basis:56px; background:#fff; border:3px solid var(--pk-pink); color:var(--pk-pink); }
+.pageShell:has(.ageGroupsSection) .pk-storyFacts > div:nth-child(2) b { border-color:var(--pk-green); color:#79a923; }
+.pageShell:has(.ageGroupsSection) .pk-storyFacts strong { color:var(--pk-purple); }
+.pageShell:has(.ageGroupsSection) .pk-storyFacts small { color:#777183; }
+.pageShell:has(.ageGroupsSection) .pk-storyCopy .pillButton { border-radius:999px; background:var(--pk-pink); padding:14px 21px; }
+.pageShell:has(.ageGroupsSection) .pk-storyOrbits { display:block; }
+.pageShell:has(.ageGroupsSection) .pk-storyDoodle { animation:none !important; }
+
+/* STATS */
+.pageShell:has(.ageGroupsSection) .compactStats {
+  order:3;
+  width:100%;
+  margin:0;
+  min-height:250px;
+  padding:62px max(8vw,55px) 82px;
+  border-radius:0;
+  background:var(--pk-green);
+  box-shadow:none;
+  position:relative;
+  overflow:hidden;
+}
+.pageShell:has(.ageGroupsSection) .compactStats::after {
+  content:"";
+  position:absolute;
+  left:-5%; right:-5%; bottom:-55px;
+  height:105px;
+  background:var(--pk-cream);
+  border-radius:50% 50% 0 0 / 100% 100% 0 0;
+}
+.pageShell:has(.ageGroupsSection) .compactStats .statsGrid { position:relative; z-index:2; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px; }
+.pageShell:has(.ageGroupsSection) .compactStats .statCard {
+  min-height:150px;
+  border:2px dashed rgba(255,255,255,.95);
+  border-radius:50%;
+  background:transparent;
+  box-shadow:none;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  text-align:center;
+}
+.pageShell:has(.ageGroupsSection) .compactStats .statCard::after { display:none; }
+.pageShell:has(.ageGroupsSection) .compactStats .statCard strong { color:#fff; font-size:clamp(31px,3vw,46px); }
+.pageShell:has(.ageGroupsSection) .compactStats .statCard span { color:#fff; font-weight:800; }
+
+/* ALL CONTENT CHAPTERS — no floating card-dashboard look. */
+.pageShell:has(.ageGroupsSection) > .section {
+  width:100%;
+  margin:0;
+  min-height:0;
+  border-radius:0;
+  box-shadow:none;
+  scroll-snap-align:none;
+  position:relative;
+}
+.pageShell:has(.ageGroupsSection) > .section .sectionHead { max-width:980px; margin:0 auto 38px; }
+.pageShell:has(.ageGroupsSection) > .section .sectionHead h2 { color:var(--pk-purple); font-size:clamp(40px,5vw,70px); line-height:.98; letter-spacing:-.05em; }
+.pageShell:has(.ageGroupsSection) > .section .sectionHead p { color:#746e83; line-height:1.65; }
+
+/* NEWS / CAMPAIGNS */
+.pageShell:has(.ageGroupsSection) > .section:has(.campaignCard) {
+  order:4;
+  padding:88px max(7vw,45px) 100px;
+  background:var(--pk-cream);
+}
+.pageShell:has(.ageGroupsSection) > .section:has(.campaignCard) .cardGrid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; max-width:980px; margin:auto; }
+.pageShell:has(.ageGroupsSection) .campaignCard {
+  min-height:315px;
+  padding:0 0 24px;
+  overflow:hidden;
+  border:0;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 12px 28px rgba(45,35,87,.09);
+}
+.pageShell:has(.ageGroupsSection) .campaignCard::before {
+  content:"";
+  display:block;
+  height:170px;
+  background:linear-gradient(135deg,#ffd4e4,#f8b7cf 48%,#b8e6f7);
+}
+.pageShell:has(.ageGroupsSection) .campaignCard:nth-child(2)::before { background:linear-gradient(135deg,#ccefa1,#8ed8e8); }
+.pageShell:has(.ageGroupsSection) .campaignCard:nth-child(3)::before { background:linear-gradient(135deg,#f3c5ff,#a9a0f0); }
+.pageShell:has(.ageGroupsSection) .campaignCard > *:not(.priceTag) { margin-left:20px; margin-right:20px; }
+.pageShell:has(.ageGroupsSection) .campaignCard .priceTag { position:absolute; margin:12px 0 0 14px; z-index:2; background:var(--pk-yellow); color:#3d2d00; border-radius:999px; }
+.pageShell:has(.ageGroupsSection) .campaignCard h3 { margin-top:18px; color:var(--pk-purple); }
+.pageShell:has(.ageGroupsSection) .campaignCard p { color:#756e82; line-height:1.55; }
+.pageShell:has(.ageGroupsSection) .campaignCard strong { color:var(--pk-pink); }
+
+/* AGE GROUPS */
+.pageShell:has(.ageGroupsSection) > .section:has(.ageGroupsAccordion) {
+  order:5;
+  padding:90px max(7vw,45px) 105px;
+  background:#fff0b9;
+}
+.pageShell:has(.ageGroupsSection) .ageGroupsAccordion { max-width:900px; margin:auto; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem { margin:0 0 14px; border:0; border-radius:18px; background:#fff; box-shadow:0 9px 24px rgba(62,46,92,.08); overflow:hidden; }
+.pageShell:has(.ageGroupsSection) .ageGroupHeader { min-height:68px; padding:12px 18px; border-left:5px solid var(--pk-pink); background:#fff; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(2) .ageGroupHeader { border-left-color:var(--pk-yellow); }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(3) .ageGroupHeader { border-left-color:var(--pk-green); }
+.pageShell:has(.ageGroupsSection) .ageGroupToggleIcon { width:38px; height:38px; background:#fff0f6; color:var(--pk-pink); }
+.pageShell:has(.ageGroupsSection) .ageGroupItem.isOpen .ageGroupToggleIcon { background:var(--pk-pink); color:#fff; }
+.pageShell:has(.ageGroupsSection) .ageGroupBody { padding:4px 22px 22px; }
+
+/* WORKSHOPS */
+.pageShell:has(.ageGroupsSection) > .section:has(#workshops) { order:6; padding:90px max(7vw,45px) 105px; background:#e7f7ff; }
+.pageShell:has(.ageGroupsSection) > .section:has(#workshops) .cardGrid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; max-width:1050px; margin:auto; }
+.pageShell:has(.ageGroupsSection) .workshopCard { padding:0 0 22px; overflow:hidden; border:0; border-radius:22px; background:#fff; box-shadow:0 12px 30px rgba(44,88,111,.10); }
+.pageShell:has(.ageGroupsSection) .workshopCard img { width:100%; height:220px; object-fit:cover; margin:0; border-radius:0; transform:none !important; animation:none !important; }
+.pageShell:has(.ageGroupsSection) .workshopCard h3,.pageShell:has(.ageGroupsSection) .workshopCard p,.pageShell:has(.ageGroupsSection) .workshopCard .priceTag { margin-left:20px; margin-right:20px; }
+.pageShell:has(.ageGroupsSection) .workshopCard h3 { margin-top:18px; color:var(--pk-purple); }
+
+/* STAFF */
+.pageShell:has(.ageGroupsSection) > .section:has(.staffCard) { order:7; padding:90px max(7vw,45px) 105px; background:#f2edff; }
+.pageShell:has(.ageGroupsSection) > .section:has(.staffCard) .cardGrid { grid-template-columns:repeat(3,minmax(0,1fr)); max-width:1000px; margin:auto; gap:22px; }
+.pageShell:has(.ageGroupsSection) .staffCard { min-height:250px; display:flex; flex-direction:column; justify-content:flex-end; padding:26px; border:0; border-radius:24px; background:#fff; box-shadow:0 12px 28px rgba(54,35,101,.08); }
+.pageShell:has(.ageGroupsSection) .staffCard h3 { color:var(--pk-purple); }
+
+/* TESTIMONIALS */
+.pageShell:has(.ageGroupsSection) > .section:has(#testimonials) { order:8; padding:90px max(7vw,45px) 105px; background:#ffe5ef; }
+.pageShell:has(.ageGroupsSection) > .section:has(#testimonials) .cardGrid { grid-template-columns:repeat(2,minmax(0,1fr)); max-width:900px; margin:auto; gap:22px; }
+.pageShell:has(.ageGroupsSection) .testimonialCard { min-height:240px; padding:34px; border:0; border-radius:28px; background:#fff; box-shadow:0 12px 30px rgba(91,42,74,.09); }
+.pageShell:has(.ageGroupsSection) .testimonialCard::before { color:rgba(255,63,131,.12); }
+.pageShell:has(.ageGroupsSection) .testimonialCard blockquote { color:var(--pk-purple); font-size:23px; line-height:1.45; }
+
+/* BRANCHES */
+.pageShell:has(.ageGroupsSection) > .section:has(#branches) { order:9; padding:90px max(7vw,45px) 105px; background:#eef5ff; }
+.pageShell:has(.ageGroupsSection) > .section:has(#branches) .cardGrid { grid-template-columns:repeat(2,minmax(0,1fr)); max-width:900px; margin:auto; gap:22px; }
+.pageShell:has(.ageGroupsSection) .branchCard { padding:28px; border:0; border-radius:24px; background:#fff; }
+
+/* GALLERY */
+.pageShell:has(.ageGroupsSection) > .section:has(.visualCard) { order:10; padding:90px max(7vw,45px) 110px; background:#f6f0ff; }
+.pageShell:has(.ageGroupsSection) > .section:has(.visualCard) .visualGrid { max-width:1050px; margin:auto; gap:22px; }
+.pageShell:has(.ageGroupsSection) .visualCard { border:0; border-radius:22px; overflow:hidden; background:#fff; box-shadow:0 12px 30px rgba(54,35,101,.08); }
+.pageShell:has(.ageGroupsSection) .visualCard img { width:100%; height:260px; object-fit:cover; transform:none !important; animation:none !important; }
+
+/* FORM / FINAL CTA */
+.pageShell:has(.ageGroupsSection) > .section:has(#request-form) { order:11; padding:100px max(7vw,45px) 115px; background:#9e8be8; }
+.pageShell:has(.ageGroupsSection) > .section:has(#request-form)::before { content:""; position:absolute; left:-5%; right:-5%; top:-60px; height:110px; background:var(--pk-cream); border-radius:0 0 50% 50% / 0 0 100% 100%; }
+.pageShell:has(.ageGroupsSection) > .section:has(#request-form) .sectionHead h2,
+.pageShell:has(.ageGroupsSection) > .section:has(#request-form) .sectionHead p { color:#fff; }
+.pageShell:has(.ageGroupsSection) .formPanel { border:0; border-radius:24px; box-shadow:0 16px 34px rgba(46,27,97,.15); }
+.pageShell:has(.ageGroupsSection) .formPanel:hover { transform:none; }
+
+.pageShell:has(.ageGroupsSection) .footer {
+  order:12;
+  margin:0;
+  padding:58px max(7vw,45px) 28px;
+  background:#fff;
+  color:#5d5670;
+  border:0;
+}
+
+/* Kill the heavy scroll/animation experiment for this reference build. */
+html.pk-kindergarten-premium-scroll { scroll-behavior:auto !important; scroll-snap-type:none !important; scroll-padding-top:0 !important; background:var(--pk-cream); }
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-motion-item,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-motion-visible { opacity:1 !important; transform:none !important; transition:none !important; }
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .whyUsCard:hover,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopCard:hover,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .testimonialCard:hover,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .campaignCard:hover { transform:none !important; }
+
+@media (max-width:980px) {
+  .pageShell:has(.ageGroupsSection) .navbar { width:calc(100% - 24px); top:10px; min-height:58px; }
+  .pageShell:has(.ageGroupsSection) .navLinks { display:none; }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlider { min-height:680px; height:680px; }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { width:min(640px,80vw); padding:180px 28px 110px; }
+  .pageShell:has(.ageGroupsSection) .compactStats .statsGrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .pageShell:has(.ageGroupsSection) .pk-storyScene { grid-template-columns:1fr; gap:20px; padding:70px 28px 95px; }
+  .pageShell:has(.ageGroupsSection) .pk-storyPhotos { min-height:420px; }
+  .pageShell:has(.ageGroupsSection) > .section:has(.campaignCard) .cardGrid,
+  .pageShell:has(.ageGroupsSection) > .section:has(#workshops) .cardGrid,
+  .pageShell:has(.ageGroupsSection) > .section:has(.staffCard) .cardGrid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+
+@media (max-width:640px) {
+  .pageShell:has(.ageGroupsSection) .navbar { padding:7px 8px 7px 12px; }
+  .pageShell:has(.ageGroupsSection) .logoMark { width:40px; height:40px; }
+  .pageShell:has(.ageGroupsSection) .logoLockup > span:last-child { font-size:13px; }
+  .pageShell:has(.ageGroupsSection) .navActions .pillButton { min-height:38px; padding:9px 13px; font-size:11px; }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlider { min-height:640px; height:640px; }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { width:100%; padding:160px 22px 90px; }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent h1 { font-size:clamp(46px,13vw,64px); }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent p { font-size:16px; }
+  .pageShell:has(.ageGroupsSection) .compactStats { padding:50px 20px 72px; }
+  .pageShell:has(.ageGroupsSection) .compactStats .statsGrid { gap:10px; }
+  .pageShell:has(.ageGroupsSection) .compactStats .statCard { min-height:130px; }
+  .pageShell:has(.ageGroupsSection) .pk-storyScene { padding:55px 20px 80px; }
+  .pageShell:has(.ageGroupsSection) .pk-storyPhotos { min-height:300px; }
+  .pageShell:has(.ageGroupsSection) .pk-polaroid { width:72%; padding-bottom:36px; }
+  .pageShell:has(.ageGroupsSection) .pk-storyCopy h2 { font-size:clamp(38px,11vw,54px); }
+  .pageShell:has(.ageGroupsSection) .pk-storyFacts { grid-template-columns:1fr; }
+  .pageShell:has(.ageGroupsSection) > .section:has(.campaignCard) .cardGrid,
+  .pageShell:has(.ageGroupsSection) > .section:has(#workshops) .cardGrid,
+  .pageShell:has(.ageGroupsSection) > .section:has(.staffCard) .cardGrid,
+  .pageShell:has(.ageGroupsSection) > .section:has(#testimonials) .cardGrid,
+  .pageShell:has(.ageGroupsSection) > .section:has(#branches) .cardGrid { grid-template-columns:1fr; }
+  .pageShell:has(.ageGroupsSection) > .section { padding-left:20px !important; padding-right:20px !important; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  html.pk-kindergarten-premium-scroll { scroll-behavior:auto !important; }
+}
