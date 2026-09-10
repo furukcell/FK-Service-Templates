@@ -104,6 +104,16 @@ function mountStoryScene() {
   hero.insertAdjacentElement("afterend", scene);
 }
 
+function cleanupKindergartenEnhancements() {
+  document.querySelectorAll(".pageShell:has(.ageGroupsSection) .pk-storyScene").forEach((node) => node.remove());
+  document.querySelectorAll(".pageShell:has(.ageGroupsSection) .pk-heroDecor").forEach((node) => node.remove());
+  document.querySelectorAll(".pageShell:has(.ageGroupsSection) .pk-heroVideo").forEach((node) => node.remove());
+  document.querySelectorAll(".pageShell:has(.ageGroupsSection) .pk-motion-item").forEach((node) => {
+    node.classList.remove("pk-motion-item", "pk-motion-visible");
+    (node as HTMLElement).style.removeProperty("--pk-delay");
+  });
+}
+
 export function KindergartenCorporateEnhancer({ active }: Props) {
   useEffect(() => {
     if (!active || typeof window === "undefined") return;
@@ -114,34 +124,38 @@ export function KindergartenCorporateEnhancer({ active }: Props) {
     mountStoryScene();
 
     const nodes = Array.from(document.querySelectorAll<HTMLElement>(SELECTORS));
-    let observer: IntersectionObserver | null = null;
+    if (!nodes.length) return () => {
+      cleanupKindergartenEnhancements();
+      document.documentElement.classList.remove("pk-kindergarten-premium-scroll");
+    };
 
-    if (nodes.length && !reduceMotion && "IntersectionObserver" in window) {
-      nodes.forEach((node, index) => {
-        node.classList.add("pk-motion-item");
-        node.style.setProperty("--pk-delay", `${Math.min(index % 4, 3) * 80}ms`);
-      });
-
-      observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("pk-motion-visible");
-            observer?.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: "0px 0px -55px 0px" });
-
-      nodes.forEach((node) => observer?.observe(node));
-    } else {
+    if (reduceMotion || !("IntersectionObserver" in window)) {
       nodes.forEach((node) => node.classList.add("pk-motion-visible"));
+      return () => {
+        cleanupKindergartenEnhancements();
+        document.documentElement.classList.remove("pk-kindergarten-premium-scroll");
+      };
     }
 
+    nodes.forEach((node, index) => {
+      node.classList.add("pk-motion-item");
+      node.style.setProperty("--pk-delay", `${Math.min(index % 4, 3) * 80}ms`);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("pk-motion-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -55px 0px" });
+
+    nodes.forEach((node) => observer.observe(node));
     return () => {
-      observer?.disconnect();
+      observer.disconnect();
+      cleanupKindergartenEnhancements();
       document.documentElement.classList.remove("pk-kindergarten-premium-scroll");
-      document.querySelectorAll(".pageShell:has(.ageGroupsSection) .pk-storyScene").forEach((node) => node.remove());
-      document.querySelectorAll(".pageShell:has(.ageGroupsSection) .pk-heroDecor").forEach((node) => node.remove());
-      document.querySelectorAll(".pageShell:has(.ageGroupsSection) .pk-heroVideo").forEach((node) => node.remove());
     };
   }, [active]);
 
