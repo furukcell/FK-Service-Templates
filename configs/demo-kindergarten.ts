@@ -58,11 +58,23 @@ export const demoKindergartenConfig: BusinessTemplateConfig = {
     { name: "Merkez Şube", phone: "+90 5xx xxx xx xx", whatsapp: "+905xxxxxxxxx", address: "Milas / Muğla" },
     { name: "Bodrum Şube", phone: "+90 5xx xxx xx xx", whatsapp: "+905xxxxxxxxx", address: "Bodrum / Muğla" }
   ],
+  heroSlides: [
+    {
+      title: "16 yıllık tecrübemizle çocuklarınızın yanındayız.",
+      description: "Kreş, anaokulu ve gündüz bakım evleri için sınıflar, günlük akış, yemek bilgisi, galeri ve ön görüşme formu olan modern web sitesi.",
+      imageUrl: "https://picsum.photos/seed/kres-hero-1/1600/900"
+    },
+    {
+      title: "Oyun ve sanatla desteklenen okul öncesi eğitim.",
+      description: "Deneyimli öğretmen kadromuz ve düzenli veli bilgilendirmesiyle çocuğunuzun gelişimini birlikte takip ediyoruz.",
+      imageUrl: "https://picsum.photos/seed/kres-hero-2/1600/900"
+    }
+  ],
   workshops: [
-    { title: "Görsel Sanatlar", description: "Resim, ebru ve drama etkinlikleriyle çocukların sanatsal yönü destekleniyor.", ageRange: "3-6 Yaş" },
-    { title: "Robotik ve Kodlama", description: "Eğlenerek öğrenme odaklı temel robotik ve kodlama atölyesi.", ageRange: "4-6 Yaş" },
-    { title: "Satranç", description: "Dikkat, strateji ve problem çözme becerilerini geliştiren satranç dersleri.", ageRange: "4-6 Yaş" },
-    { title: "Yüzme", description: "Kurum bünyesindeki havuzda branş öğretmenleri eşliğinde yüzme etkinlikleri.", ageRange: "3-6 Yaş" }
+    { title: "Görsel Sanatlar", description: "Resim, ebru ve drama etkinlikleriyle çocukların sanatsal yönü destekleniyor.", ageRange: "3-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-sanat/600/400" },
+    { title: "Robotik ve Kodlama", description: "Eğlenerek öğrenme odaklı temel robotik ve kodlama atölyesi.", ageRange: "4-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-robotik/600/400" },
+    { title: "Satranç", description: "Dikkat, strateji ve problem çözme becerilerini geliştiren satranç dersleri.", ageRange: "4-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-satranc/600/400" },
+    { title: "Yüzme", description: "Kurum bünyesindeki havuzda branş öğretmenleri eşliğinde yüzme etkinlikleri.", ageRange: "3-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-yuzme/600/400" }
   ],
   testimonials: [
     { name: "Elif K.", role: "Veli", quote: "Çocuğum sabah severek okula gidiyor, öğretmenlerle iletişimimiz çok düzenli." },
