@@ -62,13 +62,6 @@ export type Testimonial = {
   quote: string;
 };
 
-export type Announcement = {
-  title: string;
-  excerpt: string;
-  date?: string;
-  imageUrl?: string;
-};
-
 export type NurseryEnabledFeatures = {
   enrollment?: boolean;
   multiBranch?: boolean;
@@ -78,7 +71,6 @@ export type NurseryEnabledFeatures = {
   gallery?: boolean;
   whatsapp?: boolean;
   maps?: boolean;
-  announcements?: boolean;
 };
 
 export type BusinessTemplateConfig = {
@@ -108,7 +100,6 @@ export type BusinessTemplateConfig = {
   branches?: Branch[];
   workshops?: Workshop[];
   testimonials?: Testimonial[];
-  announcements?: Announcement[];
   enabledFeatures?: NurseryEnabledFeatures;
   form: {
     title: string;
