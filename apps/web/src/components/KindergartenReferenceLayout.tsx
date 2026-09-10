@@ -21,30 +21,14 @@ function logoMark() {
   );
 }
 
-function Sun() {
-  return <div className="kr-sun" aria-hidden="true"><span>☻</span></div>;
-}
-function Cloud({ className = "" }: { className?: string }) {
-  return <div className={`kr-cloud ${className}`} aria-hidden="true"><i /><i /><i /></div>;
-}
-function Flower({ className = "" }: { className?: string }) {
-  return <div className={`kr-flower ${className}`} aria-hidden="true"><span>✿</span></div>;
-}
-function Rocket() {
-  return <div className="kr-rocket" aria-hidden="true">🚀</div>;
-}
-function Teddy() {
-  return <div className="kr-teddy" aria-hidden="true"><div className="kr-ear l"/><div className="kr-ear r"/><div className="kr-teddyFace">●ᴗ●</div><div className="kr-tummy">♥</div></div>;
-}
-function Bunny() {
-  return <div className="kr-bunny" aria-hidden="true"><div className="kr-bunnyEar l"/><div className="kr-bunnyEar r"/><div className="kr-bunnyFace">●ᴗ●</div></div>;
-}
-function Elephant() {
-  return <div className="kr-elephant" aria-hidden="true">🐘</div>;
-}
-function Hill({ className = "" }: { className?: string }) {
-  return <div className={`kr-hill ${className}`} aria-hidden="true"><Flower className="one"/><Flower className="two"/><span className="kr-bush"/><span className="kr-bush b2"/></div>;
-}
+function Sun() { return <div className="kr-sun" aria-hidden="true"><span>☻</span></div>; }
+function Cloud({ className = "" }: { className?: string }) { return <div className={`kr-cloud ${className}`} aria-hidden="true"><i /><i /><i /></div>; }
+function Flower({ className = "" }: { className?: string }) { return <div className={`kr-flower ${className}`} aria-hidden="true"><span>✿</span></div>; }
+function Rocket() { return <div className="kr-rocket" aria-hidden="true">🚀</div>; }
+function Teddy() { return <div className="kr-teddy" aria-hidden="true"><div className="kr-ear l"/><div className="kr-ear r"/><div className="kr-teddyFace">●ᴗ●</div><div className="kr-tummy">♥</div></div>; }
+function Bunny() { return <div className="kr-bunny" aria-hidden="true"><div className="kr-bunnyEar l"/><div className="kr-bunnyEar r"/><div className="kr-bunnyFace">●ᴗ●</div></div>; }
+function Elephant() { return <div className="kr-elephant" aria-hidden="true">🐘</div>; }
+function Hill({ className = "" }: { className?: string }) { return <div className={`kr-hill ${className}`} aria-hidden="true"><Flower className="one"/><Flower className="two"/><span className="kr-bush"/><span className="kr-bush b2"/></div>; }
 
 function Photo({ src, title, className = "" }: { src?: string; title: string; className?: string }) {
   return <div className={`kr-photo ${className}`}>
@@ -74,7 +58,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       <nav className="kr-nav">
         <a className="kr-brand" href="#top" aria-label={config.brandName}>{logoMark()}<span><b>{config.brandName}</b><small>Bugünün minikleri, yarının büyük adamları</small></span></a>
         <div className="kr-navLinks">
-          {['Ana Sayfa', 'Kurumsal', 'Atölyelerimiz', 'Galeri', 'Duyurular', 'İletişim'].map((item, i) => <a key={item} className={i === 0 ? 'active' : ''} href={i === 0 ? '#top' : i === 2 ? '#workshops' : i === 3 ? '#gallery' : i === 4 ? '#news' : '#contact'}>{item}</a>)}
+          {['Ana Sayfa', 'Kurumsal', 'Atölyelerimiz', 'Galeri', 'Duyurular', 'İletişim'].map((item, i) => <a key={item} className={i === 0 ? 'active' : ''} href={i === 0 ? '#top' : i === 1 ? '#about' : i === 2 ? '#news' : i === 3 ? '#news' : i === 4 ? '#news' : '#contact'}>{item}</a>)}
         </div>
         <div className="kr-navRight"><button className="kr-search" aria-label="Ara">⌕</button><a className="kr-navCta" href="#contact">Kayıt &amp; Bilgi Al</a></div>
       </nav>
@@ -128,29 +112,22 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         <div className="kr-sectionHead"><span className="kr-kicker">MİNİK ADIMLAR’DAN HABERLER</span><h2>Duyurular &amp; Etkinlikler <i>〽</i></h2><a href="#contact">Tüm Duyurular →</a></div>
         <div className="kr-newsGrid">
           {news.map((item, index) => <article className="kr-newsCard" key={`${item.title}-${index}`}>
-            <div className="kr-newsImage"><Photo src={item.title === gallery[0]?.title ? gallery[0]?.imageUrl : undefined} title={item.title} /><span>{index === 0 ? '12 EYLÜL 2025' : index === 1 ? '5 EYLÜL 2025' : '1 EYLÜL 2025'}</span></div>
+            <div className="kr-newsImage"><Photo src={gallery[index]?.imageUrl} title={item.title} /><span>{index === 0 ? '12 EYLÜL 2025' : index === 1 ? '5 EYLÜL 2025' : '1 EYLÜL 2025'}</span></div>
             <div className="kr-newsBody"><h3>{item.title}</h3><p>{item.description}</p><a href="#contact">Daha Fazla →</a></div>
           </article>)}
         </div>
       </section>
 
-      <section id="workshops" className="kr-join">
+      <section id="join" className="kr-join">
         <Hill className="joinHill" /><Bunny />
         <div><span>Gelin, Minik Adımlar Ailemize Katılın</span><small>Çocuğunuzun mutlu ve başarılı bir geleceğe adım atması için bizimle iletişime geçin.</small></div>
         <a href="#contact">Randevu Al →</a>
       </section>
 
-      <section id="gallery" className="kr-workshops kr-paper">
-        <div className="kr-sectionHead"><span className="kr-kicker">OYUN • SANAT • KEŞİF</span><h2>Atölyelerimiz</h2></div>
-        <div className="kr-workshopGrid">
-          {(config.workshops || []).slice(0, 3).map((workshop, index) => <article key={workshop.title} className="kr-workshopCard"><div className="kr-workshopVisual">{workshop.imageUrl ? <img src={workshop.imageUrl} alt="" /> : <span>{['🎨','🧩','♟'][index]}</span>}</div><b>{workshop.title}</b><small>{workshop.ageRange}</small><p>{workshop.description}</p></article>)}
-        </div>
-      </section>
-
       <section id="contact" className="kr-footer">
         <div className="kr-footerTop">
           <a className="kr-brand footerBrand" href="#top">{logoMark()}<span><b>{config.brandName}</b><small>Bugünün minikleri, yarının büyük adamları</small></span></a>
-          <div><b>Hızlı Erişim</b><a href="#top">Ana Sayfa</a><a href="#about">Kurumsal</a><a href="#workshops">Atölyelerimiz</a></div>
+          <div><b>Hızlı Erişim</b><a href="#top">Ana Sayfa</a><a href="#about">Kurumsal</a><a href="#news">Atölyelerimiz</a><a href="#news">Duyurular</a><a href="#contact">İletişim</a></div>
           <div><b>Bize Ulaşın</b><span>☎ {config.phone}</span><span>✉ info@minikadimlar.com</span><span>⌖ {config.address}</span></div>
           <div className="kr-social"><a href={config.instagramUrl || '#'}>◎</a><a href="#contact">f</a><a href="#contact">▶</a></div>
         </div>
