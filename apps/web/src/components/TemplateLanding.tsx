@@ -382,6 +382,7 @@ function VisualSection({ config, prominentLocationCard = false }: { config: Busi
   );
 }
 
+// --- Kreş "corporate" tasarımına özel bölümler ---
 function WhyUsSection({ config }: { config: BusinessTemplateConfig }) {
   if (!config.whyUs?.length) return null;
   return (
