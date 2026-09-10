@@ -68,7 +68,7 @@ function isWhatsappCta(label: string) {
 function PrimaryCtaButton({ config }: { config: BusinessTemplateConfig }) {
   const isWhatsapp = isWhatsappCta(config.primaryCta);
   return (
-    
+     <a
       className="pillButton navButtonLink"
       href={isWhatsapp ? whatsappUrl(config) : "#request-form"}
       target={isWhatsapp ? "_blank" : undefined}
