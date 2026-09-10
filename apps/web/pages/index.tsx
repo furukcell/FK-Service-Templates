@@ -37,15 +37,26 @@ export default function HomePage() {
       {isReferenceKindergarten ? (
         <KindergartenReferenceLayout config={config} onLayoutChange={setActiveLayout} />
       ) : (
-        <TemplateLanding
-          config={config}
-          activeTemplate={activeTemplate}
-          activeLayout={isFlow ? "modern" : activeLayout}
-          onTemplateChange={setActiveTemplate}
-          onLayoutChange={setActiveLayout}
-          showTemplateSwitch
-          showLayoutSwitch
-        />
+        <>
+          <TemplateLanding
+            config={config}
+            activeTemplate={activeTemplate}
+            activeLayout={isFlow ? "modern" : activeLayout}
+            onTemplateChange={setActiveTemplate}
+            onLayoutChange={setActiveLayout}
+            showTemplateSwitch
+            showLayoutSwitch
+          />
+          {isKindergarten ? (
+            <button
+              type="button"
+              onClick={() => setActiveLayout("kindergarten-reference")}
+              style={{ position: "fixed", zIndex: 90, right: 16, bottom: 16, border: 0, borderRadius: 24, padding: "10px 16px", background: "#f83d7c", color: "#fff", fontWeight: 900, boxShadow: "0 8px 24px rgba(64,32,120,.22)", cursor: "pointer" }}
+            >
+              Minik Adımlar Tasarımı
+            </button>
+          ) : null}
+        </>
       )}
       <SalonFlowStyleButton activeTemplate={activeTemplate} activeLayout={activeLayout} onSelect={setActiveLayout} />
       <SalonPremiumHeroMount active={isSalonFlow} config={config} />
