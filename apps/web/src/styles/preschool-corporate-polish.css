@@ -51,6 +51,7 @@
 }
 
 .pageShell:has(.ageGroupsSection) .whyUsCard {
+  position: relative;
   overflow: hidden;
 }
 
@@ -64,6 +65,7 @@
   border-radius: 50%;
   border: 2px dashed rgba(41,32,68,.12);
   transition: transform .45s ease;
+  pointer-events: none;
 }
 
 .pageShell:has(.ageGroupsSection) .whyUsCard:hover::after {
