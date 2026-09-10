@@ -1,63 +1,32 @@
-/* Bilim Çocuk — reference fidelity layer
-   Decorative geometry intentionally mirrors the supplied reference composition. */
+/* Bilim Çocuk — reference fidelity layer */
 .kr-site{--ref-blue:#1976d2;--ref-sky:#62b9eb;--ref-deep:#0d47a1;--ref-pale:#f8fcff}
 
-/* Hero landscape: a deeper, layered green meadow/foothill silhouette so the hero ends in a real countryside scene rather than a thin green strip. */
-.kr-hero::after{content:"";position:absolute;z-index:11;left:-2%;right:-2%;bottom:-2px;height:132px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 190' preserveAspectRatio='none'%3E%3Cpath fill='%236bc4ed' d='M0 105 C100 66 210 137 330 98 C455 58 560 130 690 92 C820 53 935 129 1065 87 C1190 51 1320 117 1440 74 L1440 190 L0 190 Z'/%3E%3Cpath fill='%2343a5df' d='M0 132 C120 91 245 158 370 121 C500 80 615 155 755 114 C890 76 1010 153 1140 111 C1260 73 1350 128 1440 101 L1440 190 L0 190 Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
-.kr-hero::before{content:"";position:absolute;z-index:10;left:-2%;right:-2%;bottom:54px;height:168px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 210' preserveAspectRatio='none'%3E%3Cpath fill='%237fbd3f' d='M0 145 C75 112 140 132 220 111 C305 89 366 130 450 104 C535 78 595 119 680 96 C770 70 836 113 920 87 C1000 62 1062 105 1140 79 C1235 48 1310 91 1440 58 L1440 210 L0 210 Z'/%3E%3Cpath fill='%239bd44e' d='M0 165 C100 137 178 158 270 135 C355 114 425 151 515 128 C610 103 685 145 775 119 C875 91 950 138 1040 111 C1140 82 1225 125 1315 99 C1370 83 1408 92 1440 83 L1440 210 L0 210 Z'/%3E%3Cpath fill='%234f9f35' d='M0 185 C125 159 218 180 325 157 C430 134 520 174 625 151 C730 128 820 168 925 143 C1035 117 1120 158 1225 133 C1310 113 1375 135 1440 119 L1440 210 L0 210 Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
-.kr-hero .kr-teddy{bottom:48px}.kr-hero .kr-sign{bottom:17%}
+/* HERO: gerçek arazi hissi. Yeşil dağ/çayır hero'nun altını doldurur ve doğrudan beyaz hikaye alanına geçer. */
+.kr-hero{position:relative;overflow:hidden}
+.kr-hero::before{content:"";position:absolute;z-index:10;left:-3%;right:-3%;bottom:-2px;height:190px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 210' preserveAspectRatio='none'%3E%3Cpath fill='%2388c957' d='M0 145 C90 105 175 160 285 118 C390 78 480 142 590 106 C700 70 800 133 915 96 C1035 56 1130 125 1240 88 C1330 58 1390 94 1440 66 L1440 210 L0 210 Z'/%3E%3Cpath fill='%235aaa43' d='M0 166 C105 125 210 178 325 140 C440 102 540 165 655 128 C775 90 875 153 990 118 C1110 80 1210 146 1320 112 C1370 97 1410 105 1440 91 L1440 210 L0 210 Z'/%3E%3Cpath fill='%233f963d' d='M0 190 C130 155 235 194 355 163 C480 131 585 190 710 151 C835 115 945 177 1065 143 C1190 109 1300 162 1440 126 L1440 210 L0 210 Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.kr-hero::after{content:"";position:absolute;z-index:11;left:-2%;right:-2%;bottom:-2px;height:88px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0 54 C125 18 245 72 375 40 C510 7 635 70 765 36 C900 2 1020 67 1150 34 C1270 6 1360 57 1440 26 L1440 100 L0 100 Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.kr-hero .kr-teddy{bottom:92px}.kr-hero .kr-sign{bottom:20%}
 
-/* Reference-style hand-drawn scenery accents. */
+/* Story: beyaz alana yumuşak, organik giriş ve el çizimi hissi. */
+.kr-story{position:relative;overflow:hidden}
 .kr-story:before{content:"";position:absolute;z-index:2;right:6%;top:55px;width:130px;height:110px;opacity:.75;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 130'%3E%3Cpath d='M12 100c24-24 45-30 69-18 17 9 31 10 54-7' fill='none' stroke='%2343a5df' stroke-width='3' stroke-dasharray='5 8' stroke-linecap='round'/%3E%3Ccircle cx='23' cy='100' r='7' fill='%2342a5f5'/%3E%3Ccircle cx='92' cy='82' r='8' fill='%238fd3ff'/%3E%3Cpath d='M126 28c7-15 25-14 29 1-9-4-18-2-29-1Z' fill='%2343a5df'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
 .kr-story .kr-storyPhotos:after{content:"✦";position:absolute;right:9%;bottom:22px;font-size:38px;color:#42a5f5;transform:rotate(18deg)}
 
-/* Stats becomes a landscape strip: soft sky/ground layers and floating confetti. */
-.kr-stats:after{z-index:1!important}
-.kr-stats .kr-statsInner{padding-top:10px}
-.kr-stats:before{z-index:2!important}
-.kr-stats::marker{display:none}
-.kr-stats .kr-bee{animation:kr-buzz 4s ease-in-out infinite}
+/* Stats */
+.kr-stats:after{z-index:1!important}.kr-stats .kr-statsInner{padding-top:10px}.kr-stats:before{z-index:2!important}.kr-stats::marker{display:none}.kr-stats .kr-bee{animation:kr-buzz 4s ease-in-out infinite}
 @keyframes kr-buzz{0%,100%{transform:translate(0,0) rotate(-4deg)}50%{transform:translate(-8px,-7px) rotate(4deg)}}
 .kr-stats{background:linear-gradient(180deg,#2495d6 0%,#49b5e8 100%)!important}
 
-/* Give the news area the same airy illustrated stage as the reference. */
-.kr-news{background:#f8fcff!important}
-.kr-news:after{height:118px!important}
-.kr-newsGrid{margin-top:30px}
-.kr-newsCard{border-radius:14px!important;transform:translateZ(0);transition:transform .28s ease,box-shadow .28s ease}
-.kr-newsCard:hover{transform:translateY(-7px) rotate(-.35deg);box-shadow:0 18px 34px rgba(13,71,161,.16)}
-.kr-newsCard:nth-child(2):hover{transform:translateY(-7px) rotate(.35deg)}
-.kr-newsCard:nth-child(3):hover{transform:translateY(-7px) rotate(-.2deg)}
+/* Haberler */
+.kr-news{background:#f8fcff!important}.kr-news:after{height:118px!important}.kr-newsGrid{margin-top:30px}.kr-newsCard{border-radius:14px!important;transform:translateZ(0);transition:transform .28s ease,box-shadow .28s ease}.kr-newsCard:hover{transform:translateY(-7px) rotate(-.35deg);box-shadow:0 18px 34px rgba(13,71,161,.16)}.kr-newsCard:nth-child(2):hover{transform:translateY(-7px) rotate(.35deg)}.kr-newsCard:nth-child(3):hover{transform:translateY(-7px) rotate(-.2deg)}
 
-/* Polaroids: closer to the overlapping, playful reference framing. */
-.kr-photo{border-radius:4px!important;box-shadow:0 14px 28px rgba(13,71,161,.15)!important}
-.kr-storyPhotos .photoA{transform:rotate(6deg);transform-origin:center center}
-.kr-storyPhotos .photoB{transform:rotate(-5deg);transform-origin:center center}
+/* Polaroid */
+.kr-photo{border-radius:4px!important;box-shadow:0 14px 28px rgba(13,71,161,.15)!important}.kr-storyPhotos .photoA{transform:rotate(6deg);transform-origin:center center}.kr-storyPhotos .photoB{transform:rotate(-5deg);transform-origin:center center}
 
-/* Section entrance: stagger children for a flowing rather than flat scroll. */
-@supports (animation-timeline:view()){
- .kr-story .kr-storyCopy{animation:kr-copy-in linear both;animation-timeline:view();animation-range:entry 0% cover 38%}
- .kr-story .kr-storyPhotos{animation:kr-photos-in linear both;animation-timeline:view();animation-range:entry 0% cover 38%}
- .kr-stats .kr-stat:nth-child(1){animation-delay:.03s}.kr-stats .kr-stat:nth-child(2){animation-delay:.10s}.kr-stats .kr-stat:nth-child(3){animation-delay:.17s}.kr-stats .kr-stat:nth-child(4){animation-delay:.24s}
- .kr-stats .kr-stat{animation:kr-stat-in linear both;animation-timeline:view();animation-range:entry 0% cover 34%}
-}
-@keyframes kr-copy-in{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
-@keyframes kr-photos-in{from{opacity:0;transform:translateY(34px) rotate(-1deg)}to{opacity:1;transform:none}}
-@keyframes kr-stat-in{from{opacity:0;transform:translateY(24px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+/* Akış */
+@supports (animation-timeline:view()){.kr-story .kr-storyCopy{animation:kr-copy-in linear both;animation-timeline:view();animation-range:entry 0% cover 38%}.kr-story .kr-storyPhotos{animation:kr-photos-in linear both;animation-timeline:view();animation-range:entry 0% cover 38%}.kr-stats .kr-stat:nth-child(1){animation-delay:.03s}.kr-stats .kr-stat:nth-child(2){animation-delay:.10s}.kr-stats .kr-stat:nth-child(3){animation-delay:.17s}.kr-stats .kr-stat:nth-child(4){animation-delay:.24s}.kr-stats .kr-stat{animation:kr-stat-in linear both;animation-timeline:view();animation-range:entry 0% cover 34%}}
+@keyframes kr-copy-in{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}@keyframes kr-photos-in{from{opacity:0;transform:translateY(34px) rotate(-1deg)}to{opacity:1;transform:none}}@keyframes kr-stat-in{from{opacity:0;transform:translateY(24px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-/* Keep the reference's generous desktop composition while preventing huge empty gaps. */
-@media (min-width:981px){
- .kr-story{min-height:515px;padding-top:78px;padding-bottom:126px}
- .kr-storyPhotos{height:390px}
- .kr-storyCopy{padding-left:18px}
- .kr-stats{min-height:330px}
- .kr-news{min-height:470px}
-}
-@media (max-width:760px){
- .kr-hero::after{height:94px}
- .kr-hero::before{bottom:38px;height:118px}
- .kr-story:before{display:none}
- .kr-story{padding-top:64px;padding-bottom:108px}
- .kr-storyPhotos .photoA{transform:rotate(5deg)}
- .kr-storyPhotos .photoB{transform:rotate(-5deg)}
-}
+@media (min-width:981px){.kr-story{min-height:515px;padding-top:78px;padding-bottom:126px}.kr-storyPhotos{height:390px}.kr-storyCopy{padding-left:18px}.kr-stats{min-height:330px}.kr-news{min-height:470px}}
+@media (min-width:761px) and (max-width:980px){.kr-hero{height:680px;min-height:680px}.kr-story{padding:95px 7% 125px}.kr-storyInner{grid-template-columns:48% 52%;gap:2%}.kr-storyPhotos{height:350px}.photoA{width:245px;height:175px}.photoB{width:255px;height:180px;left:17%;top:165px}.kr-stats{padding:85px 5% 105px}.kr-statsInner{grid-template-columns:repeat(4,1fr);gap:10px}.kr-stat{width:125px;height:125px}.kr-news{padding:105px 5% 120px}.kr-newsGrid{grid-template-columns:repeat(3,1fr);gap:10px}}
+@media (max-width:760px){.kr-hero{height:720px;min-height:720px}.kr-hero::before{height:145px}.kr-hero::after{height:62px}.kr-hero .kr-teddy{bottom:72px}.kr-story{padding:64px 6% 108px}.kr-story:before{display:none}.kr-storyPhotos{height:330px}.kr-stats{padding:62px 6% 95px}.kr-news{padding:72px 6% 105px}.kr-join{padding:38px 7% 48px;min-height:210px}}
