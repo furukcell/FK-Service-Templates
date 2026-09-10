@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import type { LayoutVariant } from "@fk-templates/shared";
 
-const allowedLayouts: LayoutVariant[] = ["modern", "split", "showcase", "flow"];
+const allowedLayouts: LayoutVariant[] = ["modern", "split", "showcase", "flow", "corporate"];
 
 export function useLayoutVariantFromQuery(defaultLayout: LayoutVariant = "modern") {
   const router = useRouter();
