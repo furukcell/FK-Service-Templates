@@ -1,0 +1,176 @@
+/* FK Preschool Corporate — final visual polish layer.
+ * Targets only the kindergarten corporate page detected by .ageGroupsSection.
+ */
+
+.pageShell:has(.ageGroupsSection) .section {
+  isolation: isolate;
+}
+
+.pageShell:has(.ageGroupsSection) .section:not(.compactStats)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 190px;
+  height: 190px;
+  border: 2px dashed rgba(255,79,135,.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.pageShell:has(.ageGroupsSection) .section:nth-of-type(3)::before {
+  left: -90px;
+  top: 90px;
+}
+
+.pageShell:has(.ageGroupsSection) .section:nth-of-type(5)::before {
+  right: -80px;
+  bottom: 70px;
+  border-color: rgba(43,183,233,.13);
+}
+
+.pageShell:has(.ageGroupsSection) .corporateHeroSlider::before {
+  content: "";
+  position: absolute;
+  right: 7%;
+  bottom: -95px;
+  width: 250px;
+  height: 250px;
+  border: 2px dashed rgba(255,255,255,.25);
+  border-radius: 50%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.pageShell:has(.ageGroupsSection) .corporateHeroSlideContent {
+  animation: pkHeroContentIn .8s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes pkHeroContentIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pageShell:has(.ageGroupsSection) .whyUsCard {
+  overflow: hidden;
+}
+
+.pageShell:has(.ageGroupsSection) .whyUsCard::after {
+  content: "";
+  position: absolute;
+  width: 105px;
+  height: 105px;
+  right: -38px;
+  top: -38px;
+  border-radius: 50%;
+  border: 2px dashed rgba(41,32,68,.12);
+  transition: transform .45s ease;
+}
+
+.pageShell:has(.ageGroupsSection) .whyUsCard:hover::after {
+  transform: scale(1.35) rotate(18deg);
+}
+
+.pageShell:has(.ageGroupsSection) .ageGroupItem {
+  overflow: hidden;
+  background: #fff;
+}
+
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(1) .ageGroupHeader { border-left: 5px solid #ff6470; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(2) .ageGroupHeader { border-left: 5px solid #ffc21e; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(3) .ageGroupHeader { border-left: 5px solid #a8d24a; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(4) .ageGroupHeader { border-left: 5px solid #25afe5; }
+.pageShell:has(.ageGroupsSection) .ageGroupItem:nth-child(5) .ageGroupHeader { border-left: 5px solid #9b6cff; }
+
+.pageShell:has(.ageGroupsSection) .ageGroupHeader {
+  transition: background .25s ease, padding-left .25s ease;
+}
+
+.pageShell:has(.ageGroupsSection) .ageGroupItem:hover .ageGroupHeader,
+.pageShell:has(.ageGroupsSection) .ageGroupItem.isOpen .ageGroupHeader {
+  background: #fff7fa;
+  padding-left: 22px;
+}
+
+.pageShell:has(.ageGroupsSection) .ageGroupToggleIcon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff0f5;
+  color: #ff4f87;
+  font-weight: 900;
+  transition: transform .25s ease, background .25s ease;
+}
+
+.pageShell:has(.ageGroupsSection) .ageGroupItem.isOpen .ageGroupToggleIcon {
+  transform: rotate(180deg);
+  background: #ff4f87;
+  color: #fff;
+}
+
+.pageShell:has(.ageGroupsSection) .workshopCard,
+.pageShell:has(.ageGroupsSection) .visualCard {
+  position: relative;
+}
+
+.pageShell:has(.ageGroupsSection) .workshopCard::after,
+.pageShell:has(.ageGroupsSection) .visualCard::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  right: -45px;
+  bottom: -45px;
+  border: 2px dashed rgba(255,79,135,.14);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.pageShell:has(.ageGroupsSection) .testimonialCard blockquote {
+  position: relative;
+  z-index: 1;
+}
+
+.pageShell:has(.ageGroupsSection) .campaignCard strong {
+  display: inline-flex;
+  margin-top: 18px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: #fff0f5;
+  color: #ff4f87;
+}
+
+.pageShell:has(.ageGroupsSection) .locationCard {
+  border: 2px solid rgba(43,183,233,.14);
+}
+
+.pageShell:has(.ageGroupsSection) .locationCard .mapEmbedFrame {
+  min-height: 310px;
+  filter: saturate(.9) contrast(1.02);
+}
+
+.pageShell:has(.ageGroupsSection) .formPanel h3 {
+  color: #292044;
+}
+
+.pageShell:has(.ageGroupsSection) .footer {
+  background: #28164b;
+  color: rgba(255,255,255,.88);
+}
+
+@media (max-width: 960px) {
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlider::before { right: -50px; }
+}
+
+@media (max-width: 640px) {
+  .pageShell:has(.ageGroupsSection) .section:not(.compactStats)::before { width: 120px; height: 120px; }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlider::before { display: none; }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pageShell:has(.ageGroupsSection) .whyUsCard::after,
+  .pageShell:has(.ageGroupsSection) .ageGroupToggleIcon { transition: none !important; }
+  .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { animation: none !important; }
+}
