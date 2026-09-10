@@ -1,7 +1,4 @@
-/* FK Preschool Corporate — final visual polish layer.
- * Targets only the kindergarten corporate page detected by .ageGroupsSection.
- */
-
+/* FK Preschool Corporate — final visual polish layer. */
 .pageShell:has(.ageGroupsSection) .section { isolation: isolate; }
 .pageShell:has(.ageGroupsSection) .section:not(.compactStats)::before { content:""; position:absolute; z-index:-1; width:190px; height:190px; border:2px dashed rgba(255,79,135,.12); border-radius:50%; pointer-events:none; }
 .pageShell:has(.ageGroupsSection) .section:nth-of-type(3)::before { left:-90px; top:90px; }
@@ -59,67 +56,22 @@
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .formPanel { box-shadow:0 14px 38px rgba(39,21,74,.08); }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .footer { margin-top:20px; }
 
-  /* Reference-style living photographs: the image gently travels horizontally inside its frame. */
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualCard > img,
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopCard > img {
-    display:block;
-    width:100%;
-    height:clamp(230px,22vw,360px);
-    object-fit:cover;
-    transform:scale(1.08) translate3d(-2.5%,0,0);
-    transform-origin:center;
-    animation:pkPhotoDrift 12s ease-in-out infinite alternate;
-    will-change:transform;
-  }
-
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopCard > img { display:block; width:100%; height:clamp(230px,22vw,360px); object-fit:cover; transform:scale(1.08) translate3d(-2.5%,0,0); transform-origin:center; animation:pkPhotoDrift 12s ease-in-out infinite alternate; will-change:transform; }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualCard:nth-child(even) > img,
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopCard:nth-child(even) > img {
-    animation-name:pkPhotoDriftReverse;
-  }
-
-  @keyframes pkPhotoDrift {
-    from { transform:scale(1.08) translate3d(-2.5%,0,0); }
-    to { transform:scale(1.08) translate3d(2.5%,0,0); }
-  }
-  @keyframes pkPhotoDriftReverse {
-    from { transform:scale(1.08) translate3d(2.5%,0,0); }
-    to { transform:scale(1.08) translate3d(-2.5%,0,0); }
-  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopCard:nth-child(even) > img { animation-name:pkPhotoDriftReverse; }
+  @keyframes pkPhotoDrift { from { transform:scale(1.08) translate3d(-2.5%,0,0); } to { transform:scale(1.08) translate3d(2.5%,0,0); } }
+  @keyframes pkPhotoDriftReverse { from { transform:scale(1.08) translate3d(2.5%,0,0); } to { transform:scale(1.08) translate3d(-2.5%,0,0); } }
 }
 
 @media (max-width:960px) { .pageShell:has(.ageGroupsSection) .corporateHeroSlider::before { right:-50px; } }
-@media (max-width:640px) {
-  .pageShell:has(.ageGroupsSection) .section:not(.compactStats)::before { width:120px; height:120px; }
-  .pageShell:has(.ageGroupsSection) .corporateHeroSlider::before { display:none; }
-  .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { animation:none; }
-}
-@media (prefers-reduced-motion:reduce) {
-  html.pk-kindergarten-premium-scroll { scroll-behavior:auto; scroll-snap-type:none; }
-  .pageShell:has(.ageGroupsSection) .whyUsCard::after,
-  .pageShell:has(.ageGroupsSection) .ageGroupToggleIcon { transition:none !important; }
-  .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent,
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type { animation:none !important; }
-  .pageShell:has(.ageGroupsSection) .pk-heroDoodle,
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualCard > img,
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopCard > img { animation:none !important; transform:none !important; }
-}
+@media (max-width:640px) { .pageShell:has(.ageGroupsSection) .section:not(.compactStats)::before { width:120px; height:120px; } .pageShell:has(.ageGroupsSection) .corporateHeroSlider::before { display:none; } .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { animation:none; } }
+@media (prefers-reduced-motion:reduce) { html.pk-kindergarten-premium-scroll { scroll-behavior:auto; scroll-snap-type:none; } .pageShell:has(.ageGroupsSection) .whyUsCard::after,.pageShell:has(.ageGroupsSection) .ageGroupToggleIcon { transition:none !important; } .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent,html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type { animation:none !important; } .pageShell:has(.ageGroupsSection) .pk-heroDoodle,html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualCard > img,html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopCard > img { animation:none !important; transform:none !important; } }
 
 /* Playful kindergarten hero doodles: simple hand-drawn SVGs, never emoji. */
 @media (min-width:981px) {
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-heroDecor { position:absolute; inset:0; z-index:4; pointer-events:none; overflow:hidden; }
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-heroDoodle {
-    position:absolute;
-    width:clamp(48px,5vw,86px);
-    height:auto;
-    fill:none;
-    stroke:currentColor;
-    stroke-width:3.5;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-    opacity:.78;
-    filter:drop-shadow(0 9px 16px rgba(20,12,35,.16));
-    animation:pkDoodleFloat 6s ease-in-out infinite;
-  }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-heroDoodle { position:absolute; width:clamp(48px,5vw,86px); height:auto; fill:none; stroke:currentColor; stroke-width:3.5; stroke-linecap:round; stroke-linejoin:round; opacity:.78; filter:drop-shadow(0 9px 16px rgba(20,12,35,.16)); animation:pkDoodleFloat 6s ease-in-out infinite; }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-doodle-sun { left:5%; top:16%; color:#ffc21e; }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-doodle-cloud { right:7%; top:14%; width:clamp(70px,7vw,120px); color:#8ed34f; animation-delay:-1.4s; }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-doodle-teddy { right:5%; bottom:17%; color:#ff6f91; animation-delay:-3.1s; }
@@ -128,5 +80,45 @@
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-doodle-butterfly { left:25%; top:13%; width:clamp(42px,4vw,70px); color:#a88cf2; animation-delay:-4.7s; }
   @keyframes pkDoodleFloat { 0%,100% { transform:translate3d(0,0,0) rotate(-2deg); } 50% { transform:translate3d(0,-13px,0) rotate(3deg); } }
 }
-
 @media (max-width:980px) { .pageShell:has(.ageGroupsSection) .pk-heroDecor { display:none; } }
+@media (prefers-reduced-motion:reduce) { .pageShell:has(.ageGroupsSection) .pk-heroDoodle { animation:none !important; } }
+
+/* Reference-style living kindergarten scenes. */
+@media (min-width:981px) {
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyScene { position:relative; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:clamp(48px,7vw,110px); width:100%; min-height:650px; padding:86px max(6vw,48px) 100px; overflow:hidden; background:#fffaf5; isolation:isolate; scroll-snap-align:start; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyScene::after { content:""; position:absolute; left:-5%; right:-5%; bottom:-82px; height:150px; background:#b0d84b; border-radius:50% 50% 0 0 / 100% 100% 0 0; z-index:-1; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyScene::before { content:""; position:absolute; width:460px; height:460px; left:-180px; top:80px; border:2px dashed rgba(42,183,233,.18); border-radius:50%; z-index:-1; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyPhotos { position:relative; min-height:520px; max-width:650px; margin:auto; width:100%; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-polaroid { position:absolute; width:min(390px,54%); aspect-ratio:1.22; margin:0; padding:15px 15px 48px; background-color:#fff; border-radius:7px; box-shadow:0 22px 42px rgba(39,21,74,.17); background-size:cover; background-position:center; background-repeat:no-repeat; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-polaroid-a { left:4%; top:8%; transform:rotate(-5deg); animation:pkPhotoDriftA 9s ease-in-out infinite; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-polaroid-b { right:3%; bottom:4%; transform:rotate(5deg); animation:pkPhotoDriftB 10s ease-in-out infinite; }
+  @keyframes pkPhotoDriftA { 0%,100% { transform:rotate(-5deg) translate3d(0,0,0); } 50% { transform:rotate(-2.5deg) translate3d(8px,-12px,0); } }
+  @keyframes pkPhotoDriftB { 0%,100% { transform:rotate(5deg) translate3d(0,0,0); } 50% { transform:rotate(2deg) translate3d(-10px,10px,0); } }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyCopy { max-width:650px; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyEyebrow { display:block; margin-bottom:14px; color:#ff4f87; font-size:14px; font-weight:900; letter-spacing:.14em; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyCopy h2 { margin:0 0 18px; color:#2b1d52; font-size:clamp(38px,4vw,62px); line-height:.98; letter-spacing:-.035em; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyCopy > p { max-width:590px; margin:0 0 28px; color:#706a7a; font-size:18px; line-height:1.75; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyFacts { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:28px; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyFacts > div { display:flex; gap:13px; align-items:flex-start; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyFacts b { display:grid; place-items:center; flex:0 0 54px; width:54px; height:54px; border-radius:50%; background:#fff; border:4px solid #ff6b9a; color:#ff4f87; font-size:25px; box-shadow:0 8px 20px rgba(39,21,74,.08); }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyFacts > div:nth-child(2) b { border-color:#a8d24a; color:#82ad2b; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyFacts span { display:grid; gap:4px; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyFacts strong { color:#2b1d52; font-size:17px; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyFacts small { color:#777181; line-height:1.55; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-storyDoodle { position:absolute; z-index:2; display:grid; place-items:center; width:45px; height:45px; border-radius:50%; font-size:30px; font-weight:900; animation:pkStoryFloat 6s ease-in-out infinite; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-story-heart { left:39%; top:20%; color:#ff4f87; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-story-bird { left:51%; top:38%; color:#ffc21e; font-size:19px; animation-delay:-2s; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-story-ball { left:15%; bottom:16%; color:#25afe5; animation-delay:-3.5s; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-story-spark { right:7%; top:13%; color:#ffc21e; animation-delay:-4s; }
+  @keyframes pkStoryFloat { 0%,100% { transform:translateY(0) rotate(-4deg); } 50% { transform:translateY(-12px) rotate(5deg); } }
+
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .compactStats { position:relative; width:100%; margin:0; border-radius:0; padding:72px max(7vw,48px) 88px; overflow:hidden; background:#b0d84b; box-shadow:none; scroll-snap-align:start; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .compactStats::before { content:""; position:absolute; inset:auto -5% -70px; height:150px; background:#fffaf5; border-radius:50% 50% 0 0 / 100% 100% 0 0; z-index:0; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .compactStats .statsGrid { position:relative; z-index:1; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .statsGrid { gap:24px; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .statCard { min-height:190px; display:grid; place-items:center; align-content:center; border:2px dashed rgba(255,255,255,.9); border-radius:50%; background:transparent; color:#fff; box-shadow:none; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .statCard strong { color:#fff; font-size:clamp(34px,3vw,48px); }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .statCard span { color:#fff; font-weight:800; }
+}
+@media (max-width:980px) { .pageShell:has(.ageGroupsSection) .pk-storyScene { display:none !important; } }
+@media (prefers-reduced-motion:reduce) { .pageShell:has(.ageGroupsSection) .pk-polaroid-a,.pageShell:has(.ageGroupsSection) .pk-polaroid-b,.pageShell:has(.ageGroupsSection) .pk-storyDoodle { animation:none !important; } }
