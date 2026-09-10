@@ -22,7 +22,7 @@ type TemplateLandingProps = {
   prominentLocationCard?: boolean;
 };
 
-const layoutOrder: LayoutVariant[] = ["modern", "split", "showcase"];
+const layoutOrder: LayoutVariant[] = ["modern", "split", "showcase", "corporate"];
 
 function applyTheme(config: BusinessTemplateConfig): CSSProperties {
   return {
