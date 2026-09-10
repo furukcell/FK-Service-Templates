@@ -68,7 +68,7 @@ function isWhatsappCta(label: string) {
 function PrimaryCtaButton({ config }: { config: BusinessTemplateConfig }) {
   const isWhatsapp = isWhatsappCta(config.primaryCta);
   return (
-    <a
+    
       className="pillButton navButtonLink"
       href={isWhatsapp ? whatsappUrl(config) : "#request-form"}
       target={isWhatsapp ? "_blank" : undefined}
@@ -382,6 +382,98 @@ function VisualSection({ config, prominentLocationCard = false }: { config: Busi
   );
 }
 
+// --- Kreş "corporate" tasarımına özel bölümler ---
+function WhyUsSection({ config }: { config: BusinessTemplateConfig }) {
+  if (!config.whyUs?.length) return null;
+  return (
+    <section className="section" id="why-us">
+      <div className="sectionHead">
+        <h2>Bizi Neden Seçmelisiniz?</h2>
+        <p>Kurumumuzu farklı kılan yaklaşımlar.</p>
+      </div>
+      <div className="cardGrid whyUsGrid">
+        {config.whyUs.map((item) => (
+          <article className="serviceCard whyUsCard" key={item.title}>
+            <span className="whyUsIcon" aria-hidden="true">{item.icon}</span>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BranchesSection({ config }: { config: BusinessTemplateConfig }) {
+  const shouldShow = config.enabledFeatures?.multiBranch !== false && !!config.branches?.length;
+  if (!shouldShow) return null;
+  return (
+    <section className="section" id="branches">
+      <div className="sectionHead">
+        <h2>Şubelerimiz</h2>
+        <p>Size en yakın şubeden bilgi ve ön kayıt talebinde bulunun.</p>
+      </div>
+      <div className="cardGrid">
+        {config.branches!.map((branch) => (
+          <article className="serviceCard branchCard" key={branch.name}>
+            <h3>{branch.name}</h3>
+            <p>{branch.address}</p>
+            <div className="heroActions">
+              <a className="ghostButton navButtonLink" href={`tel:${normalizePhone(branch.phone)}`}>Ara</a>
+              <a className="pillButton navButtonLink" href={`https://wa.me/${normalizePhone(branch.whatsapp)}`} target="_blank" rel="noreferrer">WhatsApp</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function WorkshopsSection({ config }: { config: BusinessTemplateConfig }) {
+  const shouldShow = config.enabledFeatures?.branchLessons !== false && !!config.workshops?.length;
+  if (!shouldShow) return null;
+  return (
+    <section className="section" id="workshops">
+      <div className="sectionHead">
+        <h2>Branş Dersleri ve Atölyeler</h2>
+        <p>Yaş grubuna uygun branş dersi ve atölye programlarımız.</p>
+      </div>
+      <div className="cardGrid">
+        {config.workshops!.map((workshop) => (
+          <article className="serviceCard workshopCard" key={workshop.title}>
+            {workshop.imageUrl ? <img src={workshop.imageUrl} alt={workshop.title} /> : null}
+            <h3>{workshop.title}</h3>
+            <p>{workshop.description}</p>
+            {workshop.ageRange ? <span className="priceTag">{workshop.ageRange}</span> : null}
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsSection({ config }: { config: BusinessTemplateConfig }) {
+  const shouldShow = config.enabledFeatures?.testimonials !== false && !!config.testimonials?.length;
+  if (!shouldShow) return null;
+  return (
+    <section className="section" id="testimonials">
+      <div className="sectionHead">
+        <h2>Veli Görüşleri</h2>
+        <p>Ailelerimizin kurumumuz hakkındaki deneyimleri.</p>
+      </div>
+      <div className="cardGrid">
+        {config.testimonials!.map((testimonial) => (
+          <article className="serviceCard testimonialCard" key={testimonial.name}>
+            <blockquote>“{testimonial.quote}”</blockquote>
+            <strong>{testimonial.name}</strong>
+            {testimonial.role ? <span className="priceTag">{testimonial.role}</span> : null}
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function RequestFormSection({ config, handleSubmit, isSubmitting, submitStatus, contentBasePath }: { config: BusinessTemplateConfig; handleSubmit: (event: FormEvent<HTMLFormElement>) => void; isSubmitting: boolean; submitStatus: string; contentBasePath?: string }) {
   return (
     <section className="section" id="request-form">
@@ -468,93 +560,4 @@ function SplitLayout({ config, switchers, form }: { config: BusinessTemplateConf
   );
 }
 
-function ShowcaseLayout({ config, switchers, form, hideShowcaseServiceStrip, hidePreviewMiniGrid, prominentLocationCard }: { config: BusinessTemplateConfig; switchers: ReactNode; form: ReactNode; hideShowcaseServiceStrip?: boolean; hidePreviewMiniGrid?: boolean; prominentLocationCard?: boolean }) {
-  return (
-    <>
-      <Nav config={config} />
-      <section className={`showcaseHero ${hideShowcaseServiceStrip ? "showcaseHeroCompact" : ""}`}>
-        <span className="eyebrow">{config.eyebrow}</span>
-        <h1>{config.heroTitle}</h1>
-        <p>{config.heroDescription}</p>
-        <div className="heroActions showcaseActions"><PrimaryCtaButton config={config} /><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
-        {switchers}
-        {!hideShowcaseServiceStrip ? (
-          <div className="showcaseServiceStrip">
-            {config.services.map((service) => <article key={service.title}><span>{service.price || "Bilgi al"}</span><strong>{service.title}</strong></article>)}
-          </div>
-        ) : null}
-      </section>
-      <section className={`showcasePanelGrid ${prominentLocationCard ? "showcasePanelGridWideMap" : ""}`}><PreviewPanel config={config} hideMiniGrid={hidePreviewMiniGrid} /><VisualSection config={config} prominentLocationCard={prominentLocationCard} /></section>
-      <ServicesSection config={config} />
-      <CampaignSection config={config} />
-      <StaffSection config={config} />
-      {form}
-    </>
-  );
-}
-
-export function TemplateLanding({ config, activeTemplate, activeLayout = "modern", onTemplateChange, onLayoutChange, showTemplateSwitch = true, showLayoutSwitch = true, contentBasePath, hideShowcaseServiceStrip, hidePreviewMiniGrid, prominentLocationCard }: TemplateLandingProps) {
-  const [submitStatus, setSubmitStatus] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitStatus("");
-
-    const formData = new FormData(event.currentTarget);
-    const customerName = String(formData.get("name") || "").trim();
-    const customerPhone = String(formData.get("phone") || "").trim();
-    const acceptedLegal = formData.get("acceptedLegal") === "on";
-    const honeypot = String(formData.get("website") || "");
-
-    if (honeypot) {
-      setSubmitStatus("Talebiniz alındı.");
-      return;
-    }
-
-    if (!customerName || !customerPhone) {
-      setSubmitStatus("Ad soyad ve telefon zorunludur.");
-      return;
-    }
-
-    if (!acceptedLegal) {
-      setSubmitStatus("Devam etmek için KVKK/Gizlilik bilgilendirmesini onaylamalısınız.");
-      return;
-    }
-
-    setIsSubmitting(true);
-    try {
-      const requestPayload = {
-        template: config.template,
-        businessId: process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business",
-        customerName,
-        customerPhone,
-        subject: getSubject(formData, config),
-        note: String(formData.get("note") || ""),
-        source: "website" as const,
-        preferredDate: String(formData.get("date") || ""),
-        preferredTime: String(formData.get("time") || ""),
-        extra: formDataToExtra(formData)
-      };
-      await createBusinessRequest(requestPayload);
-      await notifyNewRequest(requestPayload);
-      setSubmitStatus("Talep alındı. İşletme size telefon veya WhatsApp ile dönüş yapacak.");
-      event.currentTarget.reset();
-    } catch (error) {
-      setSubmitStatus(isDemoMode() ? "Demo mod: Firebase bilgileri girilince bu talep panele düşecek." : "Talep şu anda gönderilemedi. Lütfen telefon veya WhatsApp üzerinden iletişime geçin.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
-
-  const switchers = <Switchers activeTemplate={activeTemplate} activeLayout={activeLayout} onTemplateChange={onTemplateChange} onLayoutChange={onLayoutChange} showTemplateSwitch={showTemplateSwitch} showLayoutSwitch={showLayoutSwitch} />;
-  const form = <RequestFormSection config={config} handleSubmit={handleSubmit} isSubmitting={isSubmitting} submitStatus={submitStatus} contentBasePath={contentBasePath} />;
-
-  return (
-    <Shell config={config} contentBasePath={contentBasePath}>
-      {activeLayout === "split" ? <SplitLayout config={config} switchers={switchers} form={form} /> : null}
-      {activeLayout === "showcase" ? <ShowcaseLayout config={config} switchers={switchers} form={form} hideShowcaseServiceStrip={hideShowcaseServiceStrip} hidePreviewMiniGrid={hidePreviewMiniGrid} prominentLocationCard={prominentLocationCard} /> : null}
-      {activeLayout === "modern" ? <ModernLayout config={config} switchers={switchers} form={form} hidePreviewMiniGrid={hidePreviewMiniGrid} /> : null}
-    </Shell>
-  );
-}
+function ShowcaseLayout({ config, switchers, form, hideShowcaseServiceStrip, hidePreviewMiniGrid, prominentLocationCard }: { config: BusinessTemplateConfig; switchers: ReactNode; form: ReactNode; hideShowcaseServiceStrip?: boolean; hidePreviewMiniGrid?: boolean;
