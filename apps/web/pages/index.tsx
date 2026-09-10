@@ -19,7 +19,9 @@ import { useManagedTemplateConfig } from "../src/useManagedTemplateConfig";
 
 export default function HomePage() {
   const [activeTemplate, setActiveTemplate] = useState<TemplateKey>(getDefaultTemplate());
-  const [activeLayout, setActiveLayout] = useState<LayoutVariant>("modern");
+  const [activeLayout, setActiveLayout] = useState<LayoutVariant>(() =>
+    getDefaultTemplate() === "kindergarten" ? "kindergarten-reference" : "modern"
+  );
   const baseConfig = templateConfigs[activeTemplate];
   const { config, requiresSetup } = useManagedTemplateConfig(baseConfig);
   const isSalon = activeTemplate === "salon";
@@ -31,32 +33,27 @@ export default function HomePage() {
 
   if (requiresSetup) return <SiteSetupGuard />;
 
+  const handleTemplateChange = (template: TemplateKey) => {
+    setActiveTemplate(template);
+    if (template === "kindergarten") setActiveLayout("kindergarten-reference");
+    else if (activeLayout === "kindergarten-reference") setActiveLayout("modern");
+  };
+
   return (
     <>
       <SeoHead title={`${config.brandName} | ${config.sector}`} description={config.heroDescription} canonicalPath="/" />
       {isReferenceKindergarten ? (
         <KindergartenReferenceLayout config={config} onLayoutChange={setActiveLayout} />
       ) : (
-        <>
-          <TemplateLanding
-            config={config}
-            activeTemplate={activeTemplate}
-            activeLayout={isFlow ? "modern" : activeLayout}
-            onTemplateChange={setActiveTemplate}
-            onLayoutChange={setActiveLayout}
-            showTemplateSwitch
-            showLayoutSwitch
-          />
-          {isKindergarten ? (
-            <button
-              type="button"
-              onClick={() => setActiveLayout("kindergarten-reference")}
-              style={{ position: "fixed", zIndex: 90, right: 16, bottom: 16, border: 0, borderRadius: 24, padding: "10px 16px", background: "#f83d7c", color: "#fff", fontWeight: 900, boxShadow: "0 8px 24px rgba(64,32,120,.22)", cursor: "pointer" }}
-            >
-              Minik Adımlar Tasarımı
-            </button>
-          ) : null}
-        </>
+        <TemplateLanding
+          config={config}
+          activeTemplate={activeTemplate}
+          activeLayout={isFlow ? "modern" : activeLayout}
+          onTemplateChange={handleTemplateChange}
+          onLayoutChange={setActiveLayout}
+          showTemplateSwitch
+          showLayoutSwitch
+        />
       )}
       <SalonFlowStyleButton activeTemplate={activeTemplate} activeLayout={activeLayout} onSelect={setActiveLayout} />
       <SalonPremiumHeroMount active={isSalonFlow} config={config} />
