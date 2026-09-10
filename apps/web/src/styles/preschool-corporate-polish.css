@@ -42,7 +42,8 @@
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:not(:first-of-type),
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroDots { display:none; }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type { display:block; animation:pkHeroKenBurns 18s ease-out both; }
-  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; pointer-events:none; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-hero-video,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-heroVideo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; pointer-events:none; }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlideOverlay { z-index:1; }
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent { position:relative; z-index:2; }
   @keyframes pkHeroKenBurns { from { transform:scale(1.04); } to { transform:scale(1.11); } }
@@ -71,4 +72,46 @@
   .pageShell:has(.ageGroupsSection) .ageGroupToggleIcon { transition:none !important; }
   .pageShell:has(.ageGroupsSection) .corporateHeroSlideContent,
   html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .corporateHeroSlide:first-of-type { animation:none !important; }
+}
+
+/* Playful kindergarten hero decor inspired by the reference: light doodles, toys and gentle motion. */
+@media (min-width:981px) {
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-heroDecor {
+    position:absolute;
+    inset:0;
+    z-index:4;
+    pointer-events:none;
+    overflow:hidden;
+  }
+
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-heroDoodle {
+    position:absolute;
+    display:grid;
+    place-items:center;
+    font-size:clamp(30px,3vw,56px);
+    opacity:.88;
+    filter:drop-shadow(0 9px 16px rgba(20,12,35,.18));
+    animation:pkDoodleFloat 6s ease-in-out infinite;
+    user-select:none;
+  }
+
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-doodle-sun { left:5%; top:16%; color:#ffc21e; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-doodle-cloud { right:7%; top:14%; animation-delay:-1.4s; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-doodle-bear { right:5%; bottom:17%; animation-delay:-3.1s; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-doodle-rocket { left:7%; bottom:18%; animation-delay:-4.2s; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-doodle-ball { right:25%; bottom:10%; font-size:clamp(24px,2vw,42px); animation-delay:-2.2s; }
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .pk-doodle-butterfly { left:25%; top:13%; font-size:clamp(24px,2vw,42px); animation-delay:-4.7s; }
+
+  @keyframes pkDoodleFloat {
+    0%,100% { transform:translate3d(0,0,0) rotate(-2deg); }
+    50% { transform:translate3d(0,-13px,0) rotate(3deg); }
+  }
+}
+
+@media (max-width:980px) {
+  .pageShell:has(.ageGroupsSection) .pk-heroDecor { display:none; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .pageShell:has(.ageGroupsSection) .pk-heroDoodle { animation:none !important; }
 }
