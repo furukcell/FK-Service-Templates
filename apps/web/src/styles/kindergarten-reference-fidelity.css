@@ -2,9 +2,9 @@
    Decorative geometry intentionally mirrors the supplied reference composition. */
 .kr-site{--ref-blue:#1976d2;--ref-sky:#62b9eb;--ref-deep:#0d47a1;--ref-pale:#f8fcff}
 
-/* Organic landscape under the hero: layered silhouettes instead of flat rounded blocks. */
-.kr-hero::after{content:"";position:absolute;z-index:11;left:-2%;right:-2%;bottom:-2px;height:118px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 170' preserveAspectRatio='none'%3E%3Cpath fill='%236bc4ed' d='M0 92 C100 55 210 126 330 89 C455 50 560 119 690 82 C820 45 935 117 1065 78 C1190 42 1320 106 1440 65 L1440 170 L0 170 Z'/%3E%3Cpath fill='%2343a5df' d='M0 116 C120 79 245 144 370 108 C500 70 615 141 755 102 C890 65 1010 139 1140 99 C1260 62 1350 116 1440 90 L1440 170 L0 170 Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
-.kr-hero::before{content:"";position:absolute;z-index:10;left:0;right:0;bottom:54px;height:72px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath fill='%23a8d95c' d='M0 83 C125 54 220 95 350 72 C470 51 560 92 690 69 C820 45 930 91 1060 66 C1190 42 1300 84 1440 55 L1440 100 L0 100 Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+/* Hero landscape: a deeper, layered green meadow/foothill silhouette so the hero ends in a real countryside scene rather than a thin green strip. */
+.kr-hero::after{content:"";position:absolute;z-index:11;left:-2%;right:-2%;bottom:-2px;height:132px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 190' preserveAspectRatio='none'%3E%3Cpath fill='%236bc4ed' d='M0 105 C100 66 210 137 330 98 C455 58 560 130 690 92 C820 53 935 129 1065 87 C1190 51 1320 117 1440 74 L1440 190 L0 190 Z'/%3E%3Cpath fill='%2343a5df' d='M0 132 C120 91 245 158 370 121 C500 80 615 155 755 114 C890 76 1010 153 1140 111 C1260 73 1350 128 1440 101 L1440 190 L0 190 Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.kr-hero::before{content:"";position:absolute;z-index:10;left:-2%;right:-2%;bottom:54px;height:168px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 210' preserveAspectRatio='none'%3E%3Cpath fill='%237fbd3f' d='M0 145 C75 112 140 132 220 111 C305 89 366 130 450 104 C535 78 595 119 680 96 C770 70 836 113 920 87 C1000 62 1062 105 1140 79 C1235 48 1310 91 1440 58 L1440 210 L0 210 Z'/%3E%3Cpath fill='%239bd44e' d='M0 165 C100 137 178 158 270 135 C355 114 425 151 515 128 C610 103 685 145 775 119 C875 91 950 138 1040 111 C1140 82 1225 125 1315 99 C1370 83 1408 92 1440 83 L1440 210 L0 210 Z'/%3E%3Cpath fill='%234f9f35' d='M0 185 C125 159 218 180 325 157 C430 134 520 174 625 151 C730 128 820 168 925 143 C1035 117 1120 158 1225 133 C1310 113 1375 135 1440 119 L1440 210 L0 210 Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
 .kr-hero .kr-teddy{bottom:48px}.kr-hero .kr-sign{bottom:17%}
 
 /* Reference-style hand-drawn scenery accents. */
@@ -54,8 +54,8 @@
  .kr-news{min-height:470px}
 }
 @media (max-width:760px){
- .kr-hero::after{height:82px}
- .kr-hero::before{bottom:37px;height:48px}
+ .kr-hero::after{height:94px}
+ .kr-hero::before{bottom:38px;height:118px}
  .kr-story:before{display:none}
  .kr-story{padding-top:64px;padding-bottom:108px}
  .kr-storyPhotos .photoA{transform:rotate(5deg)}
