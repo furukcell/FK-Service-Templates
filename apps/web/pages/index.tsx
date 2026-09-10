@@ -16,6 +16,7 @@ import { TemplateLanding } from "../src/components/TemplateLanding";
 import { getDefaultTemplate } from "../src/defaultTemplate";
 import { templateConfigs } from "../src/templateConfigs";
 import { useManagedTemplateConfig } from "../src/useManagedTemplateConfig";
+import "../src/styles/kindergarten-blue-enhancements.css";
 
 export default function HomePage() {
   const [activeTemplate, setActiveTemplate] = useState<TemplateKey>(getDefaultTemplate());
