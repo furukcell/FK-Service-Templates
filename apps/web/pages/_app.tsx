@@ -36,6 +36,7 @@ import "../src/styles/kindergarten-premium.css";
 // Preschool corporate visual system: colorful cards, depth and motion-ready sections.
 import "../src/styles/preschool-corporate.css";
 import "../src/styles/preschool-corporate-runtime.css";
+import "../src/styles/preschool-corporate-polish.css";
 // Desktop-only Akışkan Premium refinements. Mobile/tablet rules remain untouched.
 import "../src/styles/flow-desktop-premium.css";
 import "../src/styles/ada-site.css";
