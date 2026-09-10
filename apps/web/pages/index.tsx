@@ -2,8 +2,8 @@ import { useState } from "react";
 import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { FlowTemplateEnhancements } from "../src/components/FlowTemplateEnhancements";
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
+import { KindergartenDesignChooser } from "../src/components/KindergartenDesignChooser";
 import { KindergartenPremiumHeroMount } from "../src/components/KindergartenPremiumHeroMount";
-import { KindergartenReferenceLayout } from "../src/components/KindergartenReferenceLayout";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { SalonFlowStyleButton } from "../src/components/SalonFlowStyleButton";
 import { SalonGalleryMount } from "../src/components/SalonGalleryMount";
@@ -28,7 +28,6 @@ export default function HomePage() {
   const isSalon = activeTemplate === "salon";
   const isKindergarten = activeTemplate === "kindergarten";
   const isFlow = activeLayout === "flow";
-  const isReferenceKindergarten = isKindergarten && activeLayout === "kindergarten-reference";
   const isSalonFlow = isSalon && isFlow;
   const isKindergartenFlow = isKindergarten && isFlow;
 
@@ -36,15 +35,14 @@ export default function HomePage() {
 
   const handleTemplateChange = (template: TemplateKey) => {
     setActiveTemplate(template);
-    if (template === "kindergarten") setActiveLayout("kindergarten-reference");
-    else if (activeLayout === "kindergarten-reference") setActiveLayout("modern");
+    setActiveLayout(template === "kindergarten" ? "kindergarten-reference" : "modern");
   };
 
   return (
     <>
       <SeoHead title={`${config.brandName} | ${config.sector}`} description={config.heroDescription} canonicalPath="/" />
-      {isReferenceKindergarten ? (
-        <KindergartenReferenceLayout config={config} onLayoutChange={setActiveLayout} />
+      {isKindergarten ? (
+        <KindergartenDesignChooser config={config} activeLayout={activeLayout} onLayoutChange={setActiveLayout} />
       ) : (
         <TemplateLanding
           config={config}
