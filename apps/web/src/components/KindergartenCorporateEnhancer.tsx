@@ -25,9 +25,9 @@ function mountHeroVideo() {
     if (slide.querySelector(".pk-heroVideo")) return;
 
     const background = slide.style.backgroundImage;
-    const match = background.match(/url\\([\"']?(.+?)[\"']?\\)/i);
+    const match = background.match(/url\([\"']?(.+?)[\"']?\)/i);
     const url = match?.[1];
-    if (!url || !/\\.(mp4|webm|ogg)(\\?|#|$)/i.test(url)) return;
+    if (!url || !/\.(mp4|webm|ogg)(\?|#|$)/i.test(url)) return;
 
     slide.style.backgroundImage = "none";
     const video = document.createElement("video");
@@ -74,7 +74,9 @@ export function KindergartenCorporateEnhancer({ active }: Props) {
     mountHeroDecorations();
 
     const nodes = Array.from(document.querySelectorAll<HTMLElement>(SELECTORS));
-    if (!nodes.length) return;
+    if (!nodes.length) {
+      return () => document.documentElement.classList.remove("pk-kindergarten-premium-scroll");
+    }
 
     if (reduceMotion || !("IntersectionObserver" in window)) {
       nodes.forEach((node) => node.classList.add("pk-motion-visible"));
