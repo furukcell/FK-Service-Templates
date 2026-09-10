@@ -22,7 +22,7 @@ export const demoKindergartenConfig: BusinessTemplateConfig = {
     soft: "#EEF2FF",
     dark: "#312E81"
   },
-  navItems: ["Sınıflar", "Günlük Akış", "Galeri", "Kayıt"],
+  navItems: ["Sınıflar", "Neden Biz", "Şubeler", "Atölyeler", "Galeri", "Kayıt"],
   stats: [
     { value: "2-6", label: "yaş grubu" },
     { value: "Günlük", label: "program akışı" },
@@ -48,13 +48,44 @@ export const demoKindergartenConfig: BusinessTemplateConfig = {
     { name: "Sınıf Öğretmeni", role: "Yaş Grubu Sorumlusu", description: "Çocukların günlük akışını, etkinliklerini ve sınıf düzenini takip eder." },
     { name: "Kurum Ekibi", role: "Bakım ve İletişim", description: "Güvenli ortam, veli iletişimi ve günlük düzenin sürdürülebilirliğini sağlar." }
   ],
+  whyUs: [
+    { icon: "🛡️", title: "Güvenli Ortam", desc: "Kamerayla izlenen, uzman personelle desteklenen güvenli sınıf ve bahçe alanları." },
+    { icon: "🎨", title: "Oyna ve Öğren", desc: "Yaş grubuna uygun oyun temelli öğrenme ve yaratıcı etkinlik programı." },
+    { icon: "🍎", title: "Organik Beslenme", desc: "Çocukların ihtiyacına uygun hazırlanan, diyetisyen kontrollü günlük menüler." },
+    { icon: "🧑‍🏫", title: "Usta Eğitmenler", desc: "Deneyimli, alanında uzman öğretmen kadrosuyla düzenli gelişim takibi." }
+  ],
+  branches: [
+    { name: "Merkez Şube", phone: "+90 5xx xxx xx xx", whatsapp: "+905xxxxxxxxx", address: "Milas / Muğla" },
+    { name: "Bodrum Şube", phone: "+90 5xx xxx xx xx", whatsapp: "+905xxxxxxxxx", address: "Bodrum / Muğla" }
+  ],
+  workshops: [
+    { title: "Görsel Sanatlar", description: "Resim, ebru ve drama etkinlikleriyle çocukların sanatsal yönü destekleniyor.", ageRange: "3-6 Yaş" },
+    { title: "Robotik ve Kodlama", description: "Eğlenerek öğrenme odaklı temel robotik ve kodlama atölyesi.", ageRange: "4-6 Yaş" },
+    { title: "Satranç", description: "Dikkat, strateji ve problem çözme becerilerini geliştiren satranç dersleri.", ageRange: "4-6 Yaş" },
+    { title: "Yüzme", description: "Kurum bünyesindeki havuzda branş öğretmenleri eşliğinde yüzme etkinlikleri.", ageRange: "3-6 Yaş" }
+  ],
+  testimonials: [
+    { name: "Elif K.", role: "Veli", quote: "Çocuğum sabah severek okula gidiyor, öğretmenlerle iletişimimiz çok düzenli." },
+    { name: "Murat A.", role: "Veli", quote: "Günlük akış ve etkinlik bilgilendirmeleri sayesinde her zaman haberdarız." }
+  ],
+  enabledFeatures: {
+    enrollment: true,
+    multiBranch: true,
+    testimonials: true,
+    teacherCards: true,
+    branchLessons: true,
+    gallery: true,
+    whatsapp: true,
+    maps: true
+  },
   form: {
     title: "Kayıt / ön görüşme talebi bırak",
-    description: "Çocuğunuzun yaşı, kayıt dönemi veya kontenjan bilgisi için formu doldurun; kurum size telefon veya WhatsApp üzerinden dönüş yapsın.",
+    description: "Çocuğunuzun yaşı, tercih ettiğiniz şube ve kayıt dönemi bilgisi için formu doldurun; kurum size telefon veya WhatsApp üzerinden dönüş yapsın.",
     fields: [
       { key: "name", label: "Veli adı soyadı", type: "text", placeholder: "Adınız soyadınız" },
       { key: "phone", label: "Telefon", type: "tel", placeholder: "+90 5xx xxx xx xx" },
       { key: "childAge", label: "Çocuğun yaşı", type: "select", options: ["2 yaş", "3 yaş", "4 yaş", "5 yaş", "6 yaş", "Bilgi almak istiyorum"] },
+      { key: "branch", label: "Tercih edilen şube", type: "select", options: ["Merkez Şube", "Bodrum Şube", "Bilgi almak istiyorum"] },
       { key: "service", label: "Talep tipi", type: "select", options: ["Kayıt bilgisi almak istiyorum", "Ön görüşme talep ediyorum", "Kontenjan sormak istiyorum", "Fiyat bilgisi almak istiyorum", "Yemek ve günlük program hakkında bilgi almak istiyorum"] },
       { key: "date", label: "Tercih edilen görüşme tarihi", type: "date" },
       { key: "note", label: "Not", type: "textarea", placeholder: "Çocuğun yaşı, kayıt dönemi veya merak ettiğiniz konuyu yazın" }
