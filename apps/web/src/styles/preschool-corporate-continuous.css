@@ -1,0 +1,276 @@
+/* FK Preschool Corporate — continuous one-page composition. */
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) {
+  background: #fffaf5;
+}
+
+/* The reference is one illustrated world, not a stack of boxed websites. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .section {
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .sectionHead,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .cardGrid,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .formLayout {
+  width: min(1180px, calc(100% - 48px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Remove the visual seams created by the generic card system. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .whyUsCard,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopCard,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .branchCard,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .testimonialCard,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .campaignCard,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .staffCard,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .visualCard,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .formPanel {
+  box-shadow: 0 12px 28px rgba(49,31,77,.08);
+}
+
+/* Why-us becomes the soft white story panel directly under the hero. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.whyUsGrid) {
+  background: #fffaf5;
+  padding-top: 92px;
+  padding-bottom: 105px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.whyUsGrid)::after {
+  background: #fffaf5;
+  height: 86px;
+  bottom: -43px;
+  border-radius: 0 0 55% 45% / 0 0 100% 100%;
+  box-shadow: none;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.whyUsGrid) .sectionHead {
+  text-align: center;
+  max-width: 900px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.whyUsGrid) .sectionHead h2::before {
+  content: "BİZİM İÇİN EN DEĞERLİSİ";
+  display: block;
+  margin-bottom: 12px;
+  color: #ed3d75;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+
+/* Green countryside/statistics chapter. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section.compactStats {
+  width: 100%;
+  border-radius: 0;
+  background: #b4d94d;
+  padding: 76px 0 90px;
+  margin: 0;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section.compactStats::after {
+  left: -6%;
+  right: -6%;
+  bottom: -48px;
+  height: 96px;
+  background: #b4d94d;
+  box-shadow: none;
+  z-index: -1;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section.compactStats .statsGrid {
+  width: min(920px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+/* Every following section gets its own color chapter but no card-like outer shell. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.ageGroupItem) {
+  background: #fff;
+  padding-top: 100px;
+  padding-bottom: 112px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.ageGroupItem) .sectionHead {
+  text-align: center;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.ageGroupItem) .ageGroupsAccordion {
+  width: min(920px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.workshopCard) {
+  background: #eaf8ff;
+  padding-top: 105px;
+  padding-bottom: 118px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.workshopCard)::after {
+  background: #eaf8ff;
+  box-shadow: none;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.workshopCard) .sectionHead,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.testimonialCard) .sectionHead,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.campaignCard) .sectionHead {
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.workshopCard) .cardGrid {
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 18px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .workshopCard {
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Branches: warm yellow stop between the blue and purple chapters. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.branchCard) {
+  background: #fff3c9;
+  padding-top: 100px;
+  padding-bottom: 112px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.branchCard)::after {
+  background: #fff3c9;
+  box-shadow: none;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.branchCard) .branchCard {
+  border-radius: 28px;
+  background: rgba(255,255,255,.82);
+}
+
+/* Staff: lavender classroom chapter. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.staffCard) {
+  background: #f0eaff;
+  padding-top: 105px;
+  padding-bottom: 120px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.staffCard)::after {
+  background: #f0eaff;
+  box-shadow: none;
+}
+
+/* Parent testimonials: soft green, quote bubbles rather than corporate panels. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.testimonialCard) {
+  background: #f1f9dd;
+  padding-top: 105px;
+  padding-bottom: 118px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.testimonialCard)::after {
+  background: #f1f9dd;
+  box-shadow: none;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .testimonialCard {
+  background: #fff;
+  border-radius: 30px;
+}
+
+/* CTA is a single big purple ribbon, not another independent website block. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.campaignCard) {
+  background: #8f72d9;
+  color: #fff;
+  padding-top: 82px;
+  padding-bottom: 96px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.campaignCard)::after {
+  background: #8f72d9;
+  box-shadow: none;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.campaignCard) .sectionHead h2,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.campaignCard) .sectionHead p {
+  color: #fff;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.campaignCard) .campaignCard {
+  background: rgba(255,255,255,.94);
+}
+
+/* Gallery / visual chapter returns to paper cream. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.visualCard) {
+  background: #fffaf5;
+  padding-top: 105px;
+  padding-bottom: 115px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.visualCard)::after {
+  background: #fffaf5;
+  box-shadow: none;
+}
+
+/* Final registration area is deep purple and visually connected to the footer. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.formPanel) {
+  background: #291448;
+  color: #fff;
+  padding-top: 92px;
+  padding-bottom: 105px;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.formPanel)::after {
+  display: none;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.formPanel) .sectionHead h2,
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.formPanel) .sectionHead p {
+  color: #fff;
+}
+
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.formPanel) .formPanel {
+  background: #fff;
+}
+
+/* Footer is part of the same purple chapter. */
+html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .footer {
+  margin-top: 0;
+  border-radius: 0;
+  background: #291448;
+  color: rgba(255,255,255,.9);
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+@media (max-width: 980px) {
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .sectionHead,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .cardGrid,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .formLayout,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.ageGroupItem) .ageGroupsAccordion,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section.compactStats .statsGrid {
+    width: min(100% - 32px, 720px);
+  }
+
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.workshopCard) .cardGrid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .sectionHead,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .cardGrid,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .formLayout,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.ageGroupItem) .ageGroupsAccordion,
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section.compactStats .statsGrid {
+    width: calc(100% - 28px);
+  }
+
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) .section {
+    padding-top: 68px;
+    padding-bottom: 78px;
+  }
+
+  html.pk-kindergarten-premium-scroll .pageShell:has(.ageGroupsSection) > .section:has(.workshopCard) .cardGrid {
+    grid-template-columns: 1fr;
+  }
+}
