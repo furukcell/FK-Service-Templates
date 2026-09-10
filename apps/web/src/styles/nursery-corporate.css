@@ -131,6 +131,75 @@
   z-index: 1;
 }
 
+.ageGroupsAccordion {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ageGroupItem {
+  border: 1px solid color-mix(in srgb, var(--dark) 12%, transparent);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  transition: border-color 200ms ease;
+}
+
+.ageGroupItem.isOpen {
+  border-color: var(--primary);
+}
+
+.ageGroupHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+
+.ageGroupTitle {
+  font-weight: 700;
+  color: var(--dark);
+  font-size: 17px;
+}
+
+.ageGroupToggleIcon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--soft) 70%, #fff);
+  color: var(--primary);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.ageGroupItem.isOpen .ageGroupToggleIcon {
+  background: var(--primary);
+  color: #fff;
+}
+
+.ageGroupBody {
+  padding: 0 22px 20px;
+  color: color-mix(in srgb, var(--dark) 75%, #333);
+}
+
+.ageGroupBody p {
+  margin: 0 0 8px;
+  line-height: 1.6;
+}
+
 @media (max-width: 720px) {
   .corporateHeroSlider {
     min-height: 420px;
