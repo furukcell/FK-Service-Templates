@@ -5,9 +5,9 @@ export const demoKindergartenConfig: BusinessTemplateConfig = {
   sector: "Kreş / Anaokulu",
   brandName: "Minik Adımlar Kreşi",
   eyebrow: "Güvenli, sevgi dolu ve düzenli kreş ortamı",
-  heroTitle: "Çocuğunuz için sıcak, güvenli ve gelişimi destekleyen bir başlangıç.",
-  heroDescription: "Kreş, anaokulu ve gündüz bakım evleri için sınıflar, günlük akış, yemek bilgisi, galeri ve ön görüşme formu olan modern web sitesi.",
-  primaryCta: "Ön Görüşme Talep Et",
+  heroTitle: "Çocuklarımızın büyük yarınlara güvenle hazırlandığı yer.",
+  heroDescription: "Sevgi, güven ve keşifle dolu bir okul öncesi deneyimi.",
+  primaryCta: "Okulumuzu Keşfedin →",
   secondaryCta: "Sınıfları İncele",
   topBarText: "Güvenli ortam • Yaş grupları • Günlük akış • Ön görüşme formu",
   phone: "+90 5xx xxx xx xx",
@@ -16,18 +16,18 @@ export const demoKindergartenConfig: BusinessTemplateConfig = {
   mapsUrl: "https://maps.google.com/?q=Milas%20Mu%C4%9Fla",
   instagramUrl: "https://instagram.com/",
   theme: {
-    primary: "#4F46E5",
-    secondary: "#38BDF8",
-    accent: "#FBBF24",
-    soft: "#EEF2FF",
-    dark: "#312E81"
+    primary: "#FF3F83",
+    secondary: "#55BFEA",
+    accent: "#FFD43B",
+    soft: "#FFF0B9",
+    dark: "#32216B"
   },
-  navItems: ["Sınıflar", "Neden Biz", "Şubeler", "Atölyeler", "Galeri", "Kayıt"],
+  navItems: ["Ana Sayfa", "Kurumsal", "Atölyelerimiz", "Galeri", "Duyurular", "İletişim"],
   stats: [
-    { value: "2-6", label: "yaş grubu" },
-    { value: "Günlük", label: "program akışı" },
-    { value: "1 dk", label: "ön görüşme talebi" },
-    { value: "Güvenli", label: "kurumsal iletişim" }
+    { value: "150+", label: "Mutlu Öğrenci" },
+    { value: "20+", label: "Eğitici Atölye" },
+    { value: "5+", label: "Servis Güzergâhı" },
+    { value: "10+", label: "Yıllık Deneyim" }
   ],
   services: [
     { title: "2 Yaş Oyun Grubu", description: "Oyun temelli öğrenme, öz bakım becerileri ve güvenli sosyal gelişim ortamı.", price: "Kontenjan sor" },
@@ -35,14 +35,14 @@ export const demoKindergartenConfig: BusinessTemplateConfig = {
     { title: "5 Yaş Okula Hazırlık", description: "Okula geçiş sürecini destekleyen sosyal, bilişsel ve temel akademik hazırlık çalışmaları.", price: "Ön görüşme" }
   ],
   campaignItems: [
-    { title: "Yeni dönem kayıtları", description: "Kayıt ve kontenjan bilgisi için ön görüşme talebi bırakabilirsiniz.", price: "Bilgi al" },
-    { title: "Günlük akış", description: "Karşılama, kahvaltı, etkinlik, oyun, yemek, dinlenme ve veli teslim düzeni.", price: "Düzenli program" },
-    { title: "Yemek ve bakım düzeni", description: "Çocukların günlük rutinini destekleyen yemek, dinlenme ve etkinlik planlaması.", price: "Detay sor" }
+    { title: "Renkli Eller Atölyesi", description: "Miniklerle birlikte yaratıcılığımızı renklerle konuşturduk.", price: "12 Eylül 2025" },
+    { title: "Doğa Günümüz", description: "Bahçemizde doğayı keşfettik, eğlendik ve öğrendik.", price: "5 Eylül 2025" },
+    { title: "Yıl Sonu Gösterimiz", description: "Miniklerimizin yıl boyunca hazırladığı gösterilerimizi de bekliyoruz.", price: "1 Eylül 2025" }
   ],
   galleryItems: [
-    { title: "Sınıf ortamı", description: "Çocuk yüzü göstermeden sınıf, oyun ve etkinlik alanı görselleri." },
-    { title: "Bahçe ve oyun alanı", description: "Güvenli açık alan, oyuncak ve hareket etkinlikleri için galeri alanı." },
-    { title: "Etkinlik masası", description: "Sanat, müzik, boyama ve keşif çalışmalarını gösteren görsel alan." }
+    { title: "Sınıf ortamı", description: "Çocukların oyun, öğrenme ve keşif alanları.", imageUrl: "https://picsum.photos/seed/minik-adimlar-classroom/900/650" },
+    { title: "Bahçe ve oyun alanı", description: "Güvenli açık alan ve hareket etkinlikleri.", imageUrl: "https://picsum.photos/seed/minik-adimlar-garden/900/650" },
+    { title: "Etkinlik masası", description: "Sanat, müzik, boyama ve keşif çalışmaları.", imageUrl: "https://picsum.photos/seed/minik-adimlar-workshop/900/650" }
   ],
   staff: [
     { name: "Sınıf Öğretmeni", role: "Yaş Grubu Sorumlusu", description: "Çocukların günlük akışını, etkinliklerini ve sınıf düzenini takip eder." },
@@ -60,21 +60,21 @@ export const demoKindergartenConfig: BusinessTemplateConfig = {
   ],
   heroSlides: [
     {
-      title: "16 yıllık tecrübemizle çocuklarınızın yanındayız.",
-      description: "Kreş, anaokulu ve gündüz bakım evleri için sınıflar, günlük akış, yemek bilgisi, galeri ve ön görüşme formu olan modern web sitesi.",
-      imageUrl: "https://picsum.photos/seed/kres-hero-1/1600/900"
+      title: "Minik Adımlar\nBüyük Yarınlara",
+      description: "Sevgi, güven ve keşifle dolu bir öğrenme yolculuğu...",
+      imageUrl: "https://picsum.photos/seed/minik-adimlar-hero/1800/1100"
     },
     {
-      title: "Oyun ve sanatla desteklenen okul öncesi eğitim.",
-      description: "Deneyimli öğretmen kadromuz ve düzenli veli bilgilendirmesiyle çocuğunuzun gelişimini birlikte takip ediyoruz.",
-      imageUrl: "https://picsum.photos/seed/kres-hero-2/1600/900"
+      title: "Oyun ve sanatla büyüyoruz.",
+      description: "Deneyimli öğretmen kadromuzla çocukların merakını ve özgüvenini destekliyoruz.",
+      imageUrl: "https://picsum.photos/seed/minik-adimlar-hero-2/1800/1100"
     }
   ],
   workshops: [
-    { title: "Görsel Sanatlar", description: "Resim, ebru ve drama etkinlikleriyle çocukların sanatsal yönü destekleniyor.", ageRange: "3-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-sanat/600/400" },
-    { title: "Robotik ve Kodlama", description: "Eğlenerek öğrenme odaklı temel robotik ve kodlama atölyesi.", ageRange: "4-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-robotik/600/400" },
-    { title: "Satranç", description: "Dikkat, strateji ve problem çözme becerilerini geliştiren satranç dersleri.", ageRange: "4-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-satranc/600/400" },
-    { title: "Yüzme", description: "Kurum bünyesindeki havuzda branş öğretmenleri eşliğinde yüzme etkinlikleri.", ageRange: "3-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-yuzme/600/400" }
+    { title: "Görsel Sanatlar", description: "Resim, ebru ve drama etkinlikleriyle çocukların sanatsal yönü destekleniyor.", ageRange: "3-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-sanat/900/600" },
+    { title: "Robotik ve Kodlama", description: "Eğlenerek öğrenme odaklı temel robotik ve kodlama atölyesi.", ageRange: "4-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-robotik/900/600" },
+    { title: "Satranç", description: "Dikkat, strateji ve problem çözme becerilerini geliştiren satranç dersleri.", ageRange: "4-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-satranc/900/600" },
+    { title: "Yüzme", description: "Kurum bünyesindeki havuzda branş öğretmenleri eşliğinde yüzme etkinlikleri.", ageRange: "3-6 Yaş", imageUrl: "https://picsum.photos/seed/kres-atolye-yuzme/900/600" }
   ],
   testimonials: [
     { name: "Elif K.", role: "Veli", quote: "Çocuğum sabah severek okula gidiyor, öğretmenlerle iletişimimiz çok düzenli." },
