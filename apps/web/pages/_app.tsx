@@ -48,6 +48,7 @@ import "../src/styles/ada-reference-final.css";
 import "../src/styles/ada-yeni-reference.css";
 import "../src/styles/ada-yeni-wave-fix.css";
 import "../src/styles/nursery-corporate.css";
+import "../src/styles/preschool-corporate-continuous.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
