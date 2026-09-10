@@ -50,3 +50,92 @@
   font-style: italic;
   color: var(--dark);
 }
+
+.corporateHeroSlider {
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;
+  padding: 0;
+  background: var(--dark);
+}
+
+.corporateHeroSlide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 900ms ease;
+  display: flex;
+  align-items: center;
+}
+
+.corporateHeroSlide.isActive {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+}
+
+.corporateHeroSlideOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), transparent 40%),
+    linear-gradient(160deg, color-mix(in srgb, var(--dark) 88%, transparent), color-mix(in srgb, var(--primary) 78%, transparent) 75%);
+}
+
+.corporateHeroSlideContent {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  padding: 96px 48px;
+  color: #fff;
+}
+
+.corporateHeroSlideContent .eyebrow {
+  color: rgba(255,255,255,0.85);
+}
+
+.corporateHeroSlideContent p {
+  color: rgba(255,255,255,0.85);
+}
+
+.corporateHeroDots {
+  position: absolute;
+  z-index: 2;
+  left: 48px;
+  bottom: 28px;
+  display: flex;
+  gap: 10px;
+}
+
+.corporateHeroDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,0.45);
+  cursor: pointer;
+  padding: 0;
+  transition: background 200ms ease, transform 200ms ease;
+}
+
+.corporateHeroDot.isActive {
+  background: #fff;
+  transform: scale(1.25);
+}
+
+.corporateHeroSwitchers {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 720px) {
+  .corporateHeroSlider {
+    min-height: 420px;
+  }
+  .corporateHeroSlideContent {
+    padding: 64px 24px;
+  }
+}
