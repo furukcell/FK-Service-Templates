@@ -1,5 +1,5 @@
 export type TemplateKey = "appointment" | "salon" | "real-estate" | "cafe" | "kindergarten" | "event-venue";
-export type LayoutVariant = "modern" | "split" | "showcase" | "flow";
+export type LayoutVariant = "modern" | "split" | "showcase" | "flow" | "corporate";
 
 export type ServiceItem = {
   title: string;
@@ -34,6 +34,53 @@ export type BusinessTheme = {
   dark: string;
 };
 
+// --- Kreş "corporate" tasarımına özel opsiyonel tipler ---
+export type WhyUsItem = {
+  icon: string;
+  title: string;
+  desc: string;
+};
+
+export type Branch = {
+  name: string;
+  phone: string;
+  whatsapp: string;
+  address: string;
+  mapsUrl?: string;
+};
+
+export type Workshop = {
+  title: string;
+  description: string;
+  ageRange?: string;
+  imageUrl?: string;
+};
+
+export type Testimonial = {
+  name: string;
+  role?: string;
+  quote: string;
+};
+
+export type Announcement = {
+  title: string;
+  excerpt: string;
+  date?: string;
+  imageUrl?: string;
+};
+
+export type NurseryEnabledFeatures = {
+  enrollment?: boolean;
+  multiBranch?: boolean;
+  testimonials?: boolean;
+  teacherCards?: boolean;
+  branchLessons?: boolean;
+  gallery?: boolean;
+  whatsapp?: boolean;
+  maps?: boolean;
+  announcements?: boolean;
+};
+
 export type BusinessTemplateConfig = {
   template: TemplateKey;
   sector: string;
@@ -56,6 +103,13 @@ export type BusinessTemplateConfig = {
   staff: StaffMember[];
   galleryItems?: VisualItem[];
   campaignItems?: ServiceItem[];
+  // --- opsiyonel, sadece "corporate" kreş tasarımında kullanılır ---
+  whyUs?: WhyUsItem[];
+  branches?: Branch[];
+  workshops?: Workshop[];
+  testimonials?: Testimonial[];
+  announcements?: Announcement[];
+  enabledFeatures?: NurseryEnabledFeatures;
   form: {
     title: string;
     description: string;
@@ -82,5 +136,6 @@ export const layoutVariantLabels: Record<LayoutVariant, string> = {
   modern: "Modern Kartlı",
   split: "Split Premium",
   showcase: "Showcase Vitrin",
-  flow: "Akışkan Premium"
+  flow: "Akışkan Premium",
+  corporate: "Kurumsal Vitrin"
 };
