@@ -300,6 +300,42 @@ function ServicesSection({ config }: { config: BusinessTemplateConfig }) {
   );
 }
 
+function AgeGroupsAccordion({ config }: { config: BusinessTemplateConfig }) {
+  const [openIndex, setOpenIndex] = useState(0);
+  return (
+    <section className="section ageGroupsSection" id="services">
+      <div className="sectionHead">
+        <h2>{servicesTitle(config)}</h2>
+        <p>{servicesDescription(config)}</p>
+      </div>
+      <div className="ageGroupsAccordion">
+        {config.services.map((service, index) => {
+          const isOpen = index === openIndex;
+          return (
+            <div className={`ageGroupItem ${isOpen ? "isOpen" : ""}`} key={service.title}>
+              <button
+                type="button"
+                className="ageGroupHeader"
+                aria-expanded={isOpen}
+                onClick={() => setOpenIndex(isOpen ? -1 : index)}
+              >
+                <span className="ageGroupTitle">{service.title}</span>
+                <span className="ageGroupToggleIcon" aria-hidden="true">{isOpen ? "−" : "+"}</span>
+              </button>
+              {isOpen ? (
+                <div className="ageGroupBody">
+                  <p>{service.description}</p>
+                  {service.price ? <span className="priceTag">{service.price}</span> : null}
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function CampaignSection({ config }: { config: BusinessTemplateConfig }) {
   if (!config.campaignItems?.length) return null;
   return (
@@ -653,7 +689,7 @@ function CorporateLayout({ config, switchers, form }: { config: BusinessTemplate
       )}
       <WhyUsSection config={config} />
       <section className="section compactStats"><Stats config={config} /></section>
-      <ServicesSection config={config} />
+      <AgeGroupsAccordion config={config} />
       <WorkshopsSection config={config} />
       <BranchesSection config={config} />
       {showTeacherCards ? <StaffSection config={config} /> : null}
