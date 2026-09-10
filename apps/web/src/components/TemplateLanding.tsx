@@ -560,4 +560,120 @@ function SplitLayout({ config, switchers, form }: { config: BusinessTemplateConf
   );
 }
 
-function ShowcaseLayout({ config, switchers, form, hideShowcaseServiceStrip, hidePreviewMiniGrid, prominentLocationCard }: { config: BusinessTemplateConfig; switchers: ReactNode; form: ReactNode; hideShowcaseServiceStrip?: boolean; hidePreviewMiniGrid?: boolean;
+function ShowcaseLayout({ config, switchers, form, hideShowcaseServiceStrip, hidePreviewMiniGrid, prominentLocationCard }: { config: BusinessTemplateConfig; switchers: ReactNode; form: ReactNode; hideShowcaseServiceStrip?: boolean; hidePreviewMiniGrid?: boolean; prominentLocationCard?: boolean }) {
+  return (
+    <>
+      <Nav config={config} />
+      <section className={`showcaseHero ${hideShowcaseServiceStrip ? "showcaseHeroCompact" : ""}`}>
+        <span className="eyebrow">{config.eyebrow}</span>
+        <h1>{config.heroTitle}</h1>
+        <p>{config.heroDescription}</p>
+        <div className="heroActions showcaseActions"><PrimaryCtaButton config={config} /><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
+        {switchers}
+        {!hideShowcaseServiceStrip ? (
+          <div className="showcaseServiceStrip">
+            {config.services.map((service) => <article key={service.title}><span>{service.price || "Bilgi al"}</span><strong>{service.title}</strong></article>)}
+          </div>
+        ) : null}
+      </section>
+      <section className={`showcasePanelGrid ${prominentLocationCard ? "showcasePanelGridWideMap" : ""}`}><PreviewPanel config={config} hideMiniGrid={hidePreviewMiniGrid} /><VisualSection config={config} prominentLocationCard={prominentLocationCard} /></section>
+      <ServicesSection config={config} />
+      <CampaignSection config={config} />
+      <StaffSection config={config} />
+      {form}
+    </>
+  );
+}
+
+function CorporateLayout({ config, switchers, form }: { config: BusinessTemplateConfig; switchers: ReactNode; form: ReactNode }) {
+  const showTeacherCards = config.enabledFeatures?.teacherCards !== false;
+  return (
+    <>
+      <Nav config={config} />
+      <section className="showcaseHero corporateHero">
+        <span className="eyebrow">{config.eyebrow}</span>
+        <h1>{config.heroTitle}</h1>
+        <p>{config.heroDescription}</p>
+        <div className="heroActions showcaseActions"><PrimaryCtaButton config={config} /><a className="ghostButton navButtonLink" href="#services">{config.secondaryCta}</a></div>
+        {switchers}
+      </section>
+      <WhyUsSection config={config} />
+      <section className="section compactStats"><Stats config={config} /></section>
+      <ServicesSection config={config} />
+      <WorkshopsSection config={config} />
+      <BranchesSection config={config} />
+      {showTeacherCards ? <StaffSection config={config} /> : null}
+      <TestimonialsSection config={config} />
+      <CampaignSection config={config} />
+      <VisualSection config={config} />
+      {form}
+    </>
+  );
+}
+
+export function TemplateLanding({ config, activeTemplate, activeLayout = "modern", onTemplateChange, onLayoutChange, showTemplateSwitch = true, showLayoutSwitch = true, contentBasePath, hideShowcaseServiceStrip, hidePreviewMiniGrid, prominentLocationCard }: TemplateLandingProps) {
+  const [submitStatus, setSubmitStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSubmitStatus("");
+
+    const formData = new FormData(event.currentTarget);
+    const customerName = String(formData.get("name") || "").trim();
+    const customerPhone = String(formData.get("phone") || "").trim();
+    const acceptedLegal = formData.get("acceptedLegal") === "on";
+    const honeypot = String(formData.get("website") || "");
+
+    if (honeypot) {
+      setSubmitStatus("Talebiniz alındı.");
+      return;
+    }
+
+    if (!customerName || !customerPhone) {
+      setSubmitStatus("Ad soyad ve telefon zorunludur.");
+      return;
+    }
+
+    if (!acceptedLegal) {
+      setSubmitStatus("Devam etmek için KVKK/Gizlilik bilgilendirmesini onaylamalısınız.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const requestPayload = {
+        template: config.template,
+        businessId: process.env.NEXT_PUBLIC_BUSINESS_ID || "demo-business",
+        customerName,
+        customerPhone,
+        subject: getSubject(formData, config),
+        note: String(formData.get("note") || ""),
+        source: "website" as const,
+        preferredDate: String(formData.get("date") || ""),
+        preferredTime: String(formData.get("time") || ""),
+        extra: formDataToExtra(formData)
+      };
+      await createBusinessRequest(requestPayload);
+      await notifyNewRequest(requestPayload);
+      setSubmitStatus("Talep alındı. İşletme size telefon veya WhatsApp ile dönüş yapacak.");
+      event.currentTarget.reset();
+    } catch (error) {
+      setSubmitStatus(isDemoMode() ? "Demo mod: Firebase bilgileri girilince bu talep panele düşecek." : "Talep şu anda gönderilemedi. Lütfen telefon veya WhatsApp üzerinden iletişime geçin.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  const switchers = <Switchers activeTemplate={activeTemplate} activeLayout={activeLayout} onTemplateChange={onTemplateChange} onLayoutChange={onLayoutChange} showTemplateSwitch={showTemplateSwitch} showLayoutSwitch={showLayoutSwitch} />;
+  const form = <RequestFormSection config={config} handleSubmit={handleSubmit} isSubmitting={isSubmitting} submitStatus={submitStatus} contentBasePath={contentBasePath} />;
+
+  return (
+    <Shell config={config} contentBasePath={contentBasePath}>
+      {activeLayout === "split" ? <SplitLayout config={config} switchers={switchers} form={form} /> : null}
+      {activeLayout === "showcase" ? <ShowcaseLayout config={config} switchers={switchers} form={form} hideShowcaseServiceStrip={hideShowcaseServiceStrip} hidePreviewMiniGrid={hidePreviewMiniGrid} prominentLocationCard={prominentLocationCard} /> : null}
+      {activeLayout === "modern" ? <ModernLayout config={config} switchers={switchers} form={form} hidePreviewMiniGrid={hidePreviewMiniGrid} /> : null}
+      {activeLayout === "corporate" ? <CorporateLayout config={config} switchers={switchers} form={form} /> : null}
+    </Shell>
+  );
+}
