@@ -1,0 +1,74 @@
+/* Bilim Çocuk — hero/about overlap refinement */
+
+/* Remove the artificial green landscape band from the bottom of the hero. */
+.kr-hero::before {
+  display: none !important;
+}
+
+/* Keep a deeper, soft white organic edge at the bottom of the hero. */
+.kr-hero::after {
+  height: 112px !important;
+  bottom: -1px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 160' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0 72 C95 22 190 112 305 62 C430 8 548 108 680 63 C812 18 910 114 1038 58 C1162 4 1268 106 1370 52 C1400 36 1422 34 1440 30 V160 H0 Z'/%3E%3C/svg%3E") !important;
+  background-size: 100% 100% !important;
+}
+
+/* The large middle experience band is removed from the first-screen flow. */
+.kr-experienceWave {
+  display: none !important;
+}
+
+/* Pull the development/story section upward so it feels physically layered over the hero,
+   rather than like a separate page starting underneath it. */
+.kr-aboutWave {
+  position: relative;
+  z-index: 20;
+  margin-top: -108px !important;
+  padding-top: 166px !important;
+  padding-bottom: 94px !important;
+  background: #fffaf1 !important;
+}
+
+/* Much deeper organic white bite between hero and the cream story section. */
+.kr-aboutWave::before {
+  top: 0 !important;
+  height: 142px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 180' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0 78 C100 16 210 132 330 72 C460 8 570 132 710 70 C850 8 965 130 1100 64 C1228 2 1320 118 1440 48 V0 H0 Z'/%3E%3C/svg%3E") !important;
+  background-size: 100% 100% !important;
+}
+
+/* Give the actual content a little more lift above the curved edge. */
+.kr-aboutWave .kr-waveInner {
+  position: relative;
+  z-index: 3;
+}
+
+/* Desktop: make the overlap prominent, matching the supplied reference composition. */
+@media (min-width: 981px) {
+  .kr-aboutWave {
+    margin-top: -122px !important;
+    padding-top: 178px !important;
+  }
+}
+
+/* Tablet keeps the same visual relationship without crushing the content. */
+@media (min-width: 761px) and (max-width: 980px) {
+  .kr-aboutWave {
+    margin-top: -92px !important;
+    padding-top: 148px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .kr-hero::after {
+    height: 88px !important;
+  }
+  .kr-aboutWave {
+    margin-top: -72px !important;
+    padding-top: 118px !important;
+    padding-bottom: 78px !important;
+  }
+  .kr-aboutWave::before {
+    height: 106px !important;
+  }
+}
