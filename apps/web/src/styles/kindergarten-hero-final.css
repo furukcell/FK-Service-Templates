@@ -13,12 +13,12 @@
 @media (max-width:760px){.kr-hero{height:72vw!important;min-height:0!important;max-height:none!important}.kr-hero .kr-heroImage{animation:krHeroGentleMotionMobile 14s ease-in-out infinite alternate!important}.kr-hero:after{height:78px!important}.kr-aboutWave{margin-top:-28px!important;padding-top:88px!important}.kr-aboutWave:before{display:none!important}}
 @keyframes krHeroGentleMotionMobile{0%,100%{transform:scale(1)}50%{transform:scale(1.004) translateY(-1px)}}
 
-/* Experience counters: exactly three clean circles, no service counter or decorative extras. */
+/* Experience counters: integrated countryside artwork + exactly three clean circles. */
 @property --krCount{syntax:"<integer>";inherits:false;initial-value:0}
 @keyframes krCountUp{0%{--krCount:0}55%{--krCount:var(--krTarget)}100%{--krCount:var(--krTarget)}}
-.kr-experienceWave{padding-top:48px!important;padding-bottom:38px!important;min-height:235px!important}
+.kr-experienceWave{padding-top:48px!important;padding-bottom:38px!important;min-height:235px!important;background-color:#4d9225!important;background-image:url("/images/logos/bilim-cocuk-yesil-alan.png")!important;background-repeat:no-repeat!important;background-position:center bottom!important;background-size:100% auto!important;position:relative!important;overflow:hidden!important}
 .kr-experienceWave .kr-sectionHead{display:none!important}
-.kr-experienceGrid{grid-template-columns:repeat(3,1fr)!important;gap:34px!important;max-width:620px!important;margin:0 auto!important;align-items:center!important}
+.kr-experienceGrid{grid-template-columns:repeat(3,1fr)!important;gap:34px!important;max-width:620px!important;margin:0 auto!important;align-items:center!important;position:relative!important;z-index:2!important}
 .kr-experienceGrid .kr-stat:nth-child(3){display:none!important}
 .kr-experienceWave .kr-tree,.kr-experienceWave .kr-signpost,.kr-experienceWave .kr-bee{display:none!important}
 .kr-experienceWave .kr-stat{width:112px!important;height:112px!important;transition:transform .38s cubic-bezier(.2,.8,.2,1),box-shadow .38s ease,background .38s ease!important;cursor:default!important;will-change:transform!important}
@@ -31,7 +31,7 @@
 .kr-experienceWave .kr-stat:nth-child(4){--krTarget:10!important}
 .kr-experienceWave .kr-stat>span:last-child{font-size:8px!important;font-weight:900!important;letter-spacing:.15px!important}
 .kr-experienceWave .kr-stat:nth-child(1)>span:last-child{font-size:8px!important}
-.kr-experienceWave:after{height:42px!important}
+.kr-experienceWave:after{display:none!important}
 
 /* Classes: same warm cream background as the story section below the hero. */
 .kr-classesWave{background:#fffaf1!important;color:#183c70!important;margin-top:0!important;padding:78px 0 96px!important;min-height:0!important;position:relative!important}
@@ -65,6 +65,6 @@
 .kr-classVisualBadge{position:absolute!important;left:22px!important;bottom:20px!important;background:rgba(255,255,255,.9)!important;color:#15549a!important;border-radius:999px!important;padding:8px 15px!important;font:700 13px 'Baloo 2',sans-serif!important;box-shadow:0 8px 20px rgba(24,78,132,.12)!important}
 
 @media (max-width:760px){
-.kr-experienceWave{min-height:0!important;padding-top:42px!important;padding-bottom:40px!important}.kr-experienceGrid{grid-template-columns:1fr 1fr!important;gap:18px!important;max-width:330px!important}.kr-experienceWave .kr-stat{width:108px!important;height:108px!important}.kr-experienceWave .kr-stat strong::after{font-size:25px!important}.kr-experienceWave .kr-stat:nth-child(4){grid-column:1 / -1!important}
+.kr-experienceWave{min-height:0!important;padding-top:42px!important;padding-bottom:40px!important;background-size:auto 100%!important;background-position:center bottom!important}.kr-experienceGrid{grid-template-columns:1fr 1fr!important;gap:18px!important;max-width:330px!important}.kr-experienceWave .kr-stat{width:108px!important;height:108px!important}.kr-experienceWave .kr-stat strong::after{font-size:25px!important}.kr-experienceWave .kr-stat:nth-child(4){grid-column:1 / -1!important}
 .kr-classesWave{padding:56px 16px 70px!important}.kr-classesHead{margin-bottom:28px!important}.kr-classesHead h2{font-size:31px!important}.kr-classShowcase{grid-template-columns:1fr!important;gap:22px!important}.kr-classVisual{min-height:290px!important;order:-1!important;border-radius:20px!important}.kr-classList{border-radius:18px!important}.kr-classToggle{min-height:66px!important;padding:0 15px!important;font-size:15px!important}
 }
