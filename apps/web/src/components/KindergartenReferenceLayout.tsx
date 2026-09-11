@@ -48,13 +48,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
     <header id="top" className="kr-hero">
       <div className="kr-heroImage" style={{ backgroundImage: `url(${hero})` }} />
       <div className="kr-heroOverlay" />
-      <div className="kr-sun" aria-hidden="true">☀</div><div className="kr-cloud heroCloud" aria-hidden="true"><i/><i/><i/></div>
-      <div className="kr-rocket" aria-hidden="true">🚀</div>
       <div className="kr-heroCopy"><span className="kr-scribble">SEVGİ • BİLİM • KEŞİF</span><h1><span>{schoolName}</span><strong>Büyük Yarınlara</strong></h1><p>{tagline}</p><a className="kr-pinkBtn" href="#about">Okulumuzu Keşfedin <b>→</b></a></div>
-      <div className="kr-teddy" aria-hidden="true"><span className="kr-ear l"/><span className="kr-ear r"/><span className="kr-teddyFace">●</span><span className="kr-tummy">♥</span></div>
-      <div className="kr-sign"><b>Oyunla</b><b>Keşfet</b><b>Öğren</b><b>Büyü</b></div>
-      <div className="kr-heroGrass" aria-hidden="true"><span/><span/><span/><span/><i/><i/><i/></div>
-      <div className="kr-scroll" aria-hidden="true">↓</div>
     </header>
 
     <section id="about" className="kr-waveSection kr-aboutWave">
