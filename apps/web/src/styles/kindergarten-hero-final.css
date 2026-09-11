@@ -35,10 +35,52 @@
 .kr-experienceWave .kr-stat:nth-child(1)>span:last-child{font-size:9px!important}
 .kr-experienceWave:after{height:42px!important}
 
+/* Classes showcase: white section directly after the green experience area. */
+.kr-classesWave{background:#fff!important;color:#183c70!important;margin-top:0!important;padding:78px 0 96px!important;min-height:0!important;position:relative!important}
+.kr-classesWave:before,.kr-classesWave:after{display:none!important}
+.kr-classAccordionInner{max-width:1180px!important}
+.kr-classesHead{text-align:center!important;margin:0 auto 42px!important}
+.kr-classesHead .kr-kicker{color:#1976d2!important}
+.kr-classesHead h2{color:#15549a!important;margin:7px auto 10px!important;font-size:42px!important;line-height:1.05!important}
+.kr-classesHead h2 strong{color:#1976d2!important}
+.kr-classesHead p{color:#7890a8!important;max-width:600px!important;margin:0 auto!important}
+.kr-classShowcase{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:34px!important;align-items:stretch!important;max-width:1080px!important;margin:0 auto!important}
+.kr-classList{background:#fff!important;border-radius:22px!important;overflow:hidden!important;border:1px solid #e4edf5!important;box-shadow:0 16px 42px rgba(24,78,132,.10)!important}
+.kr-classItem{border-bottom:1px solid #e8eef4!important;background:#fff!important}
+.kr-classItem:last-child{border-bottom:0!important}
+.kr-classToggle{width:100%!important;min-height:74px!important;border:0!important;background:#fff!important;display:flex!important;align-items:center!important;gap:15px!important;padding:0 20px!important;text-align:left!important;cursor:pointer!important;color:#193b64!important;font:700 17px 'Baloo 2',sans-serif!important;transition:background .25s ease,color .25s ease,transform .25s ease!important}
+.kr-classToggle:hover{background:#f7fbff!important;color:#1976d2!important}
+.kr-classItem.is-open .kr-classToggle{background:#f5faff!important;color:#15549a!important}
+.kr-classIcon{width:38px!important;height:38px!important;display:grid!important;place-items:center!important;border-radius:11px!important;background:#eaf5ff!important;font-size:21px!important;flex:0 0 auto!important}
+.kr-classItem:nth-child(2) .kr-classIcon{background:#fff1f5!important}
+.kr-classItem:nth-child(3) .kr-classIcon{background:#f1f9e7!important}
+.kr-classItem:nth-child(4) .kr-classIcon{background:#fff7df!important}
+.kr-classTitle{flex:1!important}
+.kr-classPlus{width:30px!important;height:30px!important;border-radius:50%!important;background:#1976d2!important;color:#fff!important;display:grid!important;place-items:center!important;font:700 22px/1 Arial,sans-serif!important;transition:transform .3s ease,background .3s ease!important}
+.kr-classItem.is-open .kr-classPlus{background:#ff4f87!important;transform:rotate(180deg)!important}
+.kr-classDetails{display:grid!important;grid-template-rows:0fr!important;transition:grid-template-rows .42s cubic-bezier(.2,.75,.2,1)!important;background:#f8fbfe!important}
+.kr-classDetails>div{overflow:hidden!important}
+.kr-classDetails p{margin:0!important;padding:0 22px!important;color:#71879d!important;font:500 14px/1.7 'Baloo 2',sans-serif!important;opacity:0!important;transform:translateY(-8px)!important;transition:opacity .25s ease,transform .35s ease,padding .35s ease!important}
+.kr-classItem.is-open .kr-classDetails{grid-template-rows:1fr!important}
+.kr-classItem.is-open .kr-classDetails p{padding:14px 22px 19px!important;opacity:1!important;transform:translateY(0)!important}
+.kr-classVisual{min-height:390px!important;position:relative!important;overflow:hidden!important;border-radius:26px!important;background:linear-gradient(145deg,#dff2ff,#f8fbff 58%,#eaf8df)!important;box-shadow:0 20px 50px rgba(24,78,132,.13)!important;border:1px solid #e3edf5!important}
+.kr-classVisualPlaceholder{position:absolute!important;inset:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;color:#1976d2!important;text-align:center!important}
+.kr-classVisualPlaceholder:before{content:""!important;width:118px!important;height:118px!important;border-radius:50%!important;background:rgba(255,255,255,.72)!important;box-shadow:0 15px 35px rgba(24,78,132,.08)!important;margin-bottom:18px!important}
+.kr-classVisualPlaceholder span{font:800 20px 'Baloo 2',sans-serif!important;letter-spacing:1px!important}
+.kr-classVisualPlaceholder small{margin-top:3px!important;color:#6f879f!important;font:600 13px 'Baloo 2',sans-serif!important}
+.kr-classVisualBadge{position:absolute!important;left:22px!important;bottom:20px!important;background:rgba(255,255,255,.9)!important;color:#15549a!important;border-radius:999px!important;padding:8px 15px!important;font:700 13px 'Baloo 2',sans-serif!important;box-shadow:0 8px 20px rgba(24,78,132,.12)!important}
+
 @media (max-width:760px){
   .kr-experienceWave{min-height:0!important;padding-top:42px!important;padding-bottom:40px!important}
   .kr-experienceGrid{grid-template-columns:1fr 1fr!important;gap:18px!important;max-width:330px!important}
   .kr-experienceWave .kr-stat{width:128px!important;height:128px!important}
   .kr-experienceWave .kr-stat strong::after{font-size:27px!important}
   .kr-experienceWave .kr-stat:nth-child(4){grid-column:1 / -1!important}
+  .kr-classesWave{padding:56px 16px 70px!important}
+  .kr-classesHead{margin-bottom:28px!important}
+  .kr-classesHead h2{font-size:31px!important}
+  .kr-classShowcase{grid-template-columns:1fr!important;gap:22px!important}
+  .kr-classVisual{min-height:290px!important;order:-1!important;border-radius:20px!important}
+  .kr-classList{border-radius:18px!important}
+  .kr-classToggle{min-height:66px!important;padding:0 15px!important;font-size:15px!important}
 }
