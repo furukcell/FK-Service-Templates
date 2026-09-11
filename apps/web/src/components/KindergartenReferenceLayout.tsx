@@ -96,8 +96,8 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       </div>
     </section>
 
-    <section className="kr-discoveryBridge" aria-label="Merakla öğrenme alanı" style={{width:"100%",overflow:"hidden",background:"#fffaf1",lineHeight:0}}>
-      <img src="/images/logos/bilim-cocuk-merak-ogreniyor-gecis.png" alt="Merakla öğreniyor, sevgiyle büyüyoruz" style={{display:"block",width:"100%",height:"auto",maxWidth:"none"}} />
+    <section className="kr-discoveryBridge" aria-label="Merakla öğrenme alanı" style={{width:"100%",height:"230px",overflow:"hidden",background:"#fffaf1",lineHeight:0}}>
+      <img src="/images/logos/bilim-cocuk-merak-ogreniyor-gecis.png" alt="Merakla öğreniyor, sevgiyle büyüyoruz" style={{display:"block",width:"100%",height:"230px",maxWidth:"none",objectFit:"fill"}} />
     </section>
 
     <section className="kr-whyChoose" aria-labelledby="why-choose-title">
@@ -131,7 +131,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       .kr-whyHead h2 strong{color:#1976d2!important}
       .kr-whyHead p{color:#7890a8!important;max-width:700px!important;margin:0 auto!important;line-height:1.65!important}
       .kr-whyGrid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:20px!important;align-items:stretch!important;max-width:1040px!important;margin:0 auto!important}
-      .kr-whyCard{border-radius:24px!important;overflow:hidden!important;min-height:420px!important;box-shadow:0 16px 34px rgba(24,78,132,.10)!important;transition:transform 1.35s cubic-bezier(.2,.75,.2,1),box-shadow .7s ease!important;transform-style:preserve-3d!important;perspective:1200px!important;cursor:pointer!important;will-change:transform!important}
+      .kr-whyCard{border-radius:24px!important;overflow:hidden!important;min-height:420px!important;box-shadow:0 16px 34px rgba(24,78,132,.10)!important;transition:transform 8s cubic-bezier(.2,.75,.2,1),box-shadow .7s ease!important;transform-style:preserve-3d!important;perspective:1200px!important;cursor:pointer!important;will-change:transform!important}
       .kr-whyCard:hover{transform:perspective(1200px) rotateY(360deg) scale(1.03)!important;box-shadow:0 26px 48px rgba(24,78,132,.18)!important;z-index:3!important}
       .kr-why-orange{background:#ff686b!important}.kr-why-pink{background:#ffbd16!important}.kr-why-green{background:#a9cf49!important}.kr-why-blue{background:#28afe9!important}
       .kr-whyPhoto{height:190px!important;position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;padding-top:22px!important}
