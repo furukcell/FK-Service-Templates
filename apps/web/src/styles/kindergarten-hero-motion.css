@@ -1,0 +1,8 @@
+/* Bilim Çocuk hero: subtle, premium motion only. */
+.kr-heroImage{position:absolute;inset:-2.5%;z-index:0;background-size:cover;background-position:center center;animation:krHeroKenBurns 18s ease-in-out infinite alternate;will-change:transform}
+.kr-heroImage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,45,75,.02),rgba(10,45,75,.12));pointer-events:none}
+.kr-hero{isolation:isolate}
+.kr-heroOverlay{z-index:1}
+.kr-heroCopy,.kr-sun,.kr-cloud,.kr-rocket,.kr-teddy,.kr-sign,.kr-heroGrass,.kr-scroll{z-index:3}
+@keyframes krHeroKenBurns{0%{transform:scale(1) translate3d(0,0,0)}50%{transform:scale(1.018) translate3d(-.25%,.1%,0)}100%{transform:scale(1.035) translate3d(.25%,-.15%,0)}}
+@media(prefers-reduced-motion:reduce){.kr-heroImage{animation:none}}
