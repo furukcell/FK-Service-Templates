@@ -1,0 +1,12 @@
+/* Bilim Çocuk sınıflarındaki dört bilim doodle'ı: fotoğraf alanının dışında, hafif yukarı-aşağı hareket. */
+.kr-classShowcase{position:relative!important;overflow:visible!important;background-image:none!important}
+.kr-classShowcase:before,.kr-classShowcase:after{content:""!important;position:absolute!important;top:0!important;width:170px!important;height:100%!important;display:block!important;pointer-events:none!important;z-index:8!important;background-repeat:no-repeat!important}
+.kr-classShowcase:before{left:-170px!important;background-image:url("/images/logos/bilim-cocuk-atom.png"),url("/images/logos/bilim-cocuk-bilim-insanlari.png")!important;background-size:118px auto,126px auto!important;background-position:center 24px,center 230px!important;animation:krScienceLeft 6.5s ease-in-out infinite alternate!important}
+.kr-classShowcase:after{right:-170px!important;background-image:url("/images/logos/bilim-cocuk-teleskop.png"),url("/images/logos/bilim-cocuk-robot.png")!important;background-size:112px auto,106px auto!important;background-position:center 22px,center 232px!important;animation:krScienceRight 7s ease-in-out infinite alternate!important}
+@keyframes krScienceLeft{0%,100%{transform:translateY(0)}50%{transform:translateY(22px)}}
+@keyframes krScienceRight{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+@media(max-width:760px){
+  .kr-classShowcase:before,.kr-classShowcase:after{width:95px!important;height:100%!important}
+  .kr-classShowcase:before{left:-78px!important;background-size:70px auto,76px auto!important;background-position:center 175px,center 235px!important}
+  .kr-classShowcase:after{right:-78px!important;background-size:68px auto,64px auto!important;background-position:center 40px,center 150px!important}
+}
