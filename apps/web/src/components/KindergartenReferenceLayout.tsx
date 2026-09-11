@@ -1,8 +1,19 @@
 import type { BusinessTemplateConfig } from "@fk-templates/shared";
 
 type Props = { config: BusinessTemplateConfig; onLayoutChange?: (layout: "corporate" | "kindergarten-reference") => void };
-const fallbackHero = "https://picsum.photos/seed/bilim-cocuk-anaokulu/1800/1050";
-const schoolName = "Bilim Çocuk Anaokulu";
+
+function slugifyForEmail(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/ı/g, "i")
+    .replace(/ğ/g, "g")
+    .replace(/ü/g, "u")
+    .replace(/ş/g, "s")
+    .replace(/ö/g, "o")
+    .replace(/ç/g, "c")
+    .replace(/[^a-z0-9]+/g, "")
+    .trim();
+}
 
 function Logo() { return <span className="kr-logoMark" aria-hidden="true"><svg viewBox="0 0 54 54"><circle cx="27" cy="27" r="25" fill="#eaf6ff"/><path d="M16 32c-7-8 1-19 10-12 4-8 17-3 15 7-1 8-12 11-25 5Z" fill="#2196f3"/><circle cx="21" cy="22" r="4" fill="#64b5f6"/><circle cx="35" cy="20" r="4" fill="#1565c0"/><path d="M18 34c4 7 17 9 22 0" fill="none" stroke="#0d47a1" strokeWidth="2.5" strokeLinecap="round"/></svg></span> }
 function Cloud({className=""}:{className?:string}) { return <div className={`kr-cloud ${className}`} aria-hidden="true"><i/><i/><i/></div> }
@@ -10,7 +21,10 @@ function Photo({src,title,className=""}:{src?:string;title:string;className?:str
 function SectionWave({children,id,className=""}:{children:React.ReactNode;id?:string;className?:string}) { return <section id={id} className={`kr-waveSection ${className}`}>{children}</section> }
 
 export function KindergartenReferenceLayout({config,onLayoutChange}:Props) {
- const hero=config.heroSlides?.[0]?.imageUrl||fallbackHero;
+ const schoolName=config.brandName;
+ const tagline=config.eyebrow||"Sevgi, güven ve keşifle dolu bir öğrenme yolculuğu";
+ const contactEmail=`info@${slugifyForEmail(config.brandName)}.com`;
+ const hero=config.heroSlides?.[0]?.imageUrl||`https://picsum.photos/seed/${slugifyForEmail(config.brandName)}-hero/1800/1050`;
  const gallery=config.galleryItems||[];
  const news=config.campaignItems?.length?config.campaignItems.slice(0,3):[
   {title:"Renkli Eller Atölyesi",description:"Miniklerimizle yaratıcılığımızı renklerle konuşturduk."},
@@ -22,8 +36,8 @@ export function KindergartenReferenceLayout({config,onLayoutChange}:Props) {
  const staff=["Sınıf Öğretmenlerimiz","Çocuk Gelişimi Uzmanımız","Rehberlik Uzmanımız","Yardımcı Öğretmenlerimiz"];
  return <main className="kr-site">
   <style>{`.kr-site{--pink:#1976d2;--pink2:#42a5f5;--purple:#0d47a1;--purple2:#1565c0;--green:#43a5df;--green2:#2f8fc8;--blue:#64c5f3;--lav:#9acbff}.kr-navLinks a.active,.kr-navCta,.kr-pinkBtn{background:linear-gradient(135deg,#1976d2,#42a5f5)!important}.kr-facts article>span{background:#1976d2!important}.kr-facts article:nth-child(2)>span{background:#42a5f5!important}.kr-stats{background:linear-gradient(135deg,#1687cf,#49b5e8)!important}.kr-join{background:linear-gradient(90deg,#0d47a1,#42a5f5)!important}.kr-brand b{color:#1976d2!important}.kr-hero h1 strong{color:#8fd3ff!important}`}</style>
-  <nav className="kr-nav"><a className="kr-brand" href="#top" aria-label={schoolName}><Logo/><span><b>{schoolName}</b><small>Bilimle büyüyen, mutlu çocuklar</small></span></a><div className="kr-navLinks">{['Ana Sayfa','Kurumsal','Sınıflarımız','Atölyeler','Etkinlikler','Galeri','İletişim'].map((x,i)=><a key={x} className={i===0?'active':''} href={['#top','#about','#classes','#workshops','#news','#gallery','#contact'][i]}>{x}</a>)}</div><div className="kr-navRight"><div className="kr-layoutPicker"><button className="isActive" type="button">Bilim Çocuk</button>{onLayoutChange&&<button type="button" onClick={()=>onLayoutChange('corporate')}>Kurumsal</button>}</div><a className="kr-navCta" href="#contact">Kayıt &amp; Bilgi Al</a></div></nav>
-  <header id="top" className="kr-hero"><div className="kr-heroImage" style={{backgroundImage:`linear-gradient(90deg,rgba(5,39,78,.55),rgba(5,39,78,.12) 62%,rgba(5,39,78,0)),url(${hero})`}}/><div className="kr-heroOverlay"/><Cloud className="heroCloud"/><div className="kr-heroCopy"><span className="kr-scribble">SEVGİ • BİLİM • KEŞİF</span><h1><span>Bilim Çocuk</span><strong>Büyük Yarınlara</strong></h1><p>Sevgi, güven ve keşifle dolu<br/>bir öğrenme yolculuğu...</p><a className="kr-pinkBtn" href="#about">Okulumuzu Keşfedin <b>→</b></a></div><div className="kr-sign"><b>Oyna</b><b>Keşfet</b><b>Öğren</b><b>Büyü</b></div><div className="kr-scroll">↓</div><div className="kr-heroDecor">☀</div><div className="kr-heroRocket">🚀</div><div className="kr-heroTeddy">🧸</div></header>
+  <nav className="kr-nav"><a className="kr-brand" href="#top" aria-label={schoolName}><Logo/><span><b>{schoolName}</b><small>{tagline}</small></span></a><div className="kr-navLinks">{['Ana Sayfa','Kurumsal','Sınıflarımız','Atölyeler','Etkinlikler','Galeri','İletişim'].map((x,i)=><a key={x} className={i===0?'active':''} href={['#top','#about','#classes','#workshops','#news','#gallery','#contact'][i]}>{x}</a>)}</div><div className="kr-navRight"><div className="kr-layoutPicker"><button className="isActive" type="button">Referans Tasarım</button>{onLayoutChange&&<button type="button" onClick={()=>onLayoutChange('corporate')}>Kurumsal</button>}</div><a className="kr-navCta" href="#contact">Kayıt &amp; Bilgi Al</a></div></nav>
+  <header id="top" className="kr-hero"><div className="kr-heroImage" style={{backgroundImage:`linear-gradient(90deg,rgba(5,39,78,.55),rgba(5,39,78,.12) 62%,rgba(5,39,78,0)),url(${hero})`}}/><div className="kr-heroOverlay"/><Cloud className="heroCloud"/><div className="kr-heroCopy"><span className="kr-scribble">SEVGİ • BİLİM • KEŞİF</span><h1><span>{schoolName}</span><strong>Büyük Yarınlara</strong></h1><p>{tagline}</p><a className="kr-pinkBtn" href="#about">Okulumuzu Keşfedin <b>→</b></a></div><div className="kr-sign"><b>Oyna</b><b>Keşfet</b><b>Öğren</b><b>Büyü</b></div><div className="kr-scroll">↓</div><div className="kr-heroDecor">☀</div><div className="kr-heroRocket">🚀</div><div className="kr-heroTeddy">🧸</div></header>
 
   <SectionWave id="about" className="kr-aboutWave"><div className="kr-waveInner kr-storyInner"><div className="kr-storyPhotos"><Photo src={gallery[0]?.imageUrl} title="Çocuklarımız" className="photoA"/><Photo src={gallery[1]?.imageUrl} title="Gelişim etkinliği" className="photoB"/><div className="kr-dashedCircle"/></div><div className="kr-storyCopy"><span className="kr-kicker">EN DEĞERLİ VARLIĞIMIZ</span><h2>Odağımız <strong>Çocuklarımızın Gelişimi</strong></h2><p>Her çocuğun kendi hızında keşfetmesine, üretmesine ve özgüven kazanmasına alan açıyoruz. Oyun, bilim, sanat ve hareketi bir araya getirerek gelişimin her alanını destekliyoruz.</p><div className="kr-facts"><article><span>♡</span><div><b>Güvenli ve Sevgi Dolu</b><small>Çocuklarımızın kendini güvende ve değerli hissettiği bir ortam.</small></div></article><article><span>✦</span><div><b>Çocuğa Özel Gelişim</b><small>Her çocuğun ilgi ve becerilerini gözlemleyen destekleyici yaklaşım.</small></div></article></div></div></div></SectionWave>
 
@@ -33,12 +47,12 @@ export function KindergartenReferenceLayout({config,onLayoutChange}:Props) {
 
   <SectionWave id="workshops" className="kr-workshopsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">KEŞFET • ÜRET • EĞLEN</span><h2>Sınıflarımız &amp; <strong>Atölyelerimiz</strong></h2><p>Çocukların merakını canlı tutan, yaparak ve yaşayarak öğrenmeyi destekleyen özel çalışmalar.</p></div><div className="kr-workshopGrid">{workshops.map((x,i)=><article key={x}><span>{String(i+1).padStart(2,'0')}</span><div><h3>{x}</h3><p>Çocukların yaratıcılığını ve merakını destekleyen uygulamalı çalışmalar.</p></div><b>→</b></article>)}</div></div></SectionWave>
 
-  <SectionWave id="news" className="kr-newsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">BİLİM ÇOCUK'TAN</span><h2>Etkinlik &amp; Duyurular</h2></div><div className="kr-newsGrid">{news.map((item,i)=><article className="kr-newsCard" key={`${item.title}-${i}`}><div className="kr-newsImage"><Photo src={gallery[i]?.imageUrl} title={item.title}/><span>{i===0?'12 EYLÜL':i===1?'05 EYLÜL':'01 EYLÜL'}</span></div><div className="kr-newsBody"><h3>{item.title}</h3><p>{item.description}</p><a href="#contact">Detayları Gör →</a></div></article>)}</div></div></SectionWave>
+  <SectionWave id="news" className="kr-newsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">OKULUMUZDAN</span><h2>Etkinlik &amp; Duyurular</h2></div><div className="kr-newsGrid">{news.map((item,i)=><article className="kr-newsCard" key={`${item.title}-${i}`}><div className="kr-newsImage"><Photo src={gallery[i]?.imageUrl} title={item.title}/><span>{i===0?'12 EYLÜL':i===1?'05 EYLÜL':'01 EYLÜL'}</span></div><div className="kr-newsBody"><h3>{item.title}</h3><p>{item.description}</p><a href="#contact">Detayları Gör →</a></div></article>)}</div></div></SectionWave>
 
   <SectionWave id="gallery" className="kr-galleryWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">ÇOCUKLARIMIZDAN KARELER</span><h2>Galerimiz</h2></div><div className="kr-galleryGrid">{[0,1,2,3,4,5].map((n)=><Photo key={n} src={gallery[n]?.imageUrl} title={`Galeri ${n+1}`} className={`galleryPhoto g${n+1}`}/>)}</div></div></SectionWave>
 
-  <SectionWave className="kr-staffWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">BİLİM ÇOCUK AİLESİ</span><h2>Kurum Personelimiz</h2><p>Çocuklarımızın gelişimine sevgi, deneyim ve uzmanlıkla eşlik eden ekibimiz.</p></div><div className="kr-staffGrid">{staff.map((x,i)=><article key={x}><Photo src={gallery[i+6]?.imageUrl} title={x}/><div><b>{x}</b><span>Bilim Çocuk Anaokulu</span></div></article>)}</div></div></SectionWave>
+  <SectionWave className="kr-staffWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">AİLEMİZ</span><h2>Kurum Personelimiz</h2><p>Çocuklarımızın gelişimine sevgi, deneyim ve uzmanlıkla eşlik eden ekibimiz.</p></div><div className="kr-staffGrid">{staff.map((x,i)=><article key={x}><Photo src={gallery[i+6]?.imageUrl} title={x}/><div><b>{x}</b><span>{schoolName}</span></div></article>)}</div></div></SectionWave>
 
-  <section id="contact" className="kr-footer"><div className="kr-footerTop"><a className="kr-brand footerBrand" href="#top"><Logo/><span><b>{schoolName}</b><small>Bilimle büyüyen, mutlu çocuklar</small></span></a><div><b>Hızlı Erişim</b><a href="#about">Kurumsal</a><a href="#classes">Sınıflarımız</a><a href="#workshops">Atölyeler</a><a href="#gallery">Galeri</a></div><div><b>İletişim</b><span>☎ {config.phone||'0 (252) 000 00 00'}</span><span>✉ info@bilimcocukanaokulu.com</span><span>⌖ {config.address||'Muğla / Türkiye'}</span></div><div className="kr-social"><a href={config.instagramUrl||'#'}>◎</a><a href="#contact">f</a><a href="#contact">▶</a></div></div><div className="kr-footerBottom">© 2026 {schoolName}. Tüm Hakları Saklıdır.<span>FK Digital</span></div></section>
+  <section id="contact" className="kr-footer"><div className="kr-footerTop"><a className="kr-brand footerBrand" href="#top"><Logo/><span><b>{schoolName}</b><small>{tagline}</small></span></a><div><b>Hızlı Erişim</b><a href="#about">Kurumsal</a><a href="#classes">Sınıflarımız</a><a href="#workshops">Atölyeler</a><a href="#gallery">Galeri</a></div><div><b>İletişim</b><span>☎ {config.phone||'0 (252) 000 00 00'}</span><span>✉ {contactEmail}</span><span>⌖ {config.address||'Muğla / Türkiye'}</span></div><div className="kr-social"><a href={config.instagramUrl||'#'}>◎</a><a href="#contact">f</a><a href="#contact">▶</a></div></div><div className="kr-footerBottom">© 2026 {schoolName}. Tüm Hakları Saklıdır.<span>FK Digital</span></div></section>
  </main>
 }
