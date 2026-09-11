@@ -1,0 +1,407 @@
+/* Wave-section system for the kindergarten reference layout.
+   The JSX (KindergartenReferenceLayout.tsx) uses these class names but
+   no CSS previously existed for them — sections rendered flat/unstyled.
+   This file gives every .kr-waveSection its curved top divider,
+   alternating background band, and styles the grids/cards inside it. */
+
+.kr-waveSection {
+  position: relative;
+  padding: 90px 7% 70px;
+  overflow: hidden;
+}
+
+/* curved divider drawn with an SVG wave, placed at the top of each band */
+.kr-waveSection::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+.kr-waveInner {
+  position: relative;
+  z-index: 2;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* --- band colors + wave fills, alternating like the reference site --- */
+.kr-aboutWave {
+  background: #fffaf1;
+}
+.kr-aboutWave::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70' preserveAspectRatio='none'%3E%3Cpath d='M0 40 C 200 80 400 0 600 30 C 800 60 1000 10 1200 40 L1200 0 L0 0 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+}
+
+.kr-experienceWave {
+  background: linear-gradient(135deg, #eaf5ff, #f3ecff);
+}
+.kr-experienceWave::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70' preserveAspectRatio='none'%3E%3Cpath d='M0 30 C 200 0 400 60 600 35 C 800 10 1000 55 1200 25 L1200 0 L0 0 Z' fill='%23fffaf1'/%3E%3C/svg%3E");
+}
+
+.kr-classesWave {
+  background: #ffffff;
+}
+.kr-classesWave::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70' preserveAspectRatio='none'%3E%3Cpath d='M0 35 C 250 65 450 5 700 35 C 900 60 1050 15 1200 35 L1200 0 L0 0 Z' fill='%23eaf5ff'/%3E%3C/svg%3E");
+}
+
+.kr-workshopsWave {
+  background: #f6f4ff;
+}
+.kr-workshopsWave::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70' preserveAspectRatio='none'%3E%3Cpath d='M0 30 C 200 5 500 65 800 30 C 950 12 1080 45 1200 30 L1200 0 L0 0 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+}
+
+.kr-newsWave {
+  background: #fff2f6;
+}
+.kr-newsWave::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70' preserveAspectRatio='none'%3E%3Cpath d='M0 40 C 300 10 600 60 900 30 C 1000 20 1100 45 1200 35 L1200 0 L0 0 Z' fill='%23f6f4ff'/%3E%3C/svg%3E");
+}
+
+.kr-galleryWave {
+  background: #eef8ff;
+}
+.kr-galleryWave::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70' preserveAspectRatio='none'%3E%3Cpath d='M0 30 C 250 60 500 5 750 35 C 950 55 1080 15 1200 30 L1200 0 L0 0 Z' fill='%23fff2f6'/%3E%3C/svg%3E");
+}
+
+.kr-staffWave {
+  background: #f3efff;
+}
+.kr-staffWave::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70' preserveAspectRatio='none'%3E%3Cpath d='M0 35 C 200 5 500 65 750 30 C 950 5 1080 55 1200 30 L1200 0 L0 0 Z' fill='%23eef8ff'/%3E%3C/svg%3E");
+}
+
+/* curved footer transition, so the wave rhythm continues into the footer */
+.kr-footer {
+  position: relative;
+}
+.kr-footer::before {
+  content: "";
+  position: absolute;
+  top: -69px;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 70' preserveAspectRatio='none'%3E%3Cpath d='M0 30 C 200 60 500 5 750 35 C 950 60 1080 10 1200 30 L1200 70 L0 70 Z' fill='%23f3efff'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+/* --- section head shared across wave sections --- */
+.kr-sectionHead {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 34px;
+}
+.kr-sectionHead h2 {
+  font: 800 30px/1.15 'Baloo 2', sans-serif;
+  color: var(--purple, #0d47a1);
+  margin: 8px 0 10px;
+}
+.kr-sectionHead h2 strong {
+  color: var(--pink, #1976d2);
+}
+.kr-sectionHead p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6c6677;
+}
+
+/* --- classes / feature card grid --- */
+.kr-cardGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.kr-featureCard {
+  background: #fff;
+  border-radius: 18px;
+  padding: 26px 20px;
+  text-align: center;
+  box-shadow: 0 10px 26px rgba(43, 28, 72, 0.1);
+  transition: transform 0.2s ease;
+}
+.kr-featureCard:hover {
+  transform: translateY(-4px);
+}
+.kr-cardIcon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  background: linear-gradient(135deg, var(--pink, #1976d2), var(--pink2, #42a5f5));
+  color: #fff;
+}
+.kr-featureCard h3 {
+  font: 800 15px 'Baloo 2', sans-serif;
+  color: var(--purple, #0d47a1);
+  margin: 0 0 8px;
+}
+.kr-featureCard p {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #777181;
+  margin: 0 0 12px;
+}
+.kr-featureCard a {
+  font-size: 10px;
+  font-weight: 900;
+  color: var(--pink, #1976d2);
+}
+
+/* --- experience / stats grid --- */
+.kr-experienceGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+.kr-bigExperience {
+  background: linear-gradient(135deg, var(--pink, #1976d2), var(--pink2, #42a5f5));
+  color: #fff;
+  border-radius: 20px;
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.kr-bigExperience strong {
+  font: 800 34px 'Baloo 2', sans-serif;
+}
+.kr-bigExperience span {
+  font-size: 12px;
+  font-weight: 900;
+  margin: 2px 0 8px;
+}
+.kr-bigExperience small {
+  font-size: 10px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+.kr-miniStat {
+  background: #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 20px 10px;
+  box-shadow: 0 10px 26px rgba(43, 28, 72, 0.08);
+}
+.kr-miniStat b {
+  font: 800 26px 'Baloo 2', sans-serif;
+  color: var(--purple, #0d47a1);
+}
+.kr-miniStat span {
+  font-size: 10px;
+  font-weight: 800;
+  color: #777181;
+  text-align: center;
+}
+
+/* --- workshops list --- */
+.kr-workshopGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.kr-workshopGrid > article {
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 8px 22px rgba(43, 28, 72, 0.08);
+}
+.kr-workshopGrid > article > span {
+  font: 800 20px 'Baloo 2', sans-serif;
+  color: var(--pink2, #42a5f5);
+  flex: 0 0 auto;
+}
+.kr-workshopGrid h3 {
+  font: 800 14px 'Baloo 2', sans-serif;
+  color: var(--purple, #0d47a1);
+  margin: 0 0 4px;
+}
+.kr-workshopGrid p {
+  font-size: 11px;
+  color: #777181;
+  margin: 0;
+}
+.kr-workshopGrid b {
+  margin-left: auto;
+  color: var(--pink, #1976d2);
+}
+
+/* --- news / announcement cards --- */
+.kr-newsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.kr-newsCard {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(43, 28, 72, 0.1);
+}
+.kr-newsImage {
+  height: 150px;
+  position: relative;
+}
+.kr-newsImage .kr-photo {
+  height: 100%;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.kr-newsImage img {
+  height: 100%;
+}
+.kr-newsBody {
+  padding: 16px 18px 18px;
+}
+.kr-newsBody h3 {
+  font: 800 14px 'Baloo 2', sans-serif;
+  color: var(--purple, #0d47a1);
+  margin: 0 0 6px;
+}
+.kr-newsBody p {
+  font-size: 11px;
+  color: #777181;
+  line-height: 1.5;
+  min-height: 34px;
+}
+.kr-newsBody a {
+  font-size: 10px;
+  font-weight: 900;
+  color: var(--pink, #1976d2);
+}
+
+/* --- photo gallery grid --- */
+.kr-galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 160px;
+  gap: 14px;
+}
+.kr-galleryGrid .kr-photo {
+  height: 100%;
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(43, 28, 72, 0.1);
+}
+.kr-galleryGrid .g1,
+.kr-galleryGrid .g4 {
+  grid-row: span 2;
+}
+
+/* --- staff grid --- */
+.kr-staffGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.kr-staffGrid > article {
+  background: #fff;
+  border-radius: 18px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: 0 8px 22px rgba(43, 28, 72, 0.08);
+}
+.kr-staffGrid .kr-photo {
+  border-radius: 50%;
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 12px;
+  padding: 0;
+  overflow: hidden;
+}
+.kr-staffGrid b {
+  display: block;
+  font: 800 13px 'Baloo 2', sans-serif;
+  color: var(--purple, #0d47a1);
+}
+.kr-staffGrid span {
+  display: block;
+  font-size: 10px;
+  color: #777181;
+  margin-top: 3px;
+}
+
+/* --- generic photo placeholder fallback (used when no imageUrl set) --- */
+.kr-photo {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.kr-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.kr-photoPlaceholder {
+  height: 100%;
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  background: linear-gradient(135deg, #eaf5ff, #fff4da);
+  color: #7a6f91;
+}
+.kr-photoPlaceholder span {
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+.kr-photoPlaceholder small {
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+@media (max-width: 900px) {
+  .kr-waveSection {
+    padding: 60px 6% 46px;
+  }
+  .kr-cardGrid,
+  .kr-experienceGrid,
+  .kr-workshopGrid,
+  .kr-newsGrid,
+  .kr-staffGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .kr-galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 140px;
+  }
+  .kr-storyInner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .kr-cardGrid,
+  .kr-experienceGrid,
+  .kr-workshopGrid,
+  .kr-newsGrid,
+  .kr-staffGrid {
+    grid-template-columns: 1fr;
+  }
+}
