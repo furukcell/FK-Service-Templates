@@ -1,0 +1,40 @@
+/* Final refinement: make the orange discovery bridge much thinner and slow the card rotation. */
+.kr-discoveryBridge{
+  height:clamp(150px,28vw,540px)!important;
+  overflow:hidden!important;
+  line-height:0!important;
+}
+.kr-discoveryBridge img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+}
+
+.kr-whyCard{
+  transition:transform 4s cubic-bezier(.16,.78,.18,1),box-shadow .7s ease!important;
+}
+.kr-whyCard:hover{
+  transform:perspective(1200px) rotateY(360deg) scale(1.02)!important;
+  box-shadow:0 26px 48px rgba(24,78,132,.18)!important;
+  z-index:3!important;
+}
+
+@media (max-width:760px){
+  .kr-discoveryBridge{
+    height:clamp(150px,42vw,260px)!important;
+  }
+  .kr-whyCard{
+    transition:transform 4.5s cubic-bezier(.16,.78,.18,1),box-shadow .7s ease!important;
+  }
+  .kr-whyCard:hover{
+    transform:perspective(900px) rotateY(360deg) scale(1.01)!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .kr-whyCard{transition:none!important}
+  .kr-whyCard:hover{transform:scale(1.02)!important}
+}
