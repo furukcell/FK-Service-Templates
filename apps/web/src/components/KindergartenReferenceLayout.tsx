@@ -46,6 +46,12 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
     ["/images/logos/bilim-cocuk-bahce-oyunlari.png", "Bahçe oyunları"],
     ["/images/logos/bilim-cocuk-boyama-etkinligi.png", "Boyama etkinliği"]
   ] as const;
+  const whyCards = [
+    { title: "Bilimle Öğreniyoruz", text: "Merak eden, araştıran ve keşfetmeyi seven çocuklar için deneyim odaklı eğitim sunuyoruz.", color: "orange", icon: "🔬", image: gallery[0]?.imageUrl || storyPhotos[0][0] },
+    { title: "Sevgi ve Güven", text: "Çocuklarımızın kendini değerli, güvende ve özgür hissedeceği sıcak bir ortam sağlıyoruz.", color: "pink", icon: "♥", image: gallery[1]?.imageUrl || storyPhotos[1][0] },
+    { title: "Yaratıcılığı Destekliyoruz", text: "Sanat, oyun, drama ve üretimle çocukların hayal gücünü ve özgüvenini geliştiriyoruz.", color: "green", icon: "🎨", image: gallery[2]?.imageUrl || storyPhotos[0][0] },
+    { title: "Doğayla İç İçe", text: "Doğal ortamda, hareket ederek ve yaşayarak öğrenme fırsatları sunuyoruz.", color: "blue", icon: "🌱", image: gallery[3]?.imageUrl || storyPhotos[1][0] }
+  ];
 
   return <main className="kr-site">
     <nav className="kr-nav">
@@ -94,6 +100,18 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       <img src="/images/logos/bilim-cocuk-merak-ogreniyor-gecis.png" alt="Merakla öğreniyor, sevgiyle büyüyoruz" style={{display:"block",width:"100%",height:"auto",maxWidth:"none"}} />
     </section>
 
+    <section className="kr-whyChoose" aria-labelledby="why-choose-title">
+      <div className="kr-whyInner">
+        <div className="kr-sectionHead kr-whyHead"><span className="kr-kicker">BİZİ NEDEN SEÇMELİSİNİZ?</span><h2 id="why-choose-title">Çünkü her çocuk <strong>özeldir.</strong></h2><p>Çocuklarımızın mutlu, özgüvenli ve merak eden bireyler olarak gelişmesi için eğitimimizi sevgi, deneyim ve keşif üzerine kuruyoruz.</p></div>
+        <div className="kr-whyGrid">
+          {whyCards.map((card) => <article className={`kr-whyCard kr-why-${card.color}`} key={card.title}>
+            <div className="kr-whyPhoto"><img src={card.image} alt=""/><span className="kr-whyIcon">{card.icon}</span></div>
+            <div className="kr-whyBody"><h3>{card.title}</h3><p>{card.text}</p></div>
+          </article>)}
+        </div>
+      </div>
+    </section>
+
     <section id="news" className="kr-waveSection kr-newsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">{schoolName.toUpperCase()}'DAN HABERLER</span><h2>Etkinlik ve Duyurular</h2><a href="#contact">Tüm Duyurular →</a></div><div className="kr-newsGrid">{news.map((item,i)=><article className="kr-newsCard" key={`${item.title}-${i}`}><div className="kr-newsImage"><Photo src={gallery[i]?.imageUrl} title={item.title}/><span>{i===0?"12 EYLÜL":i===1?"05 EYLÜL":"01 EYLÜL"}</span></div><div className="kr-newsBody"><h3>{item.title}</h3><p>{item.description}</p><a href="#contact">Daha Fazla →</a></div></article>)}</div><span className="kr-elephant">🐘</span></div></section>
 
     <section id="gallery" className="kr-waveSection kr-galleryWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">ÇOCUKLARIMIZDAN KARELER</span><h2>Galerimiz</h2></div><div className="kr-galleryGrid">{[0,1,2,3,4,5].map(n => <Photo key={n} src={gallery[n]?.imageUrl} title={`Galeri ${n+1}`} className={`galleryPhoto g${n+1}`}/>)}</div></div></section>
@@ -103,5 +121,46 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
     <section className="kr-join"><div><span>Gelin, {schoolName} Ailemize Katılın</span><small>Çocuğunuzun mutlu ve başarılı bir geleceğe adım atması için bizimle iletişime geçin.</small></div><a href="#contact">Randevu Al →</a><div className="kr-bunny" aria-hidden="true">🐰</div></section>
 
     <footer id="contact" className="kr-footer"><div className="kr-footerTop"><a className="kr-brand footerBrand" href="#top"><Logo/><span><b>{schoolName}</b><small>Bugünün minikleri, yarının büyük adımları</small></span></a><div><b>Hızlı Erişim</b><a href="#about">Kurumsal</a><a href="#classes">Sınıflarımız</a><a href="#gallery">Galeri</a><a href="#news">Duyurular</a></div><div><b>Bize Ulaşın</b><span>☎ {config.phone || "0542 123 45 67"}</span><span>✉ {email}</span><span>⌖ {config.address || "Muğla / Türkiye"}</span></div><div className="kr-social"><a href={config.instagramUrl || "#contact"}>◎</a><a href="#contact">f</a><a href="#contact">▶</a></div></div><div className="kr-footerBottom">© 2026 {schoolName}. Tüm Hakları Saklıdır.<span>FK Digital</span></div></footer>
+
+    <style>{`
+      .kr-whyChoose{background:#fffaf1!important;color:#183c70!important;padding:86px 0 104px!important;position:relative!important;overflow:hidden!important}
+      .kr-whyInner{max-width:1180px!important;margin:0 auto!important;padding:0 24px!important}
+      .kr-whyHead{text-align:center!important;max-width:760px!important;margin:0 auto 46px!important}
+      .kr-whyHead .kr-kicker{color:#ff4f87!important}
+      .kr-whyHead h2{color:#17386d!important;font-size:43px!important;line-height:1.05!important;margin:7px auto 12px!important}
+      .kr-whyHead h2 strong{color:#1976d2!important}
+      .kr-whyHead p{color:#7890a8!important;max-width:700px!important;margin:0 auto!important;line-height:1.65!important}
+      .kr-whyGrid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:24px!important;align-items:stretch!important}
+      .kr-whyCard{border-radius:24px!important;overflow:hidden!important;min-height:420px!important;box-shadow:0 16px 34px rgba(24,78,132,.10)!important;transition:transform .9s cubic-bezier(.2,.75,.2,1),box-shadow .9s ease!important;transform-style:preserve-3d!important;perspective:1200px!important;cursor:pointer!important;will-change:transform!important}
+      .kr-whyCard:hover{transform:perspective(1200px) rotateY(360deg) scale(1.055)!important;box-shadow:0 26px 48px rgba(24,78,132,.18)!important;z-index:3!important}
+      .kr-why-orange{background:#ff686b!important}.kr-why-pink{background:#ffbd16!important}.kr-why-green{background:#a9cf49!important}.kr-why-blue{background:#28afe9!important}
+      .kr-whyPhoto{height:190px!important;position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;padding-top:22px!important}
+      .kr-whyPhoto:before{content:""!important;position:absolute!important;width:142px!important;height:142px!important;border-radius:50%!important;border:2px dashed rgba(255,255,255,.95)!important;box-sizing:border-box!important}
+      .kr-whyPhoto img{width:122px!important;height:122px!important;border-radius:50%!important;object-fit:cover!important;border:6px solid rgba(255,255,255,.95)!important;box-shadow:0 8px 18px rgba(20,60,100,.15)!important;position:relative!important;z-index:1!important}
+      .kr-whyIcon{position:absolute!important;right:28px!important;bottom:15px!important;width:42px!important;height:42px!important;border-radius:50%!important;background:rgba(255,255,255,.96)!important;color:#1976d2!important;display:grid!important;place-items:center!important;font-size:21px!important;z-index:2!important;box-shadow:0 7px 15px rgba(20,60,100,.13)!important}
+      .kr-whyBody{padding:12px 26px 30px!important;color:#fff!important;text-align:center!important}
+      .kr-whyBody h3{margin:0 0 11px!important;font:800 22px/1.1 'Baloo 2',sans-serif!important;color:#fff!important}
+      .kr-whyBody p{margin:0!important;font:500 14px/1.65 'Baloo 2',sans-serif!important;color:rgba(255,255,255,.96)!important}
+      @media (max-width:980px){.kr-whyGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.kr-whyCard{min-height:390px!important}}
+      @media (max-width:760px){
+        .kr-whyChoose{padding:60px 0 70px!important}
+        .kr-whyInner{padding:0 16px!important}
+        .kr-whyHead{margin-bottom:30px!important}
+        .kr-whyHead h2{font-size:31px!important;max-width:350px!important}
+        .kr-whyHead p{font-size:12px!important;line-height:1.55!important;max-width:340px!important}
+        .kr-whyGrid{grid-template-columns:1fr 1fr!important;gap:12px!important}
+        .kr-whyCard{min-height:320px!important;border-radius:18px!important}
+        .kr-whyCard:hover{transform:perspective(900px) rotateY(360deg) scale(1.025)!important}
+        .kr-whyPhoto{height:132px!important;padding-top:12px!important}
+        .kr-whyPhoto:before{width:94px!important;height:94px!important}
+        .kr-whyPhoto img{width:78px!important;height:78px!important;border-width:4px!important}
+        .kr-whyIcon{right:8px!important;bottom:8px!important;width:29px!important;height:29px!important;font-size:14px!important}
+        .kr-whyBody{padding:8px 10px 18px!important}
+        .kr-whyBody h3{font-size:16px!important;margin-bottom:6px!important}
+        .kr-whyBody p{font-size:11px!important;line-height:1.45!important}
+      }
+      @media (max-width:390px){.kr-whyGrid{gap:9px!important}.kr-whyCard{min-height:300px!important}.kr-whyPhoto{height:118px!important}.kr-whyPhoto:before{width:86px!important;height:86px!important}.kr-whyPhoto img{width:70px!important;height:70px!important}.kr-whyBody h3{font-size:14px!important}.kr-whyBody p{font-size:10px!important}}
+      @media (prefers-reduced-motion:reduce){.kr-whyCard{transition:none!important}.kr-whyCard:hover{transform:scale(1.02)!important}}
+    `}</style>
   </main>;
 }
