@@ -67,15 +67,46 @@
 .kr-classVisual{background-color:#fffaf1!important;background-image:none!important;animation:none!important}
 .kr-classVisualPlaceholder{display:none!important}
 .kr-classVisualBadge{left:22px!important;bottom:20px!important}
-@keyframes krScienceDoodles{
-  0%{background-position:-76px 34px,-72px 274px,calc(100% + 70px) 118px,calc(100% + 66px) 34px}
-  28%{background-position:-55px 56px,-82px 248px,calc(100% + 78px) 136px,calc(100% + 50px) 62px}
-  55%{background-position:-88px 20px,-58px 292px,calc(100% + 60px) 96px,calc(100% + 82px) 22px}
-  78%{background-position:-64px 70px,-92px 230px,calc(100% + 74px) 150px,calc(100% + 48px) 48px}
-  100%{background-position:-76px 34px,-72px 274px,calc(100% + 70px) 118px,calc(100% + 66px) 34px}
-}
+@keyframes krScienceDoodles{0%{background-position:-76px 34px,-72px 274px,calc(100% + 70px) 118px,calc(100% + 66px) 34px}28%{background-position:-55px 56px,-82px 248px,calc(100% + 78px) 136px,calc(100% + 50px) 62px}55%{background-position:-88px 20px,-58px 292px,calc(100% + 60px) 96px,calc(100% + 82px) 22px}78%{background-position:-64px 70px,-92px 230px,calc(100% + 74px) 150px,calc(100% + 48px) 48px}100%{background-position:-76px 34px,-72px 274px,calc(100% + 70px) 118px,calc(100% + 66px) 34px}}
 
 @media (max-width:760px){
 .kr-experienceWave{height:260px!important;min-height:260px!important;max-height:260px!important;background-size:100% 100%!important;background-position:center center!important}.kr-experienceWave .kr-waveInner{justify-content:center!important}.kr-experienceGrid{grid-template-columns:repeat(3,96px)!important;gap:10px!important;transform:translateY(8px)!important}.kr-experienceWave .kr-stat{width:96px!important;height:96px!important}.kr-experienceWave .kr-stat strong::after{font-size:23px!important}.kr-experienceWave .kr-stat>span:last-child{font-size:7px!important}.kr-experienceWave .kr-stat:nth-child(4){grid-column:auto!important}
 .kr-classesWave{padding:56px 16px 70px!important}.kr-classesHead{margin-bottom:28px!important}.kr-classesHead h2{font-size:31px!important}.kr-classShowcase{grid-template-columns:1fr!important;gap:22px!important;background-size:92px auto,98px auto,92px auto,88px auto!important;background-position:-30px 195px,-28px 245px,calc(100% + 38px) 85px,calc(100% + 34px) 175px!important}.kr-classVisual{min-height:290px!important;order:-1!important;background:none!important}.kr-classList{border-radius:18px!important}.kr-classToggle{min-height:66px!important;padding:0 15px!important;font-size:15px!important}
+}
+
+/* Final mobile polish: compact header/content rhythm, no horizontal overflow, and clearer science doodles around the class photo area. */
+html,body{overflow-x:hidden!important}
+@media (max-width:760px){
+  .kr-hero{height:78vw!important}
+  .kr-hero:after{height:64px!important}
+  .kr-aboutWave{margin-top:-24px!important;padding-top:70px!important}
+  .kr-classesWave{padding:46px 12px 64px!important}
+  .kr-classesHead{margin-bottom:24px!important;padding:0 4px!important}
+  .kr-classesHead h2{font-size:28px!important;line-height:1.08!important;max-width:360px!important}
+  .kr-classesHead p{font-size:12px!important;line-height:1.55!important;max-width:340px!important}
+  .kr-classShowcase{width:100%!important;grid-template-columns:1fr!important;gap:18px!important;margin:0!important;padding:0!important;background-size:76px auto,84px auto,78px auto,72px auto!important;background-position:-18px 18px,-24px 180px,calc(100% + 18px) 48px,calc(100% + 14px) 158px!important}
+  .kr-classVisual{width:100%!important;min-height:255px!important;height:255px!important;border-radius:18px!important;order:-1!important}
+  .kr-classVisualBadge{left:12px!important;bottom:12px!important;padding:6px 11px!important;font-size:10px!important}
+  .kr-classList{width:100%!important;border-radius:17px!important}
+  .kr-classToggle{min-height:60px!important;padding:0 12px!important;gap:9px!important;font-size:14px!important}
+  .kr-classIcon{width:32px!important;height:32px!important;font-size:17px!important;border-radius:9px!important}
+  .kr-classPlus{width:26px!important;height:26px!important;font-size:18px!important}
+  .kr-classDetails p{font-size:12px!important;line-height:1.55!important;padding-left:14px!important;padding-right:14px!important}
+  .kr-classItem.is-open .kr-classDetails p{padding:11px 14px 14px!important}
+  .kr-experienceWave{height:230px!important;min-height:230px!important;max-height:230px!important}
+  .kr-experienceGrid{grid-template-columns:repeat(3,80px)!important;gap:7px!important;transform:translateY(4px)!important}
+  .kr-experienceWave .kr-stat{width:80px!important;height:80px!important}
+  .kr-experienceWave .kr-stat strong{min-height:25px!important;margin-bottom:1px!important}
+  .kr-experienceWave .kr-stat strong::after{font-size:19px!important}
+  .kr-experienceWave .kr-stat>span:last-child{font-size:6px!important;max-width:58px!important;line-height:1.1!important}
+}
+@media (max-width:390px){
+  .kr-hero{height:82vw!important}
+  .kr-classesHead h2{font-size:25px!important}
+  .kr-classShowcase{background-size:66px auto,74px auto,68px auto,64px auto!important;background-position:-16px 18px,-20px 170px,calc(100% + 12px) 46px,calc(100% + 10px) 152px!important}
+  .kr-classVisual{min-height:235px!important;height:235px!important}
+  .kr-experienceWave{height:215px!important;min-height:215px!important;max-height:215px!important}
+  .kr-experienceGrid{grid-template-columns:repeat(3,72px)!important;gap:5px!important}
+  .kr-experienceWave .kr-stat{width:72px!important;height:72px!important}
+  .kr-experienceWave .kr-stat strong::after{font-size:17px!important}
 }
