@@ -27,13 +27,10 @@ import "../src/styles/salon-gallery-premium.css";
 import "../src/styles/flow-all-sectors.css";
 import "../src/styles/flow-mobile-refine.css";
 import "../src/styles/flow-mobile-deck.css";
-// Keep the final mobile flow overrides last so they win the cascade.
 import "../src/styles/flow-mobile-final.css";
-// Approved premium headers and heroes intentionally load last.
 import "../src/styles/salon-premium-approved.css";
 import "../src/styles/salon-premium-carousel.css";
 import "../src/styles/kindergarten-premium.css";
-// Desktop-only Akışkan Premium refinements. Mobile/tablet rules remain untouched.
 import "../src/styles/flow-desktop-premium.css";
 import "../src/styles/ada-site.css";
 import "../src/styles/ada-tabs.css";
@@ -45,6 +42,11 @@ import "../src/styles/ada-reference-final.css";
 import "../src/styles/ada-yeni-reference.css";
 import "../src/styles/ada-yeni-wave-fix.css";
 import "../src/styles/nursery-corporate.css";
+import "../src/styles/kindergarten-reference.css";
+import "../src/styles/kindergarten-blue-enhancements.css";
+import "../src/styles/kindergarten-design-chooser.css";
+import "../src/styles/kindergarten-reference-fidelity.css";
+import "../src/styles/kindergarten-wave-sections.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
