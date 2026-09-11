@@ -20,7 +20,7 @@ function Photo({ src, title, className = "" }: { src?: string; title: string; cl
 
 const navItems = [
   ["Ana Sayfa", "#top"], ["Kurumsal", "#about"], ["Sınıflarımız", "#classes"],
-  ["Galeri", "#gallery"], ["Duyurular", "#news"], ["İletişim", "#contact"]
+  ["Atölyeler", "#ateliers"], ["Galeri", "#gallery"], ["Duyurular", "#news"], ["İletişim", "#contact"]
 ] as const;
 
 export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
@@ -51,6 +51,11 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
     { title: "Sevgi ve Güven", text: "Çocuklarımızın kendini değerli, güvende ve özgür hissedeceği sıcak bir ortam sağlıyoruz.", color: "pink", icon: "♥", image: gallery[1]?.imageUrl || storyPhotos[1][0] },
     { title: "Yaratıcılığı Destekliyoruz", text: "Sanat, oyun, drama ve üretimle çocukların hayal gücünü ve özgüvenini geliştiriyoruz.", color: "green", icon: "🎨", image: gallery[2]?.imageUrl || storyPhotos[0][0] },
     { title: "Doğayla İç İçe", text: "Doğal ortamda, hareket ederek ve yaşayarak öğrenme fırsatları sunuyoruz.", color: "blue", icon: "🌱", image: gallery[3]?.imageUrl || storyPhotos[1][0] }
+  ];
+  const ateliers = [
+    { title: "Bilim ve Keşif Atölyesi", text: "Deneyler, gözlemler ve küçük keşiflerle çocukların merak duygusunu destekliyoruz." },
+    { title: "Sanat ve Yaratıcılık Atölyesi", text: "Renk, müzik, drama ve üretim çalışmalarıyla çocukların hayal gücünü geliştiriyoruz." },
+    { title: "Doğa ve Yaşam Atölyesi", text: "Doğayı tanıyor, hareket ediyor ve günlük yaşam becerilerini yaşayarak öğreniyoruz." }
   ];
 
   return <main className="kr-site">
@@ -105,24 +110,36 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         <div className="kr-sectionHead kr-whyHead"><span className="kr-kicker">BİZİ NEDEN SEÇMELİSİNİZ?</span><h2 id="why-choose-title">Çünkü her çocuk <strong>özeldir.</strong></h2><p>Çocuklarımızın mutlu, özgüvenli ve merak eden bireyler olarak gelişmesi için eğitimimizi sevgi, deneyim ve keşif üzerine kuruyoruz.</p></div>
         <div className="kr-whyGrid">
           {whyCards.map((card) => <article className={`kr-whyCard kr-why-${card.color}`} key={card.title}>
-            <div className="kr-whyCardContent">
-              <div className="kr-whyPhoto"><img src={card.image} alt=""/></div>
-              <div className="kr-whyBody"><h3>{card.title}</h3><p>{card.text}</p></div>
-            </div>
+            <div className="kr-whyCardContent"><div className="kr-whyPhoto"><img src={card.image} alt=""/></div><div className="kr-whyBody"><h3>{card.title}</h3><p>{card.text}</p></div></div>
           </article>)}
         </div>
       </div>
     </section>
 
+    <div className="kr-colorBreak kr-breakOrange" aria-hidden="true"><span></span><i></i><b></b></div>
+
+    <section id="ateliers" className="kr-waveSection kr-ateliersWave">
+      <div className="kr-waveInner kr-ateliersInner">
+        <div className="kr-sectionHead kr-ateliersHead"><span className="kr-kicker">BİLİM ÇOCUK ANAOKULU</span><h2>Atölyelerimiz</h2><p>Çocuklarımızın merakını, üretme isteğini ve yaratıcılığını destekleyen özel öğrenme alanları.</p></div>
+        <div className="kr-atelierGrid">{ateliers.map((item, i) => <article className="kr-atelierCard" key={item.title}><div className="kr-atelierImage"><Photo title={`Atölye görseli ${i + 1}`} /></div><div className="kr-atelierBody"><h3>{item.title}</h3><p>{item.text}</p><a href="#contact">Daha Fazla →</a></div></article>)}</div>
+      </div>
+    </section>
+
+    <div className="kr-colorBreak kr-breakBlue" aria-hidden="true"><span></span><i></i><b></b></div>
+
     <section id="news" className="kr-waveSection kr-newsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">{schoolName.toUpperCase()}'DAN HABERLER</span><h2>Etkinlik ve Duyurular</h2><a href="#contact">Tüm Duyurular →</a></div><div className="kr-newsGrid">{news.map((item,i)=><article className="kr-newsCard" key={`${item.title}-${i}`}><div className="kr-newsImage"><Photo src={gallery[i]?.imageUrl} title={item.title}/><span>{i===0?"12 EYLÜL":i===1?"05 EYLÜL":"01 EYLÜL"}</span></div><div className="kr-newsBody"><h3>{item.title}</h3><p>{item.description}</p><a href="#contact">Daha Fazla →</a></div></article>)}</div><span className="kr-elephant">🐘</span></div></section>
 
-    <section id="gallery" className="kr-waveSection kr-galleryWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">ÇOCUKLARIMIZDAN KARELER</span><h2>Galerimiz</h2></div><div className="kr-galleryGrid">{[0,1,2,3,4,5].map(n => <Photo key={n} src={gallery[n]?.imageUrl} title={`Galeri ${n+1}`} className={`galleryPhoto g${n+1}`}/>)}</div></div></section>
+    <div className="kr-colorBreak kr-breakYellow" aria-hidden="true"><span></span><i></i><b></b></div>
 
-    <section className="kr-waveSection kr-staffWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">AİLEMİZ</span><h2>Kurum Personelimiz</h2><p>Çocuklarımızın gelişimine sevgi, deneyim ve uzmanlıkla eşlik eden ekibimiz.</p></div><div className="kr-staffGrid">{staff.map((x,i)=><article key={x}><Photo src={gallery[i+6]?.imageUrl} title={x}/><div><b>{x}</b><span>{schoolName}</span></div></article>)}</div></div></section>
+    <section id="gallery" className="kr-waveSection kr-galleryWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">ÇOCUKLARIMIZDAN KARELER</span><h2>Galerimiz</h2><p>Günlük yaşamdan, etkinliklerden ve güzel anılardan kareler.</p></div><div className="kr-galleryGrid">{[0,1,2,3,4,5].map(n => <Photo key={n} src={gallery[n]?.imageUrl} title={`Galeri ${n+1}`} className={`galleryPhoto g${n+1}`}/>)}</div></div></section>
+
+    <div className="kr-colorBreak kr-breakGreen" aria-hidden="true"><span></span><i></i><b></b></div>
+
+    <section className="kr-waveSection kr-staffWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">AİLEMİZ</span><h2>Çalışan Kadromuz</h2><p>Çocuklarımızın gelişimine sevgi, deneyim ve uzmanlıkla eşlik eden ekibimiz.</p></div><div className="kr-staffGrid">{staff.map((x,i)=><article key={x}><Photo src={gallery[i+6]?.imageUrl} title={x}/><div><b>{x}</b><span>{schoolName}</span></div></article>)}</div></div></section>
 
     <section className="kr-join"><div><span>Gelin, {schoolName} Ailemize Katılın</span><small>Çocuğunuzun mutlu ve başarılı bir geleceğe adım atması için bizimle iletişime geçin.</small></div><a href="#contact">Randevu Al →</a><div className="kr-bunny" aria-hidden="true">🐰</div></section>
 
-    <footer id="contact" className="kr-footer"><div className="kr-footerTop"><a className="kr-brand footerBrand" href="#top"><Logo/><span><b>{schoolName}</b><small>Bugünün minikleri, yarının büyük adımları</small></span></a><div><b>Hızlı Erişim</b><a href="#about">Kurumsal</a><a href="#classes">Sınıflarımız</a><a href="#gallery">Galeri</a><a href="#news">Duyurular</a></div><div><b>Bize Ulaşın</b><span>☎ {config.phone || "0542 123 45 67"}</span><span>✉ {email}</span><span>⌖ {config.address || "Muğla / Türkiye"}</span></div><div className="kr-social"><a href={config.instagramUrl || "#contact"}>◎</a><a href="#contact">f</a><a href="#contact">▶</a></div></div><div className="kr-footerBottom">© 2026 {schoolName}. Tüm Hakları Saklıdır.<span>FK Digital</span></div></footer>
+    <footer id="contact" className="kr-footer"><div className="kr-footerTop"><a className="kr-brand footerBrand" href="#top"><Logo/><span><b>{schoolName}</b><small>Bugünün minikleri, yarının büyük adımları</small></span></a><div><b>Hızlı Erişim</b><a href="#about">Kurumsal</a><a href="#classes">Sınıflarımız</a><a href="#ateliers">Atölyeler</a><a href="#gallery">Galeri</a><a href="#news">Duyurular</a></div><div><b>Bize Ulaşın</b><span>☎ {config.phone || "0542 123 45 67"}</span><span>✉ {email}</span><span>⌖ {config.address || "Muğla / Türkiye"}</span></div><div className="kr-social"><a href={config.instagramUrl || "#contact"}>◎</a><a href="#contact">f</a><a href="#contact">▶</a></div></div><div className="kr-footerBottom">© 2026 {schoolName}. Tüm Hakları Saklıdır.<span>FK Digital</span></div></footer>
 
     <style>{`
       .kr-whyChoose{background:#fffaf1!important;color:#183c70!important;padding:86px 0 104px!important;position:relative!important;overflow:hidden!important}
@@ -144,7 +161,37 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       .kr-whyBody{padding:12px 24px 30px!important;color:#fff!important;text-align:center!important}
       .kr-whyBody h3{margin:0 0 11px!important;font:800 22px/1.1 'Baloo 2',sans-serif!important;color:#fff!important}
       .kr-whyBody p{margin:0!important;font:500 14px/1.65 'Baloo 2',sans-serif!important;color:rgba(255,255,255,.96)!important}
-      @media (max-width:980px){.kr-whyGrid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px!important}.kr-whyCard{min-height:390px!important}.kr-whyCardContent{min-height:390px!important}}
+
+      .kr-colorBreak{height:138px!important;position:relative!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important}
+      .kr-colorBreak:before,.kr-colorBreak:after{content:""!important;position:absolute!important;border-radius:50%!important;opacity:.28!important}
+      .kr-colorBreak:before{width:250px!important;height:250px!important;left:-55px!important;top:-155px!important;background:#fff!important}
+      .kr-colorBreak:after{width:330px!important;height:330px!important;right:-90px!important;bottom:-220px!important;background:#fff!important}
+      .kr-colorBreak span{width:110px!important;height:110px!important;border-radius:50%!important;background:rgba(255,255,255,.2)!important;position:absolute!important;left:18%!important;bottom:-60px!important}
+      .kr-colorBreak i{width:70px!important;height:70px!important;border-radius:50%!important;background:rgba(255,255,255,.18)!important;position:absolute!important;right:24%!important;top:-35px!important}
+      .kr-colorBreak b{width:14px!important;height:14px!important;border-radius:50%!important;background:rgba(255,255,255,.8)!important;position:absolute!important;left:50%!important;top:34px!important}
+      .kr-breakOrange{background:#ff7b45!important}.kr-breakBlue{background:#4eb9e9!important}.kr-breakYellow{background:#ffd447!important}.kr-breakGreen{background:#a9cf49!important}
+
+      .kr-ateliersWave{background:#fff!important;padding:86px 0 96px!important}
+      .kr-ateliersInner{max-width:1180px!important}
+      .kr-ateliersHead{text-align:center!important;max-width:760px!important;margin:0 auto 48px!important}
+      .kr-ateliersHead h2{font-size:46px!important;color:#243d72!important;margin:8px 0 12px!important}
+      .kr-ateliersHead p{color:#7d8ea2!important;max-width:760px!important;margin:0 auto!important;line-height:1.7!important}
+      .kr-atelierGrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:26px!important;max-width:1000px!important;margin:0 auto!important}
+      .kr-atelierCard{background:#fff!important;border-radius:24px!important;overflow:hidden!important;box-shadow:0 16px 38px rgba(24,78,132,.11)!important;border:1px solid rgba(35,90,140,.08)!important}
+      .kr-atelierImage{height:235px!important;background:#eef7fb!important}
+      .kr-atelierImage .kr-photo,.kr-atelierImage .kr-photoPlaceholder{height:100%!important;width:100%!important}
+      .kr-atelierImage .kr-photoPlaceholder{border:0!important;border-radius:0!important;background:linear-gradient(135deg,#ffe7dc,#eaf7ff)!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-direction:column!important;color:#6c7d91!important}
+      .kr-atelierImage .kr-photoPlaceholder span{font-weight:800!important;font-size:13px!important;letter-spacing:1.5px!important}
+      .kr-atelierBody{padding:24px 26px 28px!important;text-align:center!important}
+      .kr-atelierBody h3{margin:0 0 11px!important;color:#243d72!important;font-size:23px!important}
+      .kr-atelierBody p{margin:0 0 18px!important;color:#7b8b9e!important;line-height:1.65!important;font-size:14px!important}
+      .kr-atelierBody a{color:#ff5d8f!important;font-weight:800!important;text-decoration:none!important}
+
+      @media (max-width:980px){
+        .kr-whyGrid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px!important}
+        .kr-whyCard{min-height:390px!important}.kr-whyCardContent{min-height:390px!important}
+        .kr-atelierGrid{grid-template-columns:1fr 1fr;max-width:760px!important}
+      }
       @media (max-width:760px){
         .kr-whyChoose{padding:60px 0 70px!important}
         .kr-whyInner{padding:0 16px!important}
@@ -152,8 +199,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         .kr-whyHead h2{font-size:31px!important;max-width:350px!important}
         .kr-whyHead p{font-size:12px!important;line-height:1.55!important;max-width:340px!important}
         .kr-whyGrid{grid-template-columns:1fr 1fr!important;gap:12px!important;max-width:none!important}
-        .kr-whyCard{min-height:320px!important;border-radius:18px!important}
-        .kr-whyCardContent{min-height:320px!important}
+        .kr-whyCard{min-height:320px!important;border-radius:18px!important}.kr-whyCardContent{min-height:320px!important}
         .kr-whyCard:hover{transform:perspective(900px) rotateY(180deg) scale(1.02)!important}
         .kr-whyPhoto{height:132px!important;padding-top:12px!important}
         .kr-whyPhoto:before{width:94px!important;height:94px!important}
@@ -161,8 +207,19 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         .kr-whyBody{padding:8px 10px 18px!important}
         .kr-whyBody h3{font-size:16px!important;margin-bottom:6px!important}
         .kr-whyBody p{font-size:11px!important;line-height:1.45!important}
+        .kr-colorBreak{height:90px!important}
+        .kr-ateliersWave{padding:60px 0 70px!important}
+        .kr-ateliersHead{margin-bottom:30px!important;padding:0 16px!important}
+        .kr-ateliersHead h2{font-size:32px!important}
+        .kr-ateliersHead p{font-size:12px!important;line-height:1.55!important}
+        .kr-atelierGrid{grid-template-columns:1fr!important;gap:16px!important;padding:0 16px!important}
+        .kr-atelierImage{height:200px!important}
+        .kr-atelierBody{padding:20px!important}
+        .kr-atelierBody h3{font-size:20px!important}
       }
-      @media (max-width:390px){.kr-whyGrid{gap:9px!important}.kr-whyCard{min-height:300px!important}.kr-whyCardContent{min-height:300px!important}.kr-whyPhoto{height:118px!important}.kr-whyPhoto:before{width:86px!important;height:86px!important}.kr-whyPhoto img{width:70px!important;height:70px!important}.kr-whyBody h3{font-size:14px!important}.kr-whyBody p{font-size:10px!important}}
+      @media (max-width:390px){
+        .kr-whyGrid{gap:9px!important}.kr-whyCard{min-height:300px!important}.kr-whyCardContent{min-height:300px!important}.kr-whyPhoto{height:118px!important}.kr-whyPhoto:before{width:86px!important;height:86px!important}.kr-whyPhoto img{width:70px!important;height:70px!important}.kr-whyBody h3{font-size:14px!important}.kr-whyBody p{font-size:10px!important}
+      }
       @media (prefers-reduced-motion:reduce){.kr-whyCard,.kr-whyCardContent{transition:none!important}.kr-whyCard:hover,.kr-whyCard:hover .kr-whyCardContent{transform:none!important}}
     `}</style>
   </main>;
