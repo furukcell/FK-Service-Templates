@@ -46,6 +46,7 @@ import "../src/styles/kindergarten-reference.css";
 import "../src/styles/kindergarten-blue-enhancements.css";
 import "../src/styles/kindergarten-design-chooser.css";
 import "../src/styles/kindergarten-reference-fidelity.css";
+import "../src/styles/kindergarten-reference-final.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
