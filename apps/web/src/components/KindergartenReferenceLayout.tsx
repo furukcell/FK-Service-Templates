@@ -105,8 +105,10 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         <div className="kr-sectionHead kr-whyHead"><span className="kr-kicker">BİZİ NEDEN SEÇMELİSİNİZ?</span><h2 id="why-choose-title">Çünkü her çocuk <strong>özeldir.</strong></h2><p>Çocuklarımızın mutlu, özgüvenli ve merak eden bireyler olarak gelişmesi için eğitimimizi sevgi, deneyim ve keşif üzerine kuruyoruz.</p></div>
         <div className="kr-whyGrid">
           {whyCards.map((card) => <article className={`kr-whyCard kr-why-${card.color}`} key={card.title}>
-            <div className="kr-whyPhoto"><img src={card.image} alt=""/></div>
-            <div className="kr-whyBody"><h3>{card.title}</h3><p>{card.text}</p></div>
+            <div className="kr-whyCardContent">
+              <div className="kr-whyPhoto"><img src={card.image} alt=""/></div>
+              <div className="kr-whyBody"><h3>{card.title}</h3><p>{card.text}</p></div>
+            </div>
           </article>)}
         </div>
       </div>
@@ -131,8 +133,10 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       .kr-whyHead h2 strong{color:#1976d2!important}
       .kr-whyHead p{color:#7890a8!important;max-width:700px!important;margin:0 auto!important;line-height:1.65!important}
       .kr-whyGrid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:20px!important;align-items:stretch!important;max-width:1040px!important;margin:0 auto!important}
-      .kr-whyCard{border-radius:24px!important;overflow:hidden!important;min-height:420px!important;box-shadow:0 16px 34px rgba(24,78,132,.10)!important;transition:transform 8s cubic-bezier(.2,.75,.2,1),box-shadow .7s ease!important;transform-style:preserve-3d!important;perspective:1200px!important;cursor:pointer!important;will-change:transform!important}
-      .kr-whyCard:hover{transform:perspective(1200px) rotateY(360deg) scale(1.03)!important;box-shadow:0 26px 48px rgba(24,78,132,.18)!important;z-index:3!important}
+      .kr-whyCard{border-radius:24px!important;overflow:hidden!important;min-height:420px!important;box-shadow:0 16px 34px rgba(24,78,132,.10)!important;transition:transform 4s cubic-bezier(.2,.75,.2,1),box-shadow .7s ease!important;transform-style:preserve-3d!important;perspective:1200px!important;cursor:pointer!important;will-change:transform!important}
+      .kr-whyCard:hover{transform:perspective(1200px) rotateY(180deg) scale(1.03)!important;box-shadow:0 26px 48px rgba(24,78,132,.18)!important;z-index:3!important}
+      .kr-whyCardContent{height:100%!important;min-height:420px!important;transform-style:preserve-3d!important;transition:transform 4s cubic-bezier(.2,.75,.2,1)!important}
+      .kr-whyCard:hover .kr-whyCardContent{transform:rotateY(-180deg)!important}
       .kr-why-orange{background:#ff686b!important}.kr-why-pink{background:#ffbd16!important}.kr-why-green{background:#a9cf49!important}.kr-why-blue{background:#28afe9!important}
       .kr-whyPhoto{height:190px!important;position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;padding-top:22px!important}
       .kr-whyPhoto:before{content:""!important;position:absolute!important;width:142px!important;height:142px!important;border-radius:50%!important;border:2px dashed rgba(255,255,255,.95)!important;box-sizing:border-box!important}
@@ -140,7 +144,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       .kr-whyBody{padding:12px 24px 30px!important;color:#fff!important;text-align:center!important}
       .kr-whyBody h3{margin:0 0 11px!important;font:800 22px/1.1 'Baloo 2',sans-serif!important;color:#fff!important}
       .kr-whyBody p{margin:0!important;font:500 14px/1.65 'Baloo 2',sans-serif!important;color:rgba(255,255,255,.96)!important}
-      @media (max-width:980px){.kr-whyGrid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px!important}.kr-whyCard{min-height:390px!important}}
+      @media (max-width:980px){.kr-whyGrid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px!important}.kr-whyCard{min-height:390px!important}.kr-whyCardContent{min-height:390px!important}}
       @media (max-width:760px){
         .kr-whyChoose{padding:60px 0 70px!important}
         .kr-whyInner{padding:0 16px!important}
@@ -149,7 +153,8 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         .kr-whyHead p{font-size:12px!important;line-height:1.55!important;max-width:340px!important}
         .kr-whyGrid{grid-template-columns:1fr 1fr!important;gap:12px!important;max-width:none!important}
         .kr-whyCard{min-height:320px!important;border-radius:18px!important}
-        .kr-whyCard:hover{transform:perspective(900px) rotateY(360deg) scale(1.02)!important}
+        .kr-whyCardContent{min-height:320px!important}
+        .kr-whyCard:hover{transform:perspective(900px) rotateY(180deg) scale(1.02)!important}
         .kr-whyPhoto{height:132px!important;padding-top:12px!important}
         .kr-whyPhoto:before{width:94px!important;height:94px!important}
         .kr-whyPhoto img{width:78px!important;height:78px!important;border-width:4px!important}
@@ -157,8 +162,8 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         .kr-whyBody h3{font-size:16px!important;margin-bottom:6px!important}
         .kr-whyBody p{font-size:11px!important;line-height:1.45!important}
       }
-      @media (max-width:390px){.kr-whyGrid{gap:9px!important}.kr-whyCard{min-height:300px!important}.kr-whyPhoto{height:118px!important}.kr-whyPhoto:before{width:86px!important;height:86px!important}.kr-whyPhoto img{width:70px!important;height:70px!important}.kr-whyBody h3{font-size:14px!important}.kr-whyBody p{font-size:10px!important}}
-      @media (prefers-reduced-motion:reduce){.kr-whyCard{transition:none!important}.kr-whyCard:hover{transform:scale(1.02)!important}}
+      @media (max-width:390px){.kr-whyGrid{gap:9px!important}.kr-whyCard{min-height:300px!important}.kr-whyCardContent{min-height:300px!important}.kr-whyPhoto{height:118px!important}.kr-whyPhoto:before{width:86px!important;height:86px!important}.kr-whyPhoto img{width:70px!important;height:70px!important}.kr-whyBody h3{font-size:14px!important}.kr-whyBody p{font-size:10px!important}}
+      @media (prefers-reduced-motion:reduce){.kr-whyCard,.kr-whyCardContent{transition:none!important}.kr-whyCard:hover,.kr-whyCard:hover .kr-whyCardContent{transform:none!important}}
     `}</style>
   </main>;
 }
