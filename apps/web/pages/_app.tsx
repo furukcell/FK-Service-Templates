@@ -50,6 +50,7 @@ import "../src/styles/kindergarten-wave-sections.css";
 import "../src/styles/kindergarten-reference-overlap.css";
 import "../src/styles/kindergarten-hero-motion.css";
 import "../src/styles/kindergarten-hero-clean.css";
+import "../src/styles/kindergarten-hero-final.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
