@@ -16,28 +16,29 @@
 /* Experience counters: exactly three clean circles, no service counter or decorative extras. */
 @property --krCount{syntax:"<integer>";inherits:false;initial-value:0}
 @keyframes krCountUp{0%{--krCount:0}55%{--krCount:var(--krTarget)}100%{--krCount:var(--krTarget)}}
-.kr-experienceWave{padding-top:76px!important;padding-bottom:72px!important;min-height:330px!important}
-.kr-experienceGrid{grid-template-columns:repeat(3,1fr)!important;gap:42px!important;max-width:760px!important;margin:0 auto!important;align-items:center!important}
+.kr-experienceWave{padding-top:48px!important;padding-bottom:38px!important;min-height:235px!important}
+.kr-experienceWave .kr-sectionHead{display:none!important}
+.kr-experienceGrid{grid-template-columns:repeat(3,1fr)!important;gap:34px!important;max-width:620px!important;margin:0 auto!important;align-items:center!important}
 .kr-experienceGrid .kr-stat:nth-child(3){display:none!important}
 .kr-experienceWave .kr-tree,
 .kr-experienceWave .kr-signpost,
 .kr-experienceWave .kr-bee{display:none!important}
-.kr-experienceWave .kr-stat{width:158px!important;height:158px!important;transition:transform .38s cubic-bezier(.2,.8,.2,1),box-shadow .38s ease,background .38s ease!important;cursor:default!important;will-change:transform!important}
-.kr-experienceWave .kr-stat:hover{transform:translateY(-13px) scale(1.10)!important;background:rgba(255,255,255,.14)!important;box-shadow:0 20px 38px rgba(43,91,20,.22),0 0 0 3px rgba(255,255,255,.14)!important}
+.kr-experienceWave .kr-stat{width:132px!important;height:132px!important;transition:transform .38s cubic-bezier(.2,.8,.2,1),box-shadow .38s ease,background .38s ease!important;cursor:default!important;will-change:transform!important}
+.kr-experienceWave .kr-stat:hover{transform:translateY(-11px) scale(1.10)!important;background:rgba(255,255,255,.14)!important;box-shadow:0 20px 38px rgba(43,91,20,.22),0 0 0 3px rgba(255,255,255,.14)!important}
 .kr-experienceWave .kr-statIcon{display:none!important}
-.kr-experienceWave .kr-stat strong{font-size:0!important;line-height:1!important;margin:0 0 5px!important;color:transparent!important;position:relative!important;display:block!important;min-height:38px!important;counter-reset:krStat var(--krCount)!important;animation:krCountUp 3.2s cubic-bezier(.18,.75,.2,1) forwards!important}
-.kr-experienceWave .kr-stat strong::after{content:counter(krStat) "+"!important;font:800 32px 'Baloo 2',sans-serif!important;color:#fff!important;display:block!important;white-space:nowrap!important}
+.kr-experienceWave .kr-stat strong{font-size:0!important;line-height:1!important;margin:0 0 5px!important;color:transparent!important;position:relative!important;display:block!important;min-height:34px!important;counter-reset:krStat var(--krCount)!important;animation:krCountUp 3.2s cubic-bezier(.18,.75,.2,1) forwards!important}
+.kr-experienceWave .kr-stat strong::after{content:counter(krStat) "+"!important;font:800 30px 'Baloo 2',sans-serif!important;color:#fff!important;display:block!important;white-space:nowrap!important}
 .kr-experienceWave .kr-stat:nth-child(1){--krTarget:150!important}
 .kr-experienceWave .kr-stat:nth-child(2){--krTarget:20!important}
 .kr-experienceWave .kr-stat:nth-child(4){--krTarget:10!important}
-.kr-experienceWave .kr-stat>span:last-child{font-size:10px!important;font-weight:900!important;letter-spacing:.15px!important}
-.kr-experienceWave .kr-stat:nth-child(1)>span:last-child{font-size:10px!important}
-.kr-experienceWave:after{height:62px!important}
+.kr-experienceWave .kr-stat>span:last-child{font-size:9px!important;font-weight:900!important;letter-spacing:.15px!important}
+.kr-experienceWave .kr-stat:nth-child(1)>span:last-child{font-size:9px!important}
+.kr-experienceWave:after{height:42px!important}
 
 @media (max-width:760px){
-  .kr-experienceWave{min-height:0!important;padding-top:58px!important;padding-bottom:60px!important}
-  .kr-experienceGrid{grid-template-columns:1fr 1fr!important;gap:20px!important;max-width:360px!important}
-  .kr-experienceWave .kr-stat{width:140px!important;height:140px!important}
+  .kr-experienceWave{min-height:0!important;padding-top:42px!important;padding-bottom:40px!important}
+  .kr-experienceGrid{grid-template-columns:1fr 1fr!important;gap:18px!important;max-width:330px!important}
+  .kr-experienceWave .kr-stat{width:128px!important;height:128px!important}
   .kr-experienceWave .kr-stat strong::after{font-size:27px!important}
   .kr-experienceWave .kr-stat:nth-child(4){grid-column:1 / -1!important}
 }
