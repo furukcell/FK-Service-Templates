@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { LayoutVariant, TemplateKey } from "@fk-templates/shared";
 import { FlowTemplateEnhancements } from "../src/components/FlowTemplateEnhancements";
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
+import { KindergartenDesignChooser } from "../src/components/KindergartenDesignChooser";
 import { KindergartenPremiumHeroMount } from "../src/components/KindergartenPremiumHeroMount";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { SalonFlowStyleButton } from "../src/components/SalonFlowStyleButton";
@@ -18,7 +19,9 @@ import { useManagedTemplateConfig } from "../src/useManagedTemplateConfig";
 
 export default function HomePage() {
   const [activeTemplate, setActiveTemplate] = useState<TemplateKey>(getDefaultTemplate());
-  const [activeLayout, setActiveLayout] = useState<LayoutVariant>("modern");
+  const [activeLayout, setActiveLayout] = useState<LayoutVariant>(() =>
+    getDefaultTemplate() === "kindergarten" ? "kindergarten-reference" : "modern"
+  );
   const baseConfig = templateConfigs[activeTemplate];
   const { config, requiresSetup } = useManagedTemplateConfig(baseConfig);
   const isSalon = activeTemplate === "salon";
@@ -29,18 +32,27 @@ export default function HomePage() {
 
   if (requiresSetup) return <SiteSetupGuard />;
 
+  const handleTemplateChange = (template: TemplateKey) => {
+    setActiveTemplate(template);
+    setActiveLayout(template === "kindergarten" ? "kindergarten-reference" : "modern");
+  };
+
   return (
     <>
       <SeoHead title={`${config.brandName} | ${config.sector}`} description={config.heroDescription} canonicalPath="/" />
-      <TemplateLanding
-        config={config}
-        activeTemplate={activeTemplate}
-        activeLayout={isFlow ? "modern" : activeLayout}
-        onTemplateChange={setActiveTemplate}
-        onLayoutChange={setActiveLayout}
-        showTemplateSwitch
-        showLayoutSwitch
-      />
+      {isKindergarten ? (
+        <KindergartenDesignChooser config={config} activeLayout={activeLayout} onLayoutChange={setActiveLayout} />
+      ) : (
+        <TemplateLanding
+          config={config}
+          activeTemplate={activeTemplate}
+          activeLayout={isFlow ? "modern" : activeLayout}
+          onTemplateChange={handleTemplateChange}
+          onLayoutChange={setActiveLayout}
+          showTemplateSwitch
+          showLayoutSwitch
+        />
+      )}
       <SalonFlowStyleButton activeTemplate={activeTemplate} activeLayout={activeLayout} onSelect={setActiveLayout} />
       <SalonPremiumHeroMount active={isSalonFlow} config={config} />
       <KindergartenPremiumHeroMount active={isKindergartenFlow} config={config} />

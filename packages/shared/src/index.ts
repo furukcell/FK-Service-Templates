@@ -1,5 +1,5 @@
 export type TemplateKey = "appointment" | "salon" | "real-estate" | "cafe" | "kindergarten" | "event-venue";
-export type LayoutVariant = "modern" | "split" | "showcase" | "flow" | "corporate";
+export type LayoutVariant = "modern" | "split" | "showcase" | "flow" | "corporate" | "kindergarten-reference";
 
 export type ServiceItem = {
   title: string;
@@ -34,7 +34,6 @@ export type BusinessTheme = {
   dark: string;
 };
 
-// --- Kreş "corporate" tasarımına özel opsiyonel tipler ---
 export type WhyUsItem = {
   icon: string;
   title: string;
@@ -101,7 +100,6 @@ export type BusinessTemplateConfig = {
   staff: StaffMember[];
   galleryItems?: VisualItem[];
   campaignItems?: ServiceItem[];
-  // --- opsiyonel, sadece "corporate" kreş tasarımında kullanılır ---
   whyUs?: WhyUsItem[];
   branches?: Branch[];
   workshops?: Workshop[];
@@ -135,5 +133,6 @@ export const layoutVariantLabels: Record<LayoutVariant, string> = {
   split: "Split Premium",
   showcase: "Showcase Vitrin",
   flow: "Akışkan Premium",
-  corporate: "Kurumsal Vitrin"
+  corporate: "Kurumsal Vitrin",
+  "kindergarten-reference": "Bilim Çocuk"
 };
