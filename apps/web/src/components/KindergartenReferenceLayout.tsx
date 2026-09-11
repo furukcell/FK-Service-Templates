@@ -26,7 +26,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
   const schoolName = config.brandName || "Bilim Çocuk Anaokulu";
   const tagline = config.eyebrow || "Güvenli, sevgi dolu ve düzenli kreş ortamı";
   const email = `info@${slugify(schoolName)}.com`;
-  const hero = config.heroSlides?.[0]?.imageUrl || "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1800&q=85";
+  const hero = "/images/logos/bilim-cocuk-hero.png";
   const gallery = config.galleryItems || [];
   const news = config.campaignItems?.length ? config.campaignItems.slice(0, 3) : [
     { title: "Renkli Eller Atölyesi", description: "Miniklerimizle yaratıcılığımızı renklerle konuşturduk." },
