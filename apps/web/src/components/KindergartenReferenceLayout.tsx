@@ -24,7 +24,6 @@ const navItems = [
 
 export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
   const schoolName = config.brandName || "Bilim Çocuk Anaokulu";
-  const tagline = config.eyebrow || "Güvenli, sevgi dolu ve düzenli kreş ortamı";
   const email = `info@${slugify(schoolName)}.com`;
   const hero = "/images/logos/bilim-cocuk-hero.png";
   const gallery = config.galleryItems || [];
@@ -47,8 +46,6 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
 
     <header id="top" className="kr-hero">
       <div className="kr-heroImage" style={{ backgroundImage: `url(${hero})` }} />
-      <div className="kr-heroOverlay" />
-      <div className="kr-heroCopy"><span className="kr-scribble">SEVGİ • BİLİM • KEŞİF</span><h1><span>{schoolName}</span><strong>Büyük Yarınlara</strong></h1><p>{tagline}</p><a className="kr-pinkBtn" href="#about">Okulumuzu Keşfedin <b>→</b></a></div>
     </header>
 
     <section id="about" className="kr-waveSection kr-aboutWave">
