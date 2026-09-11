@@ -1,0 +1,15 @@
+/* Clean kindergarten hero: keep the real school photo unobstructed. */
+.kr-hero::before{display:none!important;content:none!important}
+.kr-hero .kr-heroImage{z-index:0;background-size:cover;background-position:center center}
+.kr-hero .kr-heroOverlay{z-index:1}
+.kr-hero .kr-heroCopy{z-index:5}
+.kr-hero .kr-sun,
+.kr-hero .kr-cloud,
+.kr-hero .kr-rocket,
+.kr-hero .kr-teddy,
+.kr-hero .kr-sign,
+.kr-hero .kr-heroGrass,
+.kr-hero .kr-scroll,
+.kr-hero .kr-hill,
+.kr-hero .kr-flower,
+.kr-hero .kr-bush{display:none!important}
