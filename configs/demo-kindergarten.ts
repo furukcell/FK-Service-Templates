@@ -40,9 +40,17 @@ export const demoKindergartenConfig: BusinessTemplateConfig = {
     { title: "Yemek ve bakım düzeni", description: "Çocukların günlük rutinini destekleyen yemek, dinlenme ve etkinlik planlaması.", price: "Detay sor" }
   ],
   galleryItems: [
-    { title: "Sınıf ortamı", description: "Çocuk yüzü göstermeden sınıf, oyun ve etkinlik alanı görselleri." },
-    { title: "Bahçe ve oyun alanı", description: "Güvenli açık alan, oyuncak ve hareket etkinlikleri için galeri alanı." },
-    { title: "Etkinlik masası", description: "Sanat, müzik, boyama ve keşif çalışmalarını gösteren görsel alan." }
+    { title: "Sınıf ortamı", description: "Çocuk yüzü göstermeden sınıf, oyun ve etkinlik alanı görselleri.", imageUrl: "https://picsum.photos/seed/kres-galeri-1/700/500" },
+    { title: "Bahçe ve oyun alanı", description: "Güvenli açık alan, oyuncak ve hareket etkinlikleri için galeri alanı.", imageUrl: "https://picsum.photos/seed/kres-galeri-2/700/500" },
+    { title: "Etkinlik masası", description: "Sanat, müzik, boyama ve keşif çalışmalarını gösteren görsel alan.", imageUrl: "https://picsum.photos/seed/kres-galeri-3/700/500" },
+    { title: "Sanat atölyesi", description: "Boyama ve el işi çalışmalarından bir kare.", imageUrl: "https://picsum.photos/seed/kres-galeri-4/700/500" },
+    { title: "Oyun köşesi", description: "Serbest oyun ve keşif alanı.", imageUrl: "https://picsum.photos/seed/kres-galeri-5/700/500" },
+    { title: "Grup etkinliği", description: "Birlikte öğrenme ve paylaşma anları.", imageUrl: "https://picsum.photos/seed/kres-galeri-6/700/500" },
+    { title: "Müzik zamanı", description: "Ritim ve müzik etkinliğinden bir an.", imageUrl: "https://picsum.photos/seed/kres-galeri-7/700/500" },
+    { title: "Sınıf Öğretmenlerimiz", description: "Deneyimli sınıf öğretmeni kadromuz.", imageUrl: "https://picsum.photos/seed/kres-personel-1/500/500" },
+    { title: "Çocuk Gelişimi Uzmanımız", description: "Gelişim takibi ve destek uzmanımız.", imageUrl: "https://picsum.photos/seed/kres-personel-2/500/500" },
+    { title: "Rehberlik Uzmanımız", description: "Veli ve çocuk rehberlik desteği.", imageUrl: "https://picsum.photos/seed/kres-personel-3/500/500" },
+    { title: "Yardımcı Öğretmenlerimiz", description: "Sınıf içi destek ekibimiz.", imageUrl: "https://picsum.photos/seed/kres-personel-4/500/500" }
   ],
   staff: [
     { name: "Sınıf Öğretmeni", role: "Yaş Grubu Sorumlusu", description: "Çocukların günlük akışını, etkinliklerini ve sınıf düzenini takip eder." },
