@@ -53,6 +53,7 @@ import "../src/styles/kindergarten-hero-clean.css";
 import "../src/styles/kindergarten-hero-final.css";
 import "../src/styles/kindergarten-story-final.css";
 import "../src/styles/kindergarten-science-doodles.css";
+import "../src/styles/kindergarten-why-bridge-fix.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <><Component {...pageProps} /><SalonAdminNavigation /><CookieBanner /></>;
