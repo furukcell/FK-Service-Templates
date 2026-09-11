@@ -19,7 +19,7 @@ function Photo({ src, title, className = "" }: { src?: string; title: string; cl
 }
 
 const navItems = [
-  ["Ana Sayfa", "#top"], ["Kurumsal", "#about"], ["Atölyelerimiz", "#workshops"],
+  ["Ana Sayfa", "#top"], ["Kurumsal", "#about"], ["Sınıflarımız", "#classes"],
   ["Galeri", "#gallery"], ["Duyurular", "#news"], ["İletişim", "#contact"]
 ] as const;
 
@@ -41,7 +41,6 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
     { title: "(5 - 6 Yaş) Grubu", icon: "🔤", text: "İlkokula hazırlık sürecini akademik çalışmaların yanında özgüven, sorumluluk ve sosyal becerilerle destekliyoruz." }
   ];
   const [openClass, setOpenClass] = useState(0);
-  const workshops = ["Bilim Atölyesi", "Sanat & Tasarım", "Müzik ve Ritim", "Doğa ve Bahçe", "Drama", "Kodlama ve Robotik"];
   const staff = ["Sınıf Öğretmenlerimiz", "Çocuk Gelişimi Uzmanımız", "Rehberlik Uzmanımız", "Yardımcı Öğretmenlerimiz"];
   const storyPhotos = [
     ["/images/logos/bilim-cocuk-bahce-oyunlari.png", "Bahçe oyunları"],
@@ -68,7 +67,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       <div className="kr-waveInner"><div className="kr-sectionHead light"><span className="kr-kicker">GÜVENLE BÜYÜYEN ÇOCUKLAR</span><h2>20+ yıllık deneyim</h2></div><div className="kr-experienceGrid">{stats.map(([icon,value,label]) => <div className="kr-stat" key={label}><span className="kr-statIcon">{icon}</span><strong>{value}</strong><span>{label}</span></div>)}</div><div className="kr-tree">🌳</div><div className="kr-signpost"><b>DAHA MUTLU</b><b>DAHA ÖZGÜVENLİ</b><b>DAHA YARATICI</b></div><span className="kr-bee">🐝</span></div>
     </section>
 
-    <section className="kr-waveSection kr-classesWave">
+    <section id="classes" className="kr-waveSection kr-classesWave">
       <div className="kr-waveInner kr-classAccordionInner">
         <div className="kr-sectionHead kr-classesHead"><span className="kr-kicker">SINIFLARIMIZ</span><h2>Her yaşa özel <strong>öğrenme alanları</strong></h2><p>Çocuklarımızın yaşına, gelişimine ve meraklarına uygun sıcak sınıflar.</p></div>
         <div className="kr-classShowcase">
@@ -91,7 +90,9 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       </div>
     </section>
 
-    <section id="workshops" className="kr-waveSection kr-workshopsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">KEŞFET • ÜRET • EĞLEN</span><h2>Sınıflarımız ve <strong>Atölyeler</strong></h2><p>Yaparak ve yaşayarak öğrenmeyi destekleyen eğlenceli çalışmalar.</p></div><div className="kr-workshopGrid">{workshops.map((x,i)=><article className="kr-workshopCard" key={x}><div className="kr-workshopVisual">{["🔬","🎨","🎵","🌱","🎭","🤖"][i]}</div><b>{x}</b><small>Uygulamalı etkinlik</small></article>)}</div></div></section>
+    <section className="kr-discoveryBridge" aria-label="Merakla öğrenme alanı">
+      <img src="/images/logos/bilim-cocuk-merak-ogreniyor-gecis.png" alt="Merakla öğreniyor, sevgiyle büyüyoruz" />
+    </section>
 
     <section id="news" className="kr-waveSection kr-newsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">{schoolName.toUpperCase()}'DAN HABERLER</span><h2>Etkinlik ve Duyurular</h2><a href="#contact">Tüm Duyurular →</a></div><div className="kr-newsGrid">{news.map((item,i)=><article className="kr-newsCard" key={`${item.title}-${i}`}><div className="kr-newsImage"><Photo src={gallery[i]?.imageUrl} title={item.title}/><span>{i===0?"12 EYLÜL":i===1?"05 EYLÜL":"01 EYLÜL"}</span></div><div className="kr-newsBody"><h3>{item.title}</h3><p>{item.description}</p><a href="#contact">Daha Fazla →</a></div></article>)}</div><span className="kr-elephant">🐘</span></div></section>
 
@@ -101,6 +102,6 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
 
     <section className="kr-join"><div><span>Gelin, {schoolName} Ailemize Katılın</span><small>Çocuğunuzun mutlu ve başarılı bir geleceğe adım atması için bizimle iletişime geçin.</small></div><a href="#contact">Randevu Al →</a><div className="kr-bunny" aria-hidden="true">🐰</div></section>
 
-    <footer id="contact" className="kr-footer"><div className="kr-footerTop"><a className="kr-brand footerBrand" href="#top"><Logo/><span><b>{schoolName}</b><small>Bugünün minikleri, yarının büyük adımları</small></span></a><div><b>Hızlı Erişim</b><a href="#about">Kurumsal</a><a href="#workshops">Atölyelerimiz</a><a href="#gallery">Galeri</a><a href="#news">Duyurular</a></div><div><b>Bize Ulaşın</b><span>☎ {config.phone || "0542 123 45 67"}</span><span>✉ {email}</span><span>⌖ {config.address || "Muğla / Türkiye"}</span></div><div className="kr-social"><a href={config.instagramUrl || "#contact"}>◎</a><a href="#contact">f</a><a href="#contact">▶</a></div></div><div className="kr-footerBottom">© 2026 {schoolName}. Tüm Hakları Saklıdır.<span>FK Digital</span></div></footer>
+    <footer id="contact" className="kr-footer"><div className="kr-footerTop"><a className="kr-brand footerBrand" href="#top"><Logo/><span><b>{schoolName}</b><small>Bugünün minikleri, yarının büyük adımları</small></span></a><div><b>Hızlı Erişim</b><a href="#about">Kurumsal</a><a href="#classes">Sınıflarımız</a><a href="#gallery">Galeri</a><a href="#news">Duyurular</a></div><div><b>Bize Ulaşın</b><span>☎ {config.phone || "0542 123 45 67"}</span><span>✉ {email}</span><span>⌖ {config.address || "Muğla / Türkiye"}</span></div><div className="kr-social"><a href={config.instagramUrl || "#contact"}>◎</a><a href="#contact">f</a><a href="#contact">▶</a></div></div><div className="kr-footerBottom">© 2026 {schoolName}. Tüm Hakları Saklıdır.<span>FK Digital</span></div></footer>
   </main>;
 }
