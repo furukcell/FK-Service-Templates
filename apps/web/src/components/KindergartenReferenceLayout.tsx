@@ -36,6 +36,10 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
   const classes = ["Minik Kaşifler", "Renkli Düşler", "Meraklı Mucitler", "Büyük Adımlar"];
   const workshops = ["Bilim Atölyesi", "Sanat & Tasarım", "Müzik ve Ritim", "Doğa ve Bahçe", "Drama", "Kodlama ve Robotik"];
   const staff = ["Sınıf Öğretmenlerimiz", "Çocuk Gelişimi Uzmanımız", "Rehberlik Uzmanımız", "Yardımcı Öğretmenlerimiz"];
+  const storyPhotos = [
+    ["/images/logos/bilim-cocuk-bahce-oyunlari.png", "Bahçe oyunları"],
+    ["/images/logos/bilim-cocuk-boyama-etkinligi.png", "Boyama etkinliği"]
+  ] as const;
 
   return <main className="kr-site">
     <nav className="kr-nav">
@@ -44,14 +48,12 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       <div className="kr-navRight">{onLayoutChange && <button className="kr-layoutMini" onClick={() => onLayoutChange("corporate")} type="button">Kurumsal</button>}<button className="kr-search" type="button" aria-label="Ara">⌕</button><a className="kr-navCta" href="#contact">Kayıt &amp; Bilgi Al</a></div>
     </nav>
 
-    <header id="top" className="kr-hero">
-      <div className="kr-heroImage" style={{ backgroundImage: `url(${hero})` }} />
-    </header>
+    <header id="top" className="kr-hero"><div className="kr-heroImage" style={{ backgroundImage: `url(${hero})` }} /></header>
 
     <section id="about" className="kr-waveSection kr-aboutWave">
       <div className="kr-waveInner kr-storyInner">
-        <div className="kr-storyPhotos"><Photo src={gallery[0]?.imageUrl} title="Çocuklarımız" className="photoA"/><Photo src={gallery[1]?.imageUrl} title="Gelişim etkinliği" className="photoB"/><div className="kr-dashedCircle"/><span className="kr-ball">⚽</span><span className="kr-heartBubble">♡</span><span className="kr-bird">🐤</span></div>
-        <div className="kr-storyCopy"><span className="kr-kicker">BİZİM İÇİN EN DEĞERLİSİ</span><h2>Odağımız <strong>Çocuklarımızın Gelişimi</strong></h2><p>{schoolName} olarak her çocuğun kendine özgü bir keşif yolculuğuna sahip olduğuna inanıyoruz. Sevgi dolu, güvenli ve destekleyici bir ortamda çocuklarımızın potansiyellerini en iyi şekilde ortaya çıkarmaları için çalışıyoruz.</p><div className="kr-facts"><article><span>♥</span><div><b>Güvenli Ortam</b><small>Çocuklarımızın fiziksel, duygusal ve sosyal olarak güvende hissettiği bir ortam.</small></div></article><article><span>✦</span><div><b>Uzman Kadro</b><small>Alanında deneyimli, çocuk gelişimi konusunda uzman öğretmenler.</small></div></article></div><a className="kr-pinkBtn small" href="#contact">Bizi Daha Yakından Tanıyın <b>→</b></a></div>
+        <div className="kr-storyPhotos"><Photo src={storyPhotos[0][0]} title={storyPhotos[0][1]} className="photoA"/><Photo src={storyPhotos[1][0]} title={storyPhotos[1][1]} className="photoB"/><div className="kr-dashedCircle"/><span className="kr-ball">⚽</span><span className="kr-heartBubble">♡</span><span className="kr-bird">🐤</span></div>
+        <div className="kr-storyCopy"><span className="kr-kicker">BİZİM İÇİN EN DEĞERLİSİ</span><h2>Çocuğunuzun <strong>merakını, hayal gücünü ve özgüvenini</strong> birlikte büyütüyoruz.</h2><p>{schoolName}'nda her çocuğun kendine özgü bir dünyası olduğuna inanıyoruz. Güvenli ve sevgi dolu ortamımızda çocuklarımız; oyun oynayarak, keşfederek ve deneyimleyerek öğrenir.</p><p><strong>Amacımız sadece okul öncesi eğitim vermek değil;</strong> çocukların kendilerini ifade edebilen, merak eden, paylaşan ve öğrenmekten keyif alan bireyler olarak yetişmelerine eşlik etmek.</p><div className="kr-facts"><article><span>♥</span><div><b>Güvenli ve Sevgi Dolu Ortam</b><small>Çocuklarımızın kendini güvende ve değerli hissettiği sıcak bir ortam.</small></div></article><article><span>✦</span><div><b>Çocuk Odaklı Eğitim</b><small>Her çocuğun gelişimini ve merakını merkeze alan yaklaşım.</small></div></article><article><span>🎨</span><div><b>Yaratıcı Atölyeler</b><small>Sanat, bilim, müzik ve oyunla öğrenmeyi destekliyoruz.</small></div></article><article><span>🌱</span><div><b>Bireysel Gelişim</b><small>Çocukların kendi hızında gelişmesine sevgiyle eşlik ediyoruz.</small></div></article></div><a className="kr-pinkBtn small" href="#contact">Okulumuzu Daha Yakından Tanıyın <b>→</b></a></div>
       </div>
     </section>
 
