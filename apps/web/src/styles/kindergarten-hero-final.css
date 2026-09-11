@@ -1,5 +1,79 @@
-/* Classes garden positioning correction */
-.kr-classVisual{background-image:url("/images/logos/bilim-cocuk-kovan.png"),url("/images/logos/bilim-cocuk-ari-1.png"),url("/images/logos/bilim-cocuk-ari-1.png"),url("/images/logos/bilim-cocuk-ari-1.png"),url("/images/logos/bilim-cocuk-ari-1.png"),url("/images/logos/bilim-cocuk-ari-1.png")!important;background-repeat:no-repeat!important;background-size:92px auto,34px auto,30px auto,36px auto,28px auto,32px auto!important;background-position:right 102px bottom 28px,calc(100% - 128px) 72px,calc(100% - 215px) 145px,calc(100% - 74px) 172px,calc(100% - 245px) 42px,calc(100% - 35px) 112px!important}
+/* Hero final: full photo, subtle motion, with a clean white overlapping wave. */
+.kr-hero{height:56.25vw!important;min-height:0!important;max-height:930px!important;position:relative!important;overflow:hidden!important;background:#fff!important}
+.kr-hero .kr-heroImage{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:0!important;background-size:100% 100%!important;background-position:center center!important;background-repeat:no-repeat!important;animation:krHeroGentleMotion 14s ease-in-out infinite alternate!important;transform-origin:center center!important}
+.kr-hero .kr-heroImage::after{display:none!important}
+@keyframes krHeroGentleMotion{0%,100%{transform:scale(1)}50%{transform:scale(1.006) translateY(-1px)}}
+.kr-hero:after{content:""!important;display:block!important;position:absolute!important;z-index:25!important;left:-2%!important;right:-2%!important;bottom:-1px!important;height:108px!important;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 180' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0 105 C115 25 225 150 370 78 C510 8 615 150 755 78 C895 8 1000 152 1140 72 C1265 8 1355 132 1440 50 V180 H0Z'/%3E%3C/svg%3E") center/100% 100% no-repeat!important;pointer-events:none!important}
+.kr-aboutWave{margin-top:-38px!important;padding-top:118px!important}
+.kr-aboutWave:before{height:0!important;display:none!important}
+@media (min-width:761px) and (max-width:1100px){.kr-hero{height:56.25vw!important;max-height:none!important}.kr-hero:after{height:98px!important}.kr-aboutWave{margin-top:-34px!important;padding-top:108px!important}}
+@media (max-width:760px){.kr-hero{height:72vw!important;min-height:0!important;max-height:none!important}.kr-hero .kr-heroImage{animation:krHeroGentleMotionMobile 14s ease-in-out infinite alternate!important}.kr-hero:after{height:78px!important}.kr-aboutWave{margin-top:-28px!important;padding-top:88px!important}.kr-aboutWave:before{display:none!important}}
+@keyframes krHeroGentleMotionMobile{0%,100%{transform:scale(1)}50%{transform:scale(1.004) translateY(-1px)}}
+
+/* Experience landscape: show the complete supplied artwork instead of cropping the windmills. */
+@property --krCount{syntax:"<integer>";inherits:false;initial-value:0}
+@keyframes krCountUp{0%{--krCount:0}55%{--krCount:var(--krTarget)}100%{--krCount:var(--krTarget)}}
+.kr-experienceWave{position:relative!important;overflow:hidden!important;height:29vw!important;min-height:390px!important;max-height:500px!important;padding:0!important;background:#fffaf1 url("/images/logos/bilim-cocuk-yesil-alan.png") center center / 100% 100% no-repeat!important;color:#fff!important}
+.kr-experienceWave .kr-waveInner{position:relative!important;z-index:2!important;height:100%!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.kr-experienceWave .kr-sectionHead{display:none!important}
+.kr-experienceGrid{grid-template-columns:repeat(3,112px)!important;gap:54px!important;width:max-content!important;max-width:none!important;margin:0 auto!important;align-items:center!important;justify-content:center!important;position:relative!important;z-index:3!important;transform:translateY(18px)!important}
+.kr-experienceGrid .kr-stat:nth-child(3){display:none!important}
+.kr-experienceWave .kr-tree,.kr-experienceWave .kr-signpost,.kr-experienceWave .kr-bee{display:none!important}
+.kr-experienceWave .kr-stat{width:112px!important;height:112px!important;transition:transform .38s cubic-bezier(.2,.8,.2,1),box-shadow .38s ease,background .38s ease!important;cursor:default!important;will-change:transform!important;background:rgba(32,92,17,.28)!important;border:2px dashed rgba(255,255,255,.95)!important;border-radius:50%!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important}
+.kr-experienceWave .kr-stat:hover{transform:translateY(-9px) scale(1.08)!important;background:rgba(255,255,255,.14)!important;box-shadow:0 18px 34px rgba(43,91,20,.22),0 0 0 3px rgba(255,255,255,.14)!important}
+.kr-experienceWave .kr-statIcon{display:none!important}
+.kr-experienceWave .kr-stat strong{font-size:0!important;line-height:1!important;margin:0 0 5px!important;color:transparent!important;position:relative!important;display:block!important;min-height:34px!important;counter-reset:krStat var(--krCount)!important;animation:krCountUp 3.2s cubic-bezier(.18,.75,.2,1) forwards!important}
+.kr-experienceWave .kr-stat strong::after{content:counter(krStat) "+"!important;font:800 28px 'Baloo 2',sans-serif!important;color:#fff!important;display:block!important;white-space:nowrap!important}
+.kr-experienceWave .kr-stat:nth-child(1){--krTarget:150!important}
+.kr-experienceWave .kr-stat:nth-child(2){--krTarget:20!important}
+.kr-experienceWave .kr-stat:nth-child(4){--krTarget:10!important}
+.kr-experienceWave .kr-stat>span:last-child{font-size:8px!important;font-weight:900!important;letter-spacing:.15px!important;color:#fff!important;text-align:center!important}
+.kr-experienceWave .kr-stat:nth-child(1)>span:last-child{font-size:8px!important}
+.kr-experienceWave:after{display:none!important}
+
+/* Classes: same warm cream background as the story section below the hero. */
+.kr-classesWave{background:#fffaf1!important;color:#183c70!important;margin-top:0!important;padding:78px 0 96px!important;min-height:0!important;position:relative!important}
+.kr-classesWave:before,.kr-classesWave:after{display:none!important}
+.kr-classAccordionInner{max-width:1180px!important}
+.kr-classesHead{text-align:center!important;margin:0 auto 42px!important}
+.kr-classesHead .kr-kicker{color:#1976d2!important}
+.kr-classesHead h2{color:#15549a!important;margin:7px auto 10px!important;font-size:42px!important;line-height:1.05!important}
+.kr-classesHead h2 strong{color:#1976d2!important}
+.kr-classesHead p{color:#7890a8!important;max-width:600px!important;margin:0 auto!important}
+.kr-classShowcase{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:34px!important;align-items:stretch!important;max-width:1080px!important;margin:0 auto!important}
+.kr-classList{background:#fff!important;border-radius:22px!important;overflow:hidden!important;border:1px solid #e4edf5!important;box-shadow:0 16px 42px rgba(24,78,132,.10)!important}
+.kr-classItem{border-bottom:1px solid #e8eef4!important;background:#fff!important}
+.kr-classItem:last-child{border-bottom:0!important}
+.kr-classToggle{width:100%!important;min-height:74px!important;border:0!important;background:#fff!important;display:flex!important;align-items:center!important;gap:15px!important;padding:0 20px!important;text-align:left!important;cursor:pointer!important;color:#193b64!important;font:700 17px 'Baloo 2',sans-serif!important;transition:background .25s ease,color .25s ease,transform .25s ease!important}
+.kr-classToggle:hover{background:#f7fbff!important;color:#1976d2!important}
+.kr-classItem.is-open .kr-classToggle{background:#f5faff!important;color:#15549a!important}
+.kr-classIcon{width:38px!important;height:38px!important;display:grid!important;place-items:center!important;border-radius:11px!important;background:#eaf5ff!important;font-size:21px!important;flex:0 0 auto!important}
+.kr-classItem:nth-child(2) .kr-classIcon{background:#fff1f5!important}.kr-classItem:nth-child(3) .kr-classIcon{background:#f1f9e7!important}.kr-classItem:nth-child(4) .kr-classIcon{background:#fff7df!important}
+.kr-classTitle{flex:1!important}
+.kr-classPlus{width:30px!important;height:30px!important;border-radius:50%!important;background:#1976d2!important;color:#fff!important;display:grid!important;place-items:center!important;font:700 22px/1 Arial,sans-serif!important;transition:transform .3s ease,background .3s ease!important}
+.kr-classItem.is-open .kr-classPlus{background:#ff4f87!important;transform:rotate(180deg)!important}
+.kr-classDetails{display:grid!important;grid-template-rows:0fr!important;transition:grid-template-rows .42s cubic-bezier(.2,.75,.2,1)!important;background:#f8fbfe!important}
+.kr-classDetails>div{overflow:hidden!important}
+.kr-classDetails p{margin:0!important;padding:0 22px!important;color:#71879d!important;font:500 14px/1.7 'Baloo 2',sans-serif!important;opacity:0!important;transform:translateY(-8px)!important;transition:opacity .25s ease,transform .35s ease,padding .35s ease!important}
+.kr-classItem.is-open .kr-classDetails{grid-template-rows:1fr!important}.kr-classItem.is-open .kr-classDetails p{padding:14px 22px 19px!important;opacity:1!important;transform:translateY(0)!important}
+.kr-classVisual{min-height:390px!important;position:relative!important;overflow:hidden!important;border-radius:26px!important;background:linear-gradient(145deg,#dff2ff,#f8fbff 58%,#eaf8df)!important;box-shadow:0 20px 50px rgba(24,78,132,.13)!important;border:1px solid #e3edf5!important}
+.kr-classVisualPlaceholder{position:absolute!important;inset:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;color:#1976d2!important;text-align:center!important}
+.kr-classVisualPlaceholder:before{content:""!important;width:118px!important;height:118px!important;border-radius:50%!important;background:rgba(255,255,255,.72)!important;box-shadow:0 15px 35px rgba(24,78,132,.08)!important;margin-bottom:18px!important}
+.kr-classVisualPlaceholder span{font:800 20px 'Baloo 2',sans-serif!important;letter-spacing:1px!important}.kr-classVisualPlaceholder small{margin-top:3px!important;color:#6f879f!important;font:600 13px 'Baloo 2',sans-serif!important}
+.kr-classVisualBadge{position:absolute!important;left:22px!important;bottom:20px!important;background:rgba(255,255,255,.9)!important;color:#15549a!important;border-radius:999px!important;padding:8px 15px!important;font:700 13px 'Baloo 2',sans-serif!important;box-shadow:0 8px 20px rgba(24,78,132,.12)!important}
+
+/* Classes garden: tree is outside the photo/card, attached to the far right edge. Hive and five bees stay inside the future photo area. */
+.kr-classVisual{background-color:#fffaf1!important;background-image:url("/images/logos/bilim-cocuk-kovan.png"),url("/images/logos/bilim-cocuk-ari-1.png"),url("/images/logos/bilim-cocuk-ari-1.png"),url("/images/logos/bilim-cocuk-ari-1.png"),url("/images/logos/bilim-cocuk-ari-1.png"),url("/images/logos/bilim-cocuk-ari-1.png")!important;background-repeat:no-repeat!important;background-size:92px auto,34px auto,30px auto,36px auto,28px auto,32px auto!important;background-position:right 102px bottom 28px,calc(100% - 128px) 72px,calc(100% - 215px) 145px,calc(100% - 74px) 172px,calc(100% - 245px) 42px,calc(100% - 35px) 112px!important;animation:krGardenBees 9s ease-in-out infinite alternate!important}
+.kr-classVisualPlaceholder{display:none!important}
+.kr-classVisualBadge{left:22px!important;bottom:20px!important}
 .kr-classShowcase{position:relative!important}
-.kr-classShowcase:after{content:""!important;position:absolute!important;z-index:5!important;pointer-events:none!important;right:-155px!important;bottom:-65px!important;width:390px!important;height:600px!important;background:url("/images/logos/bilim-cocuk-agac.png") right bottom / contain no-repeat!important}
-@media(max-width:760px){.kr-classVisual{background-size:68px auto,25px auto,23px auto,27px auto,22px auto,24px auto!important;background-position:right 74px bottom 20px,calc(100% - 92px) 56px,calc(100% - 155px) 105px,calc(100% - 48px) 126px,calc(100% - 176px) 32px,calc(100% - 23px) 86px!important}.kr-classShowcase:after{right:-82px!important;bottom:-30px!important;width:230px!important;height:340px!important}}
+.kr-classShowcase:after{content:""!important;position:absolute!important;z-index:5!important;pointer-events:none!important;right:-190px!important;bottom:-78px!important;width:440px!important;height:650px!important;background:url("/images/logos/bilim-cocuk-agac.png") right bottom / contain no-repeat!important}
+@keyframes krGardenBees{
+  0%,100%{background-position:right 102px bottom 28px,calc(100% - 128px) 72px,calc(100% - 215px) 145px,calc(100% - 74px) 172px,calc(100% - 245px) 42px,calc(100% - 35px) 112px}
+  50%{background-position:right 102px bottom 28px,calc(100% - 102px) 92px,calc(100% - 242px) 112px,calc(100% - 48px) 148px,calc(100% - 206px) 62px,calc(100% - 58px) 136px}
+}
+
+@media (max-width:760px){
+.kr-experienceWave{height:260px!important;min-height:260px!important;max-height:260px!important;background-size:100% 100%!important;background-position:center center!important}.kr-experienceWave .kr-waveInner{justify-content:center!important}.kr-experienceGrid{grid-template-columns:repeat(3,96px)!important;gap:10px!important;transform:translateY(8px)!important}.kr-experienceWave .kr-stat{width:96px!important;height:96px!important}.kr-experienceWave .kr-stat strong::after{font-size:23px!important}.kr-experienceWave .kr-stat>span:last-child{font-size:7px!important}.kr-experienceWave .kr-stat:nth-child(4){grid-column:auto!important}
+.kr-classesWave{padding:56px 16px 70px!important}.kr-classesHead{margin-bottom:28px!important}.kr-classesHead h2{font-size:31px!important}.kr-classShowcase{grid-template-columns:1fr!important;gap:22px!important}.kr-classVisual{min-height:290px!important;order:-1!important;border-radius:20px!important;background-size:68px auto,25px auto,23px auto,27px auto,22px auto,24px auto!important;background-position:right 74px bottom 20px,calc(100% - 92px) 56px,calc(100% - 155px) 105px,calc(100% - 48px) 126px,calc(100% - 176px) 32px,calc(100% - 23px) 86px!important}.kr-classShowcase:after{right:-82px!important;bottom:-30px!important;width:230px!important;height:340px!important}.kr-classList{border-radius:18px!important}.kr-classToggle{min-height:66px!important;padding:0 15px!important;font-size:15px!important}
+}
