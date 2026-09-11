@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { BusinessTemplateConfig } from "@fk-templates/shared";
 
 type Props = {
@@ -33,7 +34,13 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
     { title: "Yıl Sonu Gösterimiz", description: "Miniklerimizin hazırladığı gösteriye sizleri de bekliyoruz." }
   ];
   const stats = [["🎓", "150+", "Mutlu Öğrenci"], ["📚", "20+", "Eğitici Atölye"], ["🚌", "5+", "Servis Güzergahı"], ["😊", "10+", "Yıllık Deneyim"]];
-  const classes = ["Minik Kaşifler", "Renkli Düşler", "Meraklı Mucitler", "Büyük Adımlar"];
+  const classes = [
+    { title: "(2 Yaş) Grubu", icon: "🧸", text: "Güvenli ve sevgi dolu ilk okul deneyimi. Oyun, hareket ve günlük rutinlerle çocuklarımızın keşfetme becerilerini destekliyoruz." },
+    { title: "(3 - 4 Yaş) Grubu", icon: "🎨", text: "Oyun temelli etkinliklerle sosyal iletişim, dil gelişimi ve öz bakım becerilerini destekliyoruz." },
+    { title: "(4 - 5 Yaş) Grubu", icon: "🚂", text: "Bilim, sanat, drama ve yaratıcı oyunlarla çocuklarımızın merak duygusunu ve problem çözme becerilerini geliştiriyoruz." },
+    { title: "(5 - 6 Yaş) Grubu", icon: "🔤", text: "İlkokula hazırlık sürecini akademik çalışmaların yanında özgüven, sorumluluk ve sosyal becerilerle destekliyoruz." }
+  ];
+  const [openClass, setOpenClass] = useState(0);
   const workshops = ["Bilim Atölyesi", "Sanat & Tasarım", "Müzik ve Ritim", "Doğa ve Bahçe", "Drama", "Kodlama ve Robotik"];
   const staff = ["Sınıf Öğretmenlerimiz", "Çocuk Gelişimi Uzmanımız", "Rehberlik Uzmanımız", "Yardımcı Öğretmenlerimiz"];
   const storyPhotos = [
@@ -61,7 +68,28 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       <div className="kr-waveInner"><div className="kr-sectionHead light"><span className="kr-kicker">GÜVENLE BÜYÜYEN ÇOCUKLAR</span><h2>20+ yıllık deneyim</h2></div><div className="kr-experienceGrid">{stats.map(([icon,value,label]) => <div className="kr-stat" key={label}><span className="kr-statIcon">{icon}</span><strong>{value}</strong><span>{label}</span></div>)}</div><div className="kr-tree">🌳</div><div className="kr-signpost"><b>DAHA MUTLU</b><b>DAHA ÖZGÜVENLİ</b><b>DAHA YARATICI</b></div><span className="kr-bee">🐝</span></div>
     </section>
 
-    <section className="kr-waveSection kr-classesWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">SINIFLARIMIZ</span><h2>Her yaşa özel <strong>öğrenme alanları</strong></h2><p>Çocuklarımızın yaşına, gelişimine ve meraklarına uygun sıcak sınıflar.</p></div><div className="kr-cardGrid">{classes.map((x,i) => <article className="kr-featureCard" key={x}><div className="kr-cardIcon">{["🧸","🎨","🔬","🚀"][i]}</div><h3>{x}</h3><p>Oyun, keşif ve arkadaşlıkla öğrenmenin keyfini çıkaran özel sınıf ortamı.</p><a href="#contact">Sınıfı Keşfet →</a></article>)}</div></div></section>
+    <section className="kr-waveSection kr-classesWave">
+      <div className="kr-waveInner kr-classAccordionInner">
+        <div className="kr-sectionHead kr-classesHead"><span className="kr-kicker">SINIFLARIMIZ</span><h2>Her yaşa özel <strong>öğrenme alanları</strong></h2><p>Çocuklarımızın yaşına, gelişimine ve meraklarına uygun sıcak sınıflar.</p></div>
+        <div className="kr-classShowcase">
+          <div className="kr-classList" role="tablist" aria-label="Sınıflarımız">
+            {classes.map((item, i) => {
+              const isOpen = openClass === i;
+              return <article className={`kr-classItem ${isOpen ? "is-open" : ""}`} key={item.title}>
+                <button type="button" className="kr-classToggle" onClick={() => setOpenClass(isOpen ? -1 : i)} aria-expanded={isOpen}>
+                  <span className="kr-classIcon" aria-hidden="true">{item.icon}</span><span className="kr-classTitle">{item.title}</span><span className="kr-classPlus">{isOpen ? "−" : "+"}</span>
+                </button>
+                <div className="kr-classDetails" aria-hidden={!isOpen}><div><p>{item.text}</p></div></div>
+              </article>;
+            })}
+          </div>
+          <div className="kr-classVisual" aria-live="polite">
+            <div className="kr-classVisualPlaceholder"><span>SINIF FOTOĞRAFI</span><small>{openClass >= 0 ? classes[openClass].title : "Bir sınıf seçin"}</small></div>
+            <div className="kr-classVisualBadge">{openClass >= 0 ? classes[openClass].title : "Sınıflarımız"}</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="workshops" className="kr-waveSection kr-workshopsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">KEŞFET • ÜRET • EĞLEN</span><h2>Sınıflarımız ve <strong>Atölyeler</strong></h2><p>Yaparak ve yaşayarak öğrenmeyi destekleyen eğlenceli çalışmalar.</p></div><div className="kr-workshopGrid">{workshops.map((x,i)=><article className="kr-workshopCard" key={x}><div className="kr-workshopVisual">{["🔬","🎨","🎵","🌱","🎭","🤖"][i]}</div><b>{x}</b><small>Uygulamalı etkinlik</small></article>)}</div></div></section>
 
