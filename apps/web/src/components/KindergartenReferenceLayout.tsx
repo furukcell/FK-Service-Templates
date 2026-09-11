@@ -28,10 +28,13 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
   const email = `info@${slugify(schoolName)}.com`;
   const hero = "/images/logos/bilim-cocuk-hero.png";
   const gallery = config.galleryItems || [];
-  const news = config.campaignItems?.length ? config.campaignItems.slice(0, 3) : [
+  const news = config.campaignItems?.length ? config.campaignItems : [
     { title: "Renkli Eller Atölyesi", description: "Miniklerimizle yaratıcılığımızı renklerle konuşturduk." },
     { title: "Doğa Günümüz", description: "Bahçemizde doğayı keşfettik, eğlendik ve öğrendik." },
-    { title: "Yıl Sonu Gösterimiz", description: "Miniklerimizin hazırladığı gösteriye sizleri de bekliyoruz." }
+    { title: "Yıl Sonu Gösterimiz", description: "Miniklerimizin hazırladığı gösteriye sizleri de bekliyoruz." },
+    { title: "Bilim Çocuk Günü", description: "Merak ettik, deney yaptık ve yeni şeyler keşfettik." },
+    { title: "Bahçe Şenliğimiz", description: "Açık havada oyunlarla dolu keyifli bir gün geçirdik." },
+    { title: "Aile Katılım Etkinliği", description: "Ailelerimizle birlikte ürettik, oynadık ve öğrendik." }
   ];
   const stats = [["🎓", "150+", "Mutlu Öğrenci"], ["📚", "20+", "Eğitici Atölye"], ["🚌", "5+", "Servis Güzergahı"], ["😊", "10+", "Yıllık Deneyim"]];
   const classes = [
@@ -55,7 +58,10 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
   const ateliers = [
     { title: "Bilim ve Keşif Atölyesi", text: "Deneyler, gözlemler ve küçük keşiflerle çocukların merak duygusunu destekliyoruz." },
     { title: "Sanat ve Yaratıcılık Atölyesi", text: "Renk, müzik, drama ve üretim çalışmalarıyla çocukların hayal gücünü geliştiriyoruz." },
-    { title: "Doğa ve Yaşam Atölyesi", text: "Doğayı tanıyor, hareket ediyor ve günlük yaşam becerilerini yaşayarak öğreniyoruz." }
+    { title: "Doğa ve Yaşam Atölyesi", text: "Doğayı tanıyor, hareket ediyor ve günlük yaşam becerilerini yaşayarak öğreniyoruz." },
+    { title: "Müzik ve Ritim Atölyesi", text: "Ritim, ses ve hareket çalışmalarıyla çocukların ifade becerilerini ve müzik sevgisini güçlendiriyoruz." },
+    { title: "Drama ve Hikâye Atölyesi", text: "Canlandırmalar ve hikâyelerle çocukların iletişim, empati ve özgüven gelişimini destekliyoruz." },
+    { title: "Minik Mucitler Atölyesi", text: "Basit tasarımlar ve eğlenceli problemlerle çocukların üretme ve çözüm bulma becerilerini keşfediyoruz." }
   ];
 
   return <main className="kr-site">
@@ -127,7 +133,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
 
     <div className="kr-colorBreak kr-breakBlue" aria-hidden="true"><span></span><i></i><b></b></div>
 
-    <section id="news" className="kr-waveSection kr-newsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">{schoolName.toUpperCase()}'DAN HABERLER</span><h2>Etkinlik ve Duyurular</h2><a href="#contact">Tüm Duyurular →</a></div><div className="kr-newsGrid">{news.map((item,i)=><article className="kr-newsCard" key={`${item.title}-${i}`}><div className="kr-newsImage"><Photo src={gallery[i]?.imageUrl} title={item.title}/><span>{i===0?"12 EYLÜL":i===1?"05 EYLÜL":"01 EYLÜL"}</span></div><div className="kr-newsBody"><h3>{item.title}</h3><p>{item.description}</p><a href="#contact">Daha Fazla →</a></div></article>)}</div><span className="kr-elephant">🐘</span></div></section>
+    <section id="news" className="kr-waveSection kr-newsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">{schoolName.toUpperCase()}'DAN HABERLER</span><h2>Etkinlik ve Duyurular</h2><a href="#contact">Tüm Duyurular →</a></div><div className="kr-newsGrid">{news.map((item,i)=><article className="kr-newsCard" key={`${item.title}-${i}`}><div className="kr-newsImage"><Photo src={gallery[i]?.imageUrl} title={item.title}/><span>{i===0?"12 EYLÜL":i===1?"05 EYLÜL":i===2?"01 EYLÜL":i===3?"28 AĞUSTOS":i===4?"22 AĞUSTOS":"15 AĞUSTOS"}</span></div><div className="kr-newsBody"><h3>{item.title}</h3><p>{item.description}</p><a href="#contact">Daha Fazla →</a></div></article>)}</div><span className="kr-elephant">🐘</span></div></section>
 
     <div className="kr-colorBreak kr-breakYellow" aria-hidden="true"><span></span><i></i><b></b></div>
 
@@ -176,8 +182,15 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       .kr-ateliersHead{text-align:center!important;max-width:760px!important;margin:0 auto 48px!important}
       .kr-ateliersHead h2{font-size:46px!important;color:#243d72!important;margin:8px 0 12px!important}
       .kr-ateliersHead p{color:#7d8ea2!important;max-width:760px!important;margin:0 auto!important;line-height:1.7!important}
-      .kr-atelierGrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:26px!important;max-width:1000px!important;margin:0 auto!important}
-      .kr-atelierCard{background:#fff!important;border-radius:24px!important;overflow:hidden!important;box-shadow:0 16px 38px rgba(24,78,132,.11)!important;border:1px solid rgba(35,90,140,.08)!important}
+
+      /* Shared horizontal carousel behavior: 3 cards visible on desktop, more cards continue to the right. */
+      .kr-atelierGrid,.kr-newsGrid,.kr-galleryGrid,.kr-staffGrid{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:visible!important;scroll-snap-type:x mandatory!important;scroll-behavior:smooth!important;scrollbar-width:thin!important;padding:10px 4px 22px!important;margin:0 auto!important;-webkit-overflow-scrolling:touch!important}
+      .kr-atelierGrid::-webkit-scrollbar,.kr-newsGrid::-webkit-scrollbar,.kr-galleryGrid::-webkit-scrollbar,.kr-staffGrid::-webkit-scrollbar{height:7px!important}
+      .kr-atelierGrid::-webkit-scrollbar-thumb,.kr-newsGrid::-webkit-scrollbar-thumb,.kr-galleryGrid::-webkit-scrollbar-thumb,.kr-staffGrid::-webkit-scrollbar-thumb{background:rgba(36,61,114,.22)!important;border-radius:99px!important}
+      .kr-atelierGrid > *, .kr-newsGrid > *, .kr-galleryGrid > *, .kr-staffGrid > *{flex:0 0 calc((100% - 48px)/3)!important;scroll-snap-align:start!important;min-width:0!important}
+      .kr-atelierGrid{gap:24px!important;max-width:1000px!important}
+      .kr-atelierCard{background:#fff!important;border-radius:24px!important;overflow:hidden!important;box-shadow:0 16px 38px rgba(24,78,132,.11)!important;border:1px solid rgba(35,90,140,.08)!important;transition:transform .45s cubic-bezier(.2,.75,.2,1),box-shadow .45s ease!important;will-change:transform!important}
+      .kr-atelierCard:hover{transform:translateY(-9px) scale(1.025)!important;box-shadow:0 24px 48px rgba(24,78,132,.18)!important;z-index:2!important}
       .kr-atelierImage{height:235px!important;background:#eef7fb!important}
       .kr-atelierImage .kr-photo,.kr-atelierImage .kr-photoPlaceholder{height:100%!important;width:100%!important}
       .kr-atelierImage .kr-photoPlaceholder{border:0!important;border-radius:0!important;background:linear-gradient(135deg,#ffe7dc,#eaf7ff)!important;display:flex!important;align-items:center!important;justify-content:center!important;flex-direction:column!important;color:#6c7d91!important}
@@ -187,10 +200,18 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       .kr-atelierBody p{margin:0 0 18px!important;color:#7b8b9e!important;line-height:1.65!important;font-size:14px!important}
       .kr-atelierBody a{color:#ff5d8f!important;font-weight:800!important;text-decoration:none!important}
 
+      /* The existing news/gallery/staff cards keep their visual design; only their layout becomes a carousel. */
+      .kr-newsGrid > .kr-newsCard,.kr-galleryGrid > .kr-photo,.kr-staffGrid > article{transition:transform .45s cubic-bezier(.2,.75,.2,1),box-shadow .45s ease!important;will-change:transform!important}
+      .kr-newsGrid > .kr-newsCard:hover,.kr-galleryGrid > .kr-photo:hover,.kr-staffGrid > article:hover{transform:translateY(-8px) scale(1.025)!important;box-shadow:0 24px 48px rgba(24,78,132,.16)!important;z-index:2!important}
+      .kr-galleryGrid{gap:20px!important;max-width:1180px!important}
+      .kr-galleryGrid > .kr-photo{border-radius:24px!important;overflow:hidden!important}
+      .kr-newsGrid{gap:24px!important;max-width:1180px!important}
+      .kr-staffGrid{gap:24px!important;max-width:1180px!important}
+
       @media (max-width:980px){
         .kr-whyGrid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:760px!important}
         .kr-whyCard{min-height:390px!important}.kr-whyCardContent{min-height:390px!important}
-        .kr-atelierGrid{grid-template-columns:1fr 1fr;max-width:760px!important}
+        .kr-atelierGrid > *, .kr-newsGrid > *, .kr-galleryGrid > *, .kr-staffGrid > *{flex-basis:calc((100% - 24px)/2)!important}
       }
       @media (max-width:760px){
         .kr-whyChoose{padding:60px 0 70px!important}
@@ -212,7 +233,8 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         .kr-ateliersHead{margin-bottom:30px!important;padding:0 16px!important}
         .kr-ateliersHead h2{font-size:32px!important}
         .kr-ateliersHead p{font-size:12px!important;line-height:1.55!important}
-        .kr-atelierGrid{grid-template-columns:1fr!important;gap:16px!important;padding:0 16px!important}
+        .kr-atelierGrid,.kr-newsGrid,.kr-galleryGrid,.kr-staffGrid{padding-left:16px!important;padding-right:16px!important;gap:16px!important}
+        .kr-atelierGrid > *, .kr-newsGrid > *, .kr-galleryGrid > *, .kr-staffGrid > *{flex-basis:calc(86% - 8px)!important}
         .kr-atelierImage{height:200px!important}
         .kr-atelierBody{padding:20px!important}
         .kr-atelierBody h3{font-size:20px!important}
@@ -220,7 +242,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       @media (max-width:390px){
         .kr-whyGrid{gap:9px!important}.kr-whyCard{min-height:300px!important}.kr-whyCardContent{min-height:300px!important}.kr-whyPhoto{height:118px!important}.kr-whyPhoto:before{width:86px!important;height:86px!important}.kr-whyPhoto img{width:70px!important;height:70px!important}.kr-whyBody h3{font-size:14px!important}.kr-whyBody p{font-size:10px!important}
       }
-      @media (prefers-reduced-motion:reduce){.kr-whyCard,.kr-whyCardContent{transition:none!important}.kr-whyCard:hover,.kr-whyCard:hover .kr-whyCardContent{transform:none!important}}
+      @media (prefers-reduced-motion:reduce){.kr-whyCard,.kr-whyCardContent,.kr-atelierCard,.kr-newsCard,.kr-galleryGrid .kr-photo,.kr-staffGrid article{transition:none!important}.kr-whyCard:hover,.kr-whyCard:hover .kr-whyCardContent,.kr-atelierCard:hover,.kr-newsCard:hover,.kr-galleryGrid .kr-photo:hover,.kr-staffGrid article:hover{transform:none!important}}
     `}</style>
   </main>;
 }
