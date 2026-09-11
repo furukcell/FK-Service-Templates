@@ -2,6 +2,7 @@
 .kr-storyPhotos .photoA,
 .kr-storyPhotos .photoB{will-change:transform}
 
+/* Clearly visible floating movement. */
 .kr-storyPhotos .photoA{animation:krStoryPhotoA 6.5s ease-in-out infinite!important}
 .kr-storyPhotos .photoB{animation:krStoryPhotoB 8s ease-in-out infinite!important}
 @keyframes krStoryPhotoA{
@@ -25,7 +26,7 @@
 .kr-storyCopy .kr-facts{margin:22px 0!important}
 .kr-storyCopy .kr-facts article>span{flex-basis:48px!important;width:48px!important;height:48px!important}
 
-/* Real transparent PNG decorations — no emoji substitutes. */
+/* Real transparent PNG decorations — positioned farther toward the outer edges. */
 .kr-storyPhotos{position:relative!important;isolation:isolate}
 .kr-storyPhotos .kr-storySun,
 .kr-storyPhotos .kr-storyCrab,
@@ -38,9 +39,9 @@
   will-change:transform!important;
 }
 
-/* Sun: approximately 2x, pushed farther to the left. */
+/* Sun: keep size, move farther left. */
 .kr-storyPhotos .kr-storySun{
-  left:-27%!important;
+  left:-39%!important;
   top:-10%!important;
   width:152px!important;
   height:152px!important;
@@ -51,9 +52,9 @@
   50%{transform:translate3d(18px,16px,0) rotate(7deg)}
 }
 
-/* Crab: approximately 2x, pushed farther to the left. */
+/* Crab: keep size, move farther left. */
 .kr-storyPhotos .kr-storyCrab{
-  left:-30%!important;
+  left:-43%!important;
   bottom:0!important;
   width:136px!important;
   height:136px!important;
@@ -64,10 +65,10 @@
   50%{transform:translate3d(24px,-14px,0) rotate(7deg)}
 }
 
-/* Rocket: approximately 2x, moved to the middle-right edge. */
+/* Rocket: keep size, move farther right toward the outer edge. */
 .kr-storyCopy{position:relative!important}
 .kr-storyCopy .kr-storyRocket{
-  right:-18%!important;
+  right:-29%!important;
   top:34%!important;
   width:144px!important;
   height:180px!important;
@@ -79,9 +80,9 @@
 }
 
 @media(max-width:980px){
- .kr-storyPhotos .kr-storySun{left:-8%!important;width:112px!important;height:112px!important}
- .kr-storyPhotos .kr-storyCrab{left:-10%!important;width:96px!important;height:96px!important}
- .kr-storyCopy .kr-storyRocket{right:-5%!important;width:110px!important;height:138px!important}
+ .kr-storyPhotos .kr-storySun{left:-10%!important;width:112px!important;height:112px!important}
+ .kr-storyPhotos .kr-storyCrab{left:-12%!important;width:96px!important;height:96px!important}
+ .kr-storyCopy .kr-storyRocket{right:-7%!important;width:110px!important;height:138px!important}
 }
 @media(max-width:760px){
  .kr-storyPhotos .photoA{animation-duration:5.8s!important}
