@@ -9,3 +9,10 @@
 /* Hero: keep the artwork on its natural cover framing and anchor it to the left edge. The header now overlays the hero instead of consuming hero layout space. */
 .kr-heroImage{background-size:cover!important;background-position:left center!important;animation:none!important;will-change:auto}
 @media(prefers-reduced-motion:reduce){.kr-heroImage{animation:none!important;background-position:left center!important}}
+
+/* Real Bilim Çocuk Anaokulu logo */
+.bcBrandLogo{width:180px!important;height:76px!important;flex:0 0 180px;border:0!important;border-radius:0!important;background:#fff url('/images/logos/bilim-cocuk-anaokulu-logo.png') center/contain no-repeat!important;box-shadow:none!important}
+.bcBrandLogo:before,.bcBrandLogo:after,.bcBrandLogo>span{display:none!important}
+.bcBrand>span:nth-child(2){display:none!important}
+@media(max-width:820px){.bcBrandLogo{width:155px!important;height:68px!important;flex-basis:155px}.bcBrand{flex:1;min-width:0}.bcBrand>span:nth-child(2){display:none!important}}
+@media(max-width:620px){.bcBrandLogo{width:145px!important;height:64px!important;flex-basis:145px}}
