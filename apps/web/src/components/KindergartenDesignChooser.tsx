@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import type { BusinessTemplateConfig, LayoutVariant } from "@fk-templates/shared";
 import { KindergartenReferenceLayout } from "./KindergartenReferenceLayout";
 import { TemplateLanding } from "./TemplateLanding";
-import { KindergartenAppointmentModal } from "./KindergartenAppointmentModal";
 
 type Props = {
   config: BusinessTemplateConfig;
@@ -92,13 +91,12 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
             <a className="bcNavLink active" href="#top">Anasayfa</a>
             <div className="bcMenu"><button className={`bcNavLink ${openMenu === "gallery" ? "open" : ""}`} onClick={() => setOpenMenu(openMenu === "gallery" ? null : "gallery")} type="button">Galeri <span className="bcChevron" /></button>{openMenu === "gallery" && <div className="bcDropdown">{galleryItems.map(([icon, label, href]) => <a key={label} href={href}><i>{icon}</i><span>{label}</span></a>)}</div>}</div>
             <div className="bcMenu"><button className={`bcNavLink ${openMenu === "stats" ? "open" : ""}`} onClick={() => setOpenMenu(openMenu === "stats" ? null : "stats")} type="button">İstatistik <span className="bcChevron" /></button>{openMenu === "stats" && <div className="bcDropdown">{statItems.map(([icon, label, href]) => <a key={label} href={href}><i>{icon}</i><span>{label}</span></a>)}</div>}</div>
-            <div className="bcMenu"><button className={`bcNavLink ${openMenu === "events" ? "open" : ""}`} onClick={() => setOpenMenu(openMenu === "events" ? null : "events")} type="button">Etkinlikler <span className="bcChevron" /></button>{openMenu === "events" && <div className="bcDropdown">{eventItems.map(([icon, label, href]) => <a key={label} href={href}><i>{icon}</i><span>{label}</span></a>)}</div>}</div>
+            <div className="bcMenu"><button className={`bcNavLink ${openMenu === "events" ? "open" : ""}`} onClick={() => setOpenMenu(openMenu === "events" ? null : "events")} type="button">Etkinlikler <span className="bcChevron" /></button>{openMenu === "events" && <div className="bcDropdown">{eventItems.map(([icon, label, href]) => <a key={label} href={href}><i>{icon}</i><span>{label}</span></a>}</div>}</div>
             <a className="bcNavLink" href="#contact">Randevu Al</a>
           </nav>
           <a className="bcCta" href="#contact">Ön Kayıt <b>›</b></a>
         </div>
       </header>
-      <KindergartenAppointmentModal />
       <div className="kindergartenDesignToolbarLegacy" aria-hidden="true">{kindergartenLayouts.map((layout, index) => <button key={layout} type="button" className={activeLayout === layout ? "active" : ""} onClick={() => onLayoutChange(layout)}><small>{index + 1}</small>{layout === "kindergarten-reference" ? "Bilim Çocuk" : layout}</button>)}</div>
       {isReference ? <KindergartenReferenceLayout config={{...config, brandName: schoolName}} onLayoutChange={onLayoutChange} /> : <TemplateLanding config={config} activeTemplate="kindergarten" activeLayout={templateLayout} onLayoutChange={onLayoutChange} showTemplateSwitch showLayoutSwitch={false} />}
     </main>
