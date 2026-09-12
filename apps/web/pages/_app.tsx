@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import { CookieBanner } from "../src/components/CookieBanner";
 import { SalonAdminNavigation } from "../src/components/SalonAdminNavigation";
+import { KindergartenLeadModal } from "../src/components/KindergartenLeadModal";
 import "../src/styles/globals.css";
 import "../src/styles/admin.css";
 import "../src/styles/admin-extra.css";
@@ -61,6 +62,7 @@ import "../src/styles/kindergarten-remove-old-brand.css";
 export default function App({ Component, pageProps }: AppProps) {
   return <>
     <Component {...pageProps} />
+    <KindergartenLeadModal />
     <style jsx global>{`
       main.kr-site .kr-join{background:#b3d34a!important;clip-path:none!important;border-radius:0!important;height:190px!important;min-height:190px!important;margin:0!important;overflow:hidden!important}
       main.kr-site .kr-join::before,main.kr-site .kr-join::after{display:none!important;content:none!important}
