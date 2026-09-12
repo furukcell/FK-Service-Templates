@@ -1,0 +1,93 @@
+name: Optimize Kindergarten Images
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    if: ${{ !contains(github.event.head_commit.message, '[image-optimized]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install image optimizer
+        run: npm install --no-save sharp@0.33.5
+
+      - name: Convert large kindergarten PNGs to WebP and update references
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const sharp = require('sharp');
+
+          const publicRoot = path.join(process.cwd(), 'apps/web/public/images/logos');
+          const sourceRoot = path.join(process.cwd(), 'apps/web/src');
+          const threshold = 300 * 1024;
+
+          function walk(dir) {
+            if (!fs.existsSync(dir)) return [];
+            return fs.readdirSync(dir, {withFileTypes:true}).flatMap(entry => {
+              const p = path.join(dir, entry.name);
+              return entry.isDirectory() ? walk(p) : [p];
+            });
+          }
+
+          (async () => {
+            const pngs = walk(publicRoot).filter(p => /bilim-cocuk-.*\.png$/i.test(p));
+            const converted = [];
+
+            for (const file of pngs) {
+              const stat = fs.statSync(file);
+              if (stat.size < threshold) continue;
+              const out = file.replace(/\.png$/i, '.webp');
+              await sharp(file).webp({quality: 82, effort: 5}).toFile(out);
+              converted.push({png: path.basename(file), webp: path.basename(out)});
+              console.log(`${path.basename(file)}: ${(stat.size/1024/1024).toFixed(2)} MB -> ${(fs.statSync(out).size/1024/1024).toFixed(2)} MB`);
+            }
+
+            if (!converted.length) {
+              console.log('No large kindergarten PNGs need conversion.');
+              return;
+            }
+
+            const sourceFiles = walk(sourceRoot).filter(p => /\.(tsx|ts|jsx|js|css|scss)$/.test(p));
+            for (const file of sourceFiles) {
+              let text = fs.readFileSync(file, 'utf8');
+              const before = text;
+              for (const item of converted) {
+                text = text.split(item.png).join(item.webp);
+              }
+              text = text.replace(/<img(?![^>]*\bloading=)/g, '<img loading="lazy" decoding="async"');
+              if (text !== before) fs.writeFileSync(file, text);
+            }
+          })().catch(err => { console.error(err); process.exit(1); });
+          NODE
+
+      - name: Commit optimized assets
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No optimization changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/public/images apps/web/src
+          git commit -m "[image-optimized] Optimize kindergarten images for faster loading"
+          git push
