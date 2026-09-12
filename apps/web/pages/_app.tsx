@@ -62,6 +62,15 @@ export default function App({ Component, pageProps }: AppProps) {
   return <>
     <Component {...pageProps} />
     <style jsx global>{`
+      /* The reference kindergarten page uses its own navigation. Never show the legacy premium/old-school brand lockup in its hero corner. */
+      body:has(main.kr-site) .kindergartenPremiumShell,
+      body:has(main.kr-site) .kindergartenPremiumHeader,
+      body:has(main.kr-site) .salonPremiumBrand,
+      body:has(main.kr-site) .kindergartenPremiumLogo,
+      body:has(main.kr-site) .salonPremiumBrandName,
+      body:has(main.kr-site) .salonPremiumBrandOrnament{display:none!important}
+      main.kindergartenDesignHub > .kr-site > .kr-nav{display:flex!important}
+
       main.kr-site .kr-join{background:#b3d34a!important;clip-path:none!important;border-radius:0!important;height:190px!important;min-height:190px!important;margin:0!important;overflow:hidden!important}
       main.kr-site .kr-join::before,main.kr-site .kr-join::after{display:none!important;content:none!important}
       main.kr-site .kr-join > div:first-child span{font-size:0!important}
