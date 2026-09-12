@@ -394,7 +394,7 @@ function VisualSection({ config, prominentLocationCard = false }: { config: Busi
       <div className="visualGrid">
         {config.galleryItems.map((item, index) => (
           <article className="visualCard" key={item.title}>
-            {item.imageUrl ? <img src={item.imageUrl} alt={item.title} /> : <div className="visualPlaceholder">{String(index + 1).padStart(2, "0")}</div>}
+            {item.imageUrl ? <img loading="lazy" decoding="async" src={item.imageUrl} alt={item.title} /> : <div className="visualPlaceholder">{String(index + 1).padStart(2, "0")}</div>}
             <div>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
@@ -477,7 +477,7 @@ function WorkshopsSection({ config }: { config: BusinessTemplateConfig }) {
       <div className="cardGrid">
         {config.workshops!.map((workshop) => (
           <article className="serviceCard workshopCard" key={workshop.title}>
-            {workshop.imageUrl ? <img src={workshop.imageUrl} alt={workshop.title} /> : null}
+            {workshop.imageUrl ? <img loading="lazy" decoding="async" src={workshop.imageUrl} alt={workshop.title} /> : null}
             <h3>{workshop.title}</h3>
             <p>{workshop.description}</p>
             {workshop.ageRange ? <span className="priceTag">{workshop.ageRange}</span> : null}

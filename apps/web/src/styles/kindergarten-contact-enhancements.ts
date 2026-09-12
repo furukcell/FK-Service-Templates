@@ -3,7 +3,7 @@ function addContactStyles() {
   const style = document.createElement("style");
   style.id = "kr-contact-enhancements-style";
   style.textContent = `
-    main.kr-site .kr-hero .kr-heroImage::before{content:""!important;display:block!important;position:absolute!important;z-index:3!important;left:0!important;top:0!important;width:300px!important;height:92px!important;background-image:url("/images/logos/bilim-cocuk-hero.png")!important;background-repeat:no-repeat!important;background-size:100vw 56.25vw!important;background-position:-310px 0!important;pointer-events:none!important}
+    main.kr-site .kr-hero .kr-heroImage::before{content:""!important;display:block!important;position:absolute!important;z-index:3!important;left:0!important;top:0!important;width:300px!important;height:92px!important;background-image:url("/images/logos/bilim-cocuk-hero.webp")!important;background-repeat:no-repeat!important;background-size:100vw 56.25vw!important;background-position:-310px 0!important;pointer-events:none!important}
     main.kr-site .kr-footerTop > div:nth-child(3)::after{content:none!important;display:none!important}
     main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactPhone,
     main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactAddress{display:block!important;color:rgba(255,255,255,.82)!important;font:500 14px/1.55 'Baloo 2',sans-serif!important;text-decoration:none!important;margin:0!important}
