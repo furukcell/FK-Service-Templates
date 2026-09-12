@@ -1,105 +1,44 @@
-/* Bilim Çocuk — shared premium road transition system.
-   The road is the single transition visual between the lower-page sections.
-   Each transition gets its own forward-only bus path. */
-
-/* Higher specificity is intentional: KindergartenReferenceLayout has legacy
-   inline transition styles that otherwise override this shared system. */
+/* Bilim Çocuk — shared premium road transition system. */
 main.kr-site .kr-discoveryBridge,
 main.kr-site .kr-imageBreak{
-  position:relative!important;
-  width:100%!important;
-  height:154px!important;
-  min-height:154px!important;
-  max-height:154px!important;
-  margin:0!important;
-  padding:0!important;
-  overflow:hidden!important;
-  display:block!important;
-  line-height:0!important;
-  background:#fffaf1 url('/images/logos/bilim_cocuk_yol_gecisi_premium.png') center center / 100% 100% no-repeat!important;
-  border:0!important;
+  position:relative!important;width:100%!important;height:154px!important;min-height:154px!important;max-height:154px!important;margin:0!important;padding:0!important;overflow:hidden!important;display:block!important;line-height:0!important;
+  background:#fffaf1 url('/images/logos/bilim_cocuk_yol_gecisi_premium.png') center center / 100% 100% no-repeat!important;border:0!important;
 }
-
 main.kr-site .kr-discoveryBridge img,
-main.kr-site .kr-imageBreak img{
-  display:none!important;
-}
+main.kr-site .kr-imageBreak img{display:none!important}
 
-/* The lower content pages use one warm cream canvas. */
+/* Warm cream continues immediately below every road. */
 main.kr-site .kr-ateliersWave,
 main.kr-site .kr-newsWave,
 main.kr-site .kr-galleryWave,
-main.kr-site .kr-staffWave{
-  background:#fffaf1!important;
+main.kr-site .kr-staffWave{background:#fffaf1!important}
+main.kr-site .kr-imageBreak + .kr-waveSection::before{
+  background:#fffaf1!important;background-color:#fffaf1!important;
 }
 
 main.kr-site .kr-discoveryBridge::after,
 main.kr-site .kr-imageBreak::after{
-  content:""!important;
-  position:absolute!important;
-  z-index:4!important;
-  width:120px!important;
-  height:69px!important;
-  left:0!important;
-  top:50%!important;
-  margin-top:-34px!important;
+  content:""!important;position:absolute!important;z-index:4!important;width:120px!important;height:69px!important;left:0!important;top:50%!important;margin-top:-34px!important;
   background:url('/images/logos/bilim_cocuk_okul_otobusu_ayri.png') center center / contain no-repeat!important;
-  pointer-events:none!important;
-  will-change:left,transform!important;
-  filter:drop-shadow(0 6px 7px rgba(31,64,99,.14))!important;
+  pointer-events:none!important;will-change:left,transform!important;filter:drop-shadow(0 6px 7px rgba(31,64,99,.14))!important;
 }
 
-/* The source bus faces left; scaleX(-1) mirrors it so it visibly drives right. */
-@keyframes krRoadBusOne{
-  0%{left:-12%;transform:translateY(4px) scaleX(-1) scale(.94)}
-  45%{left:42%;transform:translateY(-2px) scaleX(-1) scale(.98)}
-  100%{left:112%;transform:translateY(2px) scaleX(-1) scale(1)}
-}
-@keyframes krRoadBusTwo{
-  0%{left:-28%;transform:translateY(1px) scaleX(-1) scale(.96)}
-  48%{left:34%;transform:translateY(-3px) scaleX(-1) scale(.99)}
-  100%{left:103%;transform:translateY(2px) scaleX(-1) scale(1)}
-}
-@keyframes krRoadBusThree{
-  0%{left:5%;transform:translateY(3px) scaleX(-1) scale(.95)}
-  50%{left:56%;transform:translateY(-3px) scaleX(-1) scale(.99)}
-  100%{left:116%;transform:translateY(2px) scaleX(-1) scale(1)}
-}
-@keyframes krRoadBusFour{
-  0%{left:-18%;transform:translateY(-2px) scaleX(-1) scale(.95)}
-  46%{left:28%;transform:translateY(3px) scaleX(-1) scale(.98)}
-  100%{left:108%;transform:translateY(-1px) scaleX(-1) scale(1)}
-}
-@keyframes krRoadBusFive{
-  0%{left:15%;transform:translateY(4px) scaleX(-1) scale(.94)}
-  52%{left:63%;transform:translateY(-2px) scaleX(-1) scale(.99)}
-  100%{left:121%;transform:translateY(2px) scaleX(-1) scale(1)}
-}
+/* Bus front points RIGHT. */
+@keyframes krRoadBusOne{0%{left:-12%;transform:translateY(4px) rotateY(180deg) scale(.94)}45%{left:42%;transform:translateY(-2px) rotateY(180deg) scale(.98)}100%{left:112%;transform:translateY(2px) rotateY(180deg) scale(1)}}
+@keyframes krRoadBusTwo{0%{left:-28%;transform:translateY(1px) rotateY(180deg) scale(.96)}48%{left:34%;transform:translateY(-3px) rotateY(180deg) scale(.99)}100%{left:103%;transform:translateY(2px) rotateY(180deg) scale(1)}}
+@keyframes krRoadBusThree{0%{left:5%;transform:translateY(3px) rotateY(180deg) scale(.95)}50%{left:56%;transform:translateY(-3px) rotateY(180deg) scale(.99)}100%{left:116%;transform:translateY(2px) rotateY(180deg) scale(1)}}
+@keyframes krRoadBusFour{0%{left:-18%;transform:translateY(-2px) rotateY(180deg) scale(.95)}46%{left:28%;transform:translateY(3px) rotateY(180deg) scale(.98)}100%{left:108%;transform:translateY(-1px) rotateY(180deg) scale(1)}}
+@keyframes krRoadBusFive{0%{left:15%;transform:translateY(4px) rotateY(180deg) scale(.94)}52%{left:63%;transform:translateY(-2px) rotateY(180deg) scale(.99)}100%{left:121%;transform:translateY(2px) rotateY(180deg) scale(1)}}
 
-/* 4–5 second slow, continuous forward travel. */
-main.kr-site .kr-discoveryBridge::after{animation:krRoadBusOne 4.5s linear infinite!important}
-main.kr-site .kr-whyChoose + .kr-imageBreak::after{animation:krRoadBusTwo 4.2s linear infinite!important}
-main.kr-site .kr-ateliersWave + .kr-imageBreak::after{animation:krRoadBusThree 4.8s linear infinite!important}
-main.kr-site .kr-newsWave + .kr-imageBreak::after{animation:krRoadBusFour 4.4s linear infinite!important}
-main.kr-site .kr-galleryWave + .kr-imageBreak::after{animation:krRoadBusFive 5s linear infinite!important}
+/* Slow, visible 3.5–4 second forward movement; each transition starts differently. */
+main.kr-site .kr-discoveryBridge::after{animation:krRoadBusOne 3.8s linear infinite!important}
+main.kr-site .kr-whyChoose + .kr-imageBreak::after{animation:krRoadBusTwo 3.6s linear infinite!important}
+main.kr-site .kr-ateliersWave + .kr-imageBreak::after{animation:krRoadBusThree 4s linear infinite!important}
+main.kr-site .kr-newsWave + .kr-imageBreak::after{animation:krRoadBusFour 3.7s linear infinite!important}
+main.kr-site .kr-galleryWave + .kr-imageBreak::after{animation:krRoadBusFive 3.9s linear infinite!important}
 
 @media (max-width:760px){
-  main.kr-site .kr-discoveryBridge,
-  main.kr-site .kr-imageBreak{
-    height:112px!important;
-    min-height:112px!important;
-    max-height:112px!important;
-    background-size:100% 100%!important;
-  }
-  main.kr-site .kr-discoveryBridge::after,
-  main.kr-site .kr-imageBreak::after{
-    width:88px!important;
-    height:51px!important;
-    margin-top:-25px!important;
-  }
+  main.kr-site .kr-discoveryBridge,main.kr-site .kr-imageBreak{height:112px!important;min-height:112px!important;max-height:112px!important;background-size:100% 100%!important}
+  main.kr-site .kr-discoveryBridge::after,main.kr-site .kr-imageBreak::after{width:88px!important;height:51px!important;margin-top:-25px!important}
 }
-
-@media (prefers-reduced-motion:reduce){
-  main.kr-site .kr-discoveryBridge::after,
-  main.kr-site .kr-imageBreak::after{animation:none!important}
-}
+@media (prefers-reduced-motion:reduce){main.kr-site .kr-discoveryBridge::after,main.kr-site .kr-imageBreak::after{animation:none!important}}
