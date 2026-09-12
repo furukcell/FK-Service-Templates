@@ -28,3 +28,49 @@
   .kr-join{min-height:180px;clip-path:none;border-radius:28px 28px 0 0;flex-direction:column;gap:14px;text-align:center;padding:30px 22px}.kr-join>div>span{font-size:23px}.kr-join>a{padding:13px 20px}.kr-bunny{left:12px;width:55px;height:55px}.kr-footerTop{width:100%;max-width:none!important}.kr-footerBottom{padding-left:20px!important;padding-right:20px!important;text-align:center}
 }
 @media(max-width:480px){.bcBrandLogo{width:105px!important;height:54px!important;flex-basis:105px}.bcBrand{gap:0;max-width:calc(100% - 82px)}.bcBrandText{transform:translateY(9px);margin-left:-28px}.bcBrand strong{font-size:13px}.bcBrand small{font-size:6px}.bcCta{padding:9px 11px;font-size:9px}.bcTopbarInner>span:first-child{font-size:8px}.kr-hero{height:150vw;min-height:520px}.kr-story{padding-top:48px}.kr-storyPhotos{height:250px}.photoA{height:130px}.photoB{height:135px;top:115px}.kr-statsInner{grid-template-columns:1fr 1fr}.kr-stat{width:120px;height:120px}.kr-news,.kr-workshops{padding-left:16px;padding-right:16px}.kr-newsImage{height:135px}.kr-sectionHead h2{font-size:26px}}
+
+/* Premium mobile interaction layer — intentionally scoped to mobile only. */
+@media(max-width:767px){
+  .kr-atelierGrid,.kr-newsGrid,.kr-galleryGrid,.kr-staffGrid{
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    gap:0!important;
+    padding:12px 12vw 28px 4px!important;
+    margin-right:-4px!important;
+    scroll-snap-type:x mandatory;
+    scroll-padding-left:4px;
+    scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+  }
+  .kr-atelierGrid::-webkit-scrollbar,.kr-newsGrid::-webkit-scrollbar,.kr-galleryGrid::-webkit-scrollbar,.kr-staffGrid::-webkit-scrollbar{display:none}
+  .kr-atelierGrid>* ,.kr-newsGrid>* ,.kr-galleryGrid>* ,.kr-staffGrid>*{
+    flex:0 0 82vw!important;
+    width:82vw!important;
+    min-width:82vw!important;
+    margin-right:-10px!important;
+    scroll-snap-align:start;
+    position:relative;
+    z-index:1;
+    border-radius:24px!important;
+    box-shadow:0 14px 34px rgba(20,49,82,.14)!important;
+    transform:translateY(5px) rotate(-.35deg);
+    transition:transform .35s ease,box-shadow .35s ease;
+  }
+  .kr-atelierGrid>*:nth-child(even),.kr-newsGrid>*:nth-child(even),.kr-galleryGrid>*:nth-child(even),.kr-staffGrid>*:nth-child(even){transform:translateY(-2px) rotate(.35deg);z-index:2}
+  .kr-atelierGrid>*:nth-child(3n),.kr-newsGrid>*:nth-child(3n),.kr-galleryGrid>*:nth-child(3n),.kr-staffGrid>*:nth-child(3n){transform:translateY(8px) rotate(-.15deg);z-index:3}
+  .kr-atelierGrid>*:active,.kr-newsGrid>*:active,.kr-galleryGrid>*:active,.kr-staffGrid>*:active{transform:scale(.985) translateY(2px)!important;box-shadow:0 8px 20px rgba(20,49,82,.18)!important}
+  .kr-carouselNav{margin-top:-8px!important}
+  .kr-carouselBtn{width:38px!important;height:38px!important;border-radius:50%!important;box-shadow:0 8px 22px rgba(20,49,82,.16)!important}
+  .kr-workshopGrid{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;gap:0!important;padding:10px 12vw 26px 4px!important;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .kr-workshopGrid::-webkit-scrollbar{display:none}
+  .kr-workshopGrid>*{flex:0 0 82vw!important;width:82vw!important;min-width:82vw!important;margin-right:-10px!important;scroll-snap-align:start;border-radius:24px!important;box-shadow:0 14px 34px rgba(20,49,82,.14)!important}
+  .kr-workshopGrid>*:nth-child(even){transform:translateY(-3px) rotate(.35deg);z-index:2}.kr-workshopGrid>*:nth-child(odd){transform:translateY(5px) rotate(-.35deg)}
+}
+@media(max-width:480px){
+  .kr-atelierGrid,.kr-newsGrid,.kr-galleryGrid,.kr-staffGrid,.kr-workshopGrid{padding-right:15vw!important}
+  .kr-atelierGrid>* ,.kr-newsGrid>* ,.kr-galleryGrid>* ,.kr-staffGrid>* ,.kr-workshopGrid>*{flex-basis:84vw!important;width:84vw!important;min-width:84vw!important;border-radius:22px!important}
+}
