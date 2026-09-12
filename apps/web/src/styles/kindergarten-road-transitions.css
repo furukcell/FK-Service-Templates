@@ -1,0 +1,109 @@
+/* Bilim Çocuk — shared premium road transition system.
+   One visual language between the major sections: a fine illustrated road,
+   with the school bus travelling at a different point on each transition. */
+
+.kr-discoveryBridge,
+.kr-imageBreak{
+  position:relative!important;
+  width:100%!important;
+  height:154px!important;
+  min-height:154px!important;
+  max-height:154px!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  display:block!important;
+  line-height:0!important;
+  background:#fffaf1 url('/images/logos/bilim_cocuk_yol_gecisi_premium.png') center center / 100% 100% no-repeat!important;
+  border:0!important;
+}
+
+.kr-discoveryBridge img,
+.kr-imageBreak img{
+  display:none!important;
+}
+
+.kr-discoveryBridge::after,
+.kr-imageBreak::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:4!important;
+  width:150px!important;
+  height:82px!important;
+  left:0!important;
+  top:50%!important;
+  margin-top:-41px!important;
+  background:url('/images/logos/bilim_cocuk_okul_otobusu_ayri.png') center center / contain no-repeat!important;
+  pointer-events:none!important;
+  will-change:left,transform!important;
+  filter:drop-shadow(0 8px 8px rgba(31,64,99,.13))!important;
+}
+
+/* Every transition gets its own travel path / resting zone. */
+.kr-discoveryBridge::after{
+  animation:krRoadBusOne 8.5s cubic-bezier(.45,0,.25,1) infinite alternate!important;
+}
+.kr-imageBreak:nth-of-type(1)::after{
+  animation:krRoadBusTwo 9.5s cubic-bezier(.45,0,.25,1) infinite alternate!important;
+}
+.kr-imageBreak:nth-of-type(2)::after{
+  animation:krRoadBusThree 10.5s cubic-bezier(.45,0,.25,1) infinite alternate!important;
+}
+.kr-imageBreak:nth-of-type(3)::after{
+  animation:krRoadBusFour 9s cubic-bezier(.45,0,.25,1) infinite alternate!important;
+}
+.kr-imageBreak:nth-of-type(4)::after{
+  animation:krRoadBusFive 11s cubic-bezier(.45,0,.25,1) infinite alternate!important;
+}
+
+@keyframes krRoadBusOne{
+  0%{left:4%;transform:translateX(0) translateY(4px) scale(.94)}
+  100%{left:68%;transform:translateX(0) translateY(-3px) scale(1)}
+}
+@keyframes krRoadBusTwo{
+  0%{left:72%;transform:translateX(0) translateY(-2px) scale(.96) scaleX(-1)}
+  100%{left:18%;transform:translateX(0) translateY(3px) scale(1) scaleX(-1)}
+}
+@keyframes krRoadBusThree{
+  0%{left:12%;transform:translateX(0) translateY(3px) scale(.95)}
+  100%{left:78%;transform:translateX(0) translateY(-3px) scale(1)}
+}
+@keyframes krRoadBusFour{
+  0%{left:78%;transform:translateX(0) translateY(-3px) scale(.95) scaleX(-1)}
+  100%{left:34%;transform:translateX(0) translateY(4px) scale(1) scaleX(-1)}
+}
+@keyframes krRoadBusFive{
+  0%{left:35%;transform:translateX(0) translateY(4px) scale(.94)}
+  100%{left:88%;transform:translateX(0) translateY(-2px) scale(1)}
+}
+
+/* Keep the road transition visually attached to the next section. */
+.kr-ateliersWave,
+.kr-newsWave,
+.kr-galleryWave,
+.kr-staffWave{
+  position:relative!important;
+}
+
+@media (max-width:760px){
+  .kr-discoveryBridge,
+  .kr-imageBreak{
+    height:112px!important;
+    min-height:112px!important;
+    max-height:112px!important;
+    background-size:100% 100%!important;
+  }
+  .kr-discoveryBridge::after,
+  .kr-imageBreak::after{
+    width:108px!important;
+    height:59px!important;
+    margin-top:-30px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .kr-discoveryBridge::after,
+  .kr-imageBreak::after{
+    animation:none!important;
+  }
+}
