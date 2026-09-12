@@ -22,7 +22,7 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
   const isReference = activeLayout === "kindergarten-reference";
   const templateLayout = activeLayout === "flow" ? "modern" : activeLayout;
   const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const schoolName = config.brandName || "Bilim Çocuk Anaokulu";
+  const schoolName = "Bilim Çocuk Anaokulu";
 
   return (
     <main className="kindergartenDesignHub">
@@ -53,7 +53,7 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
         </div>
       </header>
       <div className="kindergartenDesignToolbarLegacy" aria-hidden="true">{kindergartenLayouts.map((layout, index) => <button key={layout} type="button" className={activeLayout === layout ? "active" : ""} onClick={() => onLayoutChange(layout)}><small>{index + 1}</small>{layout === "kindergarten-reference" ? "Bilim Çocuk" : layout}</button>)}</div>
-      {isReference ? <KindergartenReferenceLayout config={config} onLayoutChange={onLayoutChange} /> : <TemplateLanding config={config} activeTemplate="kindergarten" activeLayout={templateLayout} onLayoutChange={onLayoutChange} showTemplateSwitch showLayoutSwitch={false} />}
+      {isReference ? <KindergartenReferenceLayout config={{...config, brandName: schoolName}} onLayoutChange={onLayoutChange} /> : <TemplateLanding config={config} activeTemplate="kindergarten" activeLayout={templateLayout} onLayoutChange={onLayoutChange} showTemplateSwitch showLayoutSwitch={false} />}
     </main>
   );
 }
