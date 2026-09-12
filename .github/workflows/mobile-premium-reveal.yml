@@ -1,0 +1,40 @@
+name: Apply Mobile Premium Reveal
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reveal:
+    if: ${{ !contains(github.event.head_commit.message, '[mobile-reveal]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add mobile scroll-driven reveal
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const file = 'apps/web/src/styles/kindergarten-design-chooser.css';
+          const marker = '/* Mobile premium scroll reveal */';
+          const reveal = `\n\n${marker}\n@media(max-width:767px){\n  .kr-story,.kr-experienceWave,.kr-classesWave,.kr-discoveryBridge,.kr-news,.kr-workshops,.kr-join,.kr-footerTop,.kr-footerBottom{\n    animation:krMobileReveal linear both;\n    animation-timeline:view(block 82% 8%);\n    animation-range:entry 0% cover 42%;\n    will-change:opacity,transform;\n  }\n  .kr-sectionHead,.kr-storyCopy,.kr-classShowcase,.kr-facts,.kr-statsInner{\n    animation:krMobileContentReveal linear both;\n    animation-timeline:view(block 86% 12%);\n    animation-range:entry 0% cover 36%;\n  }\n  .kr-waveSection{scroll-margin-top:8px}\n}\n@keyframes krMobileReveal{\n  from{opacity:0;transform:translate3d(0,34px,0) scale(.985)}\n  to{opacity:1;transform:translate3d(0,0,0) scale(1)}\n}\n@keyframes krMobileContentReveal{\n  from{opacity:0;transform:translate3d(0,20px,0)}\n  to{opacity:1;transform:translate3d(0,0,0)}\n}\n@media(max-width:767px) and (prefers-reduced-motion:reduce){\n  .kr-story,.kr-experienceWave,.kr-classesWave,.kr-discoveryBridge,.kr-news,.kr-workshops,.kr-join,.kr-footerTop,.kr-footerBottom,.kr-sectionHead,.kr-storyCopy,.kr-classShowcase,.kr-facts,.kr-statsInner{animation:none!important;transform:none!important;opacity:1!important}\n}\n`;
+          let text = fs.readFileSync(file, 'utf8');
+          if (!text.includes(marker)) { fs.writeFileSync(file, text + reveal); }
+          NODE
+
+      - name: Commit mobile reveal
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/src/styles/kindergarten-design-chooser.css
+          git commit -m "[mobile-reveal] Add premium mobile scroll reveal"
+          git push
