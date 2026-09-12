@@ -27,3 +27,9 @@
   .kr-join{min-height:180px;clip-path:none;border-radius:28px 28px 0 0;flex-direction:column;gap:14px;text-align:center;padding:30px 22px}.kr-join>div>span{font-size:23px}.kr-join>a{padding:13px 20px}.kr-bunny{left:12px;width:55px;height:55px}.kr-footerTop{width:100%;max-width:none!important}.kr-footerBottom{padding-left:20px!important;padding-right:20px!important;text-align:center}
 }
 @media(max-width:480px){.bcBrandLogo{width:105px!important;height:54px!important;flex-basis:105px}.bcBrand{gap:7px;max-width:calc(100% - 82px)}.bcBrand strong{font-size:13px}.bcBrand small{font-size:6px}.bcCta{padding:9px 11px;font-size:9px}.bcTopbarInner>span:first-child{font-size:8px}.kr-hero{height:150vw;min-height:520px}.kr-story{padding-top:48px}.kr-storyPhotos{height:250px}.photoA{height:130px}.photoB{height:135px;top:115px}.kr-statsInner{grid-template-columns:1fr 1fr}.kr-stat{width:120px;height:120px}.kr-news,.kr-workshops{padding-left:16px;padding-right:16px}.kr-newsImage{height:135px}.kr-sectionHead h2{font-size:26px}}
+
+/* Final brand lockup alignment: bring the name right up to the logo and lower it slightly. */
+.bcBrand{gap:3px!important}
+.bcBrandText{transform:translateY(7px)!important}
+@media(max-width:820px){.bcBrand{gap:3px!important}.bcBrandText{transform:translateY(6px)!important}}
+@media(max-width:480px){.bcBrand{gap:3px!important}.bcBrandText{transform:translateY(5px)!important}}
