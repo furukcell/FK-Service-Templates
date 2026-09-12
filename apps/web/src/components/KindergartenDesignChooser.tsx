@@ -28,7 +28,6 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
     if (!isReference) return;
     let cancelled = false;
     let timer: number | undefined;
-
     const run = () => {
       if (cancelled) return;
       const footer = document.querySelector<HTMLElement>(".kr-footerTop");
@@ -85,7 +84,7 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
         <div className="bcNavWrap">
           <a className="bcBrand" href="#top">
             <span className="bcBrandLogo" aria-hidden="true"><span>☺</span></span>
-            <span className="bcBrandText"><strong><span className="bcBrandBlue">Bilim Çocuk</span> <span className="bcBrandRed">Anaokulu</span></strong><small>Güvenli Yarınlar, Mutlu Çocuklar</small></span>
+            <div className="bcBrandText"><strong><span style={{ color: "#1976d2" }}>Bilim Çocuk</span> <span style={{ color: "#e53935" }}>Anaokulu</span></strong><small>Güvenli Yarınlar, Mutlu Çocuklar</small></div>
           </a>
           <button className="bcSearch" type="button" aria-label="Ara">⌕</button>
           <nav className="bcNav" aria-label="Ana menü">
