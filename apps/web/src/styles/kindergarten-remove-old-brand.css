@@ -1,26 +1,6 @@
-/* The hero artwork contains the old Minik Adımlar Kreşi lockup in its top-left corner. Cover only that small embedded area until the header is redesigned. */
-main.kr-site .kr-hero .kr-heroImage::before{
-  content:""!important;
-  position:absolute!important;
-  z-index:20!important;
-  left:5.4vw!important;
-  top:0.7vw!important;
-  width:205px!important;
-  height:58px!important;
-  border-radius:8px 14px 14px 8px!important;
-  background:rgba(45,72,38,.94)!important;
-  box-shadow:0 1px 8px rgba(20,35,20,.16)!important;
-  pointer-events:none!important;
-}
-@media (min-width:1500px){
-  main.kr-site .kr-hero .kr-heroImage::before{width:220px!important;height:62px!important}
-}
-@media (max-width:760px){
-  main.kr-site .kr-hero .kr-heroImage::before{
-    left:4vw!important;
-    top:1.4vw!important;
-    width:165px!important;
-    height:50px!important;
-    border-radius:7px 11px 11px 7px!important;
-  }
+/* The reference page now uses the Bilim Çocuk header. Remove the legacy Minik Adımlar brand/nav completely so it cannot remain visible behind the design chooser. */
+main.kindergartenDesignHub > .kr-site > .kr-nav,
+main.kindergartenDesignHub > .kr-site > .kr-nav .kr-brand,
+main.kindergartenDesignHub > .kr-site .logoLockup{
+  display:none!important;
 }
