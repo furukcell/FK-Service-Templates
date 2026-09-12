@@ -56,6 +56,7 @@ import "../src/styles/kindergarten-science-doodles.css";
 import "../src/styles/kindergarten-why-bridge-fix.css";
 import "../src/styles/kindergarten-road-transitions.css";
 import "../src/styles/kindergarten-contact-enhancements";
+import "../src/styles/kindergarten-remove-old-brand.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <>
