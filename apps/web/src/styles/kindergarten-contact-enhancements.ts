@@ -3,6 +3,7 @@ function addContactStyles() {
   const style = document.createElement("style");
   style.id = "kr-contact-enhancements-style";
   style.textContent = `
+    main.kr-site .kr-hero .kr-heroImage::before{content:""!important;display:block!important;position:absolute!important;z-index:3!important;left:0!important;top:0!important;width:300px!important;height:92px!important;background-image:url("/images/logos/bilim-cocuk-hero.png")!important;background-repeat:no-repeat!important;background-size:100vw 56.25vw!important;background-position:-310px 0!important;pointer-events:none!important}
     main.kr-site .kr-footerTop > div:nth-child(3)::after{content:none!important;display:none!important}
     main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactPhone,
     main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactAddress{display:block!important;color:rgba(255,255,255,.82)!important;font:500 14px/1.55 'Baloo 2',sans-serif!important;text-decoration:none!important;margin:0!important}
@@ -10,21 +11,20 @@ function addContactStyles() {
     main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactAddress:hover{color:#ffd447!important}
     main.kr-site .kr-contactActions{display:none!important}
     main.kr-site .kr-contactMap{display:block!important;width:100%!important;height:150px!important;margin-top:12px!important;border:0!important;border-radius:16px!important;overflow:hidden!important;box-shadow:0 8px 24px rgba(0,0,0,.16)!important;background:#dfe7ef!important}
-    main.kr-site .kr-brandSocialWrap{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:24px!important;min-width:0!important}
-    main.kr-site .kr-brandSocialWrap .footerBrand{flex:0 0 auto!important}
-    main.kr-site .kr-brandSocialWrap .kr-social{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;width:auto!important;margin:0!important;padding:0!important;border:0!important;grid-column:auto!important}
-    main.kr-site .kr-social > b{display:none!important}
-    main.kr-site .kr-social > a{display:inline-flex!important;flex:0 0 44px!important;align-items:center!important;justify-content:center!important;width:44px!important;min-width:44px!important;height:44px!important;padding:0!important;margin:0!important;border-radius:50%!important;background:rgba(255,255,255,.1)!important;border:1px solid rgba(255,255,255,.14)!important;color:#fff!important;text-decoration:none!important;transition:transform .2s ease,background .2s ease!important}
-    main.kr-site .kr-social > a:hover{transform:translateY(-3px)!important;background:rgba(255,255,255,.2)!important}
-    main.kr-site .kr-social svg{display:block!important;width:21px!important;height:21px!important;fill:currentColor!important}
+    main.kr-site .kr-social{display:none!important}
+    main.kr-site .kr-footerTop > div:first-child{display:flex!important;align-items:center!important;gap:14px!important}
+    main.kr-site .kr-footerTop > div:first-child .kr-footerSocial{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:8px!important;margin-left:8px!important}
+    main.kr-site .kr-footerTop > div:first-child .kr-footerSocial > a{display:inline-flex!important;flex:0 0 38px!important;align-items:center!important;justify-content:center!important;width:38px!important;min-width:38px!important;height:38px!important;padding:0!important;margin:0!important;border-radius:50%!important;background:rgba(255,255,255,.1)!important;border:1px solid rgba(255,255,255,.14)!important;color:#fff!important;text-decoration:none!important;transition:transform .2s ease,background .2s ease!important}
+    main.kr-site .kr-footerTop > div:first-child .kr-footerSocial > a:hover{transform:translateY(-3px)!important;background:rgba(255,255,255,.2)!important}
+    main.kr-site .kr-footerTop > div:first-child .kr-footerSocial svg{display:block!important;width:19px!important;height:19px!important;fill:currentColor!important}
     main.kr-site .kr-footerBottom{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important}
     main.kr-site .kr-footerBottom .kr-footerCopyright{display:block!important;margin:0!important}
     main.kr-site .kr-footerBottom .kr-footerAgency{display:block!important;margin:0!important}
     @media(max-width:760px){
+      main.kr-site .kr-hero .kr-heroImage::before{width:170px!important;height:58px!important;background-size:100vw 56.25vw!important;background-position:-180px 0!important}
       main.kr-site .kr-footerTop{display:grid!important;grid-template-columns:1fr!important;gap:28px!important;padding:42px 20px 26px!important;align-items:stretch!important}
       main.kr-site .kr-footerTop > div{width:100%!important;min-width:0!important}
-      main.kr-site .kr-brandSocialWrap{width:100%!important;justify-content:center!important;gap:14px!important;flex-wrap:nowrap!important}
-      main.kr-site .kr-footer .footerBrand{display:flex!important;align-items:center!important;justify-content:center!important;text-align:left!important;width:auto!important}
+      main.kr-site .kr-footer .footerBrand{display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;width:100%!important}
       main.kr-site .kr-footer .footerBrand .kr-logoMark{width:54px!important;height:54px!important;margin:0 10px 0 0!important;flex:0 0 auto!important}
       main.kr-site .kr-footer .footerBrand b::after{font-size:20px!important}
       main.kr-site .kr-footer .footerBrand small{font-size:11px!important;line-height:1.3!important}
@@ -36,9 +36,10 @@ function addContactStyles() {
       main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactPhone,
       main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactAddress{font-size:13px!important;line-height:1.5!important}
       main.kr-site .kr-contactMap{height:190px!important;margin:12px auto 0!important;width:100%!important;max-width:520px!important;border-radius:14px!important}
-      main.kr-site .kr-social{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;justify-content:flex-start!important;align-items:center!important;gap:8px!important;overflow:visible!important}
-      main.kr-site .kr-social > a{flex:0 0 38px!important;width:38px!important;min-width:38px!important;height:38px!important;padding:0!important;margin:0!important}
-      main.kr-site .kr-social svg{width:18px!important;height:18px!important}
+      main.kr-site .kr-footerTop > div:first-child{justify-content:center!important;flex-wrap:nowrap!important}
+      main.kr-site .kr-footerTop > div:first-child .kr-footerSocial{flex:0 0 auto!important;margin-left:6px!important;gap:7px!important}
+      main.kr-site .kr-footerTop > div:first-child .kr-footerSocial > a{flex:0 0 34px!important;width:34px!important;min-width:34px!important;height:34px!important}
+      main.kr-site .kr-footerTop > div:first-child .kr-footerSocial svg{width:17px!important;height:17px!important}
       main.kr-site .kr-footerBottom{padding:16px 18px 22px!important;text-align:center!important;font-size:11px!important;line-height:1.5!important;flex-direction:column!important;gap:6px!important}
       main.kr-site .kr-join{min-height:220px!important;padding:40px 20px!important}
       main.kr-site .kr-join > div:first-child span::after{font-size:29px!important}
@@ -61,6 +62,14 @@ function setSocialIcons(footer: Element) {
     link.setAttribute("aria-label", ["Instagram", "Facebook", "YouTube"][index]);
     link.setAttribute("title", ["Instagram", "Facebook", "YouTube"][index]);
   });
+
+  const brand = footer.querySelector(".footerBrand");
+  if (brand && !brand.querySelector(".kr-footerSocial")) {
+    const wrap = document.createElement("span");
+    wrap.className = "kr-footerSocial";
+    links.slice(0, 3).forEach((link) => wrap.appendChild(link));
+    brand.appendChild(wrap);
+  }
 }
 
 function enhanceKindergartenContact() {
@@ -73,8 +82,6 @@ function enhanceKindergartenContact() {
   const contactColumn = Array.from(footer.querySelectorAll(".kr-footerTop > div")).find((el) =>
     el.querySelector("b")?.textContent?.trim() === "Bize Ulaşın"
   );
-  const socialColumn = footer.querySelector(".kr-social");
-  const footerBrand = footer.querySelector(".footerBrand");
   if (!contactColumn || !footerTop) return false;
 
   const phones = ["0507 952 12 82", "0532 699 45 85"];
@@ -110,20 +117,6 @@ function enhanceKindergartenContact() {
   map.loading = "lazy";
   map.referrerPolicy = "no-referrer-when-downgrade";
   contactColumn.appendChild(map);
-
-  if (socialColumn && footerBrand && footerBrand.parentElement !== footerTop.querySelector(".kr-brandSocialWrap")) {
-    let brandWrap = footerTop.querySelector(".kr-brandSocialWrap");
-    if (!brandWrap) {
-      brandWrap = document.createElement("div");
-      brandWrap.className = "kr-brandSocialWrap";
-      footerTop.insertBefore(brandWrap, footerTop.firstChild);
-    }
-    brandWrap.appendChild(footerBrand);
-    brandWrap.appendChild(socialColumn);
-  } else if (socialColumn) {
-    const brandWrap = footerTop.querySelector(".kr-brandSocialWrap");
-    if (brandWrap && socialColumn.parentElement !== brandWrap) brandWrap.appendChild(socialColumn);
-  }
 
   const bottom = footer.querySelector(".kr-footerBottom");
   if (bottom) {
