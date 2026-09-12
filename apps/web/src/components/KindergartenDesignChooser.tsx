@@ -35,54 +35,35 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
       if (!footer || footer.dataset.footerRevamp === "1") return;
       const children = Array.from(footer.children) as HTMLElement[];
       if (children.length < 3) return;
-
       const original = footer.innerHTML;
       const address = config.address || "İsmetpaşa Mahallesi, Ahmet Taner Kışlalı Cad. No:19, 48200 Milas/Muğla";
       const mapSrc = "https://maps.google.com/maps?q=" + encodeURIComponent(address) + "&t=m&z=15&output=embed";
-
       const faq = document.createElement("div");
       faq.className = "bcFooterFaq";
       faq.innerHTML = '<div class="bcFooterEyebrow">BİLİM ÇOCUK ANAOKULU</div><h2>Sık Sorulan Sorular</h2><p class="bcFooterLead">Aklınıza takılan en önemli soruların kısa cevapları.</p><div class="bcFaqList"><details><summary>Hangi yaş gruplarına eğitim veriyorsunuz?<span>+</span></summary><p>Çocuklarımızın yaş ve gelişim dönemlerine uygun sınıf gruplarıyla okul öncesi eğitim sunuyoruz. Detaylı bilgi için okul görüşmesinde çocuğunuzun yaşına göre uygun grubu birlikte belirliyoruz.</p></details><details><summary>Kayıt süreci nasıl ilerliyor?<span>+</span></summary><p>Ön kayıt talebinizin ardından sizinle iletişime geçerek okul hakkında bilgi veriyor ve görüşme planlıyoruz. Görüşmede kayıt koşulları ve gerekli bilgiler paylaşılır.</p></details><details><summary>Okulda hangi etkinlikler yapılıyor?<span>+</span></summary><p>Bilim, sanat, doğa, müzik, drama ve yaratıcı oyun odaklı çalışmalarla çocukların merakını ve üretme becerilerini destekleyen etkinlikler düzenliyoruz.</p></details><details><summary>Veli bilgilendirmesi nasıl yapılıyor?<span>+</span></summary><p>Çocuğun günlük yaşamı, etkinlikleri ve gelişimiyle ilgili iletişim okulun kullandığı veli iletişim kanalları üzerinden düzenli şekilde sürdürülür.</p></details><details><summary>Okulu ziyaret etmek için ne yapmalıyım?<span>+</span></summary><p>Randevu Al veya Ön Kayıt butonlarından bize ulaşarak uygun bir ziyaret zamanı oluşturabilirsiniz.</p></details></div>';
-
       const map = document.createElement("div");
       map.className = "bcFooterMapCol";
       map.innerHTML = '<div class="bcFooterMapTitle">Bizi Nerede Bulabilirsiniz?</div><div class="bcFooterMapWrap"><iframe title="Bilim Çocuk Anaokulu konumu" src="' + mapSrc + '" loading="lazy"></iframe></div>';
-
       footer.dataset.footerRevamp = "1";
       children[0].replaceWith(faq);
-
       const contact = children[2];
-      if (contact) {
-        contact.querySelectorAll("iframe, .bcFooterMapWrap, .bcFooterMapCol, .bcFooterMapAddress").forEach((node) => node.remove());
-      }
-
+      if (contact) contact.querySelectorAll("iframe, .bcFooterMapWrap, .bcFooterMapCol, .bcFooterMapAddress").forEach((node) => node.remove());
       const social = children[3];
-      if (social) social.replaceWith(map);
-      else footer.appendChild(map);
-
+      if (social) social.replaceWith(map); else footer.appendChild(map);
       const style = document.createElement("style");
       style.dataset.footerFaqStyle = "1";
       style.textContent = ".kr-footerTop{display:grid!important;grid-template-columns:minmax(0,1.55fr) minmax(150px,.7fr) minmax(190px,.9fr) minmax(360px,1.25fr)!important;gap:34px!important;align-items:start!important;max-width:1320px!important;margin:0 auto!important;padding:70px 24px 55px!important}.bcFooterFaq{min-width:0}.bcFooterEyebrow{font-size:10px;font-weight:900;letter-spacing:1.5px;color:#ffd447;margin-bottom:8px}.bcFooterFaq h2{margin:0;color:#fff;font:800 34px/1.05 'Baloo 2',sans-serif}.bcFooterLead{margin:9px 0 18px;color:rgba(255,255,255,.68);font-size:11px;line-height:1.5}.bcFaqList{display:grid;gap:8px}.bcFaqList details{background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.11);border-radius:12px;overflow:hidden}.bcFaqList summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;color:#fff;font-size:11px;font-weight:900}.bcFaqList summary::-webkit-details-marker{display:none}.bcFaqList summary span{flex:0 0 22px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#1976d2;font-size:16px;line-height:1}.bcFaqList details[open] summary span{transform:rotate(45deg)}.bcFaqList details p{margin:0;padding:0 14px 14px;color:rgba(255,255,255,.72);font-size:10px;line-height:1.6}.bcFooterMapCol{min-width:0;width:100%}.bcFooterMapTitle{color:#fff;font:800 20px/1.15 'Baloo 2',sans-serif;margin:0 0 13px}.bcFooterMapWrap{width:100%;height:205px;border-radius:18px;overflow:hidden;background:#fff;border:4px solid rgba(255,255,255,.92);box-shadow:0 16px 36px rgba(0,0,0,.16);aspect-ratio:16/9}.bcFooterMapWrap iframe{display:block;width:100%;height:100%;border:0}.bcFooterMapAddress{display:none!important}@media(max-width:1050px){.kr-footerTop{grid-template-columns:minmax(0,1.4fr) minmax(150px,.7fr) minmax(190px,.9fr)!important}.bcFooterMapCol{grid-column:1/-1}.bcFooterMapWrap{height:260px;aspect-ratio:auto}}@media(max-width:760px){.kr-footerTop{grid-template-columns:1fr!important;gap:28px!important;padding:55px 20px 40px!important}.bcFooterMapCol{grid-column:auto}.bcFooterMapWrap{height:230px;aspect-ratio:auto}}";
       document.head.appendChild(style);
-
-      const cleanup = () => {
-        footer.innerHTML = original;
-        delete footer.dataset.footerRevamp;
-        style.remove();
-      };
+      const cleanup = () => { footer.innerHTML = original; delete footer.dataset.footerRevamp; style.remove(); };
       (footer as HTMLElement & { __faqCleanup?: () => void }).__faqCleanup = cleanup;
     };
-
     timer = window.setTimeout(run, 0);
     return () => {
       cancelled = true;
       if (timer) window.clearTimeout(timer);
       const footer = document.querySelector<HTMLElement>(".kr-footerTop");
       const cleanup = (footer as (HTMLElement & { __faqCleanup?: () => void }) | null)?.__faqCleanup;
-      if (cleanup) {
-        cleanup();
-        delete (footer as HTMLElement & { __faqCleanup?: () => void }).__faqCleanup;
-      }
+      if (cleanup) { cleanup(); delete (footer as HTMLElement & { __faqCleanup?: () => void }).__faqCleanup; }
     };
   }, [isReference, config.address]);
 
@@ -102,7 +83,10 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
           </div>
         </div>
         <div className="bcNavWrap">
-          <a className="bcBrand" href="#top"><span className="bcBrandLogo" aria-hidden="true"><span>☺</span></span><span><strong>{schoolName}</strong><small>Güvenli Yarınlar, Mutlu Çocuklar</small></span></a>
+          <a className="bcBrand" href="#top">
+            <span className="bcBrandLogo" aria-hidden="true"><span>☺</span></span>
+            <span className="bcBrandText"><strong><span className="bcBrandBlue">Bilim Çocuk</span> <span className="bcBrandRed">Anaokulu</span></strong><small>Güvenli Yarınlar, Mutlu Çocuklar</small></span>
+          </a>
           <button className="bcSearch" type="button" aria-label="Ara">⌕</button>
           <nav className="bcNav" aria-label="Ana menü">
             <a className="bcNavLink active" href="#top">Anasayfa</a>
