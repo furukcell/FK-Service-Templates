@@ -5,3 +5,8 @@
 @media(max-width:1120px){.bcNavWrap{gap:12px;padding:0 18px}.bcBrand{min-width:275px;transform:translateX(-120px)}.bcBrand strong{font-size:18px}.bcNav{gap:3px}.bcNavLink{padding:0 6px;font-size:11px}.bcCta{padding:12px 16px;font-size:11px}.bcTopbarInner{padding:0 18px}}
 @media(max-width:820px){.bcTopbar{height:36px}.bcTopbarInner{font-size:8px;gap:10px}.bcTopRight span:not(:first-child){display:none}.bcTopRight{gap:8px}.bcTopRight a{width:24px;height:24px}.bcTopRight a svg{width:13px;height:13px}.bcNavWrap{height:76px;padding:0 12px;gap:8px}.bcBrand{min-width:0;flex:1;transform:none}.bcBrandLogo{width:48px;height:48px}.bcBrandLogo span{font-size:25px}.bcBrand strong{font-size:15px}.bcBrand small{font-size:7px}.bcSearch{display:none}.bcNav{gap:0}.bcNavLink{padding:0 6px;font-size:9px}.bcCta{padding:10px 12px;font-size:9px}.bcDropdown{min-width:195px}.bcDropdown a{font-size:10px;padding:9px}}
 @media(max-width:620px){.bcTopbarInner>span:nth-child(2),.bcTopRight{display:none}.bcTopbarInner{justify-content:center}.bcNavWrap{height:auto;min-height:72px;flex-wrap:wrap;padding:7px 9px}.bcBrand{flex-basis:calc(100% - 105px);transform:none}.bcCta{margin-left:0}.bcNav{order:3;width:100%;height:44px;overflow-x:auto;justify-content:flex-start}.bcNavLink{height:38px;font-size:9px;padding:0 9px}.bcDropdown{top:40px}.bcBrand strong{font-size:14px}}
+
+/* Hero: keep more of the left side visible while adding a gentle, noticeable pan. */
+.kr-heroImage{background-position:40% center;animation:krHeroPan 12s ease-in-out infinite alternate;will-change:background-position}
+@keyframes krHeroPan{0%{background-position:40% center}100%{background-position:54% center}}
+@media(prefers-reduced-motion:reduce){.kr-heroImage{animation:none;background-position:40% center}}
