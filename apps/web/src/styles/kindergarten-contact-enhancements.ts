@@ -15,10 +15,27 @@ function addContactStyles() {
     main.kr-site .kr-social > a{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:42px!important;height:42px!important;padding:0 13px!important;border-radius:999px!important;background:rgba(255,255,255,.1)!important;border:1px solid rgba(255,255,255,.14)!important;color:#fff!important;text-decoration:none!important;font:800 13px/1 'Baloo 2',sans-serif!important;transition:transform .2s ease,background .2s ease!important}
     main.kr-site .kr-social > a:hover{transform:translateY(-3px)!important;background:rgba(255,255,255,.2)!important}
     @media(max-width:760px){
-      main.kr-site .kr-contactMap{height:180px!important;border-radius:14px!important}
-      main.kr-site .kr-social{flex-wrap:wrap!important;gap:8px!important;padding-top:16px!important}
-      main.kr-site .kr-social > b{width:100%!important;text-align:center!important;margin:0 0 2px!important}
-      main.kr-site .kr-social > a{min-width:40px!important;height:40px!important}
+      main.kr-site .kr-footerTop{display:grid!important;grid-template-columns:1fr!important;gap:28px!important;padding:42px 20px 26px!important;align-items:stretch!important}
+      main.kr-site .kr-footerTop > div{width:100%!important;min-width:0!important}
+      main.kr-site .kr-footer .footerBrand{display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;width:100%!important}
+      main.kr-site .kr-footer .footerBrand .kr-logoMark{width:54px!important;height:54px!important;margin:0 10px 0 0!important;flex:0 0 auto!important}
+      main.kr-site .kr-footer .footerBrand b::after{font-size:20px!important}
+      main.kr-site .kr-footer .footerBrand small{font-size:11px!important;line-height:1.3!important}
+      main.kr-site .kr-footerTop > div:nth-child(2),
+      main.kr-site .kr-footerTop > div:nth-child(3){text-align:center!important}
+      main.kr-site .kr-footerTop > div:nth-child(2) b,
+      main.kr-site .kr-footerTop > div:nth-child(3) b{display:block!important;margin-bottom:8px!important}
+      main.kr-site .kr-footerTop > div:nth-child(2) a{display:block!important;margin:4px 0!important}
+      main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactPhone,
+      main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactAddress{font-size:13px!important;line-height:1.5!important}
+      main.kr-site .kr-contactMap{height:190px!important;margin:12px auto 0!important;width:100%!important;max-width:520px!important;border-radius:14px!important}
+      main.kr-site .kr-social{grid-column:1!important;flex-wrap:nowrap!important;justify-content:center!important;gap:8px!important;margin-top:0!important;padding:18px 0 2px!important;overflow-x:auto!important;overflow-y:hidden!important;-webkit-overflow-scrolling:touch!important;scrollbar-width:none!important}
+      main.kr-site .kr-social::-webkit-scrollbar{display:none!important}
+      main.kr-site .kr-social > b{flex:0 0 auto!important;font-size:12px!important;margin:0 4px 0 0!important}
+      main.kr-site .kr-social > a{flex:0 0 auto!important;min-width:42px!important;height:40px!important;padding:0 12px!important;font-size:12px!important}
+      main.kr-site .kr-footerBottom{padding:16px 18px 22px!important;text-align:center!important;font-size:11px!important;line-height:1.5!important}
+      main.kr-site .kr-join{min-height:220px!important;padding:40px 20px!important}
+      main.kr-site .kr-join > div:first-child span::after{font-size:29px!important}
     }
   `;
   document.head.appendChild(style);
