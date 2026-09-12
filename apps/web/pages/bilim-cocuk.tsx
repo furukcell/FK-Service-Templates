@@ -1,7 +1,7 @@
 import type { LayoutVariant } from "@fk-templates/shared";
 import { KindergartenDesignChooser } from "../src/components/KindergartenDesignChooser";
 import { SeoHead } from "../src/components/SeoHead";
-import { demoKindergartenConfig } from "../../configs/demo-kindergarten";
+import { demoKindergartenConfig } from "../../../configs/demo-kindergarten";
 
 const kindergartenDemoConfig = {
   ...demoKindergartenConfig,
@@ -9,6 +9,8 @@ const kindergartenDemoConfig = {
 };
 
 export default function BilimCocukDemoPage() {
+  const activeLayout: LayoutVariant = "kindergarten-reference";
+
   return (
     <>
       <SeoHead
@@ -16,19 +18,18 @@ export default function BilimCocukDemoPage() {
         description="Bilim Çocuk Anaokulu web sitesi."
         canonicalPath="/bilim-cocuk"
       />
-      <div className="bcDemoOnly">
-        <KindergartenDesignChooser
-          config={kindergartenDemoConfig}
-          activeLayout="kindergarten-reference"
-          onLayoutChange={() => undefined}
-        />
-      </div>
       <style jsx global>{`
-        /* The shared chooser keeps its selector hidden on the public demo route. */
         .bcDemoOnly .kindergartenDesignToolbarLegacy {
           display: none !important;
         }
       `}</style>
+      <div className="bcDemoOnly">
+        <KindergartenDesignChooser
+          config={kindergartenDemoConfig}
+          activeLayout={activeLayout}
+          onLayoutChange={() => undefined}
+        />
+      </div>
     </>
   );
 }
