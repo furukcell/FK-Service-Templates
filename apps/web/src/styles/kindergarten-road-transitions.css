@@ -25,6 +25,14 @@ main.kr-site .kr-imageBreak img{
   display:none!important;
 }
 
+/* The lower content pages use one warm cream canvas. */
+main.kr-site .kr-ateliersWave,
+main.kr-site .kr-newsWave,
+main.kr-site .kr-galleryWave,
+main.kr-site .kr-staffWave{
+  background:#fffaf1!important;
+}
+
 main.kr-site .kr-discoveryBridge::after,
 main.kr-site .kr-imageBreak::after{
   content:""!important;
@@ -41,45 +49,39 @@ main.kr-site .kr-imageBreak::after{
   filter:drop-shadow(0 6px 7px rgba(31,64,99,.14))!important;
 }
 
+/* The source bus faces left; scaleX(-1) mirrors it so it visibly drives right. */
+@keyframes krRoadBusOne{
+  0%{left:-12%;transform:translateY(4px) scaleX(-1) scale(.94)}
+  45%{left:42%;transform:translateY(-2px) scaleX(-1) scale(.98)}
+  100%{left:112%;transform:translateY(2px) scaleX(-1) scale(1)}
+}
+@keyframes krRoadBusTwo{
+  0%{left:-28%;transform:translateY(1px) scaleX(-1) scale(.96)}
+  48%{left:34%;transform:translateY(-3px) scaleX(-1) scale(.99)}
+  100%{left:103%;transform:translateY(2px) scaleX(-1) scale(1)}
+}
+@keyframes krRoadBusThree{
+  0%{left:5%;transform:translateY(3px) scaleX(-1) scale(.95)}
+  50%{left:56%;transform:translateY(-3px) scaleX(-1) scale(.99)}
+  100%{left:116%;transform:translateY(2px) scaleX(-1) scale(1)}
+}
+@keyframes krRoadBusFour{
+  0%{left:-18%;transform:translateY(-2px) scaleX(-1) scale(.95)}
+  46%{left:28%;transform:translateY(3px) scaleX(-1) scale(.98)}
+  100%{left:108%;transform:translateY(-1px) scaleX(-1) scale(1)}
+}
+@keyframes krRoadBusFive{
+  0%{left:15%;transform:translateY(4px) scaleX(-1) scale(.94)}
+  52%{left:63%;transform:translateY(-2px) scaleX(-1) scale(.99)}
+  100%{left:121%;transform:translateY(2px) scaleX(-1) scale(1)}
+}
+
 /* 4–5 second slow, continuous forward travel. */
 main.kr-site .kr-discoveryBridge::after{animation:krRoadBusOne 4.5s linear infinite!important}
 main.kr-site .kr-whyChoose + .kr-imageBreak::after{animation:krRoadBusTwo 4.2s linear infinite!important}
 main.kr-site .kr-ateliersWave + .kr-imageBreak::after{animation:krRoadBusThree 4.8s linear infinite!important}
 main.kr-site .kr-newsWave + .kr-imageBreak::after{animation:krRoadBusFour 4.4s linear infinite!important}
 main.kr-site .kr-galleryWave + .kr-imageBreak::after{animation:krRoadBusFive 5s linear infinite!important}
-
-@keyframes krRoadBusOne{
-  0%{left:-12%;transform:translateY(4px) scale(.94)}
-  45%{left:42%;transform:translateY(-2px) scale(.98)}
-  100%{left:112%;transform:translateY(2px) scale(1)}
-}
-@keyframes krRoadBusTwo{
-  0%{left:-28%;transform:translateY(1px) scale(.96)}
-  48%{left:34%;transform:translateY(-3px) scale(.99)}
-  100%{left:103%;transform:translateY(2px) scale(1)}
-}
-@keyframes krRoadBusThree{
-  0%{left:5%;transform:translateY(3px) scale(.95)}
-  50%{left:56%;transform:translateY(-3px) scale(.99)}
-  100%{left:116%;transform:translateY(2px) scale(1)}
-}
-@keyframes krRoadBusFour{
-  0%{left:-18%;transform:translateY(-2px) scale(.95)}
-  46%{left:28%;transform:translateY(3px) scale(.98)}
-  100%{left:108%;transform:translateY(-1px) scale(1)}
-}
-@keyframes krRoadBusFive{
-  0%{left:15%;transform:translateY(4px) scale(.94)}
-  52%{left:63%;transform:translateY(-2px) scale(.99)}
-  100%{left:121%;transform:translateY(2px) scale(1)}
-}
-
-main.kr-site .kr-ateliersWave,
-main.kr-site .kr-newsWave,
-main.kr-site .kr-galleryWave,
-main.kr-site .kr-staffWave{
-  position:relative!important;
-}
 
 @media (max-width:760px){
   main.kr-site .kr-discoveryBridge,
