@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { BusinessTemplateConfig, LayoutVariant } from "@fk-templates/shared";
 import { KindergartenReferenceLayout } from "./KindergartenReferenceLayout";
 import { TemplateLanding } from "./TemplateLanding";
@@ -24,6 +24,62 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const schoolName = "Bilim Çocuk Anaokulu";
 
+  useEffect(() => {
+    if (!isReference) return;
+    let cancelled = false;
+    let timer: number | undefined;
+    const run = () => {
+      if (cancelled) return;
+      const footer = document.querySelector<HTMLElement>(".kr-footerTop");
+      if (!footer || footer.dataset.footerRevamp === "1") return;
+      const original = footer.innerHTML;
+      const address = config.address || "İsmetpaşa Mahallesi, Ahmet Taner Kışlalı Cad. No:19, 48200 Milas/Muğla";
+      const phone = config.phone || "0507 952 12 82";
+      const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=m&z=15&output=embed`;
+      footer.dataset.footerRevamp = "1";
+      footer.innerHTML = `
+        <div class="bcFooterFaq">
+          <div class="bcFooterEyebrow">BİLİM ÇOCUK ANAOKULU</div>
+          <h2>Sık Sorulan Sorular</h2>
+          <p class="bcFooterLead">Aklınıza takılan en önemli soruların kısa cevapları.</p>
+          <div class="bcFaqList">
+            <details><summary>Hangi yaş gruplarına eğitim veriyorsunuz?<span>+</span></summary><p>Çocuklarımızın yaş ve gelişim dönemlerine uygun sınıf gruplarıyla okul öncesi eğitim sunuyoruz. Detaylı bilgi için okul görüşmesinde çocuğunuzun yaşına göre uygun grubu birlikte belirliyoruz.</p></details>
+            <details><summary>Kayıt süreci nasıl ilerliyor?<span>+</span></summary><p>Ön kayıt talebinizin ardından sizinle iletişime geçerek okul hakkında bilgi veriyor ve görüşme planlıyoruz. Görüşmede kayıt koşulları ve gerekli bilgiler paylaşılır.</p></details>
+            <details><summary>Okulda hangi etkinlikler yapılıyor?<span>+</span></summary><p>Bilim, sanat, doğa, müzik, drama ve yaratıcı oyun odaklı çalışmalarla çocukların merakını ve üretme becerilerini destekleyen etkinlikler düzenliyoruz.</p></details>
+            <details><summary>Veli bilgilendirmesi nasıl yapılıyor?<span>+</span></summary><p>Çocuğun günlük yaşamı, etkinlikleri ve gelişimiyle ilgili iletişim okulun kullandığı veli iletişim kanalları üzerinden düzenli şekilde sürdürülür.</p></details>
+            <details><summary>Okulu ziyaret etmek için ne yapmalıyım?<span>+</span></summary><p>Randevu Al veya Ön Kayıt butonlarından bize ulaşarak uygun bir ziyaret zamanı oluşturabilirsiniz. Sizi okulumuza tanışmaya bekliyoruz.</p></details>
+          </div>
+        </div>
+        <div class="bcFooterMapCol">
+          <div class="bcFooterMapTitle">Bizi Nerede Bulabilirsiniz?</div>
+          <div class="bcFooterMapWrap"><iframe title="Bilim Çocuk Anaokulu konumu" src="${mapSrc}" loading="lazy" allowFullScreen></iframe></div>
+          <div class="bcFooterMapAddress">📍 ${address}</div>
+          <a class="bcFooterMapPhone" href="tel:${phone.replace(/\D/g, "")}">☎ ${phone}</a>
+        </div>`;
+      const style = document.createElement("style");
+      style.dataset.footerFaqStyle = "1";
+      style.textContent = `
+        .kr-footerTop.bcFooterRevamped,.kr-footerTop{display:grid!important;grid-template-columns:minmax(0,1.55fr) minmax(330px,.85fr)!important;gap:70px!important;align-items:start!important;max-width:1180px!important;margin:0 auto!important;padding:76px 24px 58px!important}
+        .bcFooterFaq{min-width:0}.bcFooterEyebrow{font-size:10px;font-weight:900;letter-spacing:1.5px;color:#ffd447;margin-bottom:8px}.bcFooterFaq h2{margin:0;color:#fff;font:800 38px/1.05 'Baloo 2',sans-serif}.bcFooterLead{margin:10px 0 24px;color:rgba(255,255,255,.68);font-size:12px;line-height:1.5}.bcFaqList{display:grid;gap:10px}.bcFaqList details{background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.11);border-radius:14px;overflow:hidden;transition:background .2s ease}.bcFaqList details[open]{background:rgba(255,255,255,.11)}.bcFaqList summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 18px;color:#fff;font-size:12px;font-weight:900}.bcFaqList summary::-webkit-details-marker{display:none}.bcFaqList summary span{flex:0 0 24px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#1976d2;font-size:18px;line-height:1;transition:transform .2s ease}.bcFaqList details[open] summary span{transform:rotate(45deg)}.bcFaqList details p{margin:0;padding:0 18px 17px;color:rgba(255,255,255,.72);font-size:11px;line-height:1.65}.bcFooterMapCol{min-width:0;padding-top:25px}.bcFooterMapTitle{color:#fff;font:800 22px/1.15 'Baloo 2',sans-serif;margin-bottom:16px}.bcFooterMapWrap{width:100%;height:285px;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(0,0,0,.16);border:5px solid rgba(255,255,255,.92)}.bcFooterMapWrap iframe{display:block;width:100%;height:100%;border:0}.bcFooterMapAddress{margin-top:14px;color:#ffd447;font-size:10px;font-weight:800;line-height:1.5}.bcFooterMapPhone{display:inline-block;margin-top:8px;color:#fff;font-size:11px;font-weight:800;text-decoration:none}.kr-footerBottom{position:relative;z-index:5}@media(max-width:900px){.kr-footerTop.bcFooterRevamped,.kr-footerTop{grid-template-columns:1fr!important;gap:30px!important;padding:58px 20px 42px!important}.bcFooterMapCol{padding-top:0}.bcFooterMapWrap{height:250px}}@media(max-width:560px){.bcFooterFaq h2{font-size:31px}.bcFaqList summary{font-size:11px;padding:13px 14px}.bcFaqList details p{font-size:10px;padding:0 14px 15px}.bcFooterMapWrap{height:220px}.bcFooterMapAddress{font-size:9px}}
+      `;
+      document.head.appendChild(style);
+      const cleanup = () => {
+        footer.innerHTML = original;
+        delete footer.dataset.footerRevamp;
+        style.remove();
+      };
+      (footer as HTMLElement & { __faqCleanup?: () => void }).__faqCleanup = cleanup;
+    };
+    timer = window.setTimeout(run, 0);
+    return () => {
+      cancelled = true;
+      if (timer) window.clearTimeout(timer);
+      const footer = document.querySelector<HTMLElement>(".kr-footerTop");
+      const cleanup = (footer as (HTMLElement & { __faqCleanup?: () => void }) | null)?.__faqCleanup;
+      if (cleanup) { cleanup(); delete (footer as HTMLElement & { __faqCleanup?: () => void }).__faqCleanup; }
+    };
+  }, [isReference, config.address, config.phone]);
+
   return (
     <main className="kindergartenDesignHub">
       <header className="bcHeader" onMouseLeave={() => setOpenMenu(null)}>
@@ -46,7 +102,7 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
             <a className="bcNavLink active" href="#top">Anasayfa</a>
             <div className="bcMenu"><button className={`bcNavLink ${openMenu === "gallery" ? "open" : ""}`} onClick={() => setOpenMenu(openMenu === "gallery" ? null : "gallery")} type="button">Galeri <span className="bcChevron" /></button>{openMenu === "gallery" && <div className="bcDropdown">{galleryItems.map(([icon, label, href]) => <a key={label} href={href}><i>{icon}</i><span>{label}</span></a>)}</div>}</div>
             <div className="bcMenu"><button className={`bcNavLink ${openMenu === "stats" ? "open" : ""}`} onClick={() => setOpenMenu(openMenu === "stats" ? null : "stats")} type="button">İstatistik <span className="bcChevron" /></button>{openMenu === "stats" && <div className="bcDropdown">{statItems.map(([icon, label, href]) => <a key={label} href={href}><i>{icon}</i><span>{label}</span></a>)}</div>}</div>
-            <div className="bcMenu"><button className={`bcNavLink ${openMenu === "events" ? "open" : ""}`} onClick={() => setOpenMenu(openMenu === "events" ? null : "events")} type="button">Etkinlikler <span className="bcChevron" /></button>{openMenu === "events" && <div className="bcDropdown">{eventItems.map(([icon, label, href]) => <a key={label} href={href}><i>{icon}</i><span>{label}</span></a>)}</div>}</div>
+            <div className="bcMenu"><button className={`bcNavLink ${openMenu === "events" ? "open" : ""}`} onClick={() => setOpenMenu(openMenu === "events" ? null : "events")} type="button">Etkinlikler <span className="bcChevron" /></button>{openMenu === "events" && <div className="bcDropdown">{eventItems.map(([icon, label, href]) => <a key={label} href={href}><i>{icon}</i><span>{label}</span></a></div>}</div>
             <a className="bcNavLink" href="#contact">Randevu Al</a>
           </nav>
           <a className="bcCta" href="#contact">Ön Kayıt <b>›</b></a>
