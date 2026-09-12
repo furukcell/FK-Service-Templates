@@ -55,6 +55,7 @@ import "../src/styles/kindergarten-story-final.css";
 import "../src/styles/kindergarten-science-doodles.css";
 import "../src/styles/kindergarten-why-bridge-fix.css";
 import "../src/styles/kindergarten-road-transitions.css";
+import "../src/styles/kindergarten-contact-enhancements";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <>
@@ -72,7 +73,7 @@ export default function App({ Component, pageProps }: AppProps) {
       main.kr-site .kr-footer .footerBrand b::after{content:'Bilim Çocuk Anaokulu';font:800 24px/1.1 'Baloo 2',sans-serif!important;color:#fff!important}
       main.kr-site .kr-footer .footerBrand small{font-size:13px!important}
       main.kr-site .kr-footerTop > div:nth-child(3) > span{display:none!important}
-      main.kr-site .kr-footerTop > div:nth-child(3)::after{content:'☎ 0507 952 12 82\A☎ 0532 699 45 85\A\A📍 İsmetpaşa Mahallesi, Ahmet Taner Kışlalı Cad. No: 19\A48200 Milas / Muğla';white-space:pre-line;color:rgba(255,255,255,.78)!important;font:500 14px/1.55 'Baloo 2',sans-serif!important}
+      main.kr-site .kr-footerTop > div:nth-child(3)::after{content:'☎ 0507 952 12 82\\A☎ 0532 699 45 85\\A\\A📍 İsmetpaşa Mahallesi, Ahmet Taner Kışlalı Cad. No: 19\\A48200 Milas / Muğla';white-space:pre-line;color:rgba(255,255,255,.78)!important;font:500 14px/1.55 'Baloo 2',sans-serif!important}
       @media(max-width:760px){main.kr-site .kr-join{height:auto!important;min-height:220px!important;padding:42px 24px!important}main.kr-site .kr-join > div:first-child span::after{font-size:29px!important}main.kr-site .kr-footerTop > div:nth-child(3)::after{font-size:13px!important}}
     `}</style>
     <SalonAdminNavigation />
