@@ -11,3 +11,31 @@ body:has(main.kr-site) .kindergartenPremiumShell,
 body:has(main.kr-site) .kindergartenPremiumHeader{
   display:none!important;
 }
+
+/* The hero artwork contains the old lockup in its upper-left corner. A real
+   DOM mask is used here (rather than a pseudo-element) so it cannot be lost
+   behind the background-image stacking context. */
+main.kr-site .kr-heroOldBrandMask{
+  position:absolute!important;
+  z-index:100!important;
+  left:0!important;
+  top:0!important;
+  width:330px!important;
+  height:102px!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+  background-image:url("/images/logos/bilim-cocuk-hero.png")!important;
+  background-repeat:no-repeat!important;
+  background-size:100% 700px!important;
+  background-position:-330px 0!important;
+}
+main.kr-site .kr-heroOldBrandMask img{display:none!important}
+
+@media (max-width:760px){
+  main.kr-site .kr-heroOldBrandMask{
+    width:190px!important;
+    height:64px!important;
+    background-size:100vw 78vw!important;
+    background-position:-190px 0!important;
+  }
+}
