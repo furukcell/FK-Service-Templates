@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type { BusinessTemplateConfig, LayoutVariant } from "@fk-templates/shared";
 import { KindergartenReferenceLayout } from "./KindergartenReferenceLayout";
 import { TemplateLanding } from "./TemplateLanding";
+import { KindergartenAppointmentModal } from "./KindergartenAppointmentModal";
 
 type Props = {
   config: BusinessTemplateConfig;
@@ -97,6 +98,7 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
           <a className="bcCta" href="#contact">Ön Kayıt <b>›</b></a>
         </div>
       </header>
+      <KindergartenAppointmentModal />
       <div className="kindergartenDesignToolbarLegacy" aria-hidden="true">{kindergartenLayouts.map((layout, index) => <button key={layout} type="button" className={activeLayout === layout ? "active" : ""} onClick={() => onLayoutChange(layout)}><small>{index + 1}</small>{layout === "kindergarten-reference" ? "Bilim Çocuk" : layout}</button>)}</div>
       {isReference ? <KindergartenReferenceLayout config={{...config, brandName: schoolName}} onLayoutChange={onLayoutChange} /> : <TemplateLanding config={config} activeTemplate="kindergarten" activeLayout={templateLayout} onLayoutChange={onLayoutChange} showTemplateSwitch showLayoutSwitch={false} />}
     </main>
