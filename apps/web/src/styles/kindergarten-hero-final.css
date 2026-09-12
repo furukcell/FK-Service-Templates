@@ -110,3 +110,15 @@ html,body{overflow-x:hidden!important}
   .kr-experienceWave .kr-stat{width:72px!important;height:72px!important}
   .kr-experienceWave .kr-stat strong::after{font-size:17px!important}
 }
+
+/* Lower-page illustrated transitions: give the artwork room to breathe instead of flattening it into a thin strip. */
+.kr-site .kr-imageBreak{height:270px!important;overflow:hidden!important;line-height:0!important;display:block!important;background:transparent!important;position:relative!important}
+.kr-site .kr-imageBreak img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:fill!important;object-position:center!important;transform:scaleY(1.28)!important;transform-origin:center center!important}
+@media (max-width:760px){
+  .kr-site .kr-imageBreak{height:175px!important}
+  .kr-site .kr-imageBreak img{transform:scaleY(1.32)!important}
+}
+@media (max-width:390px){
+  .kr-site .kr-imageBreak{height:160px!important}
+  .kr-site .kr-imageBreak img{transform:scaleY(1.28)!important}
+}
