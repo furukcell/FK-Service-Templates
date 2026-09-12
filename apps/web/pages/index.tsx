@@ -4,6 +4,7 @@ import { FlowTemplateEnhancements } from "../src/components/FlowTemplateEnhancem
 import { ImmersiveScrollMount } from "../src/components/ImmersiveScrollMount";
 import { KindergartenDesignChooser } from "../src/components/KindergartenDesignChooser";
 import { KindergartenPremiumHeroMount } from "../src/components/KindergartenPremiumHeroMount";
+import { KindergartenTemplateSwitcher } from "../src/components/KindergartenTemplateSwitcher";
 import { SalonBookingMount } from "../src/components/SalonBookingMount";
 import { SalonFlowStyleButton } from "../src/components/SalonFlowStyleButton";
 import { SalonGalleryMount } from "../src/components/SalonGalleryMount";
@@ -41,7 +42,10 @@ export default function HomePage() {
     <>
       <SeoHead title={`${config.brandName} | ${config.sector}`} description={config.heroDescription} canonicalPath="/" />
       {isKindergarten ? (
-        <KindergartenDesignChooser config={config} activeLayout={activeLayout} onLayoutChange={setActiveLayout} />
+        <>
+          <KindergartenTemplateSwitcher activeTemplate={activeTemplate} onTemplateChange={handleTemplateChange} />
+          <KindergartenDesignChooser config={config} activeLayout={activeLayout} onLayoutChange={setActiveLayout} />
+        </>
       ) : (
         <TemplateLanding
           config={config}
