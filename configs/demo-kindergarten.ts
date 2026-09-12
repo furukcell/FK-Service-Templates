@@ -3,7 +3,7 @@ import type { BusinessTemplateConfig } from "@fk-templates/shared";
 export const demoKindergartenConfig: BusinessTemplateConfig = {
   template: "kindergarten",
   sector: "Kreş / Anaokulu",
-  brandName: "Minik Adımlar Kreşi",
+  brandName: "Bilim Çocuk Anaokulu",
   eyebrow: "Güvenli, sevgi dolu ve düzenli kreş ortamı",
   heroTitle: "Çocuğunuz için sıcak, güvenli ve gelişimi destekleyen bir başlangıç.",
   heroDescription: "Kreş, anaokulu ve gündüz bakım evleri için sınıflar, günlük akış, yemek bilgisi, galeri ve ön görüşme formu olan modern web sitesi.",
