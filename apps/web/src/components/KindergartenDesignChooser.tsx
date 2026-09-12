@@ -10,6 +10,14 @@ type Props = {
 };
 
 const kindergartenLayouts: LayoutVariant[] = ["modern", "split", "showcase", "flow", "corporate", "kindergarten-reference"];
+const kindergartenLayoutLabels: Record<LayoutVariant, string> = {
+  modern: "Modern",
+  split: "Split",
+  showcase: "Showcase",
+  flow: "Flow",
+  corporate: "Kurumsal",
+  "kindergarten-reference": "Bilim Çocuk"
+};
 const galleryItems = [["▧", "Fotoğraf Galerisi", "#gallery"], ["▶", "Video Galerisi", "#gallery"], ["▦", "Sınıflarımız", "#classes"], ["▣", "Etkinlik Galerisi", "#gallery"], ["⌂", "Okul Alanlarımız", "#about"]] as const;
 const statItems = [["♟", "Öğrenci Sayılarımız", "#stats"], ["🎓", "Mezunlarımız", "#stats"], ["🏆", "Başarılarımız", "#stats"], ["♥", "Veli Memnuniyeti", "#stats"], ["▥", "Yıllık Gelişim Raporları", "#stats"]] as const;
 const eventItems = [["▣", "Yaklaşan Etkinlikler", "#news"], ["★", "Etkinlik Takvimi", "#news"], ["▧", "Etkinlik Galerisi", "#gallery"]] as const;
@@ -97,8 +105,13 @@ export function KindergartenDesignChooser({ config, activeLayout, onLayoutChange
           <a className="bcCta" href="#contact">Ön Kayıt <b>›</b></a>
         </div>
       </header>
-      <div className="kindergartenDesignToolbarLegacy" aria-hidden="true">{kindergartenLayouts.map((layout, index) => <button key={layout} type="button" className={activeLayout === layout ? "active" : ""} onClick={() => onLayoutChange(layout)}><small>{index + 1}</small>{layout === "kindergarten-reference" ? "Bilim Çocuk" : layout}</button>)}</div>
-      {isReference ? <KindergartenReferenceLayout config={{...config, brandName: schoolName}} onLayoutChange={onLayoutChange} /> : <TemplateLanding config={config} activeTemplate="kindergarten" activeLayout={templateLayout} onLayoutChange={onLayoutChange} showTemplateSwitch showLayoutSwitch={false} />}
+      <div className="kindergartenDesignToolbarLegacy" aria-label="Bilim Çocuk Anaokulu tasarım seçenekleri">
+        <div className="kindergartenDesignToolbarTitle"><strong>Bilim Çocuk Anaokulu</strong><span>6 farklı tasarım seçeneğini inceleyin</span></div>
+        <div className="kindergartenDesignToolbarButtons">
+          {kindergartenLayouts.map((layout, index) => <button key={layout} type="button" className={activeLayout === layout ? "active" : ""} onClick={() => onLayoutChange(layout)}><small>{String(index + 1).padStart(2, "0")}</small><span>{kindergartenLayoutLabels[layout]}</span></button>)}
+        </div>
+      </div>
+      {isReference ? <KindergartenReferenceLayout config={{...config, brandName: schoolName}} onLayoutChange={onLayoutChange} /> : <TemplateLanding config={{...config, brandName: schoolName}} activeTemplate="kindergarten" activeLayout={templateLayout} onLayoutChange={onLayoutChange} showTemplateSwitch={false} showLayoutSwitch={false} />}
     </main>
   );
 }
