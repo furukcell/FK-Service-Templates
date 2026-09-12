@@ -1,6 +1,52 @@
-/* The reference page now uses the Bilim Çocuk header. Remove the legacy Minik Adımlar brand/nav completely so it cannot remain visible behind the design chooser. */
+/* The reference page must not show any legacy Minik Adımlar branding. */
 main.kindergartenDesignHub > .kr-site > .kr-nav,
-main.kindergartenDesignHub > .kr-site > .kr-nav .kr-brand,
 main.kindergartenDesignHub > .kr-site .logoLockup{
   display:none!important;
+}
+
+/* A real DOM mask sits above the baked-in old lockup in the hero artwork.
+   It reuses a clean nearby crop of the same artwork, avoiding a visible solid patch. */
+.kr-heroOldBrandMask{
+  position:absolute!important;
+  z-index:35!important;
+  left:6vw!important;
+  top:10px!important;
+  width:205px!important;
+  height:62px!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+}
+.kr-heroOldBrandMask img{
+  position:absolute!important;
+  left:-330px!important;
+  top:0!important;
+  width:100vw!important;
+  height:700px!important;
+  max-width:none!important;
+  object-fit:fill!important;
+  object-position:left top!important;
+  pointer-events:none!important;
+  user-select:none!important;
+}
+
+/* The premium kindergarten shell is portaled outside the reference page. If the
+   reference layout is present, its old shell/header must not remain visible. */
+body:has(main.kr-site) .kindergartenPremiumHeroMount,
+body:has(main.kr-site) .kindergartenPremiumShell,
+body:has(main.kr-site) .kindergartenPremiumHeader{
+  display:none!important;
+}
+
+@media (max-width:1100px){
+  .kr-heroOldBrandMask img{height:56.25vw!important}
+}
+
+@media (max-width:760px){
+  .kr-heroOldBrandMask{
+    left:4.5vw!important;
+    top:8px!important;
+    width:170px!important;
+    height:52px!important;
+  }
+  .kr-heroOldBrandMask img{left:-220px!important;height:78vw!important}
 }
