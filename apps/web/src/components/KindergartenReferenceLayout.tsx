@@ -122,7 +122,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       </div>
     </section>
 
-    <div className="kr-colorBreak kr-breakOrange" aria-hidden="true"><span></span><i></i><b></b></div>
+    <div className="kr-imageBreak" aria-hidden="true"><img src="/images/logos/bilim-cocuk-lavanta-gecis.png" alt="" /></div>
 
     <section id="ateliers" className="kr-waveSection kr-ateliersWave">
       <div className="kr-waveInner kr-ateliersInner">
@@ -131,15 +131,15 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       </div>
     </section>
 
-    <div className="kr-colorBreak kr-breakBlue" aria-hidden="true"><span></span><i></i><b></b></div>
+    <div className="kr-imageBreak" aria-hidden="true"><img src="/images/logos/bilim-cocuk-mavi-gecis.png" alt="" /></div>
 
     <section id="news" className="kr-waveSection kr-newsWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">{schoolName.toUpperCase()}'DAN HABERLER</span><h2>Etkinlik ve Duyurular</h2><a href="#contact">Tüm Duyurular →</a></div><div className="kr-newsGrid">{news.map((item,i)=><article className="kr-newsCard" key={`${item.title}-${i}`}><div className="kr-newsImage"><Photo src={gallery[i]?.imageUrl} title={item.title}/><span>{i===0?"12 EYLÜL":i===1?"05 EYLÜL":i===2?"01 EYLÜL":i===3?"28 AĞUSTOS":i===4?"22 AĞUSTOS":"15 AĞUSTOS"}</span></div><div className="kr-newsBody"><h3>{item.title}</h3><p>{item.description}</p><a href="#contact">Daha Fazla →</a></div></article>)}</div><span className="kr-elephant">🐘</span></div></section>
 
-    <div className="kr-colorBreak kr-breakYellow" aria-hidden="true"><span></span><i></i><b></b></div>
+    <div className="kr-imageBreak" aria-hidden="true"><img src="/images/logos/bilim-cocuk-sari-gecis.png" alt="" /></div>
 
     <section id="gallery" className="kr-waveSection kr-galleryWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">ÇOCUKLARIMIZDAN KARELER</span><h2>Galerimiz</h2><p>Günlük yaşamdan, etkinliklerden ve güzel anılardan kareler.</p></div><div className="kr-galleryGrid">{[0,1,2,3,4,5].map(n => <Photo key={n} src={gallery[n]?.imageUrl} title={`Galeri ${n+1}`} className={`galleryPhoto g${n+1}`}/>)}</div></div></section>
 
-    <div className="kr-colorBreak kr-breakGreen" aria-hidden="true"><span></span><i></i><b></b></div>
+    <div className="kr-imageBreak" aria-hidden="true"><img src="/images/logos/bilim-cocuk-yesil-gecis.png" alt="" /></div>
 
     <section className="kr-waveSection kr-staffWave"><div className="kr-waveInner"><div className="kr-sectionHead"><span className="kr-kicker">AİLEMİZ</span><h2>Çalışan Kadromuz</h2><p>Çocuklarımızın gelişimine sevgi, deneyim ve uzmanlıkla eşlik eden ekibimiz.</p></div><div className="kr-staffGrid">{staff.map((x,i)=><article key={x}><Photo src={gallery[i+6]?.imageUrl} title={x}/><div><b>{x}</b><span>{schoolName}</span></div></article>)}</div></div></section>
 
@@ -168,14 +168,9 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       .kr-whyBody h3{margin:0 0 11px!important;font:800 22px/1.1 'Baloo 2',sans-serif!important;color:#fff!important}
       .kr-whyBody p{margin:0!important;font:500 14px/1.65 'Baloo 2',sans-serif!important;color:rgba(255,255,255,.96)!important}
 
-      .kr-colorBreak{height:138px!important;position:relative!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important}
-      .kr-colorBreak:before,.kr-colorBreak:after{content:""!important;position:absolute!important;border-radius:50%!important;opacity:.28!important}
-      .kr-colorBreak:before{width:250px!important;height:250px!important;left:-55px!important;top:-155px!important;background:#fff!important}
-      .kr-colorBreak:after{width:330px!important;height:330px!important;right:-90px!important;bottom:-220px!important;background:#fff!important}
-      .kr-colorBreak span{width:110px!important;height:110px!important;border-radius:50%!important;background:rgba(255,255,255,.2)!important;position:absolute!important;left:18%!important;bottom:-60px!important}
-      .kr-colorBreak i{width:70px!important;height:70px!important;border-radius:50%!important;background:rgba(255,255,255,.18)!important;position:absolute!important;right:24%!important;top:-35px!important}
-      .kr-colorBreak b{width:14px!important;height:14px!important;border-radius:50%!important;background:rgba(255,255,255,.8)!important;position:absolute!important;left:50%!important;top:34px!important}
-      .kr-breakOrange{background:#ff7b45!important}.kr-breakBlue{background:#4eb9e9!important}.kr-breakYellow{background:#ffd447!important}.kr-breakGreen{background:#a9cf49!important}
+      /* Illustrated transition bands between the major lower-page sections. */
+      .kr-imageBreak{width:100%!important;height:138px!important;overflow:hidden!important;line-height:0!important;display:block!important;background:transparent!important}
+      .kr-imageBreak img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:fill!important;object-position:center!important}
 
       .kr-ateliersWave{background:#fff!important;padding:86px 0 96px!important}
       .kr-ateliersInner{max-width:1180px!important}
@@ -228,7 +223,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         .kr-whyBody{padding:8px 10px 18px!important}
         .kr-whyBody h3{font-size:16px!important;margin-bottom:6px!important}
         .kr-whyBody p{font-size:11px!important;line-height:1.45!important}
-        .kr-colorBreak{height:90px!important}
+        .kr-imageBreak{height:90px!important}
         .kr-ateliersWave{padding:60px 0 70px!important}
         .kr-ateliersHead{margin-bottom:30px!important;padding:0 16px!important}
         .kr-ateliersHead h2{font-size:32px!important}
