@@ -17,13 +17,13 @@ function addContactStyles() {
 
 function enhanceKindergartenContact() {
   const footer = document.querySelector(".kr-footer");
-  if (!footer) return;
+  if (!footer) return false;
   addContactStyles();
 
   const contactColumn = Array.from(footer.querySelectorAll(".kr-footerTop > div")).find((el) =>
     el.querySelector("b")?.textContent?.trim() === "Bize Ulaşın"
   );
-  if (!contactColumn) return;
+  if (!contactColumn) return false;
 
   const phones = ["0507 952 12 82", "0532 699 45 85"];
   const address = "İsmetpaşa Mahallesi, Ahmet Taner Kışlalı Cad. No: 19, 48200 Milas/Muğla";
@@ -76,13 +76,23 @@ function enhanceKindergartenContact() {
     const first = bottom.firstChild;
     if (first) first.textContent = "© 2026 Bilim Çocuk Anaokulu. Tüm Hakları Saklıdır.";
   }
+  return true;
 }
 
 if (typeof window !== "undefined") {
+  const run = () => {
+    if (enhanceKindergartenContact()) return;
+    const observer = new MutationObserver(() => {
+      if (enhanceKindergartenContact()) observer.disconnect();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    window.setTimeout(() => observer.disconnect(), 10000);
+  };
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", enhanceKindergartenContact, { once: true });
+    document.addEventListener("DOMContentLoaded", run, { once: true });
   } else {
-    enhanceKindergartenContact();
+    window.setTimeout(run, 0);
   }
 }
 
