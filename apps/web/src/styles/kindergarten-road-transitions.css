@@ -1,9 +1,11 @@
 /* Bilim Çocuk — shared premium road transition system.
-   One visual language between the major sections: a fine illustrated road,
-   with the school bus travelling forward at a different point on each transition. */
+   The road is the single transition visual between the lower-page sections.
+   Each transition gets its own forward-only bus path. */
 
-.kr-discoveryBridge,
-.kr-imageBreak{
+/* Higher specificity is intentional: KindergartenReferenceLayout has legacy
+   inline transition styles that otherwise override this shared system. */
+main.kr-site .kr-discoveryBridge,
+main.kr-site .kr-imageBreak{
   position:relative!important;
   width:100%!important;
   height:154px!important;
@@ -18,14 +20,13 @@
   border:0!important;
 }
 
-.kr-discoveryBridge img,
-.kr-imageBreak img{
+main.kr-site .kr-discoveryBridge img,
+main.kr-site .kr-imageBreak img{
   display:none!important;
 }
 
-/* Compact road-sized bus. contain keeps the original proportions intact. */
-.kr-discoveryBridge::after,
-.kr-imageBreak::after{
+main.kr-site .kr-discoveryBridge::after,
+main.kr-site .kr-imageBreak::after{
   content:""!important;
   position:absolute!important;
   z-index:4!important;
@@ -40,30 +41,12 @@
   filter:drop-shadow(0 6px 7px rgba(31,64,99,.14))!important;
 }
 
-/* Every transition gets a different starting point/path, but always travels forward. */
-.kr-discoveryBridge::after{
-  animation:krRoadBusOne 4.5s linear infinite!important;
-}
-
-/* after classes → ateliers */
-.kr-whyChoose + .kr-imageBreak::after{
-  animation:krRoadBusTwo 4.2s linear infinite!important;
-}
-
-/* after ateliers → news */
-.kr-ateliersWave + .kr-imageBreak::after{
-  animation:krRoadBusThree 4.8s linear infinite!important;
-}
-
-/* after news → gallery */
-.kr-newsWave + .kr-imageBreak::after{
-  animation:krRoadBusFour 4.4s linear infinite!important;
-}
-
-/* after gallery → staff */
-.kr-galleryWave + .kr-imageBreak::after{
-  animation:krRoadBusFive 5s linear infinite!important;
-}
+/* 4–5 second slow, continuous forward travel. */
+main.kr-site .kr-discoveryBridge::after{animation:krRoadBusOne 4.5s linear infinite!important}
+main.kr-site .kr-whyChoose + .kr-imageBreak::after{animation:krRoadBusTwo 4.2s linear infinite!important}
+main.kr-site .kr-ateliersWave + .kr-imageBreak::after{animation:krRoadBusThree 4.8s linear infinite!important}
+main.kr-site .kr-newsWave + .kr-imageBreak::after{animation:krRoadBusFour 4.4s linear infinite!important}
+main.kr-site .kr-galleryWave + .kr-imageBreak::after{animation:krRoadBusFive 5s linear infinite!important}
 
 @keyframes krRoadBusOne{
   0%{left:-12%;transform:translateY(4px) scale(.94)}
@@ -91,23 +74,23 @@
   100%{left:121%;transform:translateY(2px) scale(1)}
 }
 
-.kr-ateliersWave,
-.kr-newsWave,
-.kr-galleryWave,
-.kr-staffWave{
+main.kr-site .kr-ateliersWave,
+main.kr-site .kr-newsWave,
+main.kr-site .kr-galleryWave,
+main.kr-site .kr-staffWave{
   position:relative!important;
 }
 
 @media (max-width:760px){
-  .kr-discoveryBridge,
-  .kr-imageBreak{
+  main.kr-site .kr-discoveryBridge,
+  main.kr-site .kr-imageBreak{
     height:112px!important;
     min-height:112px!important;
     max-height:112px!important;
     background-size:100% 100%!important;
   }
-  .kr-discoveryBridge::after,
-  .kr-imageBreak::after{
+  main.kr-site .kr-discoveryBridge::after,
+  main.kr-site .kr-imageBreak::after{
     width:88px!important;
     height:51px!important;
     margin-top:-25px!important;
@@ -115,8 +98,6 @@
 }
 
 @media (prefers-reduced-motion:reduce){
-  .kr-discoveryBridge::after,
-  .kr-imageBreak::after{
-    animation:none!important;
-  }
+  main.kr-site .kr-discoveryBridge::after,
+  main.kr-site .kr-imageBreak::after{animation:none!important}
 }
