@@ -10,7 +10,9 @@ function addContactStyles() {
     main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactAddress:hover{color:#ffd447!important}
     main.kr-site .kr-contactActions{display:none!important}
     main.kr-site .kr-contactMap{display:block!important;width:100%!important;height:150px!important;margin-top:12px!important;border:0!important;border-radius:16px!important;overflow:hidden!important;box-shadow:0 8px 24px rgba(0,0,0,.16)!important;background:#dfe7ef!important}
-    main.kr-site .kr-social{grid-column:1 / -1!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:12px!important;width:100%!important;margin-top:8px!important;padding-top:18px!important;border-top:1px solid rgba(255,255,255,.12)!important}
+    main.kr-site .kr-brandSocialWrap{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:24px!important;min-width:0!important}
+    main.kr-site .kr-brandSocialWrap .footerBrand{flex:0 0 auto!important}
+    main.kr-site .kr-brandSocialWrap .kr-social{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;width:auto!important;margin:0!important;padding:0!important;border:0!important;grid-column:auto!important}
     main.kr-site .kr-social > b{display:none!important}
     main.kr-site .kr-social > a{display:inline-flex!important;flex:0 0 44px!important;align-items:center!important;justify-content:center!important;width:44px!important;min-width:44px!important;height:44px!important;padding:0!important;margin:0!important;border-radius:50%!important;background:rgba(255,255,255,.1)!important;border:1px solid rgba(255,255,255,.14)!important;color:#fff!important;text-decoration:none!important;transition:transform .2s ease,background .2s ease!important}
     main.kr-site .kr-social > a:hover{transform:translateY(-3px)!important;background:rgba(255,255,255,.2)!important}
@@ -21,7 +23,8 @@ function addContactStyles() {
     @media(max-width:760px){
       main.kr-site .kr-footerTop{display:grid!important;grid-template-columns:1fr!important;gap:28px!important;padding:42px 20px 26px!important;align-items:stretch!important}
       main.kr-site .kr-footerTop > div{width:100%!important;min-width:0!important}
-      main.kr-site .kr-footer .footerBrand{display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;width:100%!important}
+      main.kr-site .kr-brandSocialWrap{width:100%!important;justify-content:center!important;gap:14px!important;flex-wrap:nowrap!important}
+      main.kr-site .kr-footer .footerBrand{display:flex!important;align-items:center!important;justify-content:center!important;text-align:left!important;width:auto!important}
       main.kr-site .kr-footer .footerBrand .kr-logoMark{width:54px!important;height:54px!important;margin:0 10px 0 0!important;flex:0 0 auto!important}
       main.kr-site .kr-footer .footerBrand b::after{font-size:20px!important}
       main.kr-site .kr-footer .footerBrand small{font-size:11px!important;line-height:1.3!important}
@@ -33,8 +36,9 @@ function addContactStyles() {
       main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactPhone,
       main.kr-site .kr-footerTop > div:nth-child(3) .kr-contactAddress{font-size:13px!important;line-height:1.5!important}
       main.kr-site .kr-contactMap{height:190px!important;margin:12px auto 0!important;width:100%!important;max-width:520px!important;border-radius:14px!important}
-      main.kr-site .kr-social{grid-column:1!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;justify-content:center!important;align-items:center!important;gap:10px!important;margin-top:0!important;padding:18px 0 2px!important;overflow:visible!important}
-      main.kr-site .kr-social > a{flex:0 0 42px!important;width:42px!important;min-width:42px!important;height:42px!important;padding:0!important;margin:0!important}
+      main.kr-site .kr-social{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;justify-content:flex-start!important;align-items:center!important;gap:8px!important;overflow:visible!important}
+      main.kr-site .kr-social > a{flex:0 0 38px!important;width:38px!important;min-width:38px!important;height:38px!important;padding:0!important;margin:0!important}
+      main.kr-site .kr-social svg{width:18px!important;height:18px!important}
       main.kr-site .kr-footerBottom{padding:16px 18px 22px!important;text-align:center!important;font-size:11px!important;line-height:1.5!important;flex-direction:column!important;gap:6px!important}
       main.kr-site .kr-join{min-height:220px!important;padding:40px 20px!important}
       main.kr-site .kr-join > div:first-child span::after{font-size:29px!important}
@@ -70,6 +74,7 @@ function enhanceKindergartenContact() {
     el.querySelector("b")?.textContent?.trim() === "Bize Ulaşın"
   );
   const socialColumn = footer.querySelector(".kr-social");
+  const footerBrand = footer.querySelector(".footerBrand");
   if (!contactColumn || !footerTop) return false;
 
   const phones = ["0507 952 12 82", "0532 699 45 85"];
@@ -106,8 +111,18 @@ function enhanceKindergartenContact() {
   map.referrerPolicy = "no-referrer-when-downgrade";
   contactColumn.appendChild(map);
 
-  if (socialColumn && socialColumn.parentElement === footerTop) {
-    footerTop.appendChild(socialColumn);
+  if (socialColumn && footerBrand && footerBrand.parentElement !== footerTop.querySelector(".kr-brandSocialWrap")) {
+    let brandWrap = footerTop.querySelector(".kr-brandSocialWrap");
+    if (!brandWrap) {
+      brandWrap = document.createElement("div");
+      brandWrap.className = "kr-brandSocialWrap";
+      footerTop.insertBefore(brandWrap, footerTop.firstChild);
+    }
+    brandWrap.appendChild(footerBrand);
+    brandWrap.appendChild(socialColumn);
+  } else if (socialColumn) {
+    const brandWrap = footerTop.querySelector(".kr-brandSocialWrap");
+    if (brandWrap && socialColumn.parentElement !== brandWrap) brandWrap.appendChild(socialColumn);
   }
 
   const bottom = footer.querySelector(".kr-footerBottom");
