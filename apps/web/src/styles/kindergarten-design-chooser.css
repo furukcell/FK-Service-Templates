@@ -74,3 +74,31 @@
   .kr-atelierGrid,.kr-newsGrid,.kr-galleryGrid,.kr-staffGrid,.kr-workshopGrid{padding-right:15vw!important}
   .kr-atelierGrid>* ,.kr-newsGrid>* ,.kr-galleryGrid>* ,.kr-staffGrid>* ,.kr-workshopGrid>*{flex-basis:84vw!important;width:84vw!important;min-width:84vw!important;border-radius:22px!important}
 }
+
+
+/* Mobile premium scroll reveal */
+@media(max-width:767px){
+  .kr-story,.kr-experienceWave,.kr-classesWave,.kr-discoveryBridge,.kr-news,.kr-workshops,.kr-join,.kr-footerTop,.kr-footerBottom{
+    animation:krMobileReveal linear both;
+    animation-timeline:view(block 82% 8%);
+    animation-range:entry 0% cover 42%;
+    will-change:opacity,transform;
+  }
+  .kr-sectionHead,.kr-storyCopy,.kr-classShowcase,.kr-facts,.kr-statsInner{
+    animation:krMobileContentReveal linear both;
+    animation-timeline:view(block 86% 12%);
+    animation-range:entry 0% cover 36%;
+  }
+  .kr-waveSection{scroll-margin-top:8px}
+}
+@keyframes krMobileReveal{
+  from{opacity:0;transform:translate3d(0,34px,0) scale(.985)}
+  to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes krMobileContentReveal{
+  from{opacity:0;transform:translate3d(0,20px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@media(max-width:767px) and (prefers-reduced-motion:reduce){
+  .kr-story,.kr-experienceWave,.kr-classesWave,.kr-discoveryBridge,.kr-news,.kr-workshops,.kr-join,.kr-footerTop,.kr-footerBottom,.kr-sectionHead,.kr-storyCopy,.kr-classShowcase,.kr-facts,.kr-statsInner{animation:none!important;transform:none!important;opacity:1!important}
+}
