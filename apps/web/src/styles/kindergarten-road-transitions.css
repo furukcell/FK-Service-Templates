@@ -18,18 +18,18 @@ main.kr-site .kr-newsWave + .kr-imageBreak::after{animation:krRoadBusFour 3.7s l
 main.kr-site .kr-galleryWave + .kr-imageBreak::after{animation:krRoadBusFive 3.9s linear infinite!important}
 @media (prefers-reduced-motion:reduce){main.kr-site .kr-discoveryBridge::after,main.kr-site .kr-imageBreak::after{animation:none!important;left:12%!important}}
 
-/* Contact / appointment CTA — straight, clean reference-style card. */
-main.kr-site .kr-join{position:relative!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:40px!important;min-height:150px!important;padding:34px max(30px,calc((100% - 1000px)/2))!important;margin:0!important;background:#b4d64d!important;color:#fff!important;border-radius:0!important;box-shadow:none!important;isolation:isolate!important}
-main.kr-site .kr-join::before,main.kr-site .kr-join::after{display:none!important;content:none!important}
-main.kr-site .kr-join > div:first-child{max-width:760px!important;text-align:left!important;z-index:2!important}
-main.kr-site .kr-join > div:first-child span{display:block!important;font:800 32px/1.1 'Baloo 2',sans-serif!important;color:#fff!important;margin-bottom:7px!important}
-main.kr-site .kr-join > div:first-child small{display:block!important;font:500 14px/1.5 'Baloo 2',sans-serif!important;color:#fff!important}
-main.kr-site .kr-join > a{position:relative!important;z-index:3!important;display:inline-flex!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;min-width:145px!important;padding:14px 24px!important;border-radius:10px!important;background:#fff!important;color:#1d355d!important;font:800 14px 'Baloo 2',sans-serif!important;text-decoration:none!important;box-shadow:none!important;transition:transform .2s ease,box-shadow .2s ease!important}
-main.kr-site .kr-join > a:hover{transform:translateY(-2px)!important;box-shadow:0 8px 18px rgba(31,53,93,.14)!important}
+/* Contact / appointment CTA — flat green, no wave/decorative shape. */
+main.kr-site .kr-join{position:relative!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:44px!important;min-height:190px!important;height:190px!important;padding:44px 8%!important;margin:0!important;background:#b3d34a!important;color:#fff!important;border-radius:0!important;box-shadow:none!important;isolation:isolate!important}
+main.kr-site .kr-join::before,main.kr-site .kr-join::after{content:none!important;display:none!important;background:none!important}
+main.kr-site .kr-join > div:first-child{max-width:700px!important;text-align:left!important;z-index:2!important}
+main.kr-site .kr-join > div:first-child span{display:block!important;font:800 38px/1.08 'Baloo 2',sans-serif!important;color:#fff!important;margin-bottom:8px!important}
+main.kr-site .kr-join > div:first-child small{display:block!important;font:500 16px/1.55 'Baloo 2',sans-serif!important;color:rgba(255,255,255,.94)!important}
+main.kr-site .kr-join > a{position:relative!important;z-index:3!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:165px!important;padding:15px 25px!important;border-radius:999px!important;background:#fff!important;color:#19345f!important;font:800 15px 'Baloo 2',sans-serif!important;text-decoration:none!important;box-shadow:0 10px 24px rgba(30,60,30,.16)!important;transition:transform .25s ease,box-shadow .25s ease!important}
+main.kr-site .kr-join > a:hover{transform:translateY(-3px)!important;box-shadow:0 14px 30px rgba(30,60,30,.22)!important}
 main.kr-site .kr-bunny{display:none!important}
 
-/* Reference-inspired premium footer. */
-main.kr-site .kr-footer{background:#19345f!important;color:#fff!important;padding:0!important;margin:0!important;border:0!important}
+/* Footer starts immediately after the green CTA. */
+main.kr-site .kr-footer{background:#19345f!important;color:#fff!important;padding:0!important;margin:0!important;border:0!important;border-radius:0!important}
 main.kr-site .kr-footerTop{max-width:1180px!important;margin:0 auto!important;padding:58px 30px 48px!important;display:grid!important;grid-template-columns:1.35fr .9fr 1.15fr .65fr!important;gap:48px!important;align-items:start!important}
 main.kr-site .kr-footerTop > div{display:flex!important;flex-direction:column!important;gap:9px!important}
 main.kr-site .kr-footer .footerBrand{color:#fff!important;text-decoration:none!important;align-items:flex-start!important}
@@ -50,11 +50,10 @@ main.kr-site .kr-footerBottom span{color:rgba(255,255,255,.72)!important}
 @media (max-width:760px){
  main.kr-site .kr-discoveryBridge,main.kr-site .kr-imageBreak{height:112px!important;min-height:112px!important;max-height:112px!important;background-size:100% 100%!important}
  main.kr-site .kr-discoveryBridge::after,main.kr-site .kr-imageBreak::after{width:88px!important;height:51px!important;margin-top:-25px!important}
- main.kr-site .kr-join{min-height:205px!important;flex-direction:column!important;justify-content:center!important;gap:18px!important;padding:30px 24px!important;text-align:center!important}
+ main.kr-site .kr-join{min-height:240px!important;height:auto!important;flex-direction:column!important;gap:20px!important;padding:62px 24px 42px!important;text-align:center!important}
  main.kr-site .kr-join > div:first-child{text-align:center!important}
- main.kr-site .kr-join > div:first-child span{font-size:28px!important}
- main.kr-site .kr-join > div:first-child small{font-size:13px!important}
- main.kr-site .kr-join > a{min-width:150px!important}
+ main.kr-site .kr-join > div:first-child span{font-size:29px!important}
+ main.kr-site .kr-join > div:first-child small{font-size:14px!important}
  main.kr-site .kr-footerTop{grid-template-columns:1fr 1fr!important;gap:32px 24px!important;padding:42px 24px 34px!important}
  main.kr-site .kr-social{justify-content:flex-start!important}
  main.kr-site .kr-footerBottom{padding:16px 24px 20px!important;gap:10px!important;flex-direction:column!important}
