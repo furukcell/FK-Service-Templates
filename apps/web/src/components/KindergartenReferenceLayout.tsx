@@ -169,7 +169,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
       .kr-whyBody p{margin:0!important;font:500 14px/1.65 'Baloo 2',sans-serif!important;color:rgba(255,255,255,.96)!important}
 
       /* Illustrated transition bands between the major lower-page sections. */
-      .kr-imageBreak{width:100%!important;height:138px!important;overflow:hidden!important;line-height:0!important;display:block!important;background:transparent!important}
+      .kr-imageBreak{width:100%!important;height:190px!important;overflow:hidden!important;line-height:0!important;display:block!important;background:transparent!important}
       .kr-imageBreak img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:fill!important;object-position:center!important}
 
       .kr-ateliersWave{background:#fff!important;padding:86px 0 96px!important}
@@ -223,7 +223,7 @@ export function KindergartenReferenceLayout({ config, onLayoutChange }: Props) {
         .kr-whyBody{padding:8px 10px 18px!important}
         .kr-whyBody h3{font-size:16px!important;margin-bottom:6px!important}
         .kr-whyBody p{font-size:11px!important;line-height:1.45!important}
-        .kr-imageBreak{height:90px!important}
+        .kr-imageBreak{height:130px!important}
         .kr-ateliersWave{padding:60px 0 70px!important}
         .kr-ateliersHead{margin-bottom:30px!important;padding:0 16px!important}
         .kr-ateliersHead h2{font-size:32px!important}
