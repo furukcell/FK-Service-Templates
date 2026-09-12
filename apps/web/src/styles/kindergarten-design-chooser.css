@@ -63,7 +63,6 @@
   .kr-stats{min-height:0;padding:54px 20px 58px}
   .kr-statsInner{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 10px}
   .kr-stat{width:min(130px,42vw);height:min(130px,42vw)}
-  .kr-stat strong{font-size:23px}
   .kr-signpost{right:10px;bottom:10px;transform:scale(.78) rotate(-2deg);transform-origin:right bottom}
   .kr-bee{right:9%;top:42px;font-size:23px}
 
@@ -91,6 +90,12 @@
   .bcFooterFaq h2{font-size:29px!important}
   .bcFooterMapTitle{font-size:19px!important}
   .bcFooterMapWrap{height:230px!important}
+
+  .kr-carouselNav{left:4px!important;right:4px!important;pointer-events:none}
+  .kr-carouselBtn{width:38px!important;height:38px!important;font-size:27px!important}
+  .kr-carouselNav .kr-carouselBtn:disabled{opacity:.22!important}
+  .kr-atelierGrid,.kr-newsGrid,.kr-galleryGrid,.kr-staffGrid{max-width:100%;width:100%}
+  .kr-atelierGrid>*,.kr-newsGrid>*,.kr-galleryGrid>*,.kr-staffGrid>*{scroll-snap-align:start!important}
 }
 
 @media(max-width:480px){
